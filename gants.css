@@ -1,0 +1,30 @@
+body {
+    font-size: 22px;
+    font-family: 'Bangers', cursive;
+    border: 0px;
+    margin: 0px;
+}
+
+input{
+    font-family: 'Bangers', cursive;
+}
+.bgdiv {
+    background-image: url('img/gants.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0px;
+    margin: 0px;
+}
+
+.btnRound{
+    position: absolute; 
+    background-color: Transparent;  
+    border-radius: 35%;
+}
+
+.btnItem{
+    position: absolute; 
+    background-color: Transparent;
+    border-radius: 100%  ;
+}
+
