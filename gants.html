@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-size: 22px;
+            font-family: 'Bangers', cursive;
+            border: 0px;
+            margin: 0px;
+        }
+
+        input{
+            font-family: 'Bangers', cursive;
+        }
+        .bgdiv {
+            background-image: url('img/gants.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            border: 0px;
+            margin: 0px;
+        }
+
+        .btnRound{
+            position: absolute; 
+            background-color: Transparent;  
+            border-radius: 35%;
+        }
+
+        .btnItem{
+            position: absolute; 
+            background-color: Transparent;
+            border-radius: 100%  ;
+        }
+
+        
+    </style>
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <!--모바일페이지크기조절메타태그-->
+    <title>영리한 여우</title>
+</head>
+
+<body id="body">
+    <div id="main" class="bgdiv">
+   
+        <button id="btnCalculate" onclick="funcCal()" 
+            style="position: absolute; left:10px; top:530px; background-color: black;  border-radius: 5%;  color: white; border:0px; font-size: large; padding:10px;
+            font-family: 'Stylish', sans-serif;">
+            <span id = "spanY" style="color:yellow"></span>
+            <span id = "spanB" style="color:blue"></span>
+            <span id = "spanG" style="color:green"></span>
+            <span id = "spanO" style="color:orange"></span>
+            <span id = "spanP" style="color:purple"></span>
+            <span id = "spanPlain">계산</span>
+            </button>
+    </div>
+    <script type="text/javascript" src="gants.js"></script>
+
+</body>
+
+<script>
+
+    
+    var arrYellow = new Array()
+    for (let index = 0; index <= 3; index++) {
+        arrYellow[index] = new Array()
+        for (let idx2 = 0; idx2 <= 3; idx2++) {
+            arrYellow[index][idx2] = false
+        }
+    }
+
+    arrYellow[0][3]=arrYellow[1][2]=arrYellow[2][1]=arrYellow[3][0]=true
+
+    var arrBlue = new Array()
+    for (let index = 0; index <= 2; index++) {
+        arrBlue[index] = new Array()
+        for (let idx2 = 0; idx2 <= 3; idx2++) {
+            arrBlue[index][idx2] = false
+        }
+    }
+
+    arrBlue[0][0]=true
+
+    var arrGreen = new Array()
+    var arrOrange = new Array()
+    var arrPurple = new Array()
+
+    for (let index = 0; index <= 10; index++) {
+        arrGreen[index] = false
+        arrOrange[index] = arrPurple[index] = 0
+    }
+
+    var numOfReroll = 0
+    var numOfUsedReroll = 0
+    var numOfPlus = 0
+    var numOfUsedPlus = 0
+
+    var numOfFox = 0
+
+    var arrReroll = new Array()
+    var arrPlus = new Array()
+    var arrUseReroll = new Array()
+    var arrUsePlus = new Array()
+
+    var arrRound = new Array()
+    for (let idx = 0; idx < 6; idx++) {
+        arrRound[idx]=false
+    }
+
+    for (let index = 0; index < 7; index++) {
+        arrReroll[index] = arrPlus[index] = arrUsePlus[index] = arrUseReroll[index] = false
+    }
+
+    drawTile()
+    
+
+</script>
