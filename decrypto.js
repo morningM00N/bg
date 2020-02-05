@@ -104,7 +104,7 @@ function drawTile() {
     var pageWidth = document.documentElement.clientWidth
     var pageHeight = document.documentElement.clientHeight
     if (pageHeight > pageWidth) {
-        //var resize = confirm("원본 비율로 표시하겠습니까?\n(취소하는 경우 비율이 변경되어 글씨 크기가 매우 작을 수 있습니다.)")
+        var resize = confirm("원본 비율로 표시하겠습니까?\n(취소하는 경우 비율이 변경되어 글씨 크기가 매우 작을 수 있습니다.)")
         var resize = true
         if (resize == true) {
             pageHeight = pageWidth / 529 * 756
@@ -286,7 +286,7 @@ function funcClickCheck(thisRound, thisNumOfHints) {
             var sltAnswer = document.getElementById("sltAnswer_" + round + "_" + numOfHints)
             console.log(sltAnswer.selectedIndex)
             if (sltAnswer.selectedIndex == 0) {
-                alert("before")
+                alert("앞의 라운드부터 진행해 주세요.")
                 return
             }
 
