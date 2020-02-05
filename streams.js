@@ -113,7 +113,7 @@ function setRandomNumber()
     calculate()
 }
 
-val expert = 0
+var expert = 0
 function calculate()
 {
     if (expert == 1)
