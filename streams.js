@@ -249,7 +249,7 @@ function calculate()
     document.getElementById("pScore").innerHTML = finalScore
     if (expert==0)
     {
-        document.getElementById("pScore").innerHTML = ""+finalScore+" (上)"
+        document.getElementById("pScore").innerHTML = ""+finalScore+" (상)"
     }
 }
 var starLoc = -1
