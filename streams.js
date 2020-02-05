@@ -1,3 +1,5 @@
+
+
 function drawComponents()
 {
     var mainDiv = document.getElementById("main")
@@ -91,8 +93,25 @@ function setRandomNumber()
     calculate()
 }
 
+val expert = 0
 function calculate()
 {
+    if (expert == 1)
+    {
+        scores[6] = 3
+        scores[12] = 20
+        scores[17] = 50
+        expert = 0
+        
+    }
+    else
+    {
+        scores[6] = 9
+        scores[12] = 35
+        scores[17] = 85
+        expert = 1
+     
+    }
     var pCal = document.getElementById("calScore")
     while (pCal.childElementCount>0)
     {
@@ -208,6 +227,10 @@ function calculate()
     }
 
     document.getElementById("pScore").innerHTML = finalScore
+    if (expert==0)
+    {
+        document.getElementById("pScore").innerHTML = ""+finalScore+" (상급자용)"
+    }
 }
 var starLoc = -1
 function funcChange(idx)
