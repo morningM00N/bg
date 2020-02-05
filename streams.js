@@ -1,4 +1,24 @@
-
+var scores = new Array()
+scores[1] = 0
+scores[2] = 1
+scores[3] = 3
+scores[4] = 5
+scores[5] = 7
+scores[6] = 9
+scores[7] = 11
+scores[8] = 15
+scores[9] = 20
+scores[10] = 25
+scores[11] = 30
+scores[12] = 35
+scores[13] = 40
+scores[14] = 50
+scores[15] = 60
+scores[16] = 70
+scores[17] = 80
+scores[18] = 100
+scores[19] = 150
+scores[20] = 300
 
 function drawComponents()
 {
@@ -295,27 +315,7 @@ function funcClick(idx)
     
 }
 
-var scores = new Array()
-scores[1] = 0
-scores[2] = 1
-scores[3] = 3
-scores[4] = 5
-scores[5] = 7
-scores[6] = 9
-scores[7] = 11
-scores[8] = 15
-scores[9] = 20
-scores[10] = 25
-scores[11] = 30
-scores[12] = 35
-scores[13] = 40
-scores[14] = 50
-scores[15] = 60
-scores[16] = 70
-scores[17] = 80
-scores[18] = 100
-scores[19] = 150
-scores[20] = 300
+
 
 var selectedNumbers = new Array()
 for (let idx = 0; idx < 20; idx++) {
