@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Stylish', sans-serif;
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        .imgBtn {
+            border: 0px;
+            margin: 0px;
+            padding: 0px;
+            position: absolute;
+            background-color: transparent;
+            font-family: 'Stylish', sans-serif;
+            text-align: center;
+            color: black;
+            border-radius: 0%;
+        }
+        
+        .pText {
+            border: 0px;
+            margin: 0px;
+            padding: 0px;
+            position: absolute;
+            background-color: transparent;
+            font-family: 'Stylish', sans-serif;
+            vertical-align: initial;
+            color: black;
+        }
+    </style>
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=yes" />
+    <!--모바일페이지크기조절메타태그-->
+    <title id="title">보드게임앱</title>
+</head>
+
+<body id="body">
+    <div id="main">
+    </div>
+</body>
+
+<script>
+    var pageHeight = document.documentElement.clientHeight
+    var pageWidth = document.documentElement.clientWidth
+    var mainDiv = document.getElementById("main")
+
+    mainDiv.style.height = pageHeight + "px"
+    mainDiv.style.weight = pageWidth + "px"
+
+    {
+        var btn = document.createElement("a")
+        btn.style.width = pageWidth + "px"
+        btn.style.height = 0.05 * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = "0px"
+        btn.innerHTML = "버그 리포트 / 요청 사항 (단톡방으로 연결됩니다.)"
+        btn.href = "https://open.kakao.com/o/gg1kucWb"
+        btn.style.textDecoration = "none"
+
+        btn.style.backgroundColor = "rgb(100,100,100)"
+        btn.style.color = "white"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
+
+    }
+
+    var topLoc = 0.05
+    var btnHeight = 0.24
+
+    var barHeight = 0.0005
+
+    {
+        var btn = document.createElement("button")
+        btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/Q_w9_s5ELHA-StSmyo1rasL7LI0=/fit-in/246x300/pic4410877.jpg')"
+        btn.style.opacity = "50%"
+        btn.style.backgroundSize = "100%"
+        btn.style.backgroundPositionY = "7%"
+        btn.style.width = pageWidth + "px"
+        btn.style.height = btnHeight * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = topLoc * pageHeight + "px"
+        btn.style.backgroundColor = "gray"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "http://morningm00n.github.io/bg/gants.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = topLoc * pageHeight + "px"
+        pText.style.padding = 0.02 * pageHeight + "px"
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "영리한 여우 점수 계산 시트"
+        pText.style.color = "black"
+        mainDiv.appendChild(pText)
+        topLoc += btnHeight
+        topLoc -= 1 / pageHeight
+    }
+
+    {
+        var btn = document.createElement("button")
+        btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/NhUqgeHkg2-WlnheoI3eQKTGTE4=/fit-in/246x300/pic3759421.jpg')"
+        btn.style.opacity = "50%"
+        btn.style.backgroundSize = "100%"
+        btn.style.backgroundPositionY = "5%"
+        btn.style.width = pageWidth + "px"
+        btn.style.height = btnHeight * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = topLoc * pageHeight + "px"
+        btn.style.backgroundColor = "gray"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "http://morningm00n.github.io/bg/decrypto.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = topLoc * pageHeight + "px"
+        pText.style.padding = 0.02 * pageHeight + "px"
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "디크립토 힌트 작성 시트"
+        pText.style.color = "black"
+        mainDiv.appendChild(pText)
+        topLoc += btnHeight
+        topLoc -= 1 / pageHeight
+    }
+
+    {
+        var btn = document.createElement("button")
+        btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/6af9qQgMlYL6zvGz0f4fe_uIQ98=/fit-in/246x300/pic4519813.jpg')"
+        btn.style.opacity = "50%"
+        btn.style.backgroundSize = "100%"
+        btn.style.backgroundPositionY = "10%"
+        btn.style.width = pageWidth + "px"
+        btn.style.height = btnHeight * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = topLoc * pageHeight + "px"
+        btn.style.backgroundColor = "gray"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "http://morningm00n.github.io/bg/doppelt.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = topLoc * pageHeight + "px"
+        pText.style.padding = 0.02 * pageHeight + "px"
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "도펠트 소 클레버 점수 계산 시트"
+        pText.style.color = "black"
+        mainDiv.appendChild(pText)
+        topLoc += btnHeight
+        topLoc -= 1 / pageHeight
+    }
+
+    {
+        var btn = document.createElement("button")
+        btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/IWq2xs6Jn458d9Eo3NkecTNh0G0=/fit-in/246x300/pic3760784.jpg')"
+        btn.style.opacity = "50%"
+        btn.style.backgroundSize = "100%"
+        btn.style.backgroundPositionY = "30%"
+        btn.style.width = pageWidth + "px"
+        btn.style.height = btnHeight * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = topLoc * pageHeight + "px"
+        btn.style.backgroundColor = "gray"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "http://morningm00n.github.io/bg/streams.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = topLoc * pageHeight + "px"
+        pText.style.padding = 0.02 * pageHeight + "px"
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "스트림스 점수 계산 시트"
+        pText.style.color = "black"
+        mainDiv.appendChild(pText)
+        topLoc += btnHeight
+        topLoc -= 1 / pageHeight
+    }
+</script>
