@@ -451,11 +451,17 @@ function funcGray(a, b) {
 function funcBlue(idx) {
     var slt = document.getElementById("btnBlue" + idx)
     console.log(slt.selectedIndex)
+    if (idx > 0 && arrBlue[idx - 1] == 0) {
+        alert("왼쪽 칸부터 입력해주세요.")
+        slt.selectedIndex = 0
+        return
+    }
     if (idx > 0 && slt.selectedIndex > arrBlue[idx - 1]) {
         alert("앞의 칸보다 큰 수를 입력할 수 없습니다.")
         slt.selectedIndex = 0
         return
     }
+
     arrBlue[idx] = slt.selectedIndex
     var btn = document.getElementById("btnRemoveBlue" + idx)
     btn.style.display = "inline"
@@ -474,6 +480,13 @@ function funcBlue(idx) {
 
 function funcGreen(idx) {
     var slt = document.getElementById("btnGreen" + idx)
+
+    if (idx > 0 && arrGreen[idx - 1] == 0) {
+        alert("왼쪽 칸부터 입력해주세요.")
+        slt.selectedIndex = 0
+        return
+    }
+
     arrGreen[idx] = slt.selectedIndex
 
     var btn = document.getElementById("btnRemoveGreen" + idx)
@@ -505,6 +518,12 @@ var thresPink = new Array(1, 1, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6)
 
 function funcPink(idx) {
     var slt = document.getElementById("btnPink" + idx)
+
+    if (idx > 0 && arrPink[idx - 1] == 0) {
+        alert("왼쪽 칸부터 입력해주세요.")
+        slt.selectedIndex = 0
+        return
+    }
     if (slt.selectedIndex > 0 && slt.selectedIndex < thresPink[idx]) {
         alert("조건을 만족하지 않았습니다.")
         slt.selectedIndex = 0
