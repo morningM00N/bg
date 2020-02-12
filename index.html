@@ -64,6 +64,7 @@
 
         btn.style.backgroundColor = "rgb(100,100,100)"
         btn.style.color = "white"
+
         btn.className = "imgBtn"
         mainDiv.appendChild(btn)
 
@@ -73,6 +74,40 @@
     var btnHeight = 0.24
 
     var barHeight = 0.0005
+
+    {
+        var btn = document.createElement("button")
+        btn.style.backgroundImage = "url('https://cf.geekdo-images.com/opengraph/img/tPqRZXtkbouqL6hWNzBPWU-G_Fc=/fit-in/1200x630/pic3581963.jpg')"
+        btn.style.opacity = "50%"
+        btn.style.backgroundSize = "120%"
+        btn.style.backgroundPositionY = "8%"
+        btn.style.backgroundPositionX = "80%"
+        btn.style.width = pageWidth + "px"
+        btn.style.height = btnHeight * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = topLoc * pageHeight + "px"
+        btn.style.backgroundColor = "gray"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "diamant.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = topLoc * pageHeight + "px"
+        pText.style.padding = 0.02 * pageHeight + "px"
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "다이아망트 카드 뽑기"
+        pText.style.color = "white"
+        pText.style.textShadow="3px 3px 1px black"
+        mainDiv.appendChild(pText)
+        topLoc += btnHeight
+        topLoc -= 1 / pageHeight
+    }
 
     {
         var btn = document.createElement("button")
@@ -90,7 +125,7 @@
 
         var pText = document.createElement("a")
         pText.className = "pText"
-        pText.href = "http://morningm00n.github.io/bg/gants.html"
+        pText.href = "gants.html"
         pText.style.textDecoration = "none"
         pText.style.width = pageWidth + "px"
         pText.style.height = btnHeight * pageHeight + "px"
@@ -100,7 +135,9 @@
         pText.style.padding = 0.02 * pageHeight + "px"
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "영리한 여우 점수 계산 시트"
-        pText.style.color = "black"
+        pText.style.color = "white"
+        pText.style.textShadow="3px 3px 1px black"
+
         mainDiv.appendChild(pText)
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
@@ -122,7 +159,7 @@
 
         var pText = document.createElement("a")
         pText.className = "pText"
-        pText.href = "http://morningm00n.github.io/bg/decrypto.html"
+        pText.href = "decrypto.html"
         pText.style.textDecoration = "none"
         pText.style.width = pageWidth + "px"
         pText.style.height = btnHeight * pageHeight + "px"
@@ -132,7 +169,9 @@
         pText.style.padding = 0.02 * pageHeight + "px"
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "디크립토 힌트 작성 시트"
-        pText.style.color = "black"
+        pText.style.color = "white"
+        pText.style.textShadow="3px 3px 1px black"
+
         mainDiv.appendChild(pText)
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
@@ -154,7 +193,7 @@
 
         var pText = document.createElement("a")
         pText.className = "pText"
-        pText.href = "http://morningm00n.github.io/bg/doppelt.html"
+        pText.href = "doppelt.html"
         pText.style.textDecoration = "none"
         pText.style.width = pageWidth + "px"
         pText.style.height = btnHeight * pageHeight + "px"
@@ -163,8 +202,10 @@
         pText.style.top = topLoc * pageHeight + "px"
         pText.style.padding = 0.02 * pageHeight + "px"
         pText.style.boxSizing = "border-box"
+        pText.style.textShadow="3px 3px 1px black"
         pText.innerHTML = "도펠트 소 클레버 점수 계산 시트"
-        pText.style.color = "black"
+        pText.style.color = "white"
+
         mainDiv.appendChild(pText)
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
@@ -186,7 +227,7 @@
 
         var pText = document.createElement("a")
         pText.className = "pText"
-        pText.href = "http://morningm00n.github.io/bg/streams.html"
+        pText.href = "streams.html"
         pText.style.textDecoration = "none"
         pText.style.width = pageWidth + "px"
         pText.style.height = btnHeight * pageHeight + "px"
@@ -196,9 +237,12 @@
         pText.style.padding = 0.02 * pageHeight + "px"
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "스트림스 점수 계산 시트"
-        pText.style.color = "black"
+        pText.style.color = "white"
+        pText.style.textShadow="3px 3px 1px black"
         mainDiv.appendChild(pText)
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
     }
+
+  
 </script>
