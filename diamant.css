@@ -12,6 +12,14 @@ body{
     padding:0px;
 }
 
+.empty{
+    background-color: transparent;
+    opacity: 0%;
+    margin:0px;
+    border:0px;
+    padding:0px;
+    position: absolute;
+}
 .cards{
     background-color: transparent;
     /*opacity: 30%;*/

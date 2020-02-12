@@ -98,6 +98,12 @@ function diamantDrawTiles()
 }
 
 var cards=new Array(1,2,3,4,5,5,7,7,9,11,11,13,14,15,17,"dmg1","dmg1","dmg1","dmg2","dmg2","dmg2","dmg3","dmg3","dmg3","dmg4","dmg4","dmg4","dmg5","dmg5","dmg5","treasure","treasure","treasure","treasure","treasure")
+
+for (let idx = 0; idx < cards.length; idx++) {
+    var btnTemp = appendElement("button","idTemp"+idx,"empty",0,0,0.1,0.1,0.01)
+    btnTemp.style.backgroundImage="url('img/diamant/"+cards[idx]+".png')"
+    
+}
 var usingCards=new Array()
 var discoverTreasure=new Array()
 var permuDmg=new Array()
