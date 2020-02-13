@@ -215,7 +215,7 @@ function funcCave(round)
         {
             btnRound.style.backgroundImage="url('img/diamant/stg"+round+".png')"
         }
-        discoverTreasure[numOfDiscoveredTreasure]=false
+        discoverTreasure[round]=false
         return
     }
     if (round!=curRound)
