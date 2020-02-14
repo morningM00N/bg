@@ -35,9 +35,9 @@ function appendElement(_type, _id, _className, _left, _top, _width, _height, _fo
 
 function drawCartographers(){
     var leftIter = 0.15
-    var leftStart = 0.12
+    var leftStart = 0.11
     var leftTic = 0.0708
-    var topIter = 0.220
+    var topIter = 0.212
     var topTic = 0.0498
     for (let idxX = 0; idxX < 11; idxX++) {
         leftIter = leftStart
@@ -53,9 +53,9 @@ function drawCartographers(){
         
     }
 
-    leftIter = 0.206
+    leftIter = 0.195
     for (let idx = 0; idx < 14; idx++) {
-        var coin = appendElement("button","btnCoin"+idx,"mapTiles",leftIter, 0.827, 0.03, 0.022, 0.04)
+        var coin = appendElement("button","btnCoin"+idx,"mapTiles",leftIter, 0.820, 0.03, 0.022, 0.04)
         coin.style.color="red"
         coin.style.lineHeight = coin.style.height
         coin.onclick=function(){
@@ -65,8 +65,8 @@ function drawCartographers(){
         leftIter+=0.0505
     }
 
-    leftIter = 0.67
-    topIter = 0.07
+    leftIter = 0.66
+    topIter = 0.06
     for (let idx = 1; idx <= 6; idx++){
         var tile = appendElement("button","btnType"+idx,"mapTiles",leftIter, topIter, 0.0708, 0.0498, 0.1)
         //tile.style.border = "1px dotted black"
@@ -80,22 +80,22 @@ function drawCartographers(){
         leftIter+=0.09
         if (idx==3)
         {
-            leftIter= 0.67
-            topIter = 0.14
+            leftIter= 0.66
+            topIter = 0.13
         }
     }
 
     
     var step = 0
     for (let round = 0; round < 4; round++) {
-        leftIter = 0.075
-        topIter = 0.883
+        leftIter = 0.065
+        topIter = 0.875
         for (let idx = 0; idx < 4; idx++) {
             var score = appendElement("input","textScore"+idx+"_"+round,"textScore",step+leftIter, topIter, 0.05, 0.028, 0.035)
             leftIter+=0.05
             if (idx==1)
             {
-                leftIter = 0.075
+                leftIter = 0.065
                 topIter= topIter+=0.028
             }
             score.onchange=function()
@@ -103,15 +103,15 @@ function drawCartographers(){
                 funcCalSeason(round)
             }
         }
-        var sumScore = appendElement("p","pSumScore"+round,"textScore",step+leftIter, 0.883, 0.05, 0.056, 0.035)
+        var sumScore = appendElement("p","pSumScore"+round,"textScore",step+leftIter, 0.875, 0.05, 0.056, 0.035)
         step+=0.1865
     }
 
-    var pName = appendElement("input","textName","textScore",0.11, 0.092, 0.22, 0.027, 0.027)
-    var pTitle = appendElement("input","textTitle","textScore",0.11, 0.155, 0.165, 0.027, 0.027)
+    var pName = appendElement("input","textName","textScore",0.095, 0.084, 0.22, 0.027, 0.027)
+    var pTitle = appendElement("input","textTitle","textScore",0.095, 0.148, 0.165, 0.027, 0.027)
     pName.style.fontFamily = pTitle.style.fontFamily= "'Nanum Pen Script', cursive"
     
-    var finalScore = appendElement("button","pFinalScore","textScore",0.85, 0.878, 0.055, 0.047, 0.035)
+    var finalScore = appendElement("button","pFinalScore","textScore",0.84, 0.869, 0.055, 0.047, 0.035)
     finalScore.onclick=funcCalFinal
     //finalScore.style.backgroundColor="red"
 }
