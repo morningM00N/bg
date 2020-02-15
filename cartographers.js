@@ -71,7 +71,7 @@ function drawCartographers(){
         var tile = appendElement("button","btnType"+idx,"mapTiles",leftIter, topIter, 0.0708, 0.0498, 0.1)
         //tile.style.border = "1px dotted black"
         tile.style.backgroundImage="url('img/cartographers/"+arrImg[idx]+".png')"
-        tile.style.opacity = "50%"
+        tile.style.opacity = "0.5"
         tile.style.backgroundSize = tile.style.width+" "+tile.style.height
         tile.onclick=function()
         {
@@ -157,7 +157,7 @@ function funcClickCoin(idx)
     {
         arrCoins[idx]=1
         coin.style.backgroundColor="black"
-        coin.style.opacity="50%"
+        coin.style.opacity="0.5"
         
     }
     else if (arrCoins[idx]==2){
@@ -180,17 +180,17 @@ function funcSelectType(idx)
     var tile = document.getElementById("btnType"+idx)
     if (selectedImgIdx==idx)
     {
-        tile.style.opacity = "50%"
+        tile.style.opacity = "0.5"
         selectedImgIdx=0
         return
     }
     if (selectedImgIdx>0)
     {
         var prevTile = document.getElementById("btnType"+selectedImgIdx)
-        prevTile.style.opacity = "50%"
+        prevTile.style.opacity = "0.5"
     }
     selectedImgIdx=idx
-    tile.style.opacity = "100%"
+    tile.style.opacity = "1.0"
 }
 
 var tileSet=new Array()
@@ -234,7 +234,7 @@ function funcTileClick(idxX, idxY)
     clickedTile.style.backgroundSize=clickedTile.style.width+" "+clickedTile.style.height
     if (locRuin[idxX][idxY]==true)
     {
-        clickedTile.style.opacity="40%"
+        clickedTile.style.opacity="0.4"
     }
     //clickedTile.style.backgroundColor="red"
 }
