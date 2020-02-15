@@ -36,7 +36,7 @@ function diamantDrawTiles() {
 
         var btnDrawCards = appendElement("button", "btnDrawCards", "cards", 0.45, 0.055, 0.365 * 1.4, 0.397 * 1.4, 0.3)
         btnDrawCards.style.borderRadius = "5%"
-        btnDrawCards.style.opacity = "100%"
+        btnDrawCards.style.opacity = "1.0"
         btnDrawCards.onclick = funcClearCard
 
 
