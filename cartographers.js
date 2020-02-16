@@ -134,7 +134,7 @@ function funcCalSeason(round)
     var score = new Array()
     for (let idx = 0; idx < 4; idx++) {
         score[idx] = document.getElementById("textScore"+idx+"_"+round).value    
-        if (score[idx] == null || score[idx].length == 0 || score[idx] == "") {
+        if (score[idx] == null || score[idx].length == 0 || score[idx] == "" || isNaN(score[idx])) {
             score[idx] = 0
         }
         else {
@@ -143,7 +143,7 @@ function funcCalSeason(round)
 
     }
 
-    document.getElementById("pSumScore"+round).innerHTML=Number(score[0]+score[1]+score[2]-score[3])
+    document.getElementById("pSumScore"+round).innerHTML=Number(score[0]+score[1]+score[2]-Math.abs(score[3]))
 }
 var arrCoins=new Array()
 for (let idx = 0; idx < 14; idx++) {
