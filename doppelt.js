@@ -473,7 +473,7 @@ function funcBlue(idx) {
             gainPlus()
         }
         if (idx == 5) {
-            gainReturn()
+            gainReroll()
         }
     }
 }
