@@ -7,6 +7,7 @@ var body = document.getElementById("body")
 
 mainDiv.style.height = pageHeight + "px"
 mainDiv.style.width = pageWidth + "px"
+mainDiv.style.backgroundSize = pageWidth+"px "+pageHeight+"px"
 
 var seed = Math.floor(Math.random() * 100000);
 
@@ -56,7 +57,7 @@ var cardImgSrc = new Array(
 
 var cardTimeStamps = new Array(
     0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2
+    0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 0
 )
 
 var seasonTimeThres = new Array(8, 8, 7, 6)
@@ -71,7 +72,7 @@ function drawCGCardDrawer() {
     var leftIter = 0.05
     for (let idx = 0; idx < 4; idx++) {
         var cardEdict = appendElement("button", "btnCardEdict" + idx, "cards", leftIter, 0.05 / pageHeight * pageWidth, 0.85 / 4, 0.85 / 4 * 9 / 6.5 * pageWidth / pageHeight, 0.1)
-        cardEdict.style.backgroundImage = "url('img/cartographers/cards/ed" + idx + ".png')"
+        //cardEdict.style.backgroundImage = "url('img/cartographers/cards/s" + idx + ".png')"
         cardEdict.onclick = funcDrawScore
         leftIter += 0.90 / 4
 
