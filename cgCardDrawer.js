@@ -4,7 +4,7 @@ var pageWidth = document.documentElement.clientWidth
 if (pageHeight > pageWidth) {
     pageHeight = pageWidth * 760 / 360
 } else {
-    pageHeight = pageWidth * 360 / 760
+    //pageHeight = pageWidth * 360 / 760
 }
 var mainDiv = document.getElementById("main")
 var body = document.getElementById("body")
