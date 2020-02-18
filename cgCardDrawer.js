@@ -1,13 +1,17 @@
 var pageHeight = document.documentElement.clientHeight
 var pageWidth = document.documentElement.clientWidth
 
-pageHeight = pageWidth * 760 / 360
+if (pageHeight > pageWidth) {
+    pageHeight = pageWidth * 760 / 360
+} else {
+    pageHeight = pageWidth * 360 / 760
+}
 var mainDiv = document.getElementById("main")
 var body = document.getElementById("body")
 
 mainDiv.style.height = pageHeight + "px"
 mainDiv.style.width = pageWidth + "px"
-mainDiv.style.backgroundSize = pageWidth+"px "+pageHeight+"px"
+mainDiv.style.backgroundSize = pageWidth + "px " + pageHeight + "px"
 
 var seed = Math.floor(Math.random() * 100000);
 
@@ -72,7 +76,7 @@ function drawCGCardDrawer() {
     var leftIter = 0.05
     for (let idx = 0; idx < 4; idx++) {
         var cardEdict = appendElement("button", "btnCardEdict" + idx, "cards", leftIter, 0.05 / pageHeight * pageWidth, 0.85 / 4, 0.85 / 4 * 9 / 6.5 * pageWidth / pageHeight, 0.1)
-        //cardEdict.style.backgroundImage = "url('img/cartographers/cards/s" + idx + ".png')"
+        cardEdict.style.backgroundImage = "url('img/cartographers/cards/t" + idx + ".png')"
         cardEdict.onclick = funcDrawScore
         leftIter += 0.90 / 4
 
@@ -80,12 +84,22 @@ function drawCGCardDrawer() {
 
     var topIter = 0.05 / pageHeight * pageWidth + 0.090 * 4 / pageHeight * pageWidth - 0.02
     var cardBG = appendElement("button", "btnCardBG", "cards", 0.05, topIter, 0.065 * 5, 0.065 * 5 / 90 * 65 / pageHeight * pageWidth, 0.1)
-        //cardBG.style.backgroundImage = "url('img/cartographers/cards/bg.png')"
+    var leftLoc = 0.05 * pageWidth
+    var rightLoc = leftLoc + 0.065 * 5 * pageWidth
+    var centerLoc = (leftLoc + rightLoc) / 2
+    console.log(centerLoc)
+    cardBG.style.width = 0.065 * 5 / 90 * 65 / 90 * 65 * pageWidth + "px"
+    cardBG.style.left = centerLoc - 0.065 * 5 / 90 * 65 / 90 * 65 * pageWidth / 2 + "px"
+
+
+    //cardBG.style.backgroundImage = "url('img/cartographers/cards/bg.png')"
+    cardBG.style.backgroundSize = "100%"
     cardBG.style.border = 0.005 * pageWidth + "px dashed black"
     cardBG.onclick = funcDrawCards
 
     for (let idx = 0; idx < 2; idx++) {
         var cardScoreShow = appendElement("button", "btnScoreShow" + idx, "cards", 0.05, topIter + 0.12 + idx * 0.22, 0.065 * 5, 0.090 * 5 / pageHeight * pageWidth, 0.1)
+        cardScoreShow.onclick = funcZoom
             //cardScoreShow.style.border = 0.005 * pageWidth + "px dashed black"
 
     }
@@ -104,6 +118,12 @@ var arrScoreCard = new Array()
 var scoreReady = false
 
 function funcDrawScore() {
+    if (scoreReady == true) {
+        var check = confirm("새로운 점수카드를 뽑겠습니까?")
+        if (check == false || check == null) {
+            return
+        }
+    }
     var tempArr = new Array()
     for (let idx = 0; idx < 16; idx++) {
         tempArr[idx] = false
@@ -194,4 +214,18 @@ function funcSeasonEnd() {
     cardBG.style.border = 0.005 * pageWidth + "px dashed black"
 }
 
+function funcZoom() {
+    var zoomCard = document.getElementById("zoomCard")
+    if (zoomCard == null) {
+        zoomCard = appendElement("button", "zoomCard", "cards", 0.1, 0.1, 0.8, 0.8 * 90 / 65 * pageWidth / pageHeight, 0.1)
+    }
+    zoomCard.style.display = "inline"
+    zoomCard.style.backgroundImage = event.srcElement.style.backgroundImage
+    zoomCard.onclick = funcDisable
+
+}
+
+function funcDisable() {
+    event.srcElement.style.display = "none"
+}
 drawCGCardDrawer()
