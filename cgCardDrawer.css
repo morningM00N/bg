@@ -15,9 +15,10 @@ body {
 
 .cards {
     background-color: transparent;
-    
+
     border: 3px dashed black;
     border: 0px;
+
     margin: 0px;
     padding: 0px;
     position: absolute;
