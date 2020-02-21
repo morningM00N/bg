@@ -35,6 +35,8 @@ function appendElement(_type, _id, _className, _left, _top, _width, _height, _fo
 
 var arrCoin = new Array()
 var arrDonkey = new Array()
+var arrFirst = new Array()
+
 
 function drawCorinth() {
     var arrGlass = new Array()
@@ -140,7 +142,6 @@ function drawCorinth() {
 
     }
 
-    var arrFirst = new Array()
     var topIter = 0.271
     for (let idx = 0; idx < 3; idx++) {
         var inputFirst = appendElement("button", "btnFirst" + idx, "circle", 0.018, topIter, 0.033, 0.047, 0.05)
@@ -614,6 +615,19 @@ function funcCalFinal() {
 
         }
     }
+    if (arrFirst[1]==1)
+    {
+        subSum[2]+=3
+    }
+    if (arrFirst[2]==1)
+    {
+        subSum[4]+=4
+    }
+    if (arrFirst[3]==1)
+    {
+        subSum[6]+=5
+    }
+
     for (let idx = 0; idx < 4; idx++) {
         document.getElementById("pScore" + (2 * idx)).value = subSum[2 * idx];
     }
