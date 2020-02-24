@@ -56,6 +56,9 @@ function appendElementVP(_type, _id, _className, _left, _top, _width, _height, _
 
 var numberOfTiles = 12
 
+var arrLocationLeft=new Array()
+var arrLocationTop = new Array()
+
 function drawchachacha() {
     var numOfX = Math.round((numberOfTiles + 1 - pageHeight / pageWidth) / (1 + pageHeight / pageWidth))
     var numOfY = numberOfTiles - numOfX
@@ -76,42 +79,49 @@ function drawchachacha() {
     var rightBound = 100
     var bottomBound = 100
     for (let idx = 0; idx < numOfX; idx++) {
-        var thisTop = getRandom(2, -1) + 2.5
-        var btnTile = appendElementVP("button", "btnTile" + idx, "cards", getRandom(2, -1) + 2.5 + idx * (tileWidth + 1), thisTop, realTileWidth, realTileHeight, 0.8 * realTileHeight)
+        arrLocationLeft[idx] = getRandom(2, -1) + 2.5 + idx * (tileWidth + 1)
+        arrLocationTop[idx] = getRandom(2, -1) + 2.5
+        var btnTile = appendElementVP("button", "btnTile" + idx, "cards", arrLocationLeft[idx], arrLocationTop[idx], realTileWidth, realTileHeight, 0.8 * realTileHeight)
         btnTile.innerHTML = idx
         btnTile.style.transform = "rotate(" + getRandom(11, -10) + "deg)"
-        if (thisTop + realTileHeight > topBound) {
-            topBound = thisTop + realTileHeight
+        if (arrLocationTop[idx] + realTileHeight > topBound) {
+            topBound = arrLocationTop[idx] + realTileHeight
         }
     }
 
     for (let idx = 0; idx < numOfY; idx++) {
-        var thisLeft = getRandom(2, -1) + 97.5 - realTileWidth
-        var btnTile = appendElementVP("button", "btnTile" + (idx + numOfY), "cards", thisLeft, getRandom(2, -1) + 2.5 + idx * (tileHeight + 1), realTileWidth, realTileHeight, 0.8 * realTileHeight)
+        arrLocationLeft[idx + numOfX] = getRandom(2, -1) + 97.5 - realTileWidth
+        arrLocationTop[idx + numOfX] = getRandom(2, -1) + 2.5 + idx * (tileHeight + 1)
+
+        var btnTile = appendElementVP("button", "btnTile" + (idx + numOfY), "cards",  arrLocationLeft[idx + numOfX],  arrLocationTop[idx + numOfX], realTileWidth, realTileHeight, 0.8 * realTileHeight)
         btnTile.innerHTML = (idx + numOfX)
         btnTile.style.transform = "rotate(" + getRandom(11, -10) + "deg)"
-        if (thisLeft < rightBound) {
-            rightBound = thisLeft
+        if (arrLocationLeft[idx + numOfX] < rightBound) {
+            rightBound = arrLocationLeft[idx + numOfX]
         }
     }
 
     for (let idx = 0; idx < numOfX; idx++) {
-        var thisTop = getRandom(2, -1) + 97.5 - realTileHeight
-        var btnTile = appendElementVP("button", "btnTile" + (idx + numOfX + numOfY), "cards", getRandom(2, -1) + 97.5 - realTileWidth - idx * (tileWidth + 1), thisTop, realTileWidth, realTileHeight, 0.8 * realTileHeight)
+        arrLocationLeft[idx + numOfX + numOfY] = getRandom(2, -1) + 97.5 - realTileWidth - idx * (tileWidth + 1)
+        arrLocationTop[idx + numOfX + numOfY] = getRandom(2, -1) + 97.5 - realTileHeight
+
+        var btnTile = appendElementVP("button", "btnTile" + (idx + numOfX + numOfY), "cards", arrLocationLeft[idx + numOfX + numOfY], arrLocationTop[idx + numOfX + numOfY], realTileWidth, realTileHeight, 0.8 * realTileHeight)
         btnTile.innerHTML = (idx + numOfX + numOfY)
         btnTile.style.transform = "rotate(" + getRandom(11, -10) + "deg)"
-        if (thisTop < bottomBound) {
-            bottomBound = thisTop
+        if ( arrLocationTop[idx + numOfX + numOfY] < bottomBound) {
+            bottomBound =  arrLocationTop[idx + numOfX + numOfY]
         }
     }
 
     for (let idx = 0; idx < numOfY; idx++) {
-        var thisRight = getRandom(2, -1) + 2.5 + realTileWidth
-        var btnTile = appendElementVP("button", "btnTile" + (idx + numOfX + numOfX + numOfY), "cards", getRandom(2, -1) + 2.5, getRandom(2, -1) + 97.5 - realTileHeight - idx * (tileHeight + 1), realTileWidth, realTileHeight, 0.8 * realTileHeight)
+        arrLocationLeft[idx + numOfX + numOfX + numOfY] = getRandom(2, -1) + 2.5
+        arrLocationTop[idx + numOfX + numOfX + numOfY] = getRandom(2, -1) + 97.5 - realTileHeight - idx * (tileHeight + 1)
+
+        var btnTile = appendElementVP("button", "btnTile" + (idx + numOfX + numOfX + numOfY), "cards", arrLocationLeft[idx + numOfX + numOfX + numOfY], arrLocationTop[idx + numOfX + numOfX + numOfY], realTileWidth, realTileHeight, 0.8 * realTileHeight)
         btnTile.innerHTML = (idx + numOfX + numOfX + numOfY)
         btnTile.style.transform = "rotate(" + getRandom(11, -10) + "deg)"
-        if (thisRight > leftBound) {
-            leftBound = thisRight
+        if ( arrLocationLeft[idx + numOfX + numOfX + numOfY]+realTileWidth > leftBound) {
+            leftBound =  arrLocationLeft[idx + numOfX + numOfX + numOfY]+realTileWidth
         }
     }
 
@@ -140,12 +150,10 @@ function drawchachacha() {
     var cardHeight = lengthOfCard / pageHeight * 100
 
     for (let idx = 0; idx < numberOfTiles; idx++) {
-        var btnCards = appendElementVP("button", "btnCard" + idx, "cards", storedWidth[idx], storedHeight[idx], cardWidth, cardHeight, 0.8 * cardHeight)
+        var btnCards = appendElementVP("button", "btnCard" + idx, "cards", 50-cardWidth/2, 50-cardHeight/2, cardWidth, cardHeight, 0.8 * cardHeight)
         btnCards.innerHTML = idx
         btnCards.style.transform = "rotate(" + getRandom(31, -30) + "deg)"
-        btnCards.onclick = function() { funcMove(idx) }
-
-
+        funcMove("btnCard" + idx,storedWidth[idx],storedHeight[idx],0.5)
     }
 
 }
@@ -175,34 +183,35 @@ function drawCards(topBound, bottomBound, leftBound, rightBound, numberOfTiles, 
     return true
 }
 
+var arrMove=new Array()
 
-var count = 100
 
-function funcMove(idx) {
-    console.log("here")
-    var curLeft = Number(event.srcElement.style.left.substr(0, event.srcElement.style.left.length - 2))
-    var curTop = Number(event.srcElement.style.top.substr(0, event.srcElement.style.top.length - 2))
+function funcMove(objectID,targetLeft,targetTop,sec) {
+    arrMove[objectID]=100
+    var movedObject = document.getElementById(objectID)
+    var curLeft = Number(movedObject.style.left.substr(0, movedObject.style.left.length - 2))
+    var curTop = Number(movedObject.style.top.substr(0, movedObject.style.top.length - 2))
 
-    var modLeft = (100 - curLeft) / 100
-    var modTop = (100 - curTop) / 100
+    var modLeft = (targetLeft - curLeft) / 100
+    var modTop = (targetTop - curTop) / 100
     count = 100
-    var itrThis = setInterval(function() {
-        funcIntervalMove(idx, modLeft, modTop, itrThis)
-    }, 10)
+    var itvThis = setInterval(function() {
+        funcIntervalMove(objectID, targetLeft, targetTop, modLeft, modTop, itvThis)
+    }, 1000*sec/100)
 
 }
 
-
-function funcIntervalMove(idx, leftTic, topTic, itvThis) {
-    var thisElement = document.getElementById("btnCard" + idx)
-    if (count == 1) {
-        clearInterval(itvThis)
-    }
-    count--
+function funcIntervalMove(objectID, targetLeft, targetTop, modLeft, modTop, itvThis) {
+    var thisElement = document.getElementById(objectID)
     var curLeft = Number(thisElement.style.left.substr(0, thisElement.style.left.length - 2))
     var curTop = Number(thisElement.style.top.substr(0, thisElement.style.top.length - 2))
-    thisElement.style.left = curLeft + leftTic + "vw"
-    thisElement.style.top = curTop + topTic + "vh"
+    thisElement.style.left = curLeft + modLeft + "vw"
+    thisElement.style.top = curTop + modTop + "vh"
+    if (arrMove[objectID]==0)
+    {
+        clearInterval(itvThis)
+    }
+    arrMove[objectID]--
 
 }
 
