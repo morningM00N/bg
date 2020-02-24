@@ -1,6 +1,6 @@
 .bgdiv {
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100vw 100vh;
     border: 0px;
     margin: 0px;
     padding: 0px;
