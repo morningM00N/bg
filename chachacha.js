@@ -587,8 +587,8 @@ function funcStart()
     
     mainDiv.requestFullscreen()
     setTimeout(function(){
-        pageHeight = document.documentElement.clientHeight
-        pageWidth = document.documentElement.clientWidth
+        pageHeight = mainDiv.clientHeight
+        pageWidth = mainDiv.clientWidth
     },50)
     setTimeout(function(){drawchachacha()},500)
 }
