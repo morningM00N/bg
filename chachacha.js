@@ -593,14 +593,14 @@ function funcStart()
     }
 
     
-    document.documentElement.requestFullscreen();
+    //document.documentElement.requestFullscreen();
 
-    setTimeout(function(){
-        pageHeight = document.documentElement.clientHeight
-        pageWidth = document.documentElement.clientWidth
-        mainDiv.style.height = pageHeight + "px"
-        mainDiv.style.width = pageWidth + "px"
-    },50)
+    // setTimeout(function(){
+    //     pageHeight = document.documentElement.clientHeight
+    //     pageWidth = document.documentElement.clientWidth
+    //     mainDiv.style.height = pageHeight + "px"
+    //     mainDiv.style.width = pageWidth + "px"
+    // },50)
     setTimeout(function(){drawchachacha()},500)
 }
 
