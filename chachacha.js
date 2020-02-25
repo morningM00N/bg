@@ -592,15 +592,27 @@ function funcStart()
         mainDiv.removeChild(mainDiv.childNodes[0])
     }
 
+    var elem = document.documentElement
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
     
     //document.documentElement.requestFullscreen();
 
-    // setTimeout(function(){
-    //     pageHeight = document.documentElement.clientHeight
-    //     pageWidth = document.documentElement.clientWidth
-    //     mainDiv.style.height = pageHeight + "px"
-    //     mainDiv.style.width = pageWidth + "px"
-    // },50)
+    setTimeout(function(){
+        pageHeight = document.documentElement.clientHeight
+        pageWidth = document.documentElement.clientWidth
+        body.style.height = pageHeight + "px"
+        body.style.width = pageWidth + "px"
+        mainDiv.style.height = pageHeight + "px"
+        mainDiv.style.width = pageWidth + "px"
+    },50)
     setTimeout(function(){drawchachacha()},500)
 }
 
