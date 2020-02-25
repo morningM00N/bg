@@ -612,6 +612,7 @@ function funcStart()
         body.style.width = pageWidth + "px"
         mainDiv.style.height = pageHeight + "px"
         mainDiv.style.width = pageWidth + "px"
+        mainDiv.style.backgroundSize = pageWidth+"px "+pageHeight+"px"
     },50)
     setTimeout(function(){drawchachacha()},500)
 }
