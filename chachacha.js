@@ -598,6 +598,8 @@ function funcStart()
     setTimeout(function(){
         pageHeight = document.documentElement.clientHeight
         pageWidth = document.documentElement.clientWidth
+        mainDiv.style.height = pageHeight + "px"
+        mainDiv.style.width = pageWidth + "px"
     },50)
     setTimeout(function(){drawchachacha()},500)
 }
