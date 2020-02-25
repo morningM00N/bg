@@ -6,7 +6,7 @@ var body = document.getElementById("body")
 
 mainDiv.style.height = pageHeight + "px"
 mainDiv.style.width = pageWidth + "px"
-mainDiv.style.backgroundSize = pageWidth + "px " + pageHeight + "px"
+mainDiv.style.backgroundSize = "100vw 100vh"
 
 var seed = Math.floor(Math.random() * 100000);
 
@@ -28,38 +28,40 @@ var imgPool = new Array();
 // imgPool[11] = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRu63Iy6aij00D_2nn0dzzFPGVHhxQv0IufwKLpoL7Qt3K2qjg5"
 
 
-imgSrcs[0] = "https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313__340.jpg"
-imgRate[0] = 51 / 34
-imgSrcs[1] = "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-imgRate[1] = 132 / 99
-imgSrcs[2] = "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1094874726.png?crop=0.542xw:0.814xh;0.0472xw,0.127xh&resize=640:*"
-imgRate[2] = 1 / 1
-imgSrcs[3] = "https://i.ytimg.com/vi/Gw_xvtWJ6q0/hqdefault.jpg"
-imgRate[3] = 127 / 95
+var word_list = new Array();
+var rawFile = new XMLHttpRequest();
+rawFile.open("GET", "imgList.txt", false);
+rawFile.setRequestHeader('Content-Type', 'text/html;charset=utf-8')
+rawFile.onreadystatechange = function() {
+    if (rawFile.readyState === 4) {
+        if (rawFile.status === 200 || rawFile.status == 0) {
+            var allText = rawFile.responseText;
+            word_list = allText.split('\n');
+        }
+    }
+}
+rawFile.send(null);
 
-imgSrcs[4] = "https://www.washingtonpost.com/resizer/uwlkeOwC_3JqSUXeH8ZP81cHx3I=/arc-anglerfish-washpost-prod-washpost/public/HB4AT3D3IMI6TMPTWIZ74WAR54.jpg"
-imgRate[4] = 92 / 69
+for (let idx = 0; idx < word_list.length; idx++) {
+    if (Number(word_list[idx][word_list[idx].length-1])==0)
+    {
+        funcAddImg(word_list[idx].substr(0,word_list[idx].length-1))    
+    }
+    else{
+        funcAddImg(word_list[idx])
+    }
 
-imgSrcs[5] = "https://i.pinimg.com/originals/7d/69/87/7d6987cfe80f6f74545ba98c39694e9d.jpg"
-imgRate[5] = 338 / 224
 
-imgSrcs[6] = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiKivYLsy8XijHUP3j1w6tA5LicGZmR_TWp6rAJW59a0U5RQ2z"
-imgRate[6] = 79 / 45
+}
 
-imgSrcs[7] = "https://i.pinimg.com/originals/10/88/89/108889e58bc525525181b9fe3494a8b8.jpg"
-imgRate[7] = 1 / 1
 
-imgSrcs[8] = "https://media.cdnandroid.com/5c/03/43/f3/b3/imagen-cute-cat-hd-wallpapers-0big.jpg"
-imgRate[8] = 212 / 169
 
-imgSrcs[9] = "https://image.winudf.com/v2/image/Y29tLkhEV2FsbHBhcGVyLmN1dGVjYXRjX3NjcmVlbl80XzE1MjQzNzk3MDJfMDQw/screen-4.jpg?fakeurl=1&type=.jpg"
-imgRate[9] = 381 / 238
 
-imgSrcs[10] = "https://pbs.twimg.com/profile_images/1151916124474183680/2iZykkYm_400x400.png"
-imgRate[10] = 1 / 1
 
-imgSrcs[11] = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRu63Iy6aij00D_2nn0dzzFPGVHhxQv0IufwKLpoL7Qt3K2qjg5"
-imgRate[11] = 836 / 423
+function funcAddImg(val)
+{
+    imgSrcs[imgSrcs.length]=val
+}
 
 
 var imgBG = "https://previews.123rf.com/images/shottythefirst/shottythefirst1403/shottythefirst140300042/26763558-abstract-blue-playing-card-back-pattern-texture.jpg"
@@ -118,7 +120,7 @@ var tilePictureID = new Array()
 var cardPictureID = new Array()
 
 var playerLoc = new Array()
-var playerColor = new Array("blue", "red", "green", "yellow")
+var playerColor = new Array("blue", "red", "green", "purple")
 var currentPlayer = 0
 
 var storedWidth = new Array()
@@ -127,8 +129,26 @@ var storedHeight = new Array()
 var realTileWidth
 var realTileHeight
 
+for (let idx = 0; idx < 10000; idx++) {
+    var loc1 = getRandom(imgSrcs.length)
+    var loc2 = getRandom(imgSrcs.length)
+    var temp = imgSrcs[loc1]
+    imgSrcs[loc1] = imgSrcs[loc2]
+    imgSrcs[loc2]=temp
+}
 
+for (let idx = 0; idx < 24; idx++) {
+    var img = new Image();
 
+    img.addEventListener("load", function(){
+        imgRate[idx]=Number(this.naturalWidth)/Number(this.naturalHeight)
+        console.log( this.naturalWidth,this.naturalHeight );
+    });
+    img.src= imgSrcs[idx]
+
+}
+
+seed = 0
 
 function drawchachacha() {
     // var imgTemp = document.createElement("img")
@@ -141,28 +161,55 @@ function drawchachacha() {
     //     //alert(document.getElementById("tempImg").clientHeight)
 
 
-
-
-    for (let idx = 0; idx < numberOfTiles; idx++) {
-        var loc = getRandom(2 * numberOfTiles)
-        while (tilePictureID[loc] >= 0) {
-            loc = getRandom(2 * numberOfTiles)
+    var countTemp = 10
+    while (true) {
+        if (countTemp == 0)
+        {
+            break
         }
-        tilePictureID[loc] = idx
-
-        loc = getRandom(2 * numberOfTiles)
-        while (tilePictureID[loc] >= 0) {
-            loc = getRandom(2 * numberOfTiles)
+        countTemp--
+        var terminate = true
+        for (let idx = 0; idx < 2 * numberOfTiles; idx++) {
+            tilePictureID[idx]=-1
+            cardPictureID[idx]=-1
         }
-        tilePictureID[loc] = idx
 
-        loc = getRandom(numberOfTiles)
-        while (cardPictureID[loc] >= 0) {
+        for (let idx = 0; idx < numberOfTiles; idx++) {
+            var loc = getRandom(2 * numberOfTiles)
+            while (tilePictureID[loc] >= 0) {
+                loc = getRandom(2 * numberOfTiles)
+            }
+            tilePictureID[loc] = idx
+
+            loc = getRandom(2 * numberOfTiles)
+            while (tilePictureID[loc] >= 0) {
+                loc = getRandom(2 * numberOfTiles)
+            }
+            tilePictureID[loc] = idx
+
             loc = getRandom(numberOfTiles)
+            while (cardPictureID[loc] >= 0) {
+                loc = getRandom(numberOfTiles)
+            }
+            cardPictureID[loc] = idx
         }
-        cardPictureID[loc] = idx
+        if (tilePictureID[0]==tilePictureID[2 * numberOfTiles-1])
+        {
+            terminate=false
+        }
+        for (let idx = 0; idx < 2 * numberOfTiles-1; idx++) {
+            if (tilePictureID[idx]==tilePictureID[idx+1])
+            {
+                terminate=false
+                break
+            }
+        }
+        if (terminate == true) {
+            break
+        }
 
     }
+
     var numOfX = Math.round((numberOfTiles + 1 - pageHeight / pageWidth) / (1 + pageHeight / pageWidth))
     var numOfY = numberOfTiles - numOfX
         //console.log(numOfX, numOfY)
@@ -187,6 +234,10 @@ function drawchachacha() {
         var btnTile = appendElementVP("button", "btnTile" + idx, "cards", arrLocationLeft[0], arrLocationTop[0], realTileWidth, realTileHeight, 0.8 * realTileHeight)
         btnTile.style.backgroundImage = "url('" + imgSrcs[tilePictureID[idx]] + "')"
         btnTile.style.backgroundSize = realTileWidth * imgRate[tilePictureID[idx]] + "vw " + realTileHeight + "vh"
+        if (imgRate[tilePictureID[idx]]<1)
+        {
+            btnTile.style.backgroundSize = realTileWidth  + "vw " + realTileHeight/ imgRate[tilePictureID[idx]] + "vh"
+        }
         btnTile.style.backgroundPosition = "50% 50%"
         btnTile.style.visibility = "hidden"
         if (pageWidth > pageHeight) {
@@ -216,6 +267,10 @@ function drawchachacha() {
 
         btnTile.style.backgroundImage = "url('" + imgSrcs[tilePictureID[idx + numOfX]] + "')"
         btnTile.style.backgroundSize = realTileWidth * imgRate[tilePictureID[idx + numOfX]] + "vw " + realTileHeight + "vh"
+        if (imgRate[tilePictureID[idx + numOfX]]<1)
+        {
+            btnTile.style.backgroundSize = realTileWidth  + "vw " + realTileHeight/ imgRate[tilePictureID[idx + numOfX]] + "vh"
+        }
         btnTile.style.backgroundPosition = "50% 50%"
 
 
@@ -246,6 +301,10 @@ function drawchachacha() {
 
         btnTile.style.backgroundImage = "url('" + imgSrcs[tilePictureID[idx + numOfX + numOfY]] + "')"
         btnTile.style.backgroundSize = realTileWidth * imgRate[tilePictureID[idx + numOfX + numOfY]] + "vw " + realTileHeight + "vh"
+        if (imgRate[tilePictureID[idx + numOfX + numOfY]]<1)
+        {
+            btnTile.style.backgroundSize = realTileWidth  + "vw " + realTileHeight/ imgRate[tilePictureID[idx + numOfX + numOfY]] + "vh"
+        }
         btnTile.style.backgroundPosition = "50% 50%"
 
         setTimeout(function() {
@@ -273,6 +332,10 @@ function drawchachacha() {
 
         btnTile.style.backgroundImage = "url('" + imgSrcs[tilePictureID[idx + numOfX + numOfX + numOfY]] + "')"
         btnTile.style.backgroundSize = realTileWidth * imgRate[tilePictureID[idx + numOfX + numOfX + numOfY]] + "vw " + realTileHeight + "vh"
+        if (imgRate[tilePictureID[idx + numOfX + numOfX + numOfY]]<1)
+        {
+            btnTile.style.backgroundSize = realTileWidth  + "vw " + realTileHeight/ imgRate[tilePictureID[idx + numOfX + numOfX + numOfY]] + "vh"
+        }
         btnTile.style.backgroundPosition = "50% 50%"
 
 
@@ -394,12 +457,15 @@ function funcClickCard(idx) {
     var btnWidth = Number(btnCards.style.width.substr(0, btnCards.style.width.length - 2))
     var btnHeight = Number(btnCards.style.height.substr(0, btnCards.style.height.length - 2))
     btnCards.style.backgroundSize = btnWidth * imgRate[cardPictureID[idx]] + "vw " + btnHeight + "vh"
+    if (imgRate[cardPictureID[idx]]<1)
+    {
+        btnCards.style.backgroundSize = btnWidth + "vw " + btnHeight/imgRate[cardPictureID[idx]] + "vh"
+    }
     btnCards.style.backgroundPosition = "50% 50%"
     setTimeout(function() {
         var btnCards = document.getElementById("btnCard" + idx)
         var btnWidth = Number(btnCards.style.width.substr(0, btnCards.style.width.length - 2))
         var btnHeight = Number(btnCards.style.height.substr(0, btnCards.style.height.length - 2))
-
         btnCards.style.backgroundImage = "url('" + imgBG + "')"
         btnCards.style.backgroundSize = btnWidth + "vw " + btnHeight + "vh"
     }, 2000)
@@ -489,5 +555,42 @@ function isOverlap(thisLeft, thisTop, cardWidth, cardHeight, storedWidth, stored
     return false
 }
 
+function funcStart()
+{
+    var getAnswer=prompt("플레이어 수를 입력해 주세요. (2-4명)")
+    while (true)
+    {
+        if (Number(getAnswer)>=2 && Number(getAnswer)<=4)
+        {
+            break
+        }
+        getAnswer=prompt("플레이어 수를 입력해 주세요. (2-4명)")
+    }
+    numberOfPlayer = Number(getAnswer)
+    
+    getAnswer=prompt("타일 수를 입력해 주세요. (8-24개)")
+    while (true)
+    {
+        if (Number(getAnswer)>=8 && Number(getAnswer)<=24)
+        {
+            break
+        }
+        getAnswer=prompt("타일 수를 입력해 주세요. (8-24개)")
+    }
+    numberOfTiles = Number(getAnswer)
+    
+    while (mainDiv.childNodes.length>0)
+    {
+        mainDiv.removeChild(mainDiv.childNodes[0])
+    }
 
-drawchachacha()
+    
+    mainDiv.requestFullscreen()
+    setTimeout(function(){
+        pageHeight = document.documentElement.clientHeight
+        pageWidth = document.documentElement.clientWidth
+    },50)
+    setTimeout(function(){drawchachacha()},500)
+}
+
+//drawchachacha()
