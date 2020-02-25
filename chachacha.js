@@ -560,6 +560,10 @@ function funcStart()
     var getAnswer=prompt("플레이어 수를 입력해 주세요. (2-4명)")
     while (true)
     {
+        if (getAnswer==null)
+        {
+            return
+        }
         if (Number(getAnswer)>=2 && Number(getAnswer)<=4)
         {
             break
@@ -571,6 +575,10 @@ function funcStart()
     getAnswer=prompt("타일 수를 입력해 주세요. (8-24개)")
     while (true)
     {
+        if (getAnswer==null)
+        {
+            return
+        }
         if (Number(getAnswer)>=8 && Number(getAnswer)<=24)
         {
             break
@@ -585,7 +593,8 @@ function funcStart()
     }
 
     
-    mainDiv.requestFullscreen()
+    document.documentElement.requestFullscreen();
+
     setTimeout(function(){
         pageHeight = mainDiv.clientHeight
         pageWidth = mainDiv.clientWidth
