@@ -24,7 +24,7 @@
         var windowOuterHeight = window.outerHeight
 
 
-        var count = 50
+        var count = 0
 
         var mainDiv = document.getElementById("main")
         var body = document.getElementById("body")
@@ -42,7 +42,7 @@
         btnFull.style.fontSize = "5vh"
         funcUpdateSize()
 
-        document.getElementById("btn2").style.top = (window.screen.height - 50) + "px"
+        document.getElementById("btn2").style.top = (window.screen.availHeight - 50) + "px"
 
 
         function funcFullRequest() {
@@ -66,8 +66,8 @@
             windowWidth = window.innerWidth
             windowHeight = window.innerHeight
 
-            windowOuterWidth = window.screen.width
-            windowOuterHeight = window.screen.height
+            windowOuterWidth = window.screen.availWidth
+            windowOuterHeight = window.screen.availHeight
 
 
 
