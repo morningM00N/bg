@@ -12,6 +12,8 @@
         <button id="btnFull" onclick="funcFullRequest()">전체화면</button>
         <button id="btn2" style="position:absolute"></button>
     </div>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <script>
         var height = document.documentElement.clientHeight
         var width = document.documentElement.clientWidth
@@ -47,10 +49,13 @@
             mainDiv.requestFullscreen()
             mainDiv.style.backgroundSize = width + "px " + height + "px"
 
-            setTimeout(function() {
-                funcUpdateSize()
-            }, 1000)
+            // setTimeout(function() {
+            //     funcUpdateSize()
+            // }, 1000)
         }
+        $(window).resize(function () {
+            funcUpdateSize()
+        });
 
         function funcUpdateSize() {
             count++
