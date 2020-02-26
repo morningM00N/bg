@@ -10,7 +10,7 @@
 <body id="body" style="margin:0px; border:0px; padding:0px; background-color: red;">
     <div id="main" class="bgdiv" style="margin:0px; border:0px; padding:0px">
         <button id="btnFull" onclick="funcFullRequest()">전체화면</button>
-        <button style="position:absolute; top:100vh; height:10vh; width:10vw; left:0px"></button>
+        <button style="position:absolute; top:90vh; height:10vh; width:10vw; left:0px"></button>
     </div>
     <script>
         var height = document.documentElement.clientHeight
@@ -23,7 +23,7 @@
         var windowOuterHeight = window.outerHeight
 
 
-        var count = 30
+        var count = 40
 
         var mainDiv = document.getElementById("main")
         var body = document.getElementById("body")
@@ -66,7 +66,7 @@
             windowOuterWidth = window.screen.width
             windowOuterHeight = window.screen.height
 
-            
+
 
             heightMainDiv = document.getElementById("main").style.height
             widthMainDiv = document.getElementById("main").style.width
