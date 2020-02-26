@@ -23,7 +23,7 @@
         var windowOuterHeight = window.outerHeight
 
 
-        var count = 20
+        var count = 30
 
         var mainDiv = document.getElementById("main")
         var body = document.getElementById("body")
@@ -56,17 +56,24 @@
             height = document.documentElement.clientHeight
             width = document.documentElement.clientWidth
 
+            heightMainDiv = document.getElementById("main").style.height
+            widthMainDiv = document.getElementById("main").style.width
+
+
             windowWidth = window.innerWidth
             windowHeight = window.innerHeight
 
-            windowOuterWidth = window.outerWidth
-            windowOuterHeight = window.outerHeight
+            windowOuterWidth = window.screen.width
+            windowOuterHeight = window.screen.height
 
-
+            
 
             heightMainDiv = document.getElementById("main").style.height
             widthMainDiv = document.getElementById("main").style.width
-            btnFull.innerHTML = count + ":" + width + "," + height + "<br>" + widthMainDiv + "," + heightMainDiv + "<br>" + windowWidth + "," + windowHeight + "<br>" +
+            btnFull.innerHTML = count + ":<br>" +
+                width + "," + height + "<br>" +
+                widthMainDiv + "," + heightMainDiv + "<br>" +
+                windowWidth + "," + windowHeight + "<br>" +
                 windowOuterWidth + "," + windowOuterHeight
         }
     </script>
