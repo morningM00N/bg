@@ -7,15 +7,15 @@
     <title>전체화면 test</title>
 </head>
 
-<body id="body">
-    <div id="main" class="bgdiv">
+<body id="body" style="margin:0px; border:0px; padding:0px">
+    <div id="main" class="bgdiv" style="margin:0px; border:0px; padding:0px">
         <button id="btnFull" onclick="funcFullRequest()">전체화면</button>
     </div>
     <script>
         var height = document.documentElement.clientHeight
         var width = document.documentElement.clientWidth
 
-
+        var count = 0
 
         var mainDiv = document.getElementById("main")
         var body = document.getElementById("body")
@@ -33,18 +33,22 @@
         btnFull.style.fontSize = "5vh"
         funcUpdateSize()
 
+
         function funcFullRequest() {
             mainDiv.requestFullscreen()
-            funcUpdateSize()
+            setTimeout(function() {
+                funcUpdateSize()
+            }, 1000)
         }
 
         function funcUpdateSize() {
+            count++
             height = document.documentElement.clientHeight
             width = document.documentElement.clientWidth
 
             heightMainDiv = document.getElementById("main").style.height
             widthMainDiv = document.getElementById("main").style.width
-            btnFull.innerHTML = width + "," + height + "<br>" + widthMainDiv + "," + heightMainDiv
+            btnFull.innerHTML = count + ":" + width + "," + height + "<br>" + widthMainDiv + "," + heightMainDiv
         }
     </script>
 
