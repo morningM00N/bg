@@ -19,6 +19,10 @@
         var windowWidth = window.innerWidth
         var windowHeight = window.innerHeight
 
+        var windowOuterWidth = window.outerWidth
+        var windowOuterHeight = window.outerHeight
+
+
         var count = 20
 
         var mainDiv = document.getElementById("main")
@@ -55,9 +59,15 @@
             windowWidth = window.innerWidth
             windowHeight = window.innerHeight
 
+            windowOuterWidth = window.outerWidth
+            windowOuterHeight = window.outerHeight
+
+
+
             heightMainDiv = document.getElementById("main").style.height
             widthMainDiv = document.getElementById("main").style.width
-            btnFull.innerHTML = count + ":" + width + "," + height + "<br>" + widthMainDiv + "," + heightMainDiv + "<br>" + windowWidth + "," + windowHeight
+            btnFull.innerHTML = count + ":" + width + "," + height + "<br>" + widthMainDiv + "," + heightMainDiv + "<br>" + windowWidth + "," + windowHeight + "<br>" +
+                windowOuterWidth + "," + windowOuterHeight
         }
     </script>
 
