@@ -15,7 +15,7 @@
         var height = document.documentElement.clientHeight
         var width = document.documentElement.clientWidth
 
-        var count = 0
+        var count = 10
 
         var mainDiv = document.getElementById("main")
         var body = document.getElementById("body")
@@ -36,6 +36,8 @@
 
         function funcFullRequest() {
             mainDiv.requestFullscreen()
+            mainDiv.style.backgroundSize = width + "px " + height + "px"
+
             setTimeout(function() {
                 funcUpdateSize()
             }, 1000)
