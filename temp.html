@@ -11,6 +11,7 @@
     <div id="main" class="bgdiv" style="margin:0px; border:0px; padding:0px">
         <button id="btnFull" onclick="funcFullRequest()">전체화면</button>
         <button style="position:absolute; top:90vh; height:10vh; width:10vw; left:0px"></button>
+        <button id="btn2" style="position:absolute; top:90vh; height:50px; width:10vw; left:50vw"></button>
     </div>
     <script>
         var height = document.documentElement.clientHeight
@@ -23,7 +24,7 @@
         var windowOuterHeight = window.outerHeight
 
 
-        var count = 40
+        var count = 50
 
         var mainDiv = document.getElementById("main")
         var body = document.getElementById("body")
@@ -40,6 +41,8 @@
         var btnFull = document.getElementById("btnFull")
         btnFull.style.fontSize = "5vh"
         funcUpdateSize()
+
+        document.getElementById("btn2").style.top = (window.screen.height - 50) + "px"
 
 
         function funcFullRequest() {
