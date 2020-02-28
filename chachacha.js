@@ -587,7 +587,9 @@ function funcStart() {
         mainDiv.removeChild(mainDiv.childNodes[0])
     }
 
-    mainDiv.requestFullscreen()
+     drawchachacha()
+    
+    //mainDiv.requestFullscreen()
 
     //document.documentElement.requestFullscreen();
 
@@ -603,9 +605,9 @@ function funcStart() {
     // setTimeout(function() { drawchachacha() }, 500)
 }
 
-$(window).resize(function() {
-    drawchachacha()
-});
+// $(window).resize(function() {
+//     drawchachacha()
+// });
 
 
 //drawchachacha()
