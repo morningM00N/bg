@@ -14,6 +14,8 @@ var imgSrcs = new Array();
 var imgRate = new Array();
 var imgPool = new Array();
 
+
+
 // imgPool[0] = "https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313__340.jpg"
 // imgPool[1] = "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
 // imgPool[2] = "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1094874726.png?crop=0.542xw:0.814xh;0.0472xw,0.127xh&resize=640:*"
@@ -43,11 +45,9 @@ rawFile.onreadystatechange = function() {
 rawFile.send(null);
 
 for (let idx = 0; idx < word_list.length; idx++) {
-    if (Number(word_list[idx][word_list[idx].length-1])==0)
-    {
-        funcAddImg(word_list[idx].substr(0,word_list[idx].length-1))    
-    }
-    else{
+    if (Number(word_list[idx][word_list[idx].length - 1]) == 0) {
+        funcAddImg(word_list[idx].substr(0, word_list[idx].length - 1))
+    } else {
         funcAddImg(word_list[idx])
     }
 
@@ -58,9 +58,8 @@ for (let idx = 0; idx < word_list.length; idx++) {
 
 
 
-function funcAddImg(val)
-{
-    imgSrcs[imgSrcs.length]=val
+function funcAddImg(val) {
+    imgSrcs[imgSrcs.length] = val
 }
 
 
@@ -134,23 +133,35 @@ for (let idx = 0; idx < 10000; idx++) {
     var loc2 = getRandom(imgSrcs.length)
     var temp = imgSrcs[loc1]
     imgSrcs[loc1] = imgSrcs[loc2]
-    imgSrcs[loc2]=temp
+    imgSrcs[loc2] = temp
 }
 
 for (let idx = 0; idx < 24; idx++) {
     var img = new Image();
 
-    img.addEventListener("load", function(){
-        imgRate[idx]=Number(this.naturalWidth)/Number(this.naturalHeight)
-        console.log( this.naturalWidth,this.naturalHeight );
+    img.addEventListener("load", function() {
+        imgRate[idx] = Number(this.naturalWidth) / Number(this.naturalHeight)
+        console.log(this.naturalWidth, this.naturalHeight);
     });
-    img.src= imgSrcs[idx]
+    img.src = imgSrcs[idx]
 
 }
 
 seed = 0
 
+var drawDone = false
+
 function drawchachacha() {
+    if (drawDone == true) {
+        return
+    }
+
+    drawDone = true
+    pageHeight = document.documentElement.clientHeight
+    pageWidth = document.documentElement.clientWidth
+
+    mainDiv.style.backgroundSize = pageWidth + "px " + pageHeight + "px"
+
     // var imgTemp = document.createElement("img")
     // imgTemp.id = "tempImg"
     //     //imgTemp.src = imgSrcs[0];
@@ -163,15 +174,14 @@ function drawchachacha() {
 
     var countTemp = 10
     while (true) {
-        if (countTemp == 0)
-        {
+        if (countTemp == 0) {
             break
         }
         countTemp--
         var terminate = true
         for (let idx = 0; idx < 2 * numberOfTiles; idx++) {
-            tilePictureID[idx]=-1
-            cardPictureID[idx]=-1
+            tilePictureID[idx] = -1
+            cardPictureID[idx] = -1
         }
 
         for (let idx = 0; idx < numberOfTiles; idx++) {
@@ -193,14 +203,12 @@ function drawchachacha() {
             }
             cardPictureID[loc] = idx
         }
-        if (tilePictureID[0]==tilePictureID[2 * numberOfTiles-1])
-        {
-            terminate=false
+        if (tilePictureID[0] == tilePictureID[2 * numberOfTiles - 1]) {
+            terminate = false
         }
-        for (let idx = 0; idx < 2 * numberOfTiles-1; idx++) {
-            if (tilePictureID[idx]==tilePictureID[idx+1])
-            {
-                terminate=false
+        for (let idx = 0; idx < 2 * numberOfTiles - 1; idx++) {
+            if (tilePictureID[idx] == tilePictureID[idx + 1]) {
+                terminate = false
                 break
             }
         }
@@ -234,9 +242,8 @@ function drawchachacha() {
         var btnTile = appendElementVP("button", "btnTile" + idx, "cards", arrLocationLeft[0], arrLocationTop[0], realTileWidth, realTileHeight, 0.8 * realTileHeight)
         btnTile.style.backgroundImage = "url('" + imgSrcs[tilePictureID[idx]] + "')"
         btnTile.style.backgroundSize = realTileWidth * imgRate[tilePictureID[idx]] + "vw " + realTileHeight + "vh"
-        if (imgRate[tilePictureID[idx]]<1)
-        {
-            btnTile.style.backgroundSize = realTileWidth  + "vw " + realTileHeight/ imgRate[tilePictureID[idx]] + "vh"
+        if (imgRate[tilePictureID[idx]] < 1) {
+            btnTile.style.backgroundSize = realTileWidth + "vw " + realTileHeight / imgRate[tilePictureID[idx]] + "vh"
         }
         btnTile.style.backgroundPosition = "50% 50%"
         btnTile.style.visibility = "hidden"
@@ -267,9 +274,8 @@ function drawchachacha() {
 
         btnTile.style.backgroundImage = "url('" + imgSrcs[tilePictureID[idx + numOfX]] + "')"
         btnTile.style.backgroundSize = realTileWidth * imgRate[tilePictureID[idx + numOfX]] + "vw " + realTileHeight + "vh"
-        if (imgRate[tilePictureID[idx + numOfX]]<1)
-        {
-            btnTile.style.backgroundSize = realTileWidth  + "vw " + realTileHeight/ imgRate[tilePictureID[idx + numOfX]] + "vh"
+        if (imgRate[tilePictureID[idx + numOfX]] < 1) {
+            btnTile.style.backgroundSize = realTileWidth + "vw " + realTileHeight / imgRate[tilePictureID[idx + numOfX]] + "vh"
         }
         btnTile.style.backgroundPosition = "50% 50%"
 
@@ -301,9 +307,8 @@ function drawchachacha() {
 
         btnTile.style.backgroundImage = "url('" + imgSrcs[tilePictureID[idx + numOfX + numOfY]] + "')"
         btnTile.style.backgroundSize = realTileWidth * imgRate[tilePictureID[idx + numOfX + numOfY]] + "vw " + realTileHeight + "vh"
-        if (imgRate[tilePictureID[idx + numOfX + numOfY]]<1)
-        {
-            btnTile.style.backgroundSize = realTileWidth  + "vw " + realTileHeight/ imgRate[tilePictureID[idx + numOfX + numOfY]] + "vh"
+        if (imgRate[tilePictureID[idx + numOfX + numOfY]] < 1) {
+            btnTile.style.backgroundSize = realTileWidth + "vw " + realTileHeight / imgRate[tilePictureID[idx + numOfX + numOfY]] + "vh"
         }
         btnTile.style.backgroundPosition = "50% 50%"
 
@@ -332,9 +337,8 @@ function drawchachacha() {
 
         btnTile.style.backgroundImage = "url('" + imgSrcs[tilePictureID[idx + numOfX + numOfX + numOfY]] + "')"
         btnTile.style.backgroundSize = realTileWidth * imgRate[tilePictureID[idx + numOfX + numOfX + numOfY]] + "vw " + realTileHeight + "vh"
-        if (imgRate[tilePictureID[idx + numOfX + numOfX + numOfY]]<1)
-        {
-            btnTile.style.backgroundSize = realTileWidth  + "vw " + realTileHeight/ imgRate[tilePictureID[idx + numOfX + numOfX + numOfY]] + "vh"
+        if (imgRate[tilePictureID[idx + numOfX + numOfX + numOfY]] < 1) {
+            btnTile.style.backgroundSize = realTileWidth + "vw " + realTileHeight / imgRate[tilePictureID[idx + numOfX + numOfX + numOfY]] + "vh"
         }
         btnTile.style.backgroundPosition = "50% 50%"
 
@@ -457,9 +461,8 @@ function funcClickCard(idx) {
     var btnWidth = Number(btnCards.style.width.substr(0, btnCards.style.width.length - 2))
     var btnHeight = Number(btnCards.style.height.substr(0, btnCards.style.height.length - 2))
     btnCards.style.backgroundSize = btnWidth * imgRate[cardPictureID[idx]] + "vw " + btnHeight + "vh"
-    if (imgRate[cardPictureID[idx]]<1)
-    {
-        btnCards.style.backgroundSize = btnWidth + "vw " + btnHeight/imgRate[cardPictureID[idx]] + "vh"
+    if (imgRate[cardPictureID[idx]] < 1) {
+        btnCards.style.backgroundSize = btnWidth + "vw " + btnHeight / imgRate[cardPictureID[idx]] + "vh"
     }
     btnCards.style.backgroundPosition = "50% 50%"
     setTimeout(function() {
@@ -555,66 +558,54 @@ function isOverlap(thisLeft, thisTop, cardWidth, cardHeight, storedWidth, stored
     return false
 }
 
-function funcStart()
-{
-    var getAnswer=prompt("플레이어 수를 입력해 주세요. (2-4명)")
-    while (true)
-    {
-        if (getAnswer==null)
-        {
+function funcStart() {
+    var getAnswer = prompt("플레이어 수를 입력해 주세요. (2-4명)")
+    while (true) {
+        if (getAnswer == null) {
             return
         }
-        if (Number(getAnswer)>=2 && Number(getAnswer)<=4)
-        {
+        if (Number(getAnswer) >= 2 && Number(getAnswer) <= 4) {
             break
         }
-        getAnswer=prompt("플레이어 수를 입력해 주세요. (2-4명)")
+        getAnswer = prompt("플레이어 수를 입력해 주세요. (2-4명)")
     }
     numberOfPlayer = Number(getAnswer)
-    
-    getAnswer=prompt("타일 수를 입력해 주세요. (8-24개)")
-    while (true)
-    {
-        if (getAnswer==null)
-        {
+
+    getAnswer = prompt("타일 수를 입력해 주세요. (8-24개)")
+    while (true) {
+        if (getAnswer == null) {
             return
         }
-        if (Number(getAnswer)>=8 && Number(getAnswer)<=24)
-        {
+        if (Number(getAnswer) >= 8 && Number(getAnswer) <= 24) {
             break
         }
-        getAnswer=prompt("타일 수를 입력해 주세요. (8-24개)")
+        getAnswer = prompt("타일 수를 입력해 주세요. (8-24개)")
     }
     numberOfTiles = Number(getAnswer)
-    
-    while (mainDiv.childNodes.length>0)
-    {
+
+    while (mainDiv.childNodes.length > 0) {
         mainDiv.removeChild(mainDiv.childNodes[0])
     }
 
-    var elem = document.documentElement
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.mozRequestFullScreen) { /* Firefox */
-        elem.mozRequestFullScreen();
-      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE/Edge */
-        elem.msRequestFullscreen();
-      }
-    
+    mainDiv.requestFullscreen()
+
     //document.documentElement.requestFullscreen();
 
-    setTimeout(function(){
-        pageHeight = document.documentElement.clientHeight
-        pageWidth = document.documentElement.clientWidth
-        body.style.height = pageHeight + "px"
-        body.style.width = pageWidth + "px"
-        mainDiv.style.height = pageHeight + "px"
-        mainDiv.style.width = pageWidth + "px"
-        mainDiv.style.backgroundSize = pageWidth+"px "+pageHeight+"px"
-    },50)
-    setTimeout(function(){drawchachacha()},500)
+    // setTimeout(function() {
+    //     pageHeight = document.documentElement.clientHeight
+    //     pageWidth = document.documentElement.clientWidth
+    //     body.style.height = pageHeight + "px"
+    //     body.style.width = pageWidth + "px"
+    //     mainDiv.style.height = pageHeight + "px"
+    //     mainDiv.style.width = pageWidth + "px"
+    //     mainDiv.style.backgroundSize = pageWidth + "px " + pageHeight + "px"
+    // }, 50)
+    // setTimeout(function() { drawchachacha() }, 500)
 }
+
+$(window).resize(function() {
+    drawchachacha()
+});
+
 
 //drawchachacha()
