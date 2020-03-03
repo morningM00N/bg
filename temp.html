@@ -25,7 +25,7 @@
         var windowOuterHeight = window.outerHeight
 
 
-        var count = 0
+        var count = 100
 
         var mainDiv = document.getElementById("main")
         var body = document.getElementById("body")
@@ -68,6 +68,8 @@
             btnThis.style.height = 0.99 * height + "px"
             btnThis.style.width = 0.3 * width + "px"
 
+            mainDiv.style.width = width+"px"
+            mainDiv.style.height = height+"px"
             mainDiv.style.backgroundSize = width + "px " + height + "px"
 
 
