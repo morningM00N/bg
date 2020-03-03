@@ -9,3 +9,11 @@ function funcLocateObjects --> call when resize()
  
 
 fullMode, fixed ratio mode, 
+
+
+
+
+Cartographer --> 테두리 치기, 한번 더 클릭하면 삭제?
+
+
+twice as clever --> gray 영역 점수 수정, 버그?
