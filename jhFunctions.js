@@ -1,8 +1,14 @@
-var pageHeight = document.documentElement.clientHeight
-var pageWidth = document.documentElement.clientWidth
+var pageHeight
+var pageWidth
+var widthPerHeight
 
 var mainDiv = document.getElementById("main")
 var mainBody = document.getElementById("body")
+
+function funcWidthPerHeight(_wperh) {
+    widthPerHeight = _wperh
+}
+
 
 class ObjectInfor {
     constructor() {
@@ -20,23 +26,25 @@ class ObjectInfor {
 }
 
 {
-    mainBody.style.border = "0 px"
-    mainBody.style.margin = "0 px"
-    mainBody.style.padding = "0 px"
+    mainBody.style.border = "0px"
+    mainBody.style.margin = "0px"
+    mainBody.style.padding = "0px"
 
-    mainDiv.style.border = "0 px"
-    mainDiv.style.margin = "0 px"
-    mainDiv.style.padding = "0 px"
-
-    mainDiv.style.height = pageHeight + "px"
-    mainDiv.style.width = pageWidth + "px"
-
-    mainDiv.style.backgroundSize = pageWidth + "px " + pageHeight + "px"
+    mainDiv.style.border = "0px"
+    mainDiv.style.margin = "0px"
+    mainDiv.style.padding = "0px"
 }
 
 function funcUpdatePageSize(isMainDivSizeUpdate) {
     pageHeight = document.documentElement.clientHeight
     pageWidth = document.documentElement.clientWidth
+
+    if (pageWidth > pageHeight * widthPerHeight) {
+        pageWidth = pageHeight * widthPerHeight
+    }
+    else {
+        pageHeight = pageWidth / widthPerHeight
+    }
 
     if (isMainDivSizeUpdate == true) {
         mainDiv.style.height = pageHeight + "px"
@@ -46,13 +54,14 @@ function funcUpdatePageSize(isMainDivSizeUpdate) {
     }
 }
 
+
 function funcPrepareGetLocation() {
     var temp = document.createElement("input")
     mainBody.appendChild(temp)
     temp.style.position = "absolute"
     temp.style.left = "0px"
     temp.style.top = "0px"
-    mainDiv.onclick = function(event) {
+    mainDiv.onclick = function (event) {
         x = event.pageX;
         y = event.pageY;
         temp.value = 'new Array(' + (x / pageWidth).toFixed(4) + ',' + (y / pageHeight).toFixed(4) + ")"
@@ -67,7 +76,7 @@ function funcRelocateElements() {
     funcUpdatePageSize(true)
 }
 
-$(window).resize(function() {
+$(window).resize(function () {
     funcRelocateElements()
 });
 

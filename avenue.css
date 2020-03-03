@@ -1,0 +1,14 @@
+.bgdiv {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-image: url('img/avenue/playmatA.jpg');
+}
+
+body {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}

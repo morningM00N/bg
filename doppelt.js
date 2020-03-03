@@ -71,19 +71,30 @@ function funcCal() {
 
         }
         if (check == true) {
-            ++numOfGray
+            switch (idx) {
+                case 0:
+                    scoreGray += 2
+                    break;
+                case 1:
+                    scoreGray += 4
+                    break;
+                case 2:
+                    scoreGray += 7
+                    break;
+                case 3:
+                    scoreGray += 11
+                    break;
+                case 4:
+                    scoreGray += 16
+                    break;
+                case 5:
+                    scoreGray += 22
+                    break;
+
+                default:
+                    break;
+            }
         }
-
-    }
-    var tic = 2
-    scoreGray = 2
-    for (let idx = 1; idx < numOfGray; idx++) {
-        scoreGray += tic;
-        ++tic
-
-    }
-    if (numOfGray == 0) {
-        scoreGray = 0
     }
 
     var numOfYellow = 0;
