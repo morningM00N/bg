@@ -102,7 +102,7 @@
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "지도제작자 점수 계산 시트"
         pText.style.color = "white"
-        pText.style.textShadow="3px 3px 1px black"
+        pText.style.textShadow = "3px 3px 1px black"
         mainDiv.appendChild(pText)
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
@@ -112,20 +112,66 @@
         pText.href = "cgCardDrawer.html"
         pText.style.textDecoration = "none"
         pText.style.width = pageWidth + "px"
-        pText.style.height = btnHeight/2 * pageHeight + "px"
+        pText.style.height = btnHeight / 2 * pageHeight + "px"
         pText.style.fontSize = 0.04 * pageHeight + "px"
         pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
-        pText.style.top = (topLoc-btnHeight/2) * pageHeight + "px"
-        pText.style.padding = 0.05 * pageHeight + "px "+0.02 * pageHeight + "px "
+        pText.style.top = (topLoc - btnHeight / 2) * pageHeight + "px"
+        pText.style.padding = 0.05 * pageHeight + "px " + 0.02 * pageHeight + "px "
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "지도제작자 카드 뽑기"
         pText.style.color = "white"
-        pText.style.textAlign="right"
-        pText.style.textShadow="3px 3px 1px black"
+        pText.style.textAlign = "right"
+        pText.style.textShadow = "3px 3px 1px black"
         mainDiv.appendChild(pText)
-    }
+    } {
+        var btn = document.createElement("button")
+        btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/zZGqhCOD0hW3AyINwayRvFfOwnU=/fit-in/246x300/pic3566028.jpg')"
+        btn.style.backgroundSize = "100%"
+        btn.style.opacity = "0.5"
+        btn.style.backgroundPositionY = "8%"
+        btn.style.width = pageWidth + "px"
+        btn.style.height = btnHeight * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = topLoc * pageHeight + "px"
+        btn.style.backgroundColor = "gray"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
 
-    {
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "avenue.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = topLoc * pageHeight + "px"
+        pText.style.padding = 0.02 * pageHeight + "px"
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "애비뉴 점수 계산 시트"
+        pText.style.color = "white"
+        pText.style.textShadow = "3px 3px 1px black"
+        mainDiv.appendChild(pText)
+        topLoc += btnHeight
+        topLoc -= 1 / pageHeight
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "xxx.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight / 2 * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = (topLoc - btnHeight / 2) * pageHeight + "px"
+        pText.style.padding = 0.05 * pageHeight + "px " + 0.02 * pageHeight + "px "
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "애비뉴 카드 뽑기"
+        pText.style.color = "white"
+        pText.style.textAlign = "right"
+        pText.style.textShadow = "3px 3px 1px black"
+        mainDiv.appendChild(pText)
+    } {
         var btn = document.createElement("button")
         btn.style.backgroundImage = "url('https://cf.geekdo-images.com/opengraph/img/dfaUhAyIR3VeEQPPP44zMfbA7zc=/fit-in/1200x630/pic4521267.png')"
         btn.style.backgroundSize = "100%"
@@ -152,7 +198,7 @@
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "코린트 점수 계산 시트"
         pText.style.color = "white"
-        pText.style.textShadow="3px 3px 1px black"
+        pText.style.textShadow = "3px 3px 1px black"
         mainDiv.appendChild(pText)
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
@@ -186,7 +232,7 @@
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "다이아망트 카드 뽑기"
         pText.style.color = "white"
-        pText.style.textShadow="3px 3px 1px black"
+        pText.style.textShadow = "3px 3px 1px black"
         mainDiv.appendChild(pText)
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
@@ -219,7 +265,7 @@
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "영리한 여우 점수 계산 시트"
         pText.style.color = "white"
-        pText.style.textShadow="3px 3px 1px black"
+        pText.style.textShadow = "3px 3px 1px black"
 
         mainDiv.appendChild(pText)
         topLoc += btnHeight
@@ -253,7 +299,7 @@
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "디크립토 힌트 작성 시트"
         pText.style.color = "white"
-        pText.style.textShadow="3px 3px 1px black"
+        pText.style.textShadow = "3px 3px 1px black"
 
         mainDiv.appendChild(pText)
         topLoc += btnHeight
@@ -285,7 +331,7 @@
         pText.style.top = topLoc * pageHeight + "px"
         pText.style.padding = 0.02 * pageHeight + "px"
         pText.style.boxSizing = "border-box"
-        pText.style.textShadow="3px 3px 1px black"
+        pText.style.textShadow = "3px 3px 1px black"
         pText.innerHTML = "도펠트 소 클레버 점수 계산 시트"
         pText.style.color = "white"
 
@@ -293,7 +339,7 @@
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
     }
- 
+
     {
         var btn = document.createElement("button")
         btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/IWq2xs6Jn458d9Eo3NkecTNh0G0=/fit-in/246x300/pic3760784.jpg')"
@@ -321,11 +367,9 @@
         pText.style.boxSizing = "border-box"
         pText.innerHTML = "스트림스 점수 계산 시트"
         pText.style.color = "white"
-        pText.style.textShadow="3px 3px 1px black"
+        pText.style.textShadow = "3px 3px 1px black"
         mainDiv.appendChild(pText)
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
     }
-
-  
 </script>
