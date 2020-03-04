@@ -10,12 +10,14 @@ function funcWidthPerHeight(_wperh) {
 }
 
 var mapLocationInfor = new Array()
+var nameOfRelocatedElements = new Array()
 
 
 
 class ObjectInfor {
     constructor() {
         this.loc = new Array()
+        this.size=new Array()
     }
     setLocPortrait(left, top) {
         this.loc[0] = new Array(left, top)
@@ -23,8 +25,11 @@ class ObjectInfor {
     setLocLandscape(left, top) {
         this.loc[1] = new Array(left, top)
     }
-    setSize(width, height) {
-        this.size = new Array(width, height)
+    setSizePortrait(width, height) {
+        this.size[0] = new Array(width, height)
+    }
+    setSizeLandscape(width, height) {
+        this.size[1] = new Array(width, height)
     }
 }
 
@@ -38,7 +43,8 @@ class ObjectInfor {
     mainDiv.style.padding = "0px"
 }
 
-function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX, rightBottomY, isLand) {
+function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX, rightBottomY) {
+    nameOfRelocatedElements.push(_id)
     var newElement = document.createElement(_type)
     newElement.id = _id
     newElement.className = _class
@@ -49,19 +55,55 @@ function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX,
     newElement.style.lineHeight = (rightBottomY - leftTopY) * pageHeight + "px"
     newElement.style.fontSize = (rightBottomY - leftTopY) * pageHeight + "px"
     newElement.style.backgroundSize = newElement.style.width + " " + newElement.style.height
+
     var newObject = new ObjectInfor()
-    if (isLand == true) {
-        newObject.setLocLandscape(leftTopX, leftTopY)
-    } else {
-        newObject.setLocPortrait(leftTopX, leftTopY)
-    }
-    newObject.setSize(rightBottomX - leftTopX, rightBottomY - leftTopY)
+    newObject.setLocLandscape(leftTopX, leftTopY)
+    newObject.setSizeLandscape(rightBottomX - leftTopX, rightBottomY - leftTopY)
+    newObject.setLocPortrait(leftTopX, leftTopY)
+    newObject.setSizePortrait(rightBottomX - leftTopX, rightBottomY - leftTopY)
+
     mapLocationInfor[_id] = newObject;
 
     mainDiv.appendChild(newElement)
     return newElement
+}
+
+function funcSetLocation(_id, leftTopX, leftTopY, rightBottomX, rightBottomY, isLand) {
+    let newObject = mapLocationInfor[_id]
+    if (isLand == true) {
+        newObject.setLocLandscape(leftTopX, leftTopY)
+        newObject.setSizeLandscape(rightBottomX - leftTopX, rightBottomY - leftTopY)
+
+    }
+    else {
+        newObject.setLocPortrait(leftTopX, leftTopY)
+        newObject.setSizePortrait(rightBottomX - leftTopX, rightBottomY - leftTopY)
+    }
 
 }
+
+function funcRelocateElement(_id, isLand) {
+    let landIdx = 1
+    if (isLand == true) {
+        landIdx = 0
+    }
+
+    let leftTopX = mapLocationInfor[_id].loc[landIdx][0]
+    let leftTopY = mapLocationInfor[_id].loc[landIdx][1]
+    let objectWidth = mapLocationInfor[_id].size[landIdx][0]
+    let objectHeight = mapLocationInfor[_id].size[landIdx][1]
+
+    let newElement = document.getElementById(_id)
+    newElement.style.left = leftTopX * pageWidth + "px"
+    newElement.style.top = leftTopY * pageHeight + "px"
+    newElement.style.width = objectWidth * pageWidth + "px"
+    newElement.style.height = objectHeight * pageHeight + "px"
+    newElement.style.lineHeight = objectHeight * pageHeight + "px"
+    newElement.style.fontSize = objectHeight * pageHeight + "px"
+    newElement.style.backgroundSize = newElement.style.width + " " + newElement.style.height
+
+}
+
 
 
 function funcUpdatePageSize(isMainDivSizeUpdate) {
@@ -90,7 +132,7 @@ function funcPrepareGetLocation() {
     temp.style.position = "absolute"
     temp.style.left = "0px"
     temp.style.top = "0px"
-    mainDiv.onclick = function(event) {
+    mainDiv.onclick = function (event) {
         x = event.pageX;
         y = event.pageY;
         if (firstClick == true) {
@@ -112,12 +154,18 @@ function funcPrepareGetLocation() {
 
 
 function funcRelocateElements() {
-    funcUpdatePageSize(true)
+   // alert("here")
+    for (let idx = 0; idx < nameOfRelocatedElements.length; idx++) {
+        funcRelocateElement(nameOfRelocatedElements[idx])
+    }
+
 }
 
-$(window).resize(function() {
+$(window).resize(function () {
+    funcUpdatePageSize(true)
     funcRelocateElements()
 });
+
 
 
 

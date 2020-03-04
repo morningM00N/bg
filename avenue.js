@@ -201,7 +201,31 @@ function funcScoreEX(idx) {
 
 }
 
+function funcFullScreen()
+{
+    if (document.fullscreenElement)
+    {
+        document.exitFullscreen()
+    }
+    else{
+        mainDiv.requestFullscreen()
+    }
+    
+}
+
 function funcDrawAvenue() {
+
+    var btnFull = funcInsertElement(
+        "btnFull",
+        "button",
+        "btnTrans",
+        0.0452, 0.9070, 0.1135, 0.9755, true
+    )
+    //btnFull.style.border = "1px solid black"
+    btnFull.style.backgroundColor = "red"
+    btnFull.onclick = funcFullScreen
+    btnFull.style.backgroundImage="url('img/fullscreen.png')"
+    btnFull.style.borderRadius = "10%"
     for (let idx = 0; idx <= 4; idx++) {
         var sltSantuary = funcInsertElement(
             "sltSanctuary" + idx,
