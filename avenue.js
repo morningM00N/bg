@@ -83,6 +83,10 @@ function funcCalSanctuary(idx) {
     var sltSanctuary = document.getElementById(
         "sltSanctuary" + idx)
     if (sltSanctuary.selectedIndex == 0) {
+        if (document.fullscreenElement)
+        {
+            document.exitFullscreen()
+        }
         alert("안식처 카드를 설정해 주세요!")
         return
     }
@@ -201,17 +205,7 @@ function funcScoreEX(idx) {
 
 }
 
-function funcFullScreen()
-{
-    if (document.fullscreenElement)
-    {
-        document.exitFullscreen()
-    }
-    else{
-        mainDiv.requestFullscreen()
-    }
-    
-}
+
 
 function funcDrawAvenue() {
 
@@ -219,7 +213,7 @@ function funcDrawAvenue() {
         "btnFull",
         "button",
         "btnTrans",
-        0.0452, 0.9070, 0.1135, 0.9755, true
+        0.0452, 0.9070, 0.1135, 0.9755
     )
     //btnFull.style.border = "1px solid black"
     btnFull.style.backgroundColor = "red"
@@ -231,7 +225,7 @@ function funcDrawAvenue() {
             "sltSanctuary" + idx,
             "select",
             "sltTrans",
-            0.7852, 0.0251 + 0.078 * idx, 0.8491, 0.0900 + 0.078 * idx, true
+            0.7852, 0.0251 + 0.078 * idx, 0.8491, 0.0900 + 0.078 * idx
         )
 
         for (let idx2 = 0; idx2 < 7; idx2++) {
@@ -271,7 +265,7 @@ function funcDrawAvenue() {
             "btnScore" + idx,
             "button",
             "btnTrans",
-            0.8657, 0.0251 + 0.078 * idx, 0.9509, 0.0900 + 0.078 * idx, true
+            0.8657, 0.0251 + 0.078 * idx, 0.9509, 0.0900 + 0.078 * idx
         ).onclick = function() {
             funcCalSanctuary(idx)
         }
@@ -288,7 +282,7 @@ function funcDrawAvenue() {
                 "btnMap" + idx1 + "_" + idx2,
                 "button",
                 "btnTrans",
-                leftStart + leftTic * idx1, topStart + topTic * idx2, leftStart + leftTic * (idx1 + 1), topStart + topTic * (idx2 + 1), true
+                leftStart + leftTic * idx1, topStart + topTic * idx2, leftStart + leftTic * (idx1 + 1), topStart + topTic * (idx2 + 1)
             )
             btnMap.onclick = function() {
                 funcDrawTile(idx1, idx2)
@@ -304,7 +298,7 @@ function funcDrawAvenue() {
             "btnTile" + idx,
             "button",
             "btnTrans",
-            0.2009 + idx * leftTic, 0.8816, 0.2769 + idx * leftTic, 0.9820, true
+            0.2009 + idx * leftTic, 0.8816, 0.2769 + idx * leftTic, 0.9820
         )
         btnTile.onclick = function() {
             funcSetTile(idx)
@@ -318,7 +312,7 @@ function funcDrawAvenue() {
                 "btnEXScore" + idx,
                 "input",
                 "btnTrans",
-                0.8843, 0.4214 + topTic * idx, 0.9481, 0.4778 + topTic * idx, true)
+                0.8843, 0.4214 + topTic * idx, 0.9481, 0.4778 + topTic * idx)
 
         } else {
             funcInsertElement(
@@ -336,13 +330,13 @@ function funcDrawAvenue() {
         "btnPartialSum",
         "button",
         "btnTrans",
-        0.8667, 0.6875, 0.9491, 0.7462, true
+        0.8667, 0.6875, 0.9491, 0.7462
     )
     funcInsertElement(
         "btnMinus",
         "button",
         "btnTrans",
-        0.8667, 0.7635, 0.9491, 0.8240, true
+        0.8667, 0.7635, 0.9491, 0.8240
     )
 
 
@@ -350,7 +344,7 @@ function funcDrawAvenue() {
         "btnSum",
         "button",
         "btnTrans",
-        0.8389, 0.8804, 0.9481, 0.9744, true
+        0.8389, 0.8804, 0.9481, 0.9744
     ).onclick = function() {
         funcCalFinalScore()
     }
