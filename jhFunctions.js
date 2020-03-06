@@ -71,6 +71,15 @@ function funcInsertFullScreenButton(_topLeftX, _topLeftY, _bottomRightX, _bottom
 
 }
 
+function appendElement(_type, _id, _className, _left, _top, _width, _height, _fontSize) {
+
+    var newElement = funcInsertElement(_id, _type, _className, _left, _top, _left + _width, _top + _height)
+    newElement.style.fontSize = _fontSize * pageWidth + "px"
+
+    return newElement
+}
+
+
 function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX, rightBottomY, _fixedRatio) {
     nameOfRelocatedElements.push(_id)
     var newElement = document.getElementById(_id)
