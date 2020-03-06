@@ -81,10 +81,10 @@ function appendElement(_type, _id, _className, _left, _top, _width, _height, _fo
 
 
 function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX, rightBottomY, _fixedRatio) {
-    nameOfRelocatedElements.push(_id)
     var newElement = document.getElementById(_id)
     if (newElement == null) {
         newElement = document.createElement(_type)
+        nameOfRelocatedElements.push(_id)
     }
     newElement.id = _id
     newElement.className = _class
@@ -97,13 +97,17 @@ function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX,
     newElement.style.fontSize = (rightBottomY - leftTopY) * pageHeight + "px"
     newElement.style.backgroundSize = newElement.style.width + " " + newElement.style.height
 
+
     var newObject = new ObjectInfor()
     newObject.setLocLandscape(leftTopX, leftTopY)
     newObject.setSizeLandscape(rightBottomX - leftTopX, rightBottomY - leftTopY)
     newObject.setLocPortrait(leftTopX, leftTopY)
     newObject.setSizePortrait(rightBottomX - leftTopX, rightBottomY - leftTopY)
+
     if (_fixedRatio > 0) {
         newObject.fixedRatio = _fixedRatio
+        newObject.size[0][1] = newObject.size[0][0] * pageWidth / pageHeight
+        newObject.size[1][1] = newObject.size[1][0] * pageWidth / pageHeight
     }
 
     mapLocationInfor[_id] = newObject;
