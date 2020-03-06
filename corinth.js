@@ -1,34 +1,14 @@
-var pageHeight = document.documentElement.clientHeight
-var pageWidth = document.documentElement.clientWidth
+funcWidthPerHeight(1123 / 785)
 
-pageHeight = pageWidth * 785 / 1123
-var mainDiv = document.getElementById("main")
-var body = document.getElementById("body")
+funcUpdatePageSize(true)
 
-mainDiv.style.height = pageHeight + "px"
-mainDiv.style.width = pageWidth + "px"
-
-var seed = Math.floor(Math.random() * 100000);
-
-
-function getRandom(bound) {
-    var x = Math.sin(seed++) * 100000;
-    return Math.floor((x - Math.floor(x)) * bound)
-}
-
+//funcPrepareGetLocation()
 
 function appendElement(_type, _id, _className, _left, _top, _width, _height, _fontSize) {
-    var newElement = document.createElement(_type)
-    newElement.id = _id
-    newElement.className = _className
-    newElement.style.left = _left * pageWidth + "px"
-    newElement.style.top = _top * pageHeight + "px"
-    newElement.style.width = _width * pageWidth + "px"
-    newElement.style.height = _height * pageHeight + "px"
-    newElement.style.fontSize = _fontSize * pageWidth + "px"
-    newElement.style.lineHeight = _height * pageHeight + "px"
 
-    mainDiv.appendChild(newElement)
+    var newElement = funcInsertElement(_id, _type, _className, _left, _top, _left + _width, _top + _height)
+    newElement.style.fontSize = _fontSize * pageWidth + "px"
+
     return newElement
 }
 
@@ -44,6 +24,10 @@ function drawCorinth() {
         arrGlass[idx] = false
 
     }
+
+
+    funcInsertFullScreenButton(0.010, 0.010, 0.0832, 0.0730, 20 / 29)
+
 
     var leftIter = 0.140189671
     var topIter = 3 * 0.321210191 - 2 * 0.131210191
@@ -615,17 +599,14 @@ function funcCalFinal() {
 
         }
     }
-    if (arrFirst[1]==1)
-    {
-        subSum[2]+=3
+    if (arrFirst[1] == 1) {
+        subSum[2] += 3
     }
-    if (arrFirst[2]==1)
-    {
-        subSum[4]+=4
+    if (arrFirst[2] == 1) {
+        subSum[4] += 4
     }
-    if (arrFirst[3]==1)
-    {
-        subSum[6]+=5
+    if (arrFirst[3] == 1) {
+        subSum[6] += 5
     }
 
     for (let idx = 0; idx < 4; idx++) {
