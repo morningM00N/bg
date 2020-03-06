@@ -220,6 +220,7 @@ function funcBtnBack() {
             )
         }
         ++numberOfGoldDice
+        btnDice.style.display = "inline"
         btnDice.style.backgroundColor = "yellow"
         btnDice.style.backgroundImage = "url(img/dice/B" + (getRandom(6) + 1) + ".png)"
             //btnDice.style.color = "red"
@@ -272,6 +273,14 @@ function funcBtnBack() {
         }
 
     } else {
+
+        for (let idx = numberOfWhiteDice; idx < numberOfWhiteDice + numberOfGoldDice; idx++) {
+            let btn = document.getElementById("btnDice" + idx)
+            if (btn != null) {
+                btn.style.display = "none"
+            }
+        }
+
         funcDrawDice()
         stage = 0
         numberOfGoldDice = 0
