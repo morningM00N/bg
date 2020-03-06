@@ -173,9 +173,9 @@ function funcRoll(diceNumber, idx, intFirstTry) {
     let rolledObject = document.getElementById(_id)
     diceValue[diceNumber] = (getRandom(6) + 1)
     if (diceNumber <= 8) {
-        rolledObject.style.backgroundImage = "url('img/dice/w" + diceValue[diceNumber] + ".png')"
+        rolledObject.style.backgroundImage = "url('img/dice/W" + diceValue[diceNumber] + ".png')"
     } else {
-        rolledObject.style.backgroundImage = "url('img/dice/b" + diceValue[diceNumber] + ".png')"
+        rolledObject.style.backgroundImage = "url('img/dice/B" + diceValue[diceNumber] + ".png')"
     }
     if (getRandom(10) % 2 == 0) {
         curDegree[diceNumber] += 2
@@ -208,7 +208,6 @@ function funcBtnBack() {
         while (isValidLoc(numberOfGoldDice + 9) == false) {
             numOfTry--
             if (numOfTry == 0) {
-                alert("cannnot" + idx)
                 break;
             }
             _left = (getRandom(60) + 30) / 100
