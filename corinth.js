@@ -4,15 +4,6 @@ funcUpdatePageSize(true)
 
 //funcPrepareGetLocation()
 
-function appendElement(_type, _id, _className, _left, _top, _width, _height, _fontSize) {
-
-    var newElement = funcInsertElement(_id, _type, _className, _left, _top, _left + _width, _top + _height)
-    newElement.style.fontSize = _fontSize * pageWidth + "px"
-
-    return newElement
-}
-
-
 var arrCoin = new Array()
 var arrDonkey = new Array()
 var arrFirst = new Array()
