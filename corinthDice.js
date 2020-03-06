@@ -89,7 +89,7 @@ function funcDrawDice() {
         }
 
         btnDice.style.backgroundColor = "black"
-        btnDice.style.backgroundImage = "url(img/dice/w" + (getRandom(6) + 1) + ".png)"
+        btnDice.style.backgroundImage = "url(img/dice/W" + (getRandom(6) + 1) + ".png)"
             // btnDice.style.color = "red"
             // btnDice.innerHTML = idx
         btnDice.style.borderRadius = "20%"
@@ -222,7 +222,7 @@ function funcBtnBack() {
         }
         ++numberOfGoldDice
         btnDice.style.backgroundColor = "yellow"
-        btnDice.style.backgroundImage = "url(img/dice/b" + (getRandom(6) + 1) + ".png)"
+        btnDice.style.backgroundImage = "url(img/dice/B" + (getRandom(6) + 1) + ".png)"
             //btnDice.style.color = "red"
             //btnDice.innerHTML = idx
         btnDice.style.borderRadius = "20%"
