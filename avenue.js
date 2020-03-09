@@ -83,8 +83,7 @@ function funcCalSanctuary(idx) {
     var sltSanctuary = document.getElementById(
         "sltSanctuary" + idx)
     if (sltSanctuary.selectedIndex == 0) {
-        if (document.fullscreenElement)
-        {
+        if (document.fullscreenElement) {
             document.exitFullscreen()
         }
         alert("안식처 카드를 설정해 주세요!")
@@ -210,15 +209,15 @@ function funcScoreEX(idx) {
 function funcDrawAvenue() {
 
     var btnFull = funcInsertElement(
-        "btnFull",
-        "button",
-        "btnTrans",
-        0.0452, 0.9070, 0.1135, 0.9755
-    )
-    //btnFull.style.border = "1px solid black"
+            "btnFull",
+            "button",
+            "btnTrans",
+            0.0452, 0.9070, 0.1135, 0.9755
+        )
+        //btnFull.style.border = "1px solid black"
     btnFull.style.backgroundColor = "red"
     btnFull.onclick = funcFullScreen
-    btnFull.style.backgroundImage="url('img/fullscreen.png')"
+    btnFull.style.backgroundImage = "url('img/fullscreen.png')"
     btnFull.style.borderRadius = "10%"
     for (let idx = 0; idx <= 4; idx++) {
         var sltSantuary = funcInsertElement(
@@ -319,7 +318,7 @@ function funcDrawAvenue() {
                 "btnEXScore" + idx,
                 "button",
                 "btnTrans",
-                0.8843, 0.4214 + topTic * idx, 0.9481, 0.4778 + topTic * idx, true).onclick = function() {
+                0.8843, 0.4214 + topTic * idx, 0.9481, 0.4778 + topTic * idx).onclick = function() {
                 funcScoreEX(idx)
             }
         }
