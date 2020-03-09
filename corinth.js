@@ -17,7 +17,7 @@ function drawCorinth() {
     }
 
 
-    funcInsertFullScreenButton(0.010, 0.010, 0.0832, 0.0730, 20 / 29)
+    funcInsertFullScreenButton(0.010, 0.010, 0.0832, 0.0730, 29 / 20)
 
 
     var leftIter = 0.140189671
