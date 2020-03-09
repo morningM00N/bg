@@ -1,12 +1,14 @@
 var pageHeight
 var pageWidth
 var widthPerHeight
+var widthPerHeightForLandOnly
 
 var mainDiv = document.getElementById("main")
 var mainBody = document.getElementById("body")
 
-function funcWidthPerHeight(_wperh) {
+function funcWidthPerHeight(_wperh, _wperhonly) {
     widthPerHeight = _wperh
+    widthPerHeightForLandOnly = _wperhonly
 }
 
 var mapLocationInfor = new Array()
@@ -180,6 +182,10 @@ function funcUpdatePageSize(isMainDivSizeUpdate) {
         } else {
             pageHeight = pageWidth / widthPerHeight
         }
+    }
+    if (widthPerHeightForLandOnly>0 && pageWidth>pageHeight)
+    {
+        pageWidth = pageHeight * widthPerHeightForLandOnly
     }
 
     if (isMainDivSizeUpdate == true) {

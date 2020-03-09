@@ -1,4 +1,4 @@
-funcWidthPerHeight(0)
+funcWidthPerHeight(0, 580/816)
 
 //funcPrepareGetLocation()
 
@@ -50,7 +50,7 @@ function funcDrawCorinthDice() {
         "btnBack",
         "button",
         "btnTrans",
-        0.25, 0.08, 1.0, 1.0
+        0.25, 0.08, 0.974, 0.92
     )
     btnBack.onclick = funcBtnBack
     funcDrawDice()
@@ -62,23 +62,23 @@ function funcDrawCorinthDice() {
 
 function funcDrawDice() {
     for (let idx = 0; idx < numberOfWhiteDice; idx++) {
-        let _left = (getRandom(60) + 30) / 100
+        let _left = (getRandom(50) + 30) / 100
         let _top = (getRandom(30) + 30) / 100
         let btnDice = funcInsertElement(
             "btnDice" + idx,
             "button",
             "btnTrans",
-            _left, _top, _left + 0.1, 1.0, 1.0
+            _left, _top, _left + 0.1, 0.9, 1.0
         )
         btnDice.style.display = "inline"
-        let numOfTry = 100
+        let numOfTry = 500
         while (isValidLoc(idx) == false) {
             numOfTry--
             if (numOfTry == 0) {
-                alert("cannnot" + idx)
+                //alert("cannnot" + idx)
                 break;
             }
-            _left = (getRandom(60) + 30) / 100
+            _left = (getRandom(50) + 30) / 100
             _top = (getRandom(30) + 30) / 100
             btnDice = funcInsertElement(
                 "btnDice" + idx,
@@ -93,7 +93,7 @@ function funcDrawDice() {
             // btnDice.style.color = "red"
             // btnDice.innerHTML = idx
         btnDice.style.borderRadius = "20%"
-        btnDice.style.boxShadow = "1vw 1vw gray"
+        btnDice.style.boxShadow = "0.5vw 0.5vw gray"
         btnDice.onclick = function() {
             if (stage == 0) {
                 stage = 1
@@ -119,8 +119,8 @@ function isValidLoc(diceNumber) {
     let sizeThis = mapLocationInfor["btnDice" + diceNumber].size[idxLoc]
     for (let idx = 0; idx < diceNumber; idx++) {
         let locTarget = mapLocationInfor["btnDice" + idx].loc[idxLoc]
-        if (locThis[0] > locTarget[0] + sizeThis[0] || locTarget[0] > locThis[0] + sizeThis[0] ||
-            locThis[1] > locTarget[1] + sizeThis[1] || locTarget[1] > locThis[1] + sizeThis[1]) {
+        if (locThis[0] > locTarget[0] + 1.1*sizeThis[0] || locTarget[0] > locThis[0] + 1.1*sizeThis[0] ||
+            locThis[1] > locTarget[1] + 1.1*sizeThis[1] || locTarget[1] > locThis[1] + 1.1*sizeThis[1]) {
             overlap = false
         } else {
             overlap = true
@@ -196,7 +196,7 @@ function funcBtnBack() {
             alert("더이상 추가할 수 없습니다.")
             return
         }
-        let _left = (getRandom(60) + 30) / 100
+        let _left = (getRandom(50) + 30) / 100
         let _top = (getRandom(30) + 30) / 100
         let btnDice = funcInsertElement(
             "btnDice" + (numberOfGoldDice + 9),
@@ -204,13 +204,13 @@ function funcBtnBack() {
             "btnTrans",
             _left, _top, _left + 0.1, 1.0, 1.0
         )
-        let numOfTry = 100
+        let numOfTry = 500
         while (isValidLoc(numberOfGoldDice + 9) == false) {
             numOfTry--
             if (numOfTry == 0) {
                 break;
             }
-            _left = (getRandom(60) + 30) / 100
+            _left = (getRandom(50) + 30) / 100
             _top = (getRandom(30) + 30) / 100
             btnDice = funcInsertElement(
                 "btnDice" + (numberOfGoldDice + 9),
@@ -226,7 +226,7 @@ function funcBtnBack() {
             //btnDice.style.color = "red"
             //btnDice.innerHTML = idx
         btnDice.style.borderRadius = "20%"
-        btnDice.style.boxShadow = "1vw 1vw gray"
+        btnDice.style.boxShadow = "0.5vw 0.5vw gray"
         btnDice.onclick = function() {
             for (let idx2 = 0; idx2 < numberOfWhiteDice + numberOfGoldDice; idx2++) {
                 funcStartRoll(idx2)
