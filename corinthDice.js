@@ -55,7 +55,7 @@ function funcDrawCorinthDice() {
     btnBack.onclick = funcBtnBack
     funcDrawDice()
 
-    funcInsertFullScreenButton(0.8888, 0.0103, 0.9750, 0.0828, 20 / 29)
+    funcInsertFullScreenButton(0.8888, 0.0103, 0.9750, 0.0828, 29 / 20)
 
 
 }
