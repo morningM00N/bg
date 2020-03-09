@@ -15,9 +15,16 @@ var nameOfRelocatedElements = new Array()
 var seed = Math.floor(Math.random() * 100000);
 
 
-function getRandom(bound) {
-    let x = Math.sin(seed++) * 100000;
-    return Math.floor((x - Math.floor(x)) * bound)
+function getRandom(bound, min, isSeed) {
+    let mod = 0
+    if (min != null) {
+        mod += min
+    }
+    if (isSeed = true) {
+        let x = Math.sin(seed++) * 100000;
+        return Math.floor((x - Math.floor(x)) * bound) + mod
+    }
+    return bound * Math.random() + mod
 }
 
 
@@ -80,7 +87,7 @@ function appendElement(_type, _id, _className, _left, _top, _width, _height, _fo
 }
 
 
-function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX, rightBottomY, _fixedRatio) {
+function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX, rightBottomY, _fixedRatio) { // _fixedRatio = width / height
     var newElement = document.getElementById(_id)
     if (newElement == null) {
         newElement = document.createElement(_type)
@@ -123,10 +130,16 @@ function funcSetLocation(_id, leftTopX, leftTopY, rightBottomX, rightBottomY, is
     if (isLand == true) {
         newObject.setLocLandscape(leftTopX, leftTopY)
         newObject.setSizeLandscape(rightBottomX - leftTopX, rightBottomY - leftTopY)
+        if (newObject.fixedRatio > 0) {
+            newObject.size[1][1] = newObject.size[1][0] * pageWidth / pageHeight
+        }
 
     } else {
         newObject.setLocPortrait(leftTopX, leftTopY)
         newObject.setSizePortrait(rightBottomX - leftTopX, rightBottomY - leftTopY)
+        if (newObject.fixedRatio > 0) {
+            newObject.size[0][1] = newObject.size[0][0] * pageWidth / pageHeight
+        }
     }
     funcRelocateElement(_id)
 }
@@ -151,7 +164,7 @@ function funcRelocateElement(_id) {
     newElement.style.lineHeight = objectHeight * pageHeight + "px"
     newElement.style.fontSize = objectHeight * pageHeight + "px"
     if (mapLocationInfor[_id].fixedRatio > 0) {
-        newElement.style.fontSize = newElement.style.lineHeight = newElement.style.height = objectWidth * pageWidth * mapLocationInfor[_id].fixedRatio + "px"
+        newElement.style.fontSize = newElement.style.lineHeight = newElement.style.height = objectWidth * pageWidth / mapLocationInfor[_id].fixedRatio + "px"
     }
     newElement.style.backgroundSize = newElement.style.width + " " + newElement.style.height
 }
