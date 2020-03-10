@@ -31,8 +31,6 @@ function getRandom(bound, min, isSeed) {
 
 
 
-
-
 class ObjectInfor {
     constructor() {
         this.loc = new Array()
@@ -183,8 +181,7 @@ function funcUpdatePageSize(isMainDivSizeUpdate) {
             pageHeight = pageWidth / widthPerHeight
         }
     }
-    if (widthPerHeightForLandOnly>0 && pageWidth>pageHeight)
-    {
+    if (widthPerHeightForLandOnly > 0 && pageWidth > pageHeight) {
         pageWidth = pageHeight * widthPerHeightForLandOnly
     }
 
@@ -301,4 +298,110 @@ function funcIntervalMove(objectID, modLeft, modTop, itvThis, imgSrc) {
 
 }
 
+function isValidLoc(_id, diceNumber) {
+    if (diceNumber == 0) {
+        return
+    }
+    let idxLoc = 0
+    if (pageHeight < pageWidth) {
+        idxLoc = 1
+    }
+    let overlap = true
+    let locThis = mapLocationInfor[_id + diceNumber].loc[idxLoc]
+    let sizeThis = mapLocationInfor[_id + diceNumber].size[idxLoc]
+    for (let idx = 0; idx < diceNumber; idx++) {
+        let locTarget = mapLocationInfor[_id + idx].loc[idxLoc]
+        if (locThis[0] > locTarget[0] + 1.1 * sizeThis[0] || locTarget[0] > locThis[0] + 1.1 * sizeThis[0] ||
+            locThis[1] > locTarget[1] + 1.1 * sizeThis[1] || locTarget[1] > locThis[1] + 1.1 * sizeThis[1]) {
+            overlap = false
+        } else {
+            overlap = true
+            break
+        }
+    }
+    return overlap == false
+
+}
+
+function funcDrawDice(_id, _class, _numOfDice, arrImgs, leftTopX, leftTopY, rightBottomX, rightBottomY, size, color, funcSet) {
+    for (let idx = 0; idx < _numOfDice; idx++) {
+        let _left = leftTopX + (rightBottomX - leftTopX - size) * (getRandom(100, 1, true) / 100)
+        let _top = leftTopY + (rightBottomY - leftTopY - size / pageWidth * pageHeight) * (getRandom(100, 1, true) / 100)
+        let btnDice = funcInsertElement(
+            _id + idx,
+            "button",
+            _class,
+            _left, _top, _left + size, 0.9, 1.0
+        )
+        btnDice.style.display = "inline"
+        let numOfTry = 500
+        while (isValidLoc(_id, idx) == false) {
+            numOfTry--
+            if (numOfTry == 0) {
+                //alert("cannnot" + idx)
+                break;
+            }
+            _left = leftTopX + (rightBottomX - leftTopX - size) * (getRandom(100, 1, true) / 100)
+            _top = leftTopY + (rightBottomY - leftTopY - size / pageWidth * pageHeight) * (getRandom(100, 1, true) / 100)
+            btnDice = funcInsertElement(
+                _id + idx,
+                "button",
+                _class,
+                _left, _top, _left + size, 0.9, 1.0
+            )
+        }
+
+        btnDice.style.backgroundColor = color || "black"
+        btnDice.style.backgroundImage = "url(" + arrImgs[getRandom(arrImgs.length)] + ")"
+        btnDice.style.boxShadow = "0.5vw 0.5vw gray"
+        btnDice.onclick = funcSet
+    }
+}
+
+var curDegree = new Array()
+var intervalManager = new Array()
+var diceValue = new Array()
+
+function funcStartRoll(_id, idx, arrImgs) {
+    let diceNumber = _id + idx
+    curDegree[diceNumber] = getRandom(360)
+    if (intervalManager[diceNumber] == null) {
+        intervalManager[diceNumber] = new Array()
+    }
+
+    intervalManager[diceNumber][0] = 90 + getRandom(40)
+    intervalManager[diceNumber][1] = 5 + getRandom(10)
+    intervalManager[diceNumber][2] = 3 + getRandom(3)
+    var passedTime1 = intervalManager[diceNumber][0] * 10
+    let passedTime2 = passedTime1 + intervalManager[diceNumber][1] * 100
+    let intFirstTry = setInterval(function() { funcRoll(diceNumber, 0, arrImgs, intFirstTry) }, 10)
+    setTimeout(function() {
+        let intervalNew = setInterval(function() { funcRoll(diceNumber, 1, arrImgs, intervalNew) }, 100)
+    }, passedTime1)
+    setTimeout(function() {
+        let intervalNew = setInterval(function() { funcRoll(diceNumber, 2, arrImgs, intervalNew) }, 200)
+    }, passedTime2)
+    stage = 1
+}
+
+function funcRoll(diceNumber, idx, arrImgs, intFirstTry) {
+
+    let _id = diceNumber
+    if (intervalManager[diceNumber][idx] == 0) {
+        clearInterval(intFirstTry)
+        return
+    }
+    --intervalManager[diceNumber][idx]
+    let rolledObject = document.getElementById(_id)
+    diceValue[diceNumber] = (getRandom(arrImgs.length))
+    rolledObject.style.backgroundImage = "url('" + arrImgs[diceValue[diceNumber]] + "')"
+    if (getRandom(10) % 2 == 0) {
+        curDegree[diceNumber] += 2
+    } else {
+        curDegree[diceNumber] -= 2
+    }
+    rolledObject.style.transform = "rotate(" + curDegree[diceNumber] + "deg)"
+
+
+}
 //funcPrepareGetLocation()
