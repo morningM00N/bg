@@ -264,11 +264,17 @@ function funcBtnBack() {
             numOfDiceValue[idx] = 0
         }
         for (let idx = 0; idx < numberOfGoldDice + numberOfWhiteDice; idx++) {
+            intervalManager[idx][0]=intervalManager[idx][1]=intervalManager[idx][2]=0
             let thisVal = diceValue[idx]
             let column = 1.03 - 0.16 * targetLoc[thisVal]
             let row = 0.30 + 0.12 * numOfDiceValue[thisVal]
             numOfDiceValue[thisVal] += 1
-            funcMove("btnDice" + idx, row, column, 1)
+            let imgDes = "url('img/dice/W"+thisVal+"'.png)"
+            if (idx>numberOfWhiteDice)
+            {
+                imgDes = "url('img/dice/B"+thisVal+"'.png)"
+            }
+            funcMove("btnDice" + idx, row, column, 1,imgDes)
 
         }
 

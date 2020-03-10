@@ -231,7 +231,11 @@ function funcRelocateElements() {
 
 }
 
-$(window).resize(function() {
+var doResize = true
+$(window).resize(function () {
+    if (doResize == false) {
+        return
+    }
     funcUpdatePageSize(true)
     funcRelocateElements()
 });
@@ -326,7 +330,7 @@ function isValidLoc(_id, diceNumber) {
 function funcDrawDice(_id, _class, _numOfDice, arrImgs, leftTopX, leftTopY, rightBottomX, rightBottomY, size, color, funcSet) {
     for (let idx = 0; idx < _numOfDice; idx++) {
         let _left = leftTopX + (rightBottomX - leftTopX - size) * (getRandom(100, 1, true) / 100)
-        let _top = leftTopY + (rightBottomY - leftTopY - size / pageWidth * pageHeight) * (getRandom(100, 1, true) / 100)
+        let _top = leftTopY + (rightBottomY - leftTopY - size * pageWidth / pageHeight) * (getRandom(100, 1, true) / 100)
         let btnDice = funcInsertElement(
             _id + idx,
             "button",
@@ -342,7 +346,7 @@ function funcDrawDice(_id, _class, _numOfDice, arrImgs, leftTopX, leftTopY, righ
                 break;
             }
             _left = leftTopX + (rightBottomX - leftTopX - size) * (getRandom(100, 1, true) / 100)
-            _top = leftTopY + (rightBottomY - leftTopY - size / pageWidth * pageHeight) * (getRandom(100, 1, true) / 100)
+            _top = leftTopY + (rightBottomY - leftTopY - size * pageWidth / pageHeight) * (getRandom(100, 1, true) / 100)
             btnDice = funcInsertElement(
                 _id + idx,
                 "button",
@@ -353,7 +357,7 @@ function funcDrawDice(_id, _class, _numOfDice, arrImgs, leftTopX, leftTopY, righ
 
         btnDice.style.backgroundColor = color || "black"
         btnDice.style.backgroundImage = "url(" + arrImgs[getRandom(arrImgs.length)] + ")"
-        btnDice.style.boxShadow = "0.5vw 0.5vw gray"
+        btnDice.style.boxShadow = 0.1*size*pageWidth+"px "+ 0.1*size*pageWidth+"px gray"
         btnDice.onclick = funcSet
     }
 }
