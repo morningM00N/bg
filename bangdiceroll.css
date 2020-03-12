@@ -15,8 +15,8 @@ body {
 }
 
 .btnDice {
-    border: 0px;
     border: 1px dotted red;
+    border: 0px;
     margin: 0px;
     padding: 0px;
     background-color: transparent;

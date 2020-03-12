@@ -63,12 +63,12 @@ class ObjectInfor {
 
 function funcInsertFullScreenButton(_topLeftX, _topLeftY, _bottomRightX, _bottomRightY, ratio) {
     var btnFull = funcInsertElement(
-            "btnFull",
-            "button",
-            "",
-            _topLeftX, _topLeftY, _bottomRightX, _bottomRightY, ratio
-        )
-        //btnFull.style.border = "1px solid black"
+        "btnFull",
+        "button",
+        "",
+        _topLeftX, _topLeftY, _bottomRightX, _bottomRightY, ratio
+    )
+    //btnFull.style.border = "1px solid black"
     btnFull.onclick = funcFullScreen
     btnFull.style.position = "absolute"
     btnFull.style.border = "0px"
@@ -201,7 +201,7 @@ function funcPrepareGetLocation() {
     temp.style.position = "absolute"
     temp.style.left = "0px"
     temp.style.top = "0px"
-    mainDiv.onclick = function(event) {
+    mainDiv.onclick = function (event) {
         x = event.pageX;
         y = event.pageY;
         if (firstClick == true) {
@@ -268,7 +268,7 @@ function funcMove(objectID, targetLeft, targetTop, sec, imgSrc) {
         modTop = (targetTop * pageHeight - curTop) / 50
     }
     count = 50
-    var itvThis = setInterval(function() {
+    var itvThis = setInterval(function () {
         funcIntervalMove(objectID, modLeft, modTop, itvThis, imgSrc)
     }, 1000 * sec / 50)
     if (targetTop == false) {
@@ -327,7 +327,19 @@ function isValidLoc(_id, diceNumber) {
 
 }
 
-function funcDrawDice(_id, _class, _numOfDice, arrImgs, leftTopX, leftTopY, rightBottomX, rightBottomY, size, color, funcSet) {
+function funcDrawDice(_id, _class, _numOfDice, arrImgs, leftTopX, leftTopY, rightBottomX, rightBottomY, size,  // for portrait
+    color, funcSet,
+    _leftTopX, _leftTopY, _rightBottomX, _rightBottomY, _size // for landscape
+) {
+    let originalHeight = pageHeight
+    let originalWidth = pageWidth
+
+    if (pageHeight < pageWidth) {
+        let temp = pageHeight
+        pageHeight = pageWidth
+        pageWidth = temp
+    }
+    // portrait setting
     for (let idx = 0; idx < _numOfDice; idx++) {
         let _left = leftTopX + (rightBottomX - leftTopX - size) * (getRandom(100, 1, true) / 100)
         let _top = leftTopY + (rightBottomY - leftTopY - size * pageWidth / pageHeight) * (getRandom(100, 1, true) / 100)
@@ -338,6 +350,7 @@ function funcDrawDice(_id, _class, _numOfDice, arrImgs, leftTopX, leftTopY, righ
             _left, _top, _left + size, 0.9, 1.0
         )
         btnDice.style.display = "inline"
+        btnDice.style.opacity="1.0"
         let numOfTry = 500
         while (isValidLoc(_id, idx) == false) {
             numOfTry--
@@ -356,17 +369,53 @@ function funcDrawDice(_id, _class, _numOfDice, arrImgs, leftTopX, leftTopY, righ
         }
 
         btnDice.style.backgroundColor = color || "black"
-        btnDice.style.backgroundImage = "url(" + arrImgs[getRandom(arrImgs.length)] + ")"
-        btnDice.style.boxShadow = 0.1*size*pageWidth+"px "+ 0.1*size*pageWidth+"px gray"
+        diceValue[_id + idx]=getRandom(arrImgs.length)
+        btnDice.style.backgroundImage = "url(" + arrImgs[diceValue[_id + idx]] + ")"
+        btnDice.style.boxShadow = 0.1 * size * pageWidth + "px " + 0.1 * size * pageWidth + "px gray"
         btnDice.onclick = funcSet
     }
+
+    {
+        // landscape setting
+        let temp = pageHeight
+        pageHeight = pageWidth
+        pageWidth = temp
+
+        for (let idx = 0; idx < _numOfDice; idx++) {
+            let _left = _leftTopX + (_rightBottomX - _leftTopX - _size) * (getRandom(100, 1, true) / 100)
+            let _top = _leftTopY + (_rightBottomY - _leftTopY - _size * pageWidth / pageHeight) * (getRandom(100, 1, true) / 100)
+            let btnDice = document.getElementById(_id+idx)
+            funcSetLocation(_id + idx,_left, _top, _left + _size, 0.9, true)
+           
+            btnDice.style.display = "inline"
+            let numOfTry = 500
+            while (isValidLoc(_id, idx) == false) {
+                numOfTry--
+                if (numOfTry == 0) {
+                    //alert("cannnot" + idx)
+                    break;
+                }
+                _left = _leftTopX + (_rightBottomX - _leftTopX - _size) * (getRandom(100, 1, true) / 100)
+                _top = _leftTopY + (_rightBottomY - _leftTopY - _size * pageWidth / pageHeight) * (getRandom(100, 1, true) / 100)
+                funcSetLocation(_id + idx,_left, _top, _left + _size, 0.9, true)
+            }
+
+            btnDice.style.backgroundColor = color || "black"
+            btnDice.style.boxShadow = 0.1 * _size * pageHeight + "px " + 0.1 * _size * pageHeight + "px gray"
+            btnDice.onclick = funcSet
+        }
+
+    }
+
+    pageHeigth =  originalHeight 
+    pageWidth =  originalWidth 
 }
 
 var curDegree = new Array()
 var intervalManager = new Array()
 var diceValue = new Array()
 
-function funcStartRoll(_id, idx, arrImgs) {
+function funcStartRoll(_id, idx, arrImgs,func) {
     let diceNumber = _id + idx
     curDegree[diceNumber] = getRandom(360)
     if (intervalManager[diceNumber] == null) {
@@ -378,25 +427,29 @@ function funcStartRoll(_id, idx, arrImgs) {
     intervalManager[diceNumber][2] = 3 + getRandom(3)
     var passedTime1 = intervalManager[diceNumber][0] * 10
     let passedTime2 = passedTime1 + intervalManager[diceNumber][1] * 100
-    let intFirstTry = setInterval(function() { funcRoll(diceNumber, 0, arrImgs, intFirstTry) }, 10)
-    setTimeout(function() {
-        let intervalNew = setInterval(function() { funcRoll(diceNumber, 1, arrImgs, intervalNew) }, 100)
+    let intFirstTry = setInterval(function () { funcRoll(diceNumber, 0, arrImgs, intFirstTry) }, 10)
+    setTimeout(function () {
+        let intervalNew = setInterval(function () { funcRoll(diceNumber, 1, arrImgs, intervalNew) }, 100)
     }, passedTime1)
-    setTimeout(function() {
-        let intervalNew = setInterval(function() { funcRoll(diceNumber, 2, arrImgs, intervalNew) }, 200)
+    setTimeout(function () {
+        let intervalNew = setInterval(function () { funcRoll(diceNumber, 2, arrImgs, intervalNew,func) }, 200)
     }, passedTime2)
     stage = 1
 }
 
-function funcRoll(diceNumber, idx, arrImgs, intFirstTry) {
+function funcRoll(diceNumber, idx, arrImgs, intFirstTry, func) {
 
     let _id = diceNumber
+    let rolledObject = document.getElementById(_id)
     if (intervalManager[diceNumber][idx] == 0) {
         clearInterval(intFirstTry)
+        if (func!=null){
+            func(_id)
+        }
         return
     }
     --intervalManager[diceNumber][idx]
-    let rolledObject = document.getElementById(_id)
+    
     diceValue[diceNumber] = (getRandom(arrImgs.length))
     rolledObject.style.backgroundImage = "url('" + arrImgs[diceValue[diceNumber]] + "')"
     if (getRandom(10) % 2 == 0) {
