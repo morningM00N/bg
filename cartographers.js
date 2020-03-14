@@ -1,6 +1,8 @@
 var pageHeight = document.documentElement.clientHeight
 var pageWidth = document.documentElement.clientWidth
 
+//funcPrepareGetLocation()
+
 pageHeight = pageWidth * 1113 / 783
 var mainDiv = document.getElementById("main")
 var body = document.getElementById("body")
@@ -33,7 +35,70 @@ function appendElement(_type, _id, _className, _left, _top, _width, _height, _fo
     return newElement
 }
 
+function fucnDrawBound(){
+    curTile++
+    let thisLineWidth = 0.005*pageWidth
+    for (let idxX = 0; idxX < 11; idxX++) {
+        for (let idxY = 0; idxY < 11; idxY++) {
+            if (tileSet[idxX][idxY]>0)
+            {
+                let clickedTile = document.getElementById("btnTile"+idxX+"_"+idxY)
+                if (idxX==0 )
+                {
+                    clickedTile.style.borderTop = thisLineWidth+"px solid black"
+                    clickedTile.style.backgroundPositionY="-"+thisLineWidth+"px"
+                }
+                else if (tileSet[idxX][idxY]!=tileSet[idxX-1][idxY])
+                {
+                    if (tileSet[idxX-1][idxY]==0){
+                        let tempClickedTile = document.getElementById("btnTile"+(idxX-1)+"_"+idxY)
+                        tempClickedTile.style.borderBottom = thisLineWidth+"px solid black"
+                    }
+
+                    clickedTile.style.borderTop = thisLineWidth+"px solid black"
+                    clickedTile.style.backgroundPositionY="-"+thisLineWidth+"px"
+                }
+                if (idxX==10 || (idxX+1<11 && tileSet[idxX][idxY]!=tileSet[idxX+1][idxY]))
+                {
+                    if (idxX!=10 && tileSet[idxX+1][idxY]>0)
+                    {
+                            thisLineWidth=lineWidth/2
+                    }
+                    clickedTile.style.borderBottom = thisLineWidth+"px solid black"
+                    
+                }
+                if (idxY==0 || (idxY-1>=0 && tileSet[idxX][idxY]!=tileSet[idxX][idxY-1]))
+                {
+                    if (idxY!=0 && tileSet[idxX][idxY-1]>0)
+                    {
+                            thisLineWidth=lineWidth/2
+                    }
+                    clickedTile.style.borderLeft = thisLineWidth+"px solid black"
+                    clickedTile.style.backgroundPositionX="-"+thisLineWidth+"px"
+                }
+                if (idxY==10 || (idxY+1<11 && tileSet[idxX][idxY]!=tileSet[idxX][idxY+1]))
+                {
+                    if (idxY!=10 && tileSet[idxX][idxY+1]>0)
+                    {
+                            thisLineWidth=lineWidth/2
+                    }
+                    clickedTile.style.borderRight = thisLineWidth+"px solid black"
+                    
+                }
+            }
+        }
+    }
+}
+
+var curTile=1
 function drawCartographers(){
+
+    var btnDrawDone=appendElement("button","buttonDrawDone","mapTiles",
+        0.4600, 0.1420, 0.5400-0.4600, 0.2154-0.1477)
+    btnDrawDone.onclick=function(){
+        fucnDrawBound()
+    }
+
     var leftIter = 0.15
     var leftStart = 0.11
     var leftTic = 0.0708
@@ -218,18 +283,19 @@ function funcTileClick(idxX, idxY)
         alert("산이 있는 칸입니다!")
         return
     }
-    if (selectedImgIdx>0 && tileSet[idxX][idxY]==true)
+    if (selectedImgIdx>0 && tileSet[idxX][idxY]>0)
     {
         alert("수정할거면 먼저 지워주세요!")
         return
     }
-    tileSet[idxX][idxY]=true
+    tileSet[idxX][idxY]=curTile
+    var clickedTile = document.getElementById("btnTile"+idxX+"_"+idxY)
     if (selectedImgIdx==0)
     {
-        tileSet[idxX][idxY]=false
+        tileSet[idxX][idxY]=0
+        clickedTile.style.border="0px"
     }
     console.log(idxX,idxY)
-    var clickedTile = document.getElementById("btnTile"+idxX+"_"+idxY)
     clickedTile.style.backgroundImage="url('img/cartographers/"+arrImg[selectedImgIdx]+".png')"
     clickedTile.style.backgroundSize=clickedTile.style.width+" "+clickedTile.style.height
     if (locRuin[idxX][idxY]==true)
