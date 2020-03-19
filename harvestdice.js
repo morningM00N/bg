@@ -1,4 +1,4 @@
-funcWidthPerHeight(2253 / 2064)
+funcWidthPerHeight(826 / 756)
 
 //funcPrepareGetLocation()
 
