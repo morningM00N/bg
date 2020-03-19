@@ -1,4 +1,4 @@
-funcWidthPerHeight(826 / 756)
+funcWidthPerHeight(2253 / 2064)
 
 //funcPrepareGetLocation()
 
@@ -70,7 +70,7 @@ function funcDrawHarvestDice() {
             let btnFarm = funcInsertElement("btnFarm" + idx + "_" + idx2, "button", "btnTrans",
                 0.2310 + leftTic * (idx - 1), 0.1588 + idx2 * topTic, 0.3252 + leftTic * (idx - 1), 0.2500 + idx2 * topTic
             )
-            btnFarm.style.transform = "rotate(" + (getRandom(11) - 5) + "deg)"
+            btnFarm.style.transform = "rotate(" + (getRandom(61) - 30) + "deg)"
             let imgSrc = "lettuce"
             let ranN = getRandom(3)
             if (ranN == 0) {
@@ -79,8 +79,8 @@ function funcDrawHarvestDice() {
             else if (ranN == 1) {
                 imgSrc = "tomato"
             }
-            btnFarm.backgroundSize = "85%"
-            btnFarm.backgroundPositionX = "50%"
+            //btnFarm.style.backgroundSize = "90%"
+            //btnFarm.backgroundPositionX = "50%"
 
             btnFarm.onclick = function () {
                 funcPlant(idx, idx2)
