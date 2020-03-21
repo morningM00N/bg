@@ -23,7 +23,7 @@ function drawCorinth() {
     var leftIter = 0.140189671
     var topIter = 3 * 0.321210191 - 2 * 0.131210191
     for (let idx = 0; idx < 13; idx++) {
-        var btnLamp = appendElement("button", "btnBottle" + idx, "rect", leftIter, topIter, 0.03205699, 0.046312102, 0.05)
+        var btnLamp = appendElement("button", "btnGlass" + idx, "rect", leftIter, topIter, 0.03205699, 0.046312102, 0.05)
         var boundGlass = new Array(0, 2, 5, 8, 13)
         btnLamp.onclick = function() {
             funcClickItem(arrGlass, idx, boundGlass, "Glass")
