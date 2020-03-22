@@ -183,8 +183,8 @@ function funcBuildSettlement(idx, idx2)
     }
 }
 function fuctDrawImpSetDice() {
-    funcInsertElement("imgImp", "img", "null", 0, 0, 711 / (711 + 454 * 711 / 638), 0.5, 1).src = "/img/settlerdice/empire.jpg"
-    funcInsertElement("imgVil", "img", "null", 711 / (711 + 454 * 711 / 638), 0, 1, 0, 454 / 638).src = "/img/settlerdice/village_default.jpg"
+    funcInsertElement("imgImp", "img", "null", 0, 0, 711 / (711 + 454 * 711 / 638), 0.5, 1).src = "img/settlerdice/empire.jpg"
+    funcInsertElement("imgVil", "img", "null", 711 / (711 + 454 * 711 / 638), 0, 1, 0, 454 / 638).src = "img/settlerdice/village_default.jpg"
 
 
 
