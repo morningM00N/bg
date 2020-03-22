@@ -199,14 +199,20 @@ function funcDrawHarvestDice() {
 
 
 function funcDoFeed(feedVal) {
+    let reDoFullSize = false
     if (document.fullscreenElement) {
         document.exitFullscreen()
+        reDoFullSize=true
     }
     if (confirm("" + (feedVal + 1) + "개를 먹겠습니까?") == true) {
         for (let idx = 0; idx <= feedVal; idx++) {
             document.getElementById("btnFeed" + numOfFeeds).innerHTML = "X"
             numOfFeeds++
         }
+    }
+    if (reDoFullSize==true)
+    {
+        funcFullScreen()
     }
 }
 
