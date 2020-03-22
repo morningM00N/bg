@@ -105,7 +105,7 @@ function funcConsClick(idx, idx2)
         btnClicked.innerHTML = "X"
 
         console.log(idx2)
-        if (idx!=2)
+        if (idx!=2 || idx2>=6)
         {
             arrCons[idx][idx2] = true
         }
@@ -183,8 +183,8 @@ function funcBuildSettlement(idx, idx2)
     }
 }
 function fuctDrawImpSetDice() {
-    funcInsertElement("imgImp", "button", "btnTrans", 0, 0, 711 / (711 + 454 * 711 / 638), 0.5, 1).style.backgroundImage = "url('img/settlerdice/empire.jpg')"
-    funcInsertElement("imgVil", "button", "btnTrans", 711 / (711 + 454 * 711 / 638), 0, 1, 0, 454 / 638).style.backgroundImage = "url('img/settlerdice/village_default.jpg')"
+    funcInsertElement("imgImp", "img", "null", 0, 0, 711 / (711 + 454 * 711 / 638), 0.5, 1).src = "img/settlerdice/empire.jpg"
+    funcInsertElement("imgVil", "img", "null", 711 / (711 + 454 * 711 / 638), 0, 1, 0, 454 / 638).src = "img/settlerdice/village_default.jpg"
 
 
 
