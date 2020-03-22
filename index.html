@@ -125,6 +125,39 @@
         mainDiv.appendChild(pText)
     } {
         var btn = document.createElement("button")
+        btn.style.backgroundImage = "url('https://cf.geekdo-images.com/opengraph/img/Wa_NedSgXFy4iulBkllKArEsYSo=/fit-in/1200x630/pic4543702.jpg')"
+        btn.style.backgroundSize = "100%"
+        btn.style.opacity = "0.5"
+        btn.style.backgroundPositionY = "8%"
+        btn.style.width = pageWidth + "px"
+        btn.style.height = btnHeight * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = topLoc * pageHeight + "px"
+        btn.style.backgroundColor = "gray"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "impsetdice.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = topLoc * pageHeight + "px"
+        pText.style.padding = 0.02 * pageHeight + "px"
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "임페리얼 세틀러 롤 & 라이트"
+        pText.style.color = "white"
+        pText.style.textShadow = "3px 3px 1px black"
+        mainDiv.appendChild(pText)
+        topLoc += btnHeight
+        topLoc -= 1 / pageHeight
+
+     
+    } {
+        var btn = document.createElement("button")
         btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/zZGqhCOD0hW3AyINwayRvFfOwnU=/fit-in/246x300/pic3566028.jpg')"
         btn.style.backgroundSize = "100%"
         btn.style.opacity = "0.5"

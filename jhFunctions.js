@@ -121,6 +121,10 @@ function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX,
 
     mainDiv.appendChild(newElement)
 
+    newElement.onclick = function(){
+        console.log(newElement.id)
+    }
+
     funcRelocateElement(_id)
     return newElement
 }
@@ -209,9 +213,6 @@ function funcPrepareGetLocation() {
             firstClick = false
         } else {
             temp.value = temp.value + ", " + (x / pageWidth).toFixed(4) + ', ' + (y / pageHeight).toFixed(4)
-            if (pageHeight < pageWidth) {
-                temp.value += ", true"
-            }
             firstClick = true
         }
 
