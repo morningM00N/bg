@@ -3,7 +3,7 @@ funcWidthPerHeight((711 + 454 * 711 / 638) / 711)
 
 funcUpdatePageSize(true)
 
-//funcPrepareGetLocation()
+funcPrepareGetLocation()
 
 function funcDrawX(funcCheck) {
     if (funcCheck != null && funcCheck(event.srcElement) == false) {
@@ -307,6 +307,10 @@ arrShapre["0_0"][1]=new Array(0,0,1)
     }
 
     // draw empire section
+
+    funcInsertFullScreenButton(
+        0.2260, 0.9182, 0.2771, 0.9770, 29 / 20
+    )
 
     funcInsertElement("btnBridge0", "button", "btnCircle",
     0.0848, 0.4584, 0.1277, 0.5184
