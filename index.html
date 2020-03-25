@@ -155,6 +155,23 @@
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
 
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "impsetroll.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight / 2 * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = (topLoc - btnHeight / 2) * pageHeight + "px"
+        pText.style.padding = 0.05 * pageHeight + "px " + 0.02 * pageHeight + "px "
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "임페리얼 세틀러 롤 & 라이트 주사위 굴리기"
+        pText.style.color = "white"
+        pText.style.textAlign = "right"
+        pText.style.textShadow = "3px 3px 1px black"
+        mainDiv.appendChild(pText)
+
      
     } {
         var btn = document.createElement("button")

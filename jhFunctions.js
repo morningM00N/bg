@@ -17,7 +17,7 @@ var nameOfRelocatedElements = new Array()
 var seed = Math.floor(Math.random() * 100000);
 
 
-function getRandom(bound, min, isSeed) {
+function getRandom(bound, min, isSeed) { // exclusive bound
     let mod = 0
     if (min != null) {
         mod += min
@@ -132,6 +132,8 @@ function funcInsertElement(_id, _type, _class, leftTopX, leftTopY, rightBottomX,
 function funcSetLocation(_id, leftTopX, leftTopY, rightBottomX, rightBottomY, isLand) {
     let newObject = mapLocationInfor[_id]
     if (isLand == true) {
+
+
         newObject.setLocLandscape(leftTopX, leftTopY)
         newObject.setSizeLandscape(rightBottomX - leftTopX, rightBottomY - leftTopY)
         if (newObject.fixedRatio > 0) {
@@ -305,7 +307,7 @@ function funcIntervalMove(objectID, modLeft, modTop, itvThis, imgSrc) {
 
 function isValidLoc(_id, diceNumber) {
     if (diceNumber == 0) {
-        return
+        return true
     }
     let idxLoc = 0
     if (pageHeight < pageWidth) {
@@ -352,7 +354,7 @@ function funcDrawDice(_id, _class, _numOfDice, arrImgs, leftTopX, leftTopY, righ
         )
         btnDice.style.display = "inline"
         btnDice.style.opacity="1.0"
-        let numOfTry = 500
+        let numOfTry = 100
         while (isValidLoc(_id, idx) == false) {
             numOfTry--
             if (numOfTry == 0) {
