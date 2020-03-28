@@ -369,7 +369,7 @@ function funcCalFinalScore() {
     partialSum += Number(document.getElementById("btnEXScore1").innerHTML)
     document.getElementById("btnPartialSum").innerHTML = partialSum
     document.getElementById("btnMinus").innerHTML = -5 * numOfMinus
-    finalScore = partialSum - numOfMinus
+    finalScore = partialSum -5* numOfMinus
     event.srcElement.innerHTML = finalScore
 }
 
