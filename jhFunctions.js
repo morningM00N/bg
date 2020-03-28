@@ -316,6 +316,10 @@ function isValidLoc(_id, diceNumber) {
     let overlap = true
     let locThis = mapLocationInfor[_id + diceNumber].loc[idxLoc]
     let sizeThis = mapLocationInfor[_id + diceNumber].size[idxLoc]
+    if (locThis[0]+sizeThis[0]>0.999 ||locThis[1]+sizeThis[1]>0.999)
+    {
+        return false
+    }
     for (let idx = 0; idx < diceNumber; idx++) {
         let locTarget = mapLocationInfor[_id + idx].loc[idxLoc]
         if (locThis[0] > locTarget[0] + 1.1 * sizeThis[0] || locTarget[0] > locThis[0] + 1.1 * sizeThis[0] ||
