@@ -30,6 +30,97 @@ function getRandom(bound, min, isSeed) { // exclusive bound
 }
 
 
+class MathModBase {
+    random() {}
+    pow(d, e) {
+        return Math.pow(d, e)
+    }
+
+    getRandom(min, max) { // inclusive both range
+        if (max == null) {
+            return Math.floor(MMath.random() * (min + 1))
+        }
+        let length = max - min + 1
+        return min + Math.floor(MMath.random() * length)
+    }
+}
+
+var MMath = new MathModBase()
+
+! function(a, b, c, d, e, f, g, h, i) {
+    function j(a) {
+        var b, c = a.length,
+            e = this,
+            f = 0,
+            g = e.i = e.j = 0,
+            h = e.S = [];
+        for (c || (a = [c++]); d > f;) h[f] = f++;
+        for (f = 0; d > f; f++) h[f] = h[g = s & g + a[f % c] + (b = h[f])], h[g] = b;
+        (e.g = function(a) {
+            for (var b, c = 0, f = e.i, g = e.j, h = e.S; a--;) b = h[f = s & f + 1], c = c * d + h[s & (h[f] = h[g = s & g + b]) + (h[g] = b)];
+            return e.i = f, e.j = g, c
+        })(d)
+    }
+
+    function k(a, b) {
+        var c, d = [],
+            e = typeof a;
+        if (b && "object" == e)
+            for (c in a) try {
+                d.push(k(a[c], b - 1))
+            } catch (f) {}
+        return d.length ? d : "string" == e ? a : a + "\0"
+    }
+
+    function l(a, b) {
+        for (var c, d = a + "", e = 0; e < d.length;) b[s & e] = s & (c ^= 19 * b[s & e]) + d.charCodeAt(e++);
+        return n(b)
+    }
+
+    function m(c) {
+        try {
+            return o ? n(o.randomBytes(d)) : (a.crypto.getRandomValues(c = new Uint8Array(d)), n(c))
+        } catch (e) {
+            return [+new Date, a, (c = a.navigator) && c.plugins, a.screen, n(b)]
+        }
+    }
+
+    function n(a) {
+        return String.fromCharCode.apply(0, a)
+    }
+    var o, p = c.pow(d, e),
+        q = c.pow(2, f),
+        r = 2 * q,
+        s = d - 1,
+        t = c["seed" + i] = function(a, f, g) {
+            var h = [];
+            f = 1 == f ? {
+                entropy: !0
+            } : f || {};
+            var o = l(k(f.entropy ? [a, n(b)] : null == a ? m() : a, 3), h),
+                s = new j(h);
+            return l(n(s.S), b), (f.pass || g || function(a, b, d) {
+                return d ? (c[i] = a, b) : a
+            })(function() {
+                for (var a = s.g(e), b = p, c = 0; q > a;) a = (a + c) * d, b *= d, c = s.g(1);
+                for (; a >= r;) a /= 2, b /= 2, c >>>= 1;
+                return (a + c) / b
+            }, o, "global" in f ? f.global : this == c)
+        };
+    if (l(c[i](), b), g && g.exports) {
+        g.exports = t;
+        try {
+            o = require("crypto")
+        } catch (u) {}
+    } else h && h.amd && h(function() {
+        return t
+    })
+}(this, [], MMath, 256, 6, 52, "object" == typeof module && module, "function" == typeof define && define, "random");
+
+MMath.seedrandom();
+
+
+
 
 class ObjectInfor {
     constructor() {
@@ -305,6 +396,18 @@ function funcIntervalMove(objectID, modLeft, modTop, itvThis, imgSrc) {
 
 }
 
+function isOverlap(left1,top1,width1,height1,
+    left2,top2,width2,height2)
+{
+    if (left1>left2+width2 || left2 > left1+width1 ||
+        top1>top2+height2 || top2 > top1+height1)
+        {
+            return false
+        }
+        return true
+
+}
+
 function isValidLoc(_id, diceNumber) {
     if (diceNumber == 0) {
         return true
@@ -424,14 +527,14 @@ var diceValue = new Array()
 
 function funcStartRoll(_id, idx, arrImgs,func) {
     let diceNumber = _id + idx
-    curDegree[diceNumber] = getRandom(360)
+    curDegree[diceNumber] = MMath.getRandom(359)
     if (intervalManager[diceNumber] == null) {
         intervalManager[diceNumber] = new Array()
     }
 
-    intervalManager[diceNumber][0] = 90 + getRandom(40)
-    intervalManager[diceNumber][1] = 5 + getRandom(10)
-    intervalManager[diceNumber][2] = 3 + getRandom(3)
+    intervalManager[diceNumber][0] = 90 + MMath.getRandom(40)
+    intervalManager[diceNumber][1] = 5 + MMath.getRandom(10)
+    intervalManager[diceNumber][2] = 3 + MMath.getRandom(3)
     var passedTime1 = intervalManager[diceNumber][0] * 10
     let passedTime2 = passedTime1 + intervalManager[diceNumber][1] * 100
     let intFirstTry = setInterval(function () { funcRoll(diceNumber, 0, arrImgs, intFirstTry) }, 10)
@@ -457,7 +560,7 @@ function funcRoll(diceNumber, idx, arrImgs, intFirstTry, func) {
     }
     --intervalManager[diceNumber][idx]
     
-    diceValue[diceNumber] = (getRandom(arrImgs.length))
+    diceValue[diceNumber] = (MMath.getRandom(arrImgs.length-1))
     rolledObject.style.backgroundImage = "url('" + arrImgs[diceValue[diceNumber]] + "')"
     if (getRandom(10) % 2 == 0) {
         curDegree[diceNumber] += 2
