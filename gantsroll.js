@@ -1,4 +1,13 @@
-funcWidthPerHeight(0)
+let tpageHeight = document.documentElement.clientHeight
+let tpageWidth = document.documentElement.clientWidth
+
+let ratio = tpageWidth/tpageHeight
+if (tpageHeight>tpageWidth)
+{
+    ratio = 1/ratio
+}
+
+funcWidthPerHeight(ratio,ratio)
 
 funcUpdatePageSize(true)
 
@@ -52,6 +61,12 @@ var palleteBottom
 
 function funcDrawGantsRoll() {
     let length = pageHeight * 59 / pageWidth / 174
+
+    
+
+  
+
+    
 
 
 
@@ -123,6 +138,10 @@ function funcDrawGantsRoll() {
     btnRoll.innerHTML = "Roll"
     btnRoll.style.color = "white"
     btnRoll.onclick = funcRollDice
+
+    funcInsertFullScreenButton(
+        palleteLeft / pageWidth+0.25, 0.033, palleteLeft / pageWidth+0.25+0.13, 0.1900,
+        29 / 20)
 
 }
 
