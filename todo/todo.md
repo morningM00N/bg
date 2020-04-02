@@ -36,3 +36,6 @@ Decrypto 개인판, 점수판 전체화면 가능하게
 
 
 secret hitler 중앙보드 및 policy 대체판
+
+
+css 파일이 각자 있을 필요가...?
