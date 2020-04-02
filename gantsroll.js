@@ -1,11 +1,5 @@
 funcWidthPerHeight(0)
 
-    funcUpdatePageSize(true)
-    funcRelocateElements()
-});
-
-funcWidthPerHeight(ratio,ratio)
-
 funcUpdatePageSize(true)
 
 //funcPrepareGetLocation()
