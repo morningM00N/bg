@@ -13,6 +13,15 @@
 (20.03.29) twice as clever --> gray 영역 점수 수정
 
 
+(20.04.02) avenue --> 점수 계산 버그?
+
+
+(20.04.02) 뱅 다이스 주사위 굴리기 앱
+
+
+(20.04.02) 주사위 굴리기 jhFunctions로?
+
+
 
 Cartographer --> 테두리 치기, 한번 더 클릭하면 삭제?
 
@@ -20,10 +29,10 @@ Cartographer --> 테두리 치기, 한번 더 클릭하면 삭제?
 twice as clever --> 클릭시 버그?
 
 
-avenue --> 점수 계산 버그?
+jhFunctions에 함수들 수정했으면...
 
 
-뱅 다이스 주사위 굴리기 앱
+Decrypto 개인판, 점수판 전체화면 가능하게
 
 
-주사위 굴리기 jhFunctions로?
+secret hitler 중앙보드 및 policy 대체판
