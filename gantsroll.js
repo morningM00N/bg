@@ -1,6 +1,16 @@
 funcWidthPerHeight(0)
 
-funcUpdatePageSize(true)
+pageHeight = document.documentElement.clientHeight
+pageWidth = document.documentElement.clientWidth
+
+if (pageHeight > pageWidth) {
+    pageHeight = pageWidth * pageWidth / pageHeight
+}
+
+mainDiv.style.height = pageHeight + "px"
+mainDiv.style.width = pageWidth + "px"
+
+mainDiv.style.backgroundSize = pageWidth + "px " + pageHeight + "px"
 
 //funcPrepareGetLocation()
 
@@ -47,21 +57,27 @@ var palleteRight
 var palleteMiddle
 var palleteBottom
 
+$(window).resize(function() {
+    pageHeight = document.documentElement.clientHeight
+    pageWidth = document.documentElement.clientWidth
 
+    if (pageHeight > pageWidth) {
+        pageHeight = pageWidth * pageWidth / pageHeight
+    }
+
+    mainDiv.style.height = pageHeight + "px"
+    mainDiv.style.width = pageWidth + "px"
+
+    mainDiv.style.backgroundSize = pageWidth + "px " + pageHeight + "px"
+
+
+
+    funcDrawGantsRoll()
+});
 
 
 function funcDrawGantsRoll() {
     let length = pageHeight * 59 / pageWidth / 174
-
-    
-
-  
-
-    
-
-
-
-
     let selectedDice =
         funcInsertElement("imgSelected", "img", null,
             0, 0, length, 1, 59 / 174)
@@ -77,16 +93,16 @@ function funcDrawGantsRoll() {
     palleteRight = getNumber(btnSilverPlate.style.left)
 
     palleteTop = getNumber(btnSilverPlate.style.top)
-    palleteWidth = palleteRight-palleteLeft
+    palleteWidth = palleteRight - palleteLeft
     palleteHeight = getNumber(btnSilverPlate.style.height)
 
-    
+
     palleteMiddle = (palleteLeft + palleteRight) / 2
-    palleteLeft = length*pageWidth
+    palleteLeft = length * pageWidth
     palleteRight = getNumber(btnSilverPlate.style.left)
     palleteBottom = palleteTop + palleteHeight
 
-    console.log(palleteLeft,palleteRight)
+    //console.log(palleteLeft, palleteRight)
 
 
 
@@ -105,7 +121,7 @@ function funcDrawGantsRoll() {
 
 
 
-    console.log(palleteLeft, palleteRight, palleteTop, palleteBottom)
+    //console.log(palleteLeft, palleteRight, palleteTop, palleteBottom)
 
     funcDrawDice("btnDice", "btnTrans", 6, arrBDiceImages,
         palleteLeft / pageWidth, 0.25,
@@ -125,33 +141,34 @@ function funcDrawGantsRoll() {
     document.getElementById("btnDice5").style.backgroundColor = "white"
 
     let btnRoll = funcInsertElement("btnRoll", "button", "btnTrans",
-    palleteLeft / pageWidth, 0.03, palleteLeft / pageWidth+0.2, 0.1, 2)
+        palleteLeft / pageWidth, 0.03, palleteLeft / pageWidth + 0.2, 0.1, 2)
     btnRoll.innerHTML = "Roll"
     btnRoll.style.color = "white"
     btnRoll.onclick = funcRollDice
 
     funcInsertFullScreenButton(
-        palleteLeft / pageWidth+0.25, 0.033, palleteLeft / pageWidth+0.25+0.13, 0.1900,
+        palleteLeft / pageWidth + 0.25, 0.033, palleteLeft / pageWidth + 0.25 + 0.13, 0.1900,
         29 / 20)
 
 }
 
 let arrDiceDeactive = new Array()
 let numOfDeactivated = 0
-let destDeactivateDice=new Array()
+let destDeactivateDice = new Array()
+
 function funcSelectDice() {
     let idxDice = event.srcElement.id.replace("btnDice", "")
-    
-    let des = document.getElementById("btnSelectDice"+numOfSelected)
+
+    let des = document.getElementById("btnSelectDice" + numOfSelected)
     let desLeft = getNumber(des.style.left)
     let desTop = getNumber(des.style.top)
     let desRight = desLeft + getNumber(des.style.width)
-    let desBottom = desTop+ getNumber(des.style.height)
-    console.log(desLeft,desRight,desTop,desBottom)
+    let desBottom = desTop + getNumber(des.style.height)
+        //console.log(desLeft, desRight, desTop, desBottom)
 
-    desLeft = (desLeft+desRight)/2 - getNumber(event.srcElement.style.width)/2
-    desTop = (desTop+desBottom)/2 - getNumber(event.srcElement.style.width)/2
-    event.srcElement.style.transform="rotate(0deg)"
+    desLeft = (desLeft + desRight) / 2 - getNumber(event.srcElement.style.width) / 2
+    desTop = (desTop + desBottom) / 2 - getNumber(event.srcElement.style.width) / 2
+    event.srcElement.style.transform = "rotate(0deg)"
 
     {
         let newElement = funcInsertElement("selectDie" + event.srcElement.id, "button", "btnTrans",
@@ -165,7 +182,7 @@ function funcSelectDice() {
         newElement.style.backgroundImage = event.srcElement.style.backgroundImage
         newElement.style.backgroundSize = event.srcElement.style.backgroundSize
         newElement.style.boxShadow = event.srcElement.style.boxShadow
-        newElement.onclick = function () {
+        newElement.onclick = function() {
             event.srcElement.style.display = "none"
             let diceID = event.srcElement.id.replace("selectDie", "")
             document.getElementById(diceID).style.display = "inline"
@@ -179,54 +196,53 @@ function funcSelectDice() {
         funcMove(newElement.id, desLeft / pageWidth, desTop / pageHeight, 0.5)
     }
     arrSelected[idxDice] = true
-    //event.srcElement.style.opacity = 0.1
+        //event.srcElement.style.opacity = 0.1
     let thisNumber = getDiceValue(idxDice)
-    console.log(thisNumber)
+        //console.log(thisNumber)
     numOfSelected++
 
     for (let idx = 0; idx < 6; idx++) {
-        if (arrActivate[idx] != false && arrSelected[idx] != true && (numOfSelected==3||thisNumber > getDiceValue(idx))) {
-            
+        if (arrActivate[idx] != false && arrSelected[idx] != true && (numOfSelected == 3 || thisNumber > getDiceValue(idx))) {
+
             let thisDice = document.getElementById("btnDice" + idx)
             document.getElementById("btnDice" + idx).style.display = "none"
 
-            let newElement = funcInsertElement("deselectDiebtnDice" + idx,"button","btnTrans",
-            0,0,0,0)
-            newElement.style.display="inline"
+            let newElement = funcInsertElement("deselectDiebtnDice" + idx, "button", "btnTrans",
+                0, 0, 0, 0)
+            newElement.style.display = "inline"
             newElement.style.left = thisDice.style.left
             newElement.style.top = thisDice.style.top
             newElement.style.width = thisDice.style.width
             newElement.style.height = thisDice.style.height
-            newElement.style.backgroundColor=thisDice.style.backgroundColor
-            newElement.style.backgroundImage=thisDice.style.backgroundImage
-            newElement.style.backgroundSize=thisDice.style.backgroundSize
-            newElement.style.boxShadow=thisDice.style.boxShadow
-            newElement.onclick = function(){
-                event.srcElement.style.display="none"
-                let diceID = event.srcElement.id.replace("deselectDie","")
-                document.getElementById(diceID).style.display="inline"
+            newElement.style.backgroundColor = thisDice.style.backgroundColor
+            newElement.style.backgroundImage = thisDice.style.backgroundImage
+            newElement.style.backgroundSize = thisDice.style.backgroundSize
+            newElement.style.boxShadow = thisDice.style.boxShadow
+            newElement.onclick = function() {
+                event.srcElement.style.display = "none"
+                let diceID = event.srcElement.id.replace("deselectDie", "")
+                document.getElementById(diceID).style.display = "inline"
                 let idxDice = diceID.replace("btnDice", "")
                 for (let idx4 = 0; idx4 < numOfDeactivated; idx4++) {
-                    if (destDeactivateDice[idx4][2]==idxDice){
-                        destDeactivateDice[idx4]=destDeactivateDice[numOfSelected-1]
+                    if (destDeactivateDice[idx4][2] == idxDice) {
+                        destDeactivateDice[idx4] = destDeactivateDice[numOfSelected - 1]
                     }
                 }
                 numOfDeactivated--
                 arrActivate[idxDice] = true
-        
-            }
-            
-            let plateLeft = getNumber(document.getElementById("btnPlate").style.left)
-            let movedLeft = MMath.getRandom(plateLeft+0.2*getNumber(newElement.style.width),pageWidth-1.2*getNumber(newElement.style.width))
-            let movedTop = MMath.getRandom(0.2*pageHeight,0.8*pageHeight-1.2*getNumber(newElement.style.width))
 
-            let count= 0
-            while (true)
-            {
+            }
+
+            let plateLeft = getNumber(document.getElementById("btnPlate").style.left)
+            let movedLeft = MMath.getRandom(plateLeft + 0.2 * getNumber(newElement.style.width), pageWidth - 1.2 * getNumber(newElement.style.width))
+            let movedTop = MMath.getRandom(0.2 * pageHeight, 0.8 * pageHeight - 1.2 * getNumber(newElement.style.width))
+
+            let count = 0
+            while (true) {
                 let termi = true
                 for (let idx2 = 0; idx2 < numOfDeactivated; idx2++) {
-                   
-                        if (isOverlap(
+
+                    if (isOverlap(
                             movedLeft,
                             movedTop,
                             getNumber(newElement.style.width),
@@ -235,35 +251,33 @@ function funcSelectDice() {
                             destDeactivateDice[idx2][1],
                             getNumber(newElement.style.width),
                             getNumber(newElement.style.width)
-                        )==true)
-                        {
-                            termi=false
-                            break
-                        }
-                   
-                    
+                        ) == true) {
+                        termi = false
+                        break
+                    }
+
+
                 }
 
-                if (termi==true || count==100)
-                {
+                if (termi == true || count == 100) {
                     break
                 }
 
-                 movedLeft = MMath.getRandom(plateLeft+0.2*getNumber(newElement.style.width),pageWidth-1.2*getNumber(newElement.style.width))
-                 movedTop = MMath.getRandom(0.2*pageHeight,0.8*pageHeight-1.2*getNumber(newElement.style.width))
-    
+                movedLeft = MMath.getRandom(plateLeft + 0.2 * getNumber(newElement.style.width), pageWidth - 1.2 * getNumber(newElement.style.width))
+                movedTop = MMath.getRandom(0.2 * pageHeight, 0.8 * pageHeight - 1.2 * getNumber(newElement.style.width))
+
                 count++
             }
 
-            destDeactivateDice[numOfDeactivated]=new Array(movedLeft,movedTop,idx)
+            destDeactivateDice[numOfDeactivated] = new Array(movedLeft, movedTop, idx)
             numOfDeactivated++
 
 
 
-            funcMove(newElement.id, movedLeft/pageWidth, movedTop/pageHeight, 0.5)
+            funcMove(newElement.id, movedLeft / pageWidth, movedTop / pageHeight, 0.5)
 
             arrActivate[idx] = false
-        
+
 
         }
 
@@ -271,22 +285,19 @@ function funcSelectDice() {
 }
 
 function funcRollDice() {
-    if (numOfDeactivated+numOfSelected==6)
-    {
-        numOfDeactivated=0
-        numOfSelected=0
+    if (numOfDeactivated + numOfSelected == 6) {
+        numOfDeactivated = 0
+        numOfSelected = 0
         for (let idx = 0; idx < 6; idx++) {
-            arrSelected[idx]=false
-            arrActivate[idx]=true
-            let desDie = document.getElementById("deselectDiebtnDice"+idx)
-            if (desDie!=null)
-            {
-                desDie.style.display="none"
+            arrSelected[idx] = false
+            arrActivate[idx] = true
+            let desDie = document.getElementById("deselectDiebtnDice" + idx)
+            if (desDie != null) {
+                desDie.style.display = "none"
             }
-            let selDie = document.getElementById("selectDiebtnDice"+idx)
-            if (selDie!=null)
-            {
-                selDie.style.display="none"
+            let selDie = document.getElementById("selectDiebtnDice" + idx)
+            if (selDie != null) {
+                selDie.style.display = "none"
             }
         }
     }
@@ -300,11 +311,10 @@ function funcRollDice() {
         palleteRight / pageWidth, 0.95, 0.1
     )
     for (let idx = 0; idx < 6; idx++) {
-        if (arrSelected[idx]==true || arrActivate[idx]==false)
-        {
-            document.getElementById("btnDice"+idx).style.display="none"
+        if (arrSelected[idx] == true || arrActivate[idx] == false) {
+            document.getElementById("btnDice" + idx).style.display = "none"
         }
-        
+
     }
 
 
