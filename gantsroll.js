@@ -1,25 +1,4 @@
-let tpageHeight = document.documentElement.clientHeight
-let tpageWidth = document.documentElement.clientWidth
-
-let ratio = tpageWidth/tpageHeight
-if (tpageHeight>tpageWidth)
-{
-    ratio = 1/ratio
-}
-
-$(window).resize(function () {
-    if (doResize == false) {
-        return
-    }
-    let tpageHeight = document.documentElement.clientHeight
-let tpageWidth = document.documentElement.clientWidth
-
-let ratio = tpageWidth/tpageHeight
-if (tpageHeight>tpageWidth)
-{
-    ratio = 1/ratio
-}
-funcWidthPerHeight(ratio,ratio)
+funcWidthPerHeight(0)
 
     funcUpdatePageSize(true)
     funcRelocateElements()
