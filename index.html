@@ -172,7 +172,7 @@
         pText.style.textShadow = "3px 3px 1px black"
         mainDiv.appendChild(pText)
 
-     
+
     } {
         var btn = document.createElement("button")
         btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/zZGqhCOD0hW3AyINwayRvFfOwnU=/fit-in/246x300/pic3566028.jpg')"
@@ -221,7 +221,7 @@
         pText.style.textAlign = "right"
         pText.style.textShadow = "3px 3px 1px black"
         mainDiv.appendChild(pText)
-    }  {
+    } {
         var btn = document.createElement("button")
         btn.style.backgroundImage = "url('https://cf.geekdo-images.com/opengraph/img/dfaUhAyIR3VeEQPPP44zMfbA7zc=/fit-in/1200x630/pic4521267.png')"
         btn.style.backgroundSize = "100%"
@@ -269,8 +269,7 @@
         pText.style.textAlign = "right"
         pText.style.textShadow = "3px 3px 1px black"
         mainDiv.appendChild(pText)
-    }
-    {
+    } {
         var btn = document.createElement("button")
         btn.style.backgroundImage = "url('https://cf.geekdo-images.com/opengraph/img/r9t7ecmnFKlAmjYB14mQKq6QddQ=/fit-in/1200x630/pic3687781.jpg')"
         btn.style.opacity = "0.5"
@@ -455,6 +454,23 @@
         mainDiv.appendChild(pText)
         topLoc += btnHeight
         topLoc -= 1 / pageHeight
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "doppeltroll.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight / 2 * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = (topLoc - btnHeight / 2) * pageHeight + "px"
+        pText.style.padding = 0.05 * pageHeight + "px " + 0.02 * pageHeight + "px "
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "도펠트 소 클레버 주사위 굴리기"
+        pText.style.color = "white"
+        pText.style.textAlign = "right"
+        pText.style.textShadow = "3px 3px 1px black"
+        mainDiv.appendChild(pText)
     }
 
     {
