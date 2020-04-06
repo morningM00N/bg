@@ -390,6 +390,40 @@
 
     {
         var btn = document.createElement("button")
+        btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/AT0GoR_QSDagBfMb2hgP3ANHfj8=/fit-in/246x300/pic3979156.jpg')"
+        btn.style.opacity = "0.5"
+        btn.style.backgroundSize = "100%"
+        btn.style.backgroundPositionY = "10%"
+        btn.style.width = pageWidth + "px"
+        btn.style.height = btnHeight * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = topLoc * pageHeight + "px"
+        btn.style.backgroundColor = "gray"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "fleetrole.html "
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = topLoc * pageHeight + "px"
+        pText.style.padding = 0.02 * pageHeight + "px"
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "플릿 주사위 굴리기"
+        pText.style.color = "white"
+        pText.style.textShadow = "3px 3px 1px black"
+
+        mainDiv.appendChild(pText)
+        topLoc += btnHeight
+        topLoc -= 1 / pageHeight
+    }
+
+    {
+        var btn = document.createElement("button")
         btn.style.backgroundImage = "url('https://cf.geekdo-images.com/itemrep/img/NhUqgeHkg2-WlnheoI3eQKTGTE4=/fit-in/246x300/pic3759421.jpg')"
         btn.style.opacity = "0.5"
         btn.style.backgroundSize = "100%"
