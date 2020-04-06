@@ -10,21 +10,21 @@ $(window).resize(function() {
 let numOfPlayers = 4
 
 let arrShipDiceImg = new Array(
-    "img/dice/impset/w3.png",
-    "img/dice/impset/w4.png",
-    "img/dice/impset/w4.png",
-    "img/dice/impset/w4.png",
-    "img/dice/impset/w4.png",
-    "img/dice/impset/w5.png"
+    "img/fleet/cod.png",
+    "img/fleet/gold.png",
+    "img/fleet/lobster.png",
+    "img/fleet/oyster.png",
+    "img/fleet/shrimp.png",
+    "img/fleet/swordfish.png"
 )
 
 let arrHarborDiceImg = new Array(
-    "img/dice/impset/wood.png",
-    "img/dice/impset/wood.png",
-    "img/dice/impset/food.png",
-    "img/dice/impset/food.png",
-    "img/dice/impset/gold.png",
-    "img/dice/impset/stone.png"
+    "img/fleet/harbor.png",
+    "img/fleet/harbor.png",
+    "img/fleet/market.png",
+    "img/fleet/market.png",
+    "img/fleet/wharf.png",
+    "img/fleet/wharf.png"
 )
 
 
@@ -64,7 +64,7 @@ function funcDrawFleetRole() {
 
     let btnShipPhase = funcInsertElement("btnShipPhase", "button", "sltTrans",
         0.02, 0.02, 0.37, 0.1)
-    btnShipPhase.innerHTML = "출항 페이즈"
+    btnShipPhase.innerHTML = "출항 단계"
 
 
     btnShipPhase.onclick = function() {
@@ -112,7 +112,7 @@ function funcDrawFleetRole() {
 
     let btnHarborPhase = funcInsertElement("btnHarborPhase", "button", "sltTrans",
         0.40, 0.02, 0.75, 0.1)
-    btnHarborPhase.innerHTML = "항구 페이즈"
+    btnHarborPhase.innerHTML = "타운 단계"
 
     btnHarborPhase.onclick = function() {
 
