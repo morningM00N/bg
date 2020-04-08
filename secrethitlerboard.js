@@ -66,7 +66,7 @@ function fucDrawSecretHitlerBoard() {
                 event.srcElement.style.backgroundImage = "url('')"
             } else {
                 arrLiberalEnacted[idx] = true
-                event.srcElement.style.backgroundImage = "url('img/secrethitler/liberalpolicy.png')"
+                event.srcElement.style.backgroundImage = "url('img/secrethitler/liberalpolicys.png')"
                 let btnElectTrack = document.getElementById("btnElect" + curElectionTracker)
                 btnElectTrack.style.backgroundColor = "transparent"
                 btnElectTrack.style.boxShadow = " 0px 0px transparent"
@@ -94,7 +94,7 @@ function fucDrawSecretHitlerBoard() {
                 event.srcElement.style.backgroundImage = "url('')"
             } else {
                 arrFascistEnacted[idx] = true
-                event.srcElement.style.backgroundImage = "url('img/secrethitler/fascistpolicy.png')"
+                event.srcElement.style.backgroundImage = "url('img/secrethitler/fascistpolicys.png')"
 
                 let btnElectTrack = document.getElementById("btnElect" + curElectionTracker)
                 btnElectTrack.style.backgroundColor = "transparent"

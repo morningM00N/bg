@@ -295,7 +295,7 @@ function funcTileClick(idxX, idxY)
         tileSet[idxX][idxY]=0
         clickedTile.style.border="0px"
     }
-    console.log(idxX,idxY)
+    //console.log(idxX,idxY)
     clickedTile.style.backgroundImage="url('img/cartographers/"+arrImg[selectedImgIdx]+".png')"
     clickedTile.style.backgroundSize=clickedTile.style.width+" "+clickedTile.style.height
     if (locRuin[idxX][idxY]==true)

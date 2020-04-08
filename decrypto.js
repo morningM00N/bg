@@ -283,7 +283,7 @@ function funcClickCheck(thisRound, thisNumOfHints) {
     for (let round = 0; round < thisRound; round++) {
         for (let numOfHints = 0; numOfHints < 3; numOfHints++) {
             var sltAnswer = document.getElementById("sltAnswer_" + round + "_" + numOfHints)
-            console.log(sltAnswer.selectedIndex)
+            //console.log(sltAnswer.selectedIndex)
             if (sltAnswer.selectedIndex == 0) {
                 alert("앞의 라운드부터 진행해 주세요.")
                 return
@@ -321,10 +321,10 @@ function funcInputAnswer(thisRound, thisNumOfHints) {
 
 
     }
-    console.log("" + 0 + ":" + hints[0])
-    console.log("" + 1 + ":" + hints[1])
-    console.log("" + 2 + ":" + hints[2])
-    console.log("" + 3 + ":" + hints[3])
+    //console.log("" + 0 + ":" + hints[0])
+    //console.log("" + 1 + ":" + hints[1])
+    //console.log("" + 2 + ":" + hints[2])
+    //console.log("" + 3 + ":" + hints[3])
 
 }
 
