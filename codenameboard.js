@@ -11,6 +11,7 @@ $(window).resize(function() {
     funcDrawCodenameBoard()
 });
 
+let wordDupCheck = new Array()
 
 let wordList = new Array();
 let rawFile = new XMLHttpRequest();
@@ -27,7 +28,11 @@ rawFile.onreadystatechange = function() {
                     allText[idx] == ' ' ||
                     Number(allText[idx]) == 0) {
                     if (thisWord.length > 0 && thisWord.length <= 4) {
-                        wordList.push(thisWord)
+                        if (wordDupCheck[thisWord] != 0) {
+                            wordList.push(thisWord)
+                            wordDupCheck[thisWord] = 0
+                        }
+
                     }
                     thisWord = ""
                 } else {
