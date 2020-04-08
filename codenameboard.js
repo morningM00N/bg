@@ -99,8 +99,9 @@ function funcSetSeed(roomNumber) {
 
 }
 
-let change = true
+let change = false
 let gameStarted = false
+let allSee = false
 
 function funcDrawCodenameBoard() {
     if (pageWidth < pageHeight) {
@@ -127,10 +128,15 @@ function funcDrawCodenameBoard() {
 
     let btnChange = funcInsertElement("btnChange", "button", "sltTrans", 0.26, 0.02, 0.50, 0.08)
     btnChange.innerHTML = "교체"
+    if (change == false) {
+        btnChange.style.opacity = 0.4
+    } else {
+        btnChange.style.opacity = 1.0
+    }
     btnChange.onclick = function() {
         if (change == true) {
             change = false
-            event.srcElement.style.opacity = 0.5
+            event.srcElement.style.opacity = 0.4
         } else {
             change = true
             event.srcElement.style.opacity = 1.0
@@ -146,14 +152,47 @@ function funcDrawCodenameBoard() {
         if (confirm("정말 전체 단어를 확인하겠습니까?") != true) {
             return
         }
+        if (allSee == true) {
+            allSee = false
+        } else {
+            allSee = true
+        }
         if (change == true) {
             change = false
             document.getElementById("btnChange").style.opacity = 0.5
         }
         for (let idx = 0; idx < 5; idx++) {
             for (let idx2 = 0; idx2 < 5; idx2++) {
-                funcSelectCard(idx, idx2)
-                    //document.getElementById("btnWord" + idx + "_" + idx2).style.color = "transparent"
+                let btnSymbol = funcInsertElement("btnSym" + idx + "_" + idx2, "button", "sltTrans",
+                    0.01 + idx * 0.94 / 5 + 0.01 * idx,
+                    0.09 + idx2 * 0.86 / 5 + 0.01 * idx2,
+                    0.01 + idx * 0.94 / 5 + 0.01 * idx + 0.02,
+                    0.09 + idx2 * 0.86 / 5 + 0.01 * idx2 + 0.03,
+                )
+                btnSymbol.style.borderRadius = "30%"
+                if (allSee == true) {
+                    let thisIdx = 5 * idx + idx2
+                    if (thisIdx == idxAssasin) {
+                        btnSymbol.style.backgroundColor = "black"
+                        continue
+                    }
+                    for (let i = 0; i < idxReds.length; i++) {
+                        if (idxReds[i] == thisIdx) {
+                            btnSymbol.style.backgroundColor = "red"
+                        }
+                    }
+                    for (let i = 0; i < idxBlues.length; i++) {
+                        if (idxBlues[i] == thisIdx) {
+                            btnSymbol.style.backgroundColor = "blue"
+                        }
+                    }
+
+                } else {
+                    btnSymbol.style.backgroundColor = "transparent"
+                }
+
+
+
             }
 
         }
@@ -181,6 +220,34 @@ function funcDrawCodenameBoard() {
                 btnWord.onclick = function() {
                     funcSelectCard(idx, idx2)
                 }
+
+                let btnSymbol = funcInsertElement("btnSym" + idx + "_" + idx2, "button", "sltTrans",
+                    0.01 + idx * 0.94 / 5 + 0.01 * idx,
+                    0.09 + idx2 * 0.86 / 5 + 0.01 * idx2,
+                    0.01 + idx * 0.94 / 5 + 0.01 * idx + 0.02,
+                    0.09 + idx2 * 0.86 / 5 + 0.01 * idx2 + 0.03,
+                )
+                btnSymbol.style.borderRadius = "30%"
+                if (allSee == true) {
+                    let thisIdx = idx + idx2 * 5
+                    if (thisIdx == idxAssasin) {
+                        btnSymbol.style.backgroundColor = "black"
+                        continue
+                    }
+                    for (let i = 0; i < idxReds.length; i++) {
+                        if (idxReds[i] == thisIdx) {
+                            btnSymbol.style.backgroundColor = "red"
+                        }
+                    }
+                    for (let i = 0; i < idxBlues.length; i++) {
+                        if (idxBlues[i] == thisIdx) {
+                            btnSymbol.style.backgroundColor = "blue"
+                        }
+                    }
+
+                } else {
+                    btnSymbol.style.backgroundColor = "transparent"
+                }
             }
 
         }
@@ -194,6 +261,7 @@ let arrWordChange = new Array()
 funcDrawCodenameBoard()
 
 function startGame() {
+    allSee = false
     gameStarted = true
     let val = prompt("방번호를 입력해주세요.")
     if (val == null || val.length == 0) {
