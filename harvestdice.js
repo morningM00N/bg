@@ -62,7 +62,7 @@ function funcPlant(idx, idx2) {
 }
 function funcDrawHarvestDice() {
 
-    funcInsertFullScreenButton(0.8849, 0.0170, 0.9707, 0.0894, 29 / 20)
+    funcInsertFullScreenButton(0.8849, 0.0170, 0.9707, 0.075)
     let leftTic = 0.127
     let topTic = 0.13
     for (let idx = 0; idx < 6; idx++) {
