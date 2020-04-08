@@ -22,6 +22,7 @@ body {
     text-align-last: center;
     position: absolute;
     font-family: 'Sriracha', cursive;
+    text-shadow: 3px 3px 3px gray;
 }
 
 .sltTrans {
@@ -33,5 +34,6 @@ body {
     position: absolute;
     text-align-last: center;
     -webkit-appearance: none;
-    font-family: 'Nanum Pen Script', cursive
+    font-family: 'Nanum Pen Script', cursive;
+    text-shadow: 3px 3px 3px gray;
 }
