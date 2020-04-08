@@ -166,7 +166,8 @@ function funcDrawCodenameBoard() {
                     0.01 + (idx + 1) * 0.94 / 5 + 0.01 * idx,
                     0.09 + (idx2 + 1) * 0.86 / 5 + 0.01 * idx2,
                 )
-                btnWord.style.backgroundImage = "url('https://github.com/eettrrr/bg/blob/master/codename/img/codename.png?raw=true')"
+
+                //btnWord.style.backgroundImage = "url('https://github.com/eettrrr/bg/blob/master/codename/img/codename.png?raw=true')"
                 btnWord.style.borderRadius = "10%"
                     //btnWord.innerHTML = wordList[5 * idx + idx2]
                 btnWord.style.fontFamily = "'Stylish', sans-serif"
