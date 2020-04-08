@@ -187,6 +187,7 @@ function funcDrawCodenameBoard() {
     btnFull.onclick = funcFullScreen
 
     if (gameStarted) {
+        console.log("redraw")
         for (let idx = 0; idx < 5; idx++) {
             for (let idx2 = 0; idx2 < 4; idx2++) {
                 let btnWord = funcInsertElement("btnWord" + idx + "_" + idx2, "button", "sltTrans",
@@ -204,6 +205,34 @@ function funcDrawCodenameBoard() {
                     //btnWord.style.paddingTop = Number(btnWord.style.height.replace("px", "")) / 7 + "px"
                 btnWord.onclick = function() {
                     funcSelectCard(idx, idx2)
+                }
+
+                let btnSymbol = funcInsertElement("btnSym" + idx + "_" + idx2, "button", "sltTrans",
+                    0.01 + idx * 0.94 / 5 + 0.01 * idx,
+                    0.09 + idx2 * 0.86 / 4 + 0.01 * idx2,
+                    0.01 + idx * 0.94 / 5 + 0.01 * idx + 0.02,
+                    0.09 + idx2 * 0.86 / 4 + 0.01 * idx2 + 0.03,
+                )
+                btnSymbol.style.borderRadius = "30%"
+                if (allSee == true) {
+                    let thisIdx = idx + idx2 * 5
+                    if (thisIdx == idxAssasin) {
+                        btnSymbol.style.backgroundColor = "black"
+                        continue
+                    }
+                    for (let i = 0; i < idxReds.length; i++) {
+                        if (idxReds[i] == thisIdx) {
+                            btnSymbol.style.backgroundColor = "red"
+                        }
+                    }
+                    for (let i = 0; i < idxBlues.length; i++) {
+                        if (idxBlues[i] == thisIdx) {
+                            btnSymbol.style.backgroundColor = "blue"
+                        }
+                    }
+
+                } else {
+                    btnSymbol.style.backgroundColor = "transparent"
                 }
 
 
