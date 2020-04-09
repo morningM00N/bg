@@ -4,7 +4,7 @@ funcWidthPerHeight(0)
 
 funcUpdatePageSize(true)
 
-$(window).resize(function () {
+$(window).resize(function() {
     funcUpdatePageSize(true)
     funcDrawSHPersonal()
 });
@@ -14,7 +14,7 @@ let playerNameList = new Array();
 let rawFile = new XMLHttpRequest();
 rawFile.open("GET", "playername.txt", false);
 rawFile.setRequestHeader('Content-Type', 'text/html;charset=utf-8')
-rawFile.onreadystatechange = function () {
+rawFile.onreadystatechange = function() {
     if (rawFile.readyState === 4) {
         if (rawFile.status === 200 || rawFile.status == 0) {
             let allText = rawFile.responseText;
@@ -24,7 +24,7 @@ rawFile.onreadystatechange = function () {
 }
 
 rawFile.send(null);
-playerNameList[playerNameList.length-1]=(playerNameList[0])
+playerNameList[playerNameList.length - 1] = (playerNameList[0])
 playerNameList[0] = "이름"
 for (let idx = playerNameList.length - 1; idx >= 0; idx--) {
     if (playerNameList[idx] == "") {
@@ -69,7 +69,7 @@ function funcDrawSHPersonal() {
     let inputRoom = funcInsertElement("inputRoom", "input", "sltTrans",
         0.093, 0.0560, 0.65, 0.16
     )
-    inputRoom.onchange = function () {
+    inputRoom.onchange = function() {
         roomNumber = event.srcElement.value
     }
     inputRoom.value = roomNumber
@@ -77,7 +77,7 @@ function funcDrawSHPersonal() {
         0.67, 0.0560, 0.91, 0.16
     )
     btnNumOfP.innerHTML = numOfPlayers
-    btnNumOfP.onclick = function () {
+    btnNumOfP.onclick = function() {
         if (numOfPlayers == "수") {
             numOfPlayers = 5
         } else {
@@ -118,7 +118,7 @@ function funcDrawSHPersonal() {
     )
     btnVoteYes.style.backgroundImage = "url('img/secrethitler/voteyes.png')"
     btnVoteYes.style.boxShadow = shadowDepth + "px " + shadowDepth + "px gray"
-    btnVoteYes.onclick = function(){funcVote(true)}
+    btnVoteYes.onclick = function() { funcVote(true) }
 
     let btnVoteNo = funcInsertElement("btnVoteNo", "button", "btnTrans",
         0.5 + voteWidth / pageWidth + 0.05,
@@ -128,12 +128,12 @@ function funcDrawSHPersonal() {
     )
     btnVoteNo.style.backgroundImage = "url('img/secrethitler/voteno.png')"
     btnVoteNo.style.boxShadow = shadowDepth + "px " + shadowDepth + "px gray"
-    btnVoteNo.onclick = function(){funcVote(false)}
+    btnVoteNo.onclick = function() { funcVote(false) }
 
     btnPlayerName.innerHTML = playerNameList[idxOfPlayer]
-    btnPlayerName.onclick = function () {
+    btnPlayerName.onclick = function() {
         idxOfPlayer++
-        if (idxOfPlayer == numOfPlayers) {
+        if (idxOfPlayer == numOfPlayers + 1) {
             idxOfPlayer = 1
         }
         event.srcElement.innerHTML = playerNameList[idxOfPlayer]
@@ -143,7 +143,8 @@ function funcDrawSHPersonal() {
         0.67, 0.18, 0.91, 0.18 + 0.16 - 0.0560
     )
     btnStart.onclick = funcStartGame
-    btnStart.innerHTML="역할"
+    btnStart.innerHTML = "역할"
+    btnStart.style.whiteSpace = "nowrap"
 
     let palleteWidth = pageWidth * (0.91 - 0.093)
     let policyWidth = palleteWidth * 0.3
@@ -159,8 +160,8 @@ function funcDrawSHPersonal() {
         )
         btnPolicy.style.backgroundImage = "url('img/secrethitler/policybg.png')"
         btnPolicy.style.boxShadow = shadowDepth + "px " + shadowDepth + "px gray"
-        btnPolicy.onclick = function(){funcSelectPolicy(idx)} 
-        btnPolicy.style.display="none"
+        btnPolicy.onclick = function() { funcSelectPolicy(idx) }
+        btnPolicy.style.display = "none"
     }
 
     //console.log(palleteWidth)
@@ -168,8 +169,8 @@ function funcDrawSHPersonal() {
     let topValue = Number(btnVoteYes.style.top.replace("px", "")) +
         Number(btnVoteYes.style.height.replace("px", "")) + 0.023 * pageHeight
 
-    let bottomValue = Number(document.getElementById("btnPolicy0").style.top.replace("px", ""))
-        - 0.023 * pageHeight
+    let bottomValue = Number(document.getElementById("btnPolicy0").style.top.replace("px", "")) -
+        0.023 * pageHeight
 
     let btnHidden = funcInsertElement("btnHidden", "button", "btnTrans",
         0.15,
@@ -183,7 +184,7 @@ function funcDrawSHPersonal() {
     btnHidden.innerHTML = "숨김"
     btnHidden.style.fontSize = Number(btnHidden.style.fontSize.replace("px", "")) / 2 + "px"
     btnHidden.onclick = funcHidden
-    btnHidden.style.display="none"
+    btnHidden.style.display = "none"
 
     let btnWithdraw = funcInsertElement("btnWithdraw", "button", "btnTrans",
         0.52,
@@ -197,7 +198,7 @@ function funcDrawSHPersonal() {
     btnWithdraw.innerHTML = "무정부"
     btnWithdraw.style.fontSize = btnHidden.style.fontSize
     btnWithdraw.onclick = funcWithdraw
-    btnWithdraw.style.display="none"
+    btnWithdraw.style.display = "none"
 
 
 
@@ -206,25 +207,22 @@ function funcDrawSHPersonal() {
 }
 
 let isHidden = false
+
 function funcHidden() {
-    if (isHidden==true)
-    {
-        event.srcElement.innerHTML="숨김"
+    if (isHidden == true) {
+        event.srcElement.innerHTML = "숨김"
         for (let idx = 0; idx < 3; idx++) {
             let btnPolicy = document.getElementById("btnPolicy" + idx)
-            if (curPickedPolicyCards[idx]<6)
-            {
+            if (curPickedPolicyCards[idx] < 6) {
                 btnPolicy.style.backgroundImage = ("url('img/secrethitler/liberalpolicy.png')")
-            }
-            else{
+            } else {
                 btnPolicy.style.backgroundImage = ("url('img/secrethitler/fascistpolicy.png')")
             }
         }
-        isHidden=false
-    }
-    else{
-        event.srcElement.innerHTML="공개"
-        isHidden=true
+        isHidden = false
+    } else {
+        event.srcElement.innerHTML = "공개"
+        isHidden = true
         for (let idx = 0; idx < 3; idx++) {
             let btnPolicy = document.getElementById("btnPolicy" + idx)
             btnPolicy.style.backgroundImage = ("url('img/secrethitler/policybg.png')")
@@ -234,18 +232,17 @@ function funcHidden() {
 }
 
 function funcWithdraw() {
-    if (lastCard==false)
-    {
+    if (lastCard == false) {
         alert("마지막 카드에 사용해 주세요.")
         return
     }
-    lastCard=false
-    policyStage=false
+    lastCard = false
+    policyStage = false
     for (let idx = 0; idx < 3; idx++) {
-        document.getElementById("btnPolicy"+idx).style.display = "none"    
-        
+        document.getElementById("btnPolicy" + idx).style.display = "none"
+
     }
-    
+
 }
 let playerRole
 let policyDeck = new Array(17)
@@ -253,10 +250,10 @@ for (let idx = 0; idx < policyDeck.length; idx++) {
     policyDeck[idx] = 0
 }
 let numOfDrawDeck = 17
-let genRole =false
+let genRole = false
+
 function funcStartGame() {
-    if (idxOfPlayer==0 || numOfPlayers=="수")
-    {
+    if (idxOfPlayer == 0 || numOfPlayers == "수") {
         return
     }
 
@@ -275,59 +272,75 @@ function funcStartGame() {
             numOfFascist = 4
             break;
     }
-    if (genRole ==false)
-    {
-    playerRole = new Array(numOfPlayers)
+    if (genRole == false) {
+        playerRole = new Array(numOfPlayers)
 
-    let seed = roomNumber + "_" 
-    let d = new Date()
-    seed += (d.getFullYear() + "_")
-    if (d.getHours() >= 1 && d.getHours() < 24) {
-        seed += (d.getMonth() + "_" + d.getDate() + "_")
-    }
-    if (d.getMinutes() >= 5 && d.getMinutes() < 56) {
-        seed += (d.getHours() + "_")
-    }
-
-    //console.log(seed)
-    MMath.seedrandom(seed)
-    for (let idx = 0; idx < numOfPlayers; idx++) {
-        let loc = MMath.getRandom(numOfPlayers - 1)
-        while (playerRole[loc] >= 0) {
-            loc = MMath.getRandom(numOfPlayers - 1)
+        let seed = roomNumber + "_"
+        let d = new Date()
+        seed += (d.getFullYear() + "_")
+        if (d.getHours() >= 1 && d.getHours() < 24) {
+            seed += (d.getMonth() + "_" + d.getDate() + "_")
         }
-        playerRole[loc] = idx
-    }
-    //console.log(playerRole)
-    genRole =true
-    }
-    
+        if (d.getMinutes() >= 5 && d.getMinutes() < 56) {
+            seed += (d.getHours() + "_")
+        }
 
-    let btnVote = funcInsertElement("btnRoleBig","button","btnTrans",
-    0.1,
-    0.05,
-    0.9,
-    1.0,
-    6/9
+        //console.log(seed)
+        MMath.seedrandom(seed)
+        for (let idx = 0; idx < numOfPlayers; idx++) {
+            let loc = MMath.getRandom(numOfPlayers - 1)
+            while (playerRole[loc] >= 0) {
+                loc = MMath.getRandom(numOfPlayers - 1)
+            }
+            playerRole[loc] = idx
+        }
+        //console.log(playerRole)
+        genRole = true
+    }
+
+
+    let btnVote = funcInsertElement("btnRoleBig", "button", "btnTrans",
+        0.1,
+        0.05,
+        0.9,
+        1.0,
+        6 / 9
     )
-    btnVote.style.display="inline"
-    btnVote.onclick = function(){
+    btnVote.style.display = "inline"
+    btnVote.onclick = function() {
         event.srcElement.style.display = "none"
     }
     btnVote.style.borderRadius = "5%"
 
-    if (playerRole[idxOfPlayer-1]==0)
-    {
+    if (playerRole[idxOfPlayer - 1] == 0) {
         btnVote.style.backgroundImage = "url('img/secrethitler/rolehitler.png')"
+        btnVote.innerHTML = ""
+    } else if (playerRole[idxOfPlayer - 1] < numOfFascist) {
+        btnVote.style.backgroundImage = "url('img/secrethitler/rolefascist" + playerRole[idxOfPlayer - 1] + ".png')"
+        btnVote.style.fontSize = btnVote.style.fontSize.replace("px", "") / 8 + "px"
+        btnVote.style.whiteSpace = "nowrap"
+        btnVote.style.color = "white"
+        btnVote.style.fontWeight = "bold"
+        btnVote.style.lineHeight = btnVote.style.fontSize
+        let viewString = ""
+        for (let idx = 0; idx < playerRole.length; idx++) {
+            if (playerRole[idx] == 0) {
+                viewString += "히틀러:" + playerNameList[idx + 1] + "<br>"
+            }
+        }
+        viewString += "파시스트:<br>"
+        for (let idx = 0; idx < playerRole.length; idx++) {
+            if (playerRole[idx] < numOfFascist && playerRole[idx] > 0) {
+                viewString += playerNameList[idx + 1] + "<br>"
+            }
+        }
+
+        btnVote.innerHTML = viewString
+    } else {
+        btnVote.style.backgroundImage = "url('img/secrethitler/roleliberal" + (playerRole[idxOfPlayer - 1] - numOfFascist + 1) + ".png')"
+        btnVote.innerHTML = ""
     }
-    else if (playerRole[idxOfPlayer-1]<numOfFascist)
-    {
-        btnVote.style.backgroundImage = "url('img/secrethitler/rolefascist" +playerRole[idxOfPlayer-1] +".png')"
-    }
-    else{
-        btnVote.style.backgroundImage = "url('img/secrethitler/roleliberal" +(playerRole[idxOfPlayer-1]-numOfFascist+1) +".png')"
-    }
-    
+
 
 
 }
@@ -336,27 +349,26 @@ let ENACTED = 2
 let DISCARDED = 1
 let UNUSED = 0
 
-let curPickedPolicyCards=new Array()
+let curPickedPolicyCards = new Array()
 
 let lastCard = false
+
 function funcDrawPolicy() {
-    if (policyStage==true)
-    {
+    if (policyStage == true) {
         alert("현재 정책 단계를 끝내주세요!")
         return
     }
-    if (numOfEnactedFascistPolicies==5)
-    {
-        document.getElementById("btnWithdraw").style.display="inline"
+    if (numOfEnactedFascistPolicies == 5) {
+        document.getElementById("btnWithdraw").style.display = "inline"
     }
-    lastCard=false
-    policyStage=true
-    document.getElementById("btnHidden").innerHTML="공개"
-    isHidden=true
-    document.getElementById("btnHidden").style.display="inline"
+    lastCard = false
+    policyStage = true
+    document.getElementById("btnHidden").innerHTML = "공개"
+    isHidden = true
+    document.getElementById("btnHidden").style.display = "inline"
     if (numOfDrawDeck < 3) {
         alert("드로우 덱을 새로 만듭니다.")
-        //console.log("reshuffle...")
+            //console.log("reshuffle...")
         numOfDrawDeck = 0
         for (let idx = 0; idx < policyDeck.length; idx++) {
             if (policyDeck[idx] != ENACTED) {
@@ -366,16 +378,16 @@ function funcDrawPolicy() {
         }
     }
     numOfDrawDeck -= 3
-    //console.log("remain " + numOfDrawDeck + " cards")
+        //console.log("remain " + numOfDrawDeck + " cards")
     for (let idx = 0; idx < 3; idx++) {
-        let btnPolicy = document.getElementById("btnPolicy"+idx)
-        btnPolicy.style.display="inline"
-        btnPolicy.style.backgroundImage="url('img/secrethitler/policybg.png')"
+        let btnPolicy = document.getElementById("btnPolicy" + idx)
+        btnPolicy.style.display = "inline"
+        btnPolicy.style.backgroundImage = "url('img/secrethitler/policybg.png')"
         let thisCard = MMath.getRandom(0, policyDeck.length - 1)
         while (policyDeck[thisCard] != UNUSED) {
             thisCard = MMath.getRandom(0, policyDeck.length - 1)
         }
-        curPickedPolicyCards[idx]=thisCard
+        curPickedPolicyCards[idx] = thisCard
         policyDeck[thisCard] = DISCARDED
 
     }
@@ -386,76 +398,62 @@ funcDrawSHPersonal()
 
 //funcDrawPolicy()
 
-function funcSelectPolicy(idx)
-{
-    if (policyStage==false)
-    {
+function funcSelectPolicy(idx) {
+    if (policyStage == false) {
         funcDrawPolicy()
         return
     }
-    if (event.srcElement.innerHTML=="X")
-    {
+    if (event.srcElement.innerHTML == "X") {
         let answer = confirm("이 카드를 버리겠습니까?")
-        if (answer!=true)
-        {
+        if (answer != true) {
             return
         }
-        event.srcElement.innerHTML=""
-        event.srcElement.style.display="none"
-        if (lastCard==true)
-        {
-            policyStage=false
+        event.srcElement.innerHTML = ""
+        event.srcElement.style.display = "none"
+        if (lastCard == true) {
+            policyStage = false
             for (let idx = 0; idx < 3; idx++) {
-                if (document.getElementById("btnPolicy"+idx).style.display!="none")
-                {
-                    if (curPickedPolicyCards[idx]<6)
-                    {
+                if (document.getElementById("btnPolicy" + idx).style.display != "none") {
+                    if (curPickedPolicyCards[idx] < 6) {
                         numOfEnactedLiberalPolicies++
-                    }
-                    else{
+                    } else {
                         numOfEnactedFascistPolicies++
                     }
-                    policyDeck[curPickedPolicyCards[idx]]=ENACTED
+                    policyDeck[curPickedPolicyCards[idx]] = ENACTED
                     break;
                 }
             }
-            document.getElementById("btnHidden").style.display="none"
-            document.getElementById("btnWithdraw").style.display="none"
+            document.getElementById("btnHidden").style.display = "none"
+            document.getElementById("btnWithdraw").style.display = "none"
+        } else {
+            lastCard = true
         }
-        else{
-            lastCard=true
-        }
-    }
-    else if (event.srcElement.innerHTML=="")
-    {
+    } else if (event.srcElement.innerHTML == "") {
         for (let idx = 0; idx < 3; idx++) {
-            document.getElementById("btnPolicy"+idx).innerHTML=""
-            
+            document.getElementById("btnPolicy" + idx).innerHTML = ""
+
         }
-        event.srcElement.innerHTML="X"
+        event.srcElement.innerHTML = "X"
     }
-    
+
 }
 
-function funcVote(voteYes)
-{
-    let btnVote = funcInsertElement("btnVoteBig","button","sltTrans",
-    0.1,
-    0.05,
-    0.9,
-    1.0,
-    6/9
+function funcVote(voteYes) {
+    let btnVote = funcInsertElement("btnVoteBig", "button", "sltTrans",
+        0.1,
+        0.05,
+        0.9,
+        1.0,
+        6 / 9
     )
-    btnVote.style.display="inline"
-    btnVote.onclick = function(){
+    btnVote.style.display = "inline"
+    btnVote.onclick = function() {
         event.srcElement.style.display = "none"
     }
-    btnVote.style.borderRadius="10%"
-    if (voteYes==true)
-    {
+    btnVote.style.borderRadius = "10%"
+    if (voteYes == true) {
         btnVote.style.backgroundImage = "url('img/secrethitler/voteyes.png')"
-    }
-    else{
+    } else {
         btnVote.style.backgroundImage = "url('img/secrethitler/voteno.png')"
     }
 }
