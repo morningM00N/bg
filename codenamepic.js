@@ -1,4 +1,4 @@
-let numOfPics = 99
+let numOfPics = 145
 
 
 function funcUpdatePageSize(isMainDivSizeUpdate) {

@@ -838,6 +838,8 @@ function drawTile() {
   }
 
   topratio = 216 / 360;
+  var yy = 0.0857;
+  var xx = 0.058;
 
   var _loop8 = function _loop8(_x2) {
     leftratio = 194 / 360;
@@ -852,14 +854,14 @@ function drawTile() {
       button.style.width = button.style.height = pageWidth * 25 / 360 + "px";
       button.style.top = pageWidth * topratio + "px";
       button.style.fontSize = pageWidth * 15 / 360 + "px";
-      button.style.border = "0px";
+      button.style.border = "2px solid red";
       button.value = "";
+      leftratio += 31 / 360;
+      funcInsertElement(button.id, "button", "btnRound", 0.538 + _y * yy, 0.422 + _x2 * xx, 0.61 + _y * yy, 0.47 + _x2 * xx);
 
       button.onclick = function () {
         funcBlue(_x2, _y);
       };
-
-      leftratio += 31 / 360;
     };
 
     for (var _y = 0; _y <= 3; _y++) {
@@ -875,4 +877,4 @@ function drawTile() {
 
     _loop8(_x2);
   }
-}
+} //funcPrepareGetLocation()
