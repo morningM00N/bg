@@ -822,8 +822,6 @@
         }
     
         topratio = 216 / 360
-        let yy = 0.0857
-        let xx = 0.058
         for (let _x = 0; _x <= 2; _x++) {
     
             var leftratio = 194 / 360
@@ -840,18 +838,13 @@
                 button.style.width = button.style.height = pageWidth * 25 / 360 + "px"
                 button.style.top = pageWidth * topratio + "px"
                 button.style.fontSize = pageWidth * 15 / 360 + "px"
-                button.style.border = "2px solid red"
+                button.style.border = "0px"
     
                 button.value = ""
-                
-                leftratio += 31 / 360
-
-                funcInsertElement(button.id,"button","btnRound",
-                0.538+_y*yy, 0.422+_x*xx, 0.61+_y*yy, 0.47+_x*xx)
-
                 button.onclick = function () {
                     funcBlue(_x, _y)
                 }
+                leftratio += 31 / 360
     
             }
             topratio += 295 / 3600
@@ -859,5 +852,3 @@
     
         }
     }
-
-    //funcPrepareGetLocation()
