@@ -1,4 +1,34 @@
 
+    var pageHeight
+    var pageWidth
+    var widthPerHeight = 421/600
+    
+    var maindiv = document.getElementById("main")
+    var mainDiv = document.getElementById("main")
+    var mainBody = document.getElementById("body")
+    
+    function funcUpdatePageSize(isMainDivSizeUpdate) {
+        pageHeight = document.documentElement.clientHeight
+        pageWidth = document.documentElement.clientWidth
+        if (widthPerHeight != 0) {
+            if (pageWidth > pageHeight * widthPerHeight) {
+                pageWidth = pageHeight * widthPerHeight
+            } else {
+                pageHeight = pageWidth / widthPerHeight
+            }
+        }
+   
+        if (isMainDivSizeUpdate == true) {
+            mainDiv.style.height = pageHeight + "px"
+            mainDiv.style.width = pageWidth + "px"
+    
+            mainDiv.style.backgroundSize = pageWidth + "px " + pageHeight + "px"
+        }
+    }
+
+    funcUpdatePageSize(true)
+    
+    
     function funcCal()
     {
         var scoreY = 0
@@ -613,28 +643,7 @@
 
 
     
-        var pageHeight = document.documentElement.clientHeight
-        var modWidth = pageHeight / 600 * 420
-        var pageWidth = document.documentElement.clientWidth
-    
-        var maindiv = document.getElementById("main")
 
-
-
-
-        var mainbody = document.getElementById("body")
-        if (modWidth < pageWidth) {
-            pageWidth = modWidth
-        }
-        else {
-            pageHeight = pageWidth / 420 * 600
-        }
-    
-        maindiv.style.height = pageHeight + "px"
-        maindiv.style.width = pageWidth + "px"
-        mainbody.style.height = pageHeight + "px"
-        mainbody.style.width = pageWidth + "px"
-    
     
         var btnCal = document.getElementById("btnCalculate")
         btnCal.style.left = pageWidth * 5/360 + "px"

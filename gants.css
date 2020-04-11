@@ -20,7 +20,7 @@ input{
     position: absolute; 
     background-color: Transparent;  
     border-radius: 35%;
-    border:1px solid black 
+    border:1px solid black;
 }
 
 .btnItem{
