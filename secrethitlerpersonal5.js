@@ -56,6 +56,12 @@ function funcDrawSHPersonal() {
         document.getElementById(nameOfRelocatedElements[_idx2]).style.display = "inline";
     }
 
+    var btnRoleBig = document.getElementById("btnRoleBig");
+
+    if (btnRoleBig != null) {
+        btnRoleBig.style.display = "none";
+    }
+
     var pWarning = document.getElementById("pWarning");
 
     if (pWarning != null) {
@@ -147,7 +153,9 @@ function funcDrawSHPersonal() {
             funcSelectPolicy(_idx3);
         };
 
-        btnPolicy.style.display = "none";
+        if (policyStage == false) {
+            btnPolicy.style.display = "none";
+        }
     };
 
     for (var _idx3 = 0; _idx3 < 3; _idx3++) {
@@ -164,7 +172,11 @@ function funcDrawSHPersonal() {
     btnHidden.innerHTML = "숨김";
     btnHidden.style.fontSize = Number(btnHidden.style.fontSize.replace("px", "")) / 2 + "px";
     btnHidden.onclick = funcHidden;
-    btnHidden.style.display = "none";
+
+    if (policyStage == false) {
+        btnHidden.style.display = "none";
+    }
+
     var btnWithdraw = funcInsertElement("btnWithdraw", "button", "btnTrans", 0.52, topValue / pageHeight, 0.85, bottomValue / pageHeight);
     btnWithdraw.style.boxShadow = shadowDepth + "px " + shadowDepth + "px gray";
     btnWithdraw.style.backgroundColor = "black";
@@ -172,7 +184,11 @@ function funcDrawSHPersonal() {
     btnWithdraw.innerHTML = "무정부";
     btnWithdraw.style.fontSize = btnHidden.style.fontSize;
     btnWithdraw.onclick = funcWithdraw;
-    btnWithdraw.style.display = "none"; //console.log("here", topValue, bottomValue)
+
+    if (numOfEnactedFascistPolicies != 5 || policyStage != false) {
+        btnWithdraw.style.display = "none";
+    } //console.log("here", topValue, bottomValue)
+
 }
 
 var isHidden = false;
@@ -297,9 +313,9 @@ function funcStartGame() {
         btnVote.innerHTML = "";
     } else if (playerRole[idxOfPlayer - 1] < numOfFascist) {
         btnVote.style.backgroundImage = "url('img/secrethitler/rolefascist" + playerRole[idxOfPlayer - 1] + ".png')";
-        btnVote.style.fontSize = btnVote.style.fontSize.replace("px", "") / 7 + "px";
+        btnVote.style.fontSize = btnVote.style.fontSize.replace("px", "") / 8 + "px";
+        btnVote.style.whiteSpace = "nowrap";
         btnVote.style.color = "white";
-        btnVote.style.whiteSpace = "nowrap"
         btnVote.style.fontWeight = "bold";
         btnVote.style.lineHeight = btnVote.style.fontSize;
         var viewString = "";
