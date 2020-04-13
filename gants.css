@@ -8,6 +8,9 @@ body {
 input{
     font-family: 'Bangers', cursive;
 }
+button{
+    font-family: 'Bangers', cursive;
+}
 .bgdiv {
     background-image: url('img/gants.png');
     background-repeat: no-repeat;
@@ -20,14 +23,14 @@ input{
     position: absolute; 
     background-color: Transparent;  
     border-radius: 35%;
-    border:1px solid black;
+    border:0px;
 }
 
 .btnItem{
     position: absolute; 
     background-color: Transparent;
     border-radius: 100%  ;
-    border:1px solid black 
+    border:0px;
 
 }
 
