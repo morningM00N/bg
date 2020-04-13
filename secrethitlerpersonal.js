@@ -57,6 +57,13 @@ function funcDrawSHPersonal() {
     for (let idx = 0; idx < nameOfRelocatedElements.length; idx++) {
         document.getElementById(nameOfRelocatedElements[idx]).style.display = "inline"
     }
+
+    let btnRoleBig = document.getElementById("btnRoleBig")
+    if (btnRoleBig != null) {
+        btnRoleBig.style.display = "none"
+    }
+
+
     let pWarning = document.getElementById("pWarning")
     if (pWarning != null) {
         pWarning.style.display = "none"
@@ -161,7 +168,9 @@ function funcDrawSHPersonal() {
         btnPolicy.style.backgroundImage = "url('img/secrethitler/policybg.png')"
         btnPolicy.style.boxShadow = shadowDepth + "px " + shadowDepth + "px gray"
         btnPolicy.onclick = function() { funcSelectPolicy(idx) }
-        btnPolicy.style.display = "none"
+        if (policyStage == false) {
+            btnPolicy.style.display = "none"
+        }
     }
 
     //console.log(palleteWidth)
@@ -184,8 +193,9 @@ function funcDrawSHPersonal() {
     btnHidden.innerHTML = "숨김"
     btnHidden.style.fontSize = Number(btnHidden.style.fontSize.replace("px", "")) / 2 + "px"
     btnHidden.onclick = funcHidden
-    btnHidden.style.display = "none"
-
+    if (policyStage == false) {
+        btnHidden.style.display = "none"
+    }
     let btnWithdraw = funcInsertElement("btnWithdraw", "button", "btnTrans",
         0.52,
         topValue / pageHeight,
@@ -198,7 +208,9 @@ function funcDrawSHPersonal() {
     btnWithdraw.innerHTML = "무정부"
     btnWithdraw.style.fontSize = btnHidden.style.fontSize
     btnWithdraw.onclick = funcWithdraw
-    btnWithdraw.style.display = "none"
+    if (numOfEnactedFascistPolicies != 5 || policyStage != false) {
+        btnWithdraw.style.display = "none"
+    }
 
 
 
