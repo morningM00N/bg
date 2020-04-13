@@ -14,9 +14,8 @@
 
 <body id="body">
     <div id="main" class="bgdiv">
-   
-        <button id="btnCalculate" onclick="funcCal()" 
-            style="position: absolute; left:10px; top:530px; background-color: black;  border-radius: 5%;  color: white; border:0px; font-size: large; padding:10px;
+
+        <button id="btnCalculate" onclick="funcCal()" style="position: absolute; left:10px; top:530px; background-color: black;  border-radius: 5%;  color: white; border:0px; font-size: large; padding:10px;
             font-family: 'Stylish', sans-serif;">
             <span id = "spanY" style="color:yellow"></span>
             <span id = "spanB" style="color:blue"></span>
@@ -31,61 +30,3 @@
     <script type="text/javascript" src="gants5.js"></script>
 
 </body>
-
-<script>
-"use strict";
-
-var arrYellow = new Array();
-
-for (var index = 0; index <= 3; index++) {
-  arrYellow[index] = new Array();
-
-  for (var idx2 = 0; idx2 <= 3; idx2++) {
-    arrYellow[index][idx2] = false;
-  }
-}
-
-arrYellow[0][3] = arrYellow[1][2] = arrYellow[2][1] = arrYellow[3][0] = true;
-var arrBlue = new Array();
-
-for (var _index = 0; _index <= 2; _index++) {
-  arrBlue[_index] = new Array();
-
-  for (var _idx = 0; _idx <= 3; _idx++) {
-    arrBlue[_index][_idx] = false;
-  }
-}
-
-arrBlue[0][0] = true;
-var arrGreen = new Array();
-var arrOrange = new Array();
-var arrPurple = new Array();
-
-for (var _index2 = 0; _index2 <= 10; _index2++) {
-  arrGreen[_index2] = false;
-  arrOrange[_index2] = arrPurple[_index2] = 0;
-}
-
-var numOfReroll = 0;
-var numOfUsedReroll = 0;
-var numOfPlus = 0;
-var numOfUsedPlus = 0;
-var numOfFox = 0;
-var arrReroll = new Array();
-var arrPlus = new Array();
-var arrUseReroll = new Array();
-var arrUsePlus = new Array();
-var arrRound = new Array();
-
-for (var idx = 0; idx < 6; idx++) {
-  arrRound[idx] = false;
-}
-
-for (var _index3 = 0; _index3 < 7; _index3++) {
-  arrReroll[_index3] = arrPlus[_index3] = arrUsePlus[_index3] = arrUseReroll[_index3] = false;
-}
-
-drawTile();
-    
-
-</script>
