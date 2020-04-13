@@ -237,7 +237,7 @@ function funcDrawCodenameBoard() {
                 )
                 btnSymbol.style.borderRadius = "30%"
                 if (allSee == true) {
-                    let thisIdx = idx + idx2 * 5
+                    let thisIdx = 5*idx + idx2 
                     if (thisIdx == idxAssasin) {
                         btnSymbol.style.backgroundColor = "black"
                         continue

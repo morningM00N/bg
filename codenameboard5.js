@@ -230,7 +230,7 @@ function funcDrawCodenameBoard() {
         btnSymbol.style.borderRadius = "30%";
 
         if (allSee == true) {
-          var thisIdx = _idx5 + idx2 * 5;
+          var thisIdx = 5 * _idx5 + idx2;
 
           if (thisIdx == idxAssasin) {
             btnSymbol.style.backgroundColor = "black";
