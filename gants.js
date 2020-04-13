@@ -174,7 +174,7 @@ function funcCal() {
     if (minScore > scoreP) {
         minScore = scoreP
     }
-    document.getElementById("spanPlain").innerHTML = "+ <span style='color:red'>" + numOfFox + "</span> x " + minScore + " = " + Number(scoreY + scoreB + scoreG + scoreO + scoreP + minScore * numOfFox)
+    document.getElementById("spanPlain").innerHTML = "+ <span style='color:red'>" + numOfFox + "</span> x " + minScore + " = " + Number(scoreY + scoreB + scoreG + scoreO + scoreP + minScore * numOfFox) + ":"+pageHeight+":"+pageWidth
 
 }
 
