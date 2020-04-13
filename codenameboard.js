@@ -171,20 +171,28 @@ function funcDrawCodenameBoard() {
                 )
                 btnSymbol.style.borderRadius = "30%"
                 if (allSee == true) {
+                    let showThis = false
                     let thisIdx = 5 * idx + idx2
                     if (thisIdx == idxAssasin) {
                         btnSymbol.style.backgroundColor = "black"
+                        showThis=true
                         continue
                     }
                     for (let i = 0; i < idxReds.length; i++) {
                         if (idxReds[i] == thisIdx) {
                             btnSymbol.style.backgroundColor = "red"
+                            showThis=true
                         }
                     }
                     for (let i = 0; i < idxBlues.length; i++) {
                         if (idxBlues[i] == thisIdx) {
                             btnSymbol.style.backgroundColor = "blue"
+                            showThis=true
                         }
+                    }
+                    if (showThis==false)
+                    {
+                        btnSymbol.style.backgroundColor="transparent"
                     }
 
                 } else {

@@ -1,4 +1,4 @@
-var numOfPics = 99;
+var numOfPics = 145;
 
 function funcUpdatePageSize(isMainDivSizeUpdate) {
   pageHeight = document.documentElement.clientHeight;
@@ -159,23 +159,31 @@ function funcDrawCodenameBoard() {
         btnSymbol.style.borderRadius = "30%";
 
         if (allSee == true) {
+          var showThis = false;
           var thisIdx = _idx6 + idx2 * 5;
 
           if (thisIdx == idxAssasin) {
             btnSymbol.style.backgroundColor = "black";
+            showThis = true;
             continue;
           }
 
           for (var i = 0; i < idxReds.length; i++) {
             if (idxReds[i] == thisIdx) {
               btnSymbol.style.backgroundColor = "red";
+              showThis = true;
             }
           }
 
           for (var _i = 0; _i < idxBlues.length; _i++) {
             if (idxBlues[_i] == thisIdx) {
               btnSymbol.style.backgroundColor = "blue";
+              showThis = true;
             }
+          }
+
+          if (showThis == false) {
+            btnSymbol.style.backgroundColor = "transparent";
           }
         } else {
           btnSymbol.style.backgroundColor = "transparent";
