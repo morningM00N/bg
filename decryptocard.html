@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-size: 22px;
+            font-family: 'Bangers', cursive;
+        }
+    </style>
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <!--모바일페이지크기조절메타태그-->
+    <title>디크립토 코드</title>
+</head>
+
+<body id="body">
+    <div id="main" style="text-align:center; margin:0px">
+        <button id="imgBG"
+            style="position: absolute;background-image: url('img/decrypto/bg.jpg'); background-size: 100%; border:0px; border-radius: 5%;"
+            onclick="funcBG()"></button>
+        <button id="imgCard" style="position: absolute; background-color:transparent; background-size: 100%; border:0px; border-radius: 5%;"
+            onclick="funcCard()"></button>
+    </div>
+</body>
+
+<script>
+    alert("디스켓 그림을 클릭하면 코드가 생성됩니다.\n(코드를 클릭하면 사라집니다.)")
+    var pageHeight = document.documentElement.clientHeight
+    var pageWidth = document.documentElement.clientWidth
+
+    {
+        var body = document.getElementById("main")
+        body.style.height=pageHeight+"px"
+        body.style.width=pageWidth+"px"
+        body.style.margin = "0px"
+        body.style.backgroundColor="#ABB2B9"
+    }
+
+    {
+        var body = document.getElementById("body")
+        body.style.height=pageHeight+"px"
+        body.style.width=pageWidth+"px"
+        body.style.margin = "0px"
+    }
+
+
+    function funcBG() {
+        var imgCard = document.getElementById("imgCard")
+        var randNumber = Math.floor(Math.random() * 24) + 1
+        imgCard.style.backgroundImage = "url('img/decrypto/" + randNumber + ".png')"
+    }
+    function funcCard() {
+        var imgCard = document.getElementById("imgCard")
+        imgCard.style.backgroundImage = ""
+        imgCard.style.backgroundColor = "transparent"
+    }
+
+    if (pageHeight > pageWidth) {
+        {
+            var imgBG = document.getElementById("imgBG")
+            imgBG.style.bottom = pageHeight * 0.53 + "px"
+            imgBG.style.width = imgBG.style.height = pageHeight * 0.35 + "px"
+            imgBG.style.left = (pageWidth * 0.5 - pageHeight * 0.175) + "px"
+            if (pageHeight * 0.4 > 300) {
+                imgBG.style.width = imgBG.style.height = "300px"
+                imgBG.style.left = (pageWidth * 0.5 - 150) + "px"
+            }
+
+        }
+        {
+            var imgBG = document.getElementById("imgCard")
+            imgBG.style.top = pageHeight * 0.53 + "px"
+            imgBG.style.width = imgBG.style.height = pageHeight * 0.35 + "px"
+            imgBG.style.left = (pageWidth * 0.5 - pageHeight * 0.175) + "px"
+            if (pageHeight * 0.4 > 300) {
+                imgBG.style.width = imgBG.style.height = "300px"
+                imgBG.style.left = (pageWidth * 0.5 - 150) + "px"
+            }
+        }
+    }
+    else {
+        var temp = pageWidth
+        pageWidth = pageHeight
+        pageHeight=temp
+        {
+            var imgBG = document.getElementById("imgBG")
+            imgBG.style.right = pageHeight * 0.53 + "px"
+            imgBG.style.width = imgBG.style.height = pageHeight * 0.35 + "px"
+            imgBG.style.top = (pageWidth * 0.5 - pageHeight * 0.175) + "px"
+            if (pageHeight * 0.4 > 300) {
+                imgBG.style.width = imgBG.style.height = "300px"
+                imgBG.style.top = (pageWidth * 0.5 - 150) + "px"
+            }
+
+        }
+        {
+            var imgBG = document.getElementById("imgCard")
+            imgBG.style.left = pageHeight * 0.53 + "px"
+            imgBG.style.width = imgBG.style.height = pageHeight * 0.35 + "px"
+            imgBG.style.top = (pageWidth * 0.5 - pageHeight * 0.175) + "px"
+            if (pageHeight * 0.4 > 300) {
+                imgBG.style.width = imgBG.style.height = "300px"
+                imgBG.style.top = (pageWidth * 0.5 - 150) + "px"
+            }
+        }
+    }
+
+
+
+</script>

@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Stylish', sans-serif;
+            font-size: 22px;
+        }
+    </style>
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0, user-scalable=yes" />
+    <!--모바일페이지크기조절메타태그-->
+    <title>너도나도</title>
+</head>
+
+<body>
+    <div id="main" onclick="clickMain()">
+        <input type="button" id="btnWord" value="주제" style="font-size:200%;  background-color: #000; border: none;
+        font-family: 'Stylish', cursive;
+        color:#fff;
+        padding: 15px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px;
+        cursor: pointer; border-radius: 10px;" onClick="funcWord()" />
+        <p id="word" onClick="funcWord()" style="margin:0"></p>
+    </div>
+</body>
+
+<script>
+    var pageHeight = document.documentElement.clientHeight
+    var pageWidth = document.documentElement.clientWidth
+
+
+    function drawTextInput() {
+        for (let index = 0; index < 8; index++) {
+            var textIn = document.createElement("input")
+            textIn.type = "text"
+            textIn.id = "textIn" + index
+            textIn.style.fontSize = pageHeight * 0.05 + "px"
+            textIn.style.fontFamily = "'Stylish', cursive"
+            textIn.style.margin = "3px"
+            textIn.style.width = pageWidth * 0.8 + "px"
+            textIn.placeholder = " 단어 " + Number(index + 1)
+                //textIn.value = index
+            document.getElementById("main").appendChild(textIn)
+        }
+        var newBtn = document.createElement("input")
+        newBtn.type = "button"
+
+
+
+        newBtn.onclick = inputWordDone
+        newBtn.value = "완료"
+        newBtn.id = "btnDone"
+        var newBtnStyle = newBtn.style
+        newBtnStyle.fontSize = pageHeight * 0.05 + "px"
+        newBtnStyle.backgroundColor = "black"
+        newBtnStyle.color = "white"
+        newBtnStyle.fontFamily = "'Stylish', cursive"
+        newBtnStyle.border = "none"
+        newBtnStyle.margin = "4px"
+        newBtnStyle.padding = "15px 15px"
+        newBtnStyle.borderRadius = "10px"
+        document.getElementById("main").appendChild(newBtn)
+
+    }
+
+    var words = new Array()
+    var counts = new Array()
+    for (let index = 0; index < 8; index++) {
+        counts[index] = 1
+
+    }
+
+    var firstTouch = true
+
+    function inputWordDone() {
+        document.getElementById("btnDone").style.display = "none"
+        console.log("clicked")
+        for (let index = 0; index < 8; index++) {
+            var textIn = document.getElementById("textIn" + index)
+            words[index] = textIn.value
+            if (words[index].length == 0) {
+                words[index] = "&nbsp"
+            }
+            console.log(words[index])
+            textIn.style.display = "none"
+        }
+
+        var newTable = document.createElement("table")
+        document.getElementById("main").appendChild(newTable)
+        for (let index = 0; index < 8; index++) {
+            var newRow = newTable.insertRow()
+
+            {
+                var newWord = newRow.insertCell()
+                newWord.style.backgroundColor = "black"
+                newWord.innerHTML = words[index]
+                newWord.style.fontSize = pageHeight * 0.055 + "px"
+                newWord.id = "newWord" + index
+                newWord.width = pageWidth * 0.75 + "px"
+                newWord.onclick = function() {
+                    funcCountInc(index)
+                }
+            }
+
+            {
+                var newWord = newRow.insertCell()
+                newWord.style.fontSize = pageHeight * 0.055 + "px"
+                newWord.id = "newCount" + index
+                newWord.onclick = function() {
+                    funcCountDec(index)
+                }
+
+            }
+        }
+
+        var newBtn = document.createElement("input")
+        newBtn.type = "button"
+
+        newBtn.onclick = funcCal
+        newBtn.value = "계산"
+        newBtn.id = "btnCal"
+        var newBtnStyle = newBtn.style
+        newBtnStyle.fontSize = pageHeight * 0.05 + "px"
+        newBtnStyle.backgroundColor = "black"
+        newBtnStyle.color = "white"
+        newBtnStyle.fontFamily = "'Stylish', cursive"
+        newBtnStyle.border = "none"
+        newBtnStyle.margin = "4px"
+        newBtnStyle.padding = "15px 15px"
+        newBtnStyle.borderRadius = "10px"
+        document.getElementById("main").appendChild(newBtn)
+
+
+    }
+
+    function funcCal() {
+        var score = 0;
+        for (let index = 0; index < 8; index++) {
+            if (counts[index] == 1) {
+                continue;
+            }
+            score += counts[index]
+        }
+        document.getElementById("btnCal").value = "최종 점수: " + score
+    }
+
+    function funcCountInc(idx) {
+        if (firstTouch) {
+            for (let index = 0; index < 8; index++) {
+                document.getElementById("newWord" + index).style.backgroundColor = "white"
+
+            }
+            firstTouch = false
+            return
+        }
+        var number = document.getElementById("newCount" + idx)
+        if (number.innerHTML == "") {
+            document.getElementById("newWord" + idx).innerHTML = "<del>" + words[idx] + "</del>"
+            number.innerHTML = 0
+        } else {
+            document.getElementById("newWord" + idx).innerHTML = words[idx]
+            counts[idx] += 1
+            number.innerHTML = counts[idx]
+        }
+
+    }
+
+    function funcCountDec(idx) {
+        if (counts[idx] == 1) {
+            return;
+        }
+        var number = document.getElementById("newCount" + idx)
+
+        counts[idx] -= 1
+        if (counts[idx] == 1) {
+            document.getElementById("newWord" + idx).innerHTML = "<del>" + words[idx] + "</del>"
+            number.innerHTML = 0
+        } else {
+            document.getElementById("newWord" + idx).innerHTML = words[idx]
+            number.innerHTML = counts[idx]
+        }
+    }
+
+
+
+    function funcWord() {
+        console.log(pageHeight)
+        var word = prompt("Input a word.")
+        if (word == null || word.length == 0) {
+            return;
+        }
+        document.getElementById("btnWord").style.display = "none"
+        document.getElementById("word").innerHTML = word
+        document.getElementById("word").style.fontSize = pageHeight * 0.15 + "px"
+        drawTextInput()
+
+    }
+
+    function clickMain() {
+        // document.getElementById("main ").style.backgroundColor = "black "
+    }
+</script>
