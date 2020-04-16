@@ -207,6 +207,7 @@ function funcInsertFullScreenButton(_topLeftX, _topLeftY, _bottomRightX, _bottom
   btnFull.style.borderRadius = "10%";
   btnFull.style.innerHTML = "최대";
   btnFull.style.color = "black";
+  btnFull.style.backgroundRepeat = "no-repeat";
 }
 
 function appendElement(_type, _id, _className, _left, _top, _width, _height, _fontSize) {

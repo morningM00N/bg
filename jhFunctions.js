@@ -167,6 +167,7 @@ function funcInsertFullScreenButton(_topLeftX, _topLeftY, _bottomRightX, _bottom
     btnFull.style.borderRadius = "10%"
     btnFull.style.innerHTML="최대"
     btnFull.style.color="black"
+    btnFull.style.backgroundRepeat="no-repeat"
 
 
 }
