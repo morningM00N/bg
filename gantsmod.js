@@ -650,12 +650,12 @@ function drawTile() {
 
     var btnCal = document.getElementById("btnCalculate")
     btnCal.style.left = pageWidth * 5 / 360 + "px"
-    btnCal.style.top = pageWidth * 200 / 360 + "px"
+    btnCal.style.top = pageWidth * 520 / 360 + "px"
     btnCal.style.fontSize = pageWidth * 20 / 360 + "px"
     btnCal.style.padding = pageWidth * 8 / 360 + "px"
 
 
-    var ratio = 46 / 360
+    var ratio = 43 / 360
     for (let index = 0; index <= 10; index++) {
         var button = document.createElement("input")
         button.type = "button"
@@ -665,19 +665,19 @@ function drawTile() {
             //var button = document.getElementById(btnID)
         button.style.left = pageWidth * ratio + "px"
         button.style.width = button.style.height = pageWidth * 25 / 360 + "px"
-        button.style.top = pageWidth * 462 / 360 + "px"
+        button.style.top = pageWidth * 426 / 360 + "px"
         button.style.fontSize = pageWidth * 15 / 360 + "px"
         button.onclick = function() {
             funcPurple(index)
         }
-        ratio += 272 / 3600
+        ratio += 276 / 3600
         button.value = ""
         button.style.borderColor = "Transparent"
-        button.style.border = "2px dotted red"
+        //button.style.border = "2px dotted red"
     }
 
 
-    var ratio = 46 / 360
+    var ratio = 43 / 360
     for (let index = 0; index <= 10; index++) {
         var button = document.createElement("input")
         button.type = "button"
@@ -688,19 +688,19 @@ function drawTile() {
 
         button.style.left = pageWidth * ratio + "px"
         button.style.width = button.style.height = pageWidth * 25 / 360 + "px"
-        button.style.top = pageWidth * 411 / 360 + "px"
+        button.style.top = pageWidth * 378 / 360 + "px"
         button.style.fontSize = pageWidth * 15 / 360 + "px"
         button.value = ""
         button.style.border = "0px"
-        button.style.border = "2px dotted red"
+        //button.style.border = "2px dotted red"
 
         button.onclick = function() {
             funcOrange(index)
         }
-        ratio += 272 / 3600
+        ratio += 276 / 3600
     }
 
-    var ratio = 46 / 360
+    var ratio = 43 / 360
     for (let index = 0; index <= 10; index++) {
 
         var button = document.createElement("input")
@@ -712,15 +712,15 @@ function drawTile() {
 
         button.style.left = pageWidth * ratio + "px"
         button.style.width = button.style.height = pageWidth * 25 / 360 + "px"
-        button.style.top = pageWidth * 360 / 360 + "px"
+        button.style.top = pageWidth * 330 / 360 + "px"
         button.style.fontSize = pageWidth * 15 / 360 + "px"
         button.style.border = "0px"
-        button.style.border = "2px dotted red"
+        //button.style.border = "2px dotted red"
 
         button.onclick = function() {
             funcGreen(index)
         }
-        ratio += 272 / 3600
+        ratio += 276 / 3600
         button.value = ""
     }
 
@@ -799,10 +799,10 @@ function drawTile() {
     }
 
 
-    var topratio = 183 / 360
+    var topratio = 167 / 360
     for (let _x = 0; _x <= 3; _x++) {
 
-        var leftratio = 19 / 360
+        var leftratio = 17 / 360
         for (let _y = 0; _y <= 3; _y++) {
 
             var button = document.createElement("input")
