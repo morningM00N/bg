@@ -729,13 +729,17 @@ function drawTile() {
 
   var _loop = function _loop(_index10) {
     button = document.createElement("input");
+    button.style.margin = "0px";
+    button.style.border = "0px";
+    button.style.padding = "0px";
     button.type = "button";
     button.id = "btnPurple_" + _index10;
     maindiv.appendChild(button);
     button.className = "btnRound"; //var button = document.getElementById(btnID)
 
     button.style.left = pageWidth * ratio + "px";
-    button.style.width = button.style.height = pageWidth * 25 / 360 + "px";
+    button.style.width = pageWidth * 25 / 360 + "px";
+    button.style.height = pageWidth * 25 / 360 + "px";
     button.style.top = pageWidth * 426 / 360 + "px";
     button.style.fontSize = pageWidth * 15 / 360 + "px";
 
