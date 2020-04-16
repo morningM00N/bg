@@ -684,7 +684,7 @@ function drawTile() {
         btnRound.onclick = function() {
             funcRound(round)
         }
-        maindiv.append(btnRound)
+        maindiv.appendChild(btnRound)
         roundLeftStart += roundLeftTic
     }
 
@@ -711,7 +711,7 @@ function drawTile() {
                 funcReroll(round)
             }
 
-            maindiv.append(btnRound)
+            maindiv.appendChild(btnRound)
         } {
             var btnRound = document.createElement("button")
             btnRound.id = "btnReturn" + round
@@ -727,7 +727,7 @@ function drawTile() {
                 funcReturn(round)
             }
 
-            maindiv.append(btnRound)
+            maindiv.appendChild(btnRound)
         } {
             var btnRound = document.createElement("button")
             btnRound.id = "btnPlus" + round
@@ -743,7 +743,7 @@ function drawTile() {
                 funcPlus(round)
             }
 
-            maindiv.append(btnRound)
+            maindiv.appendChild(btnRound)
         }
         roundLeftStart += roundLeftTic
     }
@@ -774,7 +774,7 @@ function drawTile() {
             btnRound.onclick = function() {
                 funcGray(idx, idx2)
             }
-            maindiv.append(btnRound)
+            maindiv.appendChild(btnRound)
             roundLeftIter += roundLeftTic
 
 
@@ -808,7 +808,7 @@ function drawTile() {
             btnRound.onclick = function() {
                 funcYellow(idx)
             }
-            maindiv.append(btnRound)
+            maindiv.appendChild(btnRound)
             if (idx == 1 || idx == 4 || idx == 6) {
                 roundLeft += roundLeftTic
                 if (idx == 4) {
@@ -862,8 +862,8 @@ function drawTile() {
             btnRound2.onclick = function() {
                 funcClickBlue(idx)
             }
-            maindiv.append(btnRound)
-            maindiv.append(btnRound2)
+            maindiv.appendChild(btnRound)
+            maindiv.appendChild(btnRound2)
             roundLeftIter += roundLeftTic
             for (let idx2 = 0; idx2 <= 12; idx2++) {
                 var opt = document.createElement("option")
@@ -914,8 +914,8 @@ function drawTile() {
             btnRound2.onclick = function() {
                 funcClickGreen(idx)
             }
-            maindiv.append(btnRound)
-            maindiv.append(btnRound2)
+            maindiv.appendChild(btnRound)
+            maindiv.appendChild(btnRound2)
 
             roundLeftIter += roundLeftTic
             for (let idx2 = 0; idx2 <= 6; idx2++) {
@@ -981,8 +981,8 @@ function drawTile() {
 
 
 
-            maindiv.append(btnRound)
-            maindiv.append(btnRound2)
+            maindiv.appendChild(btnRound)
+            maindiv.appendChild(btnRound2)
 
             roundLeftIter += roundLeftTic
 

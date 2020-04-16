@@ -714,7 +714,7 @@ function drawTile() {
       funcRound(round);
     };
 
-    maindiv.append(btnRound);
+    maindiv.appendChild(btnRound);
     roundLeftStart += roundLeftTic;
   };
 
@@ -746,7 +746,7 @@ function drawTile() {
         funcReroll(_round);
       };
 
-      maindiv.append(btnRound);
+      maindiv.appendChild(btnRound);
     }
     {
       btnRound = document.createElement("button");
@@ -762,7 +762,7 @@ function drawTile() {
         funcReturn(_round);
       };
 
-      maindiv.append(btnRound);
+      maindiv.appendChild(btnRound);
     }
     {
       btnRound = document.createElement("button");
@@ -778,7 +778,7 @@ function drawTile() {
         funcPlus(_round);
       };
 
-      maindiv.append(btnRound);
+      maindiv.appendChild(btnRound);
     }
     roundLeftStart += roundLeftTic;
   };
@@ -815,7 +815,7 @@ function drawTile() {
         funcGray(_idx13, _idx18);
       };
 
-      maindiv.append(btnRound);
+      maindiv.appendChild(btnRound);
       roundLeftIter += roundLeftTic;
     };
 
@@ -856,7 +856,7 @@ function drawTile() {
         funcYellow(_idx14);
       };
 
-      maindiv.append(btnRound);
+      maindiv.appendChild(btnRound);
 
       if (_idx14 == 1 || _idx14 == 4 || _idx14 == 6) {
         roundLeft += roundLeftTic;
@@ -912,8 +912,8 @@ function drawTile() {
         funcClickBlue(_idx15);
       };
 
-      maindiv.append(btnRound);
-      maindiv.append(btnRound2);
+      maindiv.appendChild(btnRound);
+      maindiv.appendChild(btnRound2);
       roundLeftIter += roundLeftTic;
 
       for (var _idx19 = 0; _idx19 <= 12; _idx19++) {
@@ -969,8 +969,8 @@ function drawTile() {
         funcClickGreen(_idx16);
       };
 
-      maindiv.append(btnRound);
-      maindiv.append(btnRound2);
+      maindiv.appendChild(btnRound);
+      maindiv.appendChild(btnRound2);
       roundLeftIter += roundLeftTic;
 
       for (var _idx20 = 0; _idx20 <= 6; _idx20++) {
@@ -1040,8 +1040,8 @@ function drawTile() {
         btnRound.appendChild(opt);
       }
 
-      maindiv.append(btnRound);
-      maindiv.append(btnRound2);
+      maindiv.appendChild(btnRound);
+      maindiv.appendChild(btnRound2);
       roundLeftIter += roundLeftTic;
     }
   };
