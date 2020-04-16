@@ -166,10 +166,10 @@ function funcCal() {
 
   console.log("" + scoreY + "," + scoreB + "," + scoreG + "," + scoreO + "," + scoreP + "," + numOfFox);
   document.getElementById("spanY").innerHTML = scoreY;
-  document.getElementById("spanB").innerHTML = "+ " + scoreB;
-  document.getElementById("spanG").innerHTML = "+ " + scoreG;
-  document.getElementById("spanO").innerHTML = "+ " + scoreO;
-  document.getElementById("spanP").innerHTML = "+ " + scoreP;
+  document.getElementById("spanB").innerHTML = scoreB;
+  document.getElementById("spanG").innerHTML = scoreG;
+  document.getElementById("spanO").innerHTML = scoreO;
+  document.getElementById("spanP").innerHTML = scoreP;
   var minScore = scoreY;
 
   if (minScore > scoreB) {
@@ -188,7 +188,8 @@ function funcCal() {
     minScore = scoreP;
   }
 
-  document.getElementById("spanPlain").innerHTML = "+ <span style='color:red'>" + numOfFox + "</span> x " + minScore + " = " + Number(scoreY + scoreB + scoreG + scoreO + scoreP + minScore * numOfFox) + ":" + pageHeight + ":" + pageWidth;
+  document.getElementById("spanF").innerHTML = numOfFox * minScore;
+  event.srcElement.innerHTML = Number(scoreY + scoreB + scoreG + scoreO + scoreP + minScore * numOfFox);
 }
 
 function funcReroll(a) {
@@ -678,11 +679,52 @@ function funcRound(a) {
 }
 
 function drawTile() {
-  var btnCal = document.getElementById("btnCalculate");
-  btnCal.style.left = pageWidth * 5 / 360 + "px";
-  btnCal.style.top = pageWidth * 520 / 360 + "px";
-  btnCal.style.fontSize = pageWidth * 20 / 360 + "px";
-  btnCal.style.padding = pageWidth * 8 / 360 + "px";
+  document.getElementById("spanY").style.left = pageWidth * 7 / 360 + "px";
+  document.getElementById("spanY").style.top = pageWidth * 480 / 360 + "px";
+  document.getElementById("spanY").style.fontSize = pageWidth * 25 / 360 + "px"; //document.getElementById("spanY").innerHTML="10"
+
+  document.getElementById("spanY").style.width = 0.1 * pageWidth + "px";
+  document.getElementById("spanY").style.textAlign = "center";
+  document.getElementById("spanB").style.left = pageWidth * 57 / 360 + "px";
+  document.getElementById("spanB").style.top = pageWidth * 480 / 360 + "px";
+  document.getElementById("spanB").style.fontSize = pageWidth * 25 / 360 + "px"; //document.getElementById("spanB").innerHTML="20"
+
+  document.getElementById("spanB").style.width = 0.1 * pageWidth + "px";
+  document.getElementById("spanB").style.textAlign = "center";
+  document.getElementById("spanG").style.left = pageWidth * 106 / 360 + "px";
+  document.getElementById("spanG").style.top = pageWidth * 480 / 360 + "px";
+  document.getElementById("spanG").style.fontSize = pageWidth * 25 / 360 + "px"; //document.getElementById("spanG").innerHTML="30"
+
+  document.getElementById("spanG").style.width = 0.1 * pageWidth + "px";
+  document.getElementById("spanG").style.textAlign = "center";
+  document.getElementById("spanO").style.left = pageWidth * 155 / 360 + "px";
+  document.getElementById("spanO").style.top = pageWidth * 480 / 360 + "px";
+  document.getElementById("spanO").style.fontSize = pageWidth * 25 / 360 + "px"; //document.getElementById("spanO").innerHTML="40"
+
+  document.getElementById("spanO").style.width = 0.1 * pageWidth + "px";
+  document.getElementById("spanO").style.textAlign = "center";
+  document.getElementById("spanP").style.left = pageWidth * 205 / 360 + "px";
+  document.getElementById("spanP").style.top = pageWidth * 480 / 360 + "px";
+  document.getElementById("spanP").style.fontSize = pageWidth * 25 / 360 + "px"; //document.getElementById("spanP").innerHTML="40"
+
+  document.getElementById("spanP").style.width = 0.1 * pageWidth + "px";
+  document.getElementById("spanP").style.textAlign = "center";
+  document.getElementById("spanF").style.left = pageWidth * 253 / 360 + "px";
+  document.getElementById("spanF").style.top = pageWidth * 480 / 360 + "px";
+  document.getElementById("spanF").style.fontSize = pageWidth * 25 / 360 + "px";
+  document.getElementById("spanF").style.width = 0.1 * pageWidth + "px"; //document.getElementById("spanF").innerHTML="70"
+  //document.getElementById("spanF").style.border="1px dotted red"
+
+  document.getElementById("spanF").style.textAlign = "center";
+  document.getElementById("spanScore").style.left = pageWidth * 313 / 360 + "px";
+  document.getElementById("spanScore").style.top = pageWidth * 480 / 360 + "px";
+  document.getElementById("spanScore").style.fontSize = pageWidth * 25 / 360 + "px";
+  document.getElementById("spanScore").style.width = 0.1 * pageWidth + "px";
+  document.getElementById("spanScore").style.height = 0.08 * pageWidth + "px"; //document.getElementById("spanScore").style.backgroundColor="black"
+  //document.getElementById("spanScore").innerHTML="80"
+  //document.getElementById("spanScore").style.border="1px dotted red"
+
+  document.getElementById("spanScore").style.textAlign = "center";
   var ratio = 43 / 360;
 
   var _loop = function _loop(_index10) {
@@ -768,7 +810,7 @@ function drawTile() {
     _loop3(_index12);
   }
 
-  var ratio = 71 / 360;
+  var ratio = 70 / 360;
 
   var _loop4 = function _loop4(_index13) {
     button = document.createElement("input");
@@ -778,16 +820,15 @@ function drawTile() {
     maindiv.appendChild(button);
     button.style.left = pageWidth * ratio + "px";
     button.style.width = button.style.height = pageWidth * 25 / 360 + "px";
-    button.style.top = pageWidth * 13 / 360 + "px";
+    button.style.top = pageWidth * 9 / 360 + "px";
     button.style.fontSize = pageWidth * 15 / 360 + "px";
-    button.style.border = "0px";
-    button.style.border = "2px dotted red";
+    button.style.border = "0px"; //button.style.border = "2px dotted red"
 
     button.onclick = function () {
       funcRound(_index13);
     };
 
-    ratio += 50 / 360;
+    ratio += 50.3 / 360;
     button.value = "";
   };
 
@@ -797,7 +838,7 @@ function drawTile() {
     _loop4(_index13);
   }
 
-  ratio = 115 / 375;
+  ratio = 113 / 375;
 
   var _loop5 = function _loop5(_index14) {
     button = document.createElement("input");
@@ -807,16 +848,15 @@ function drawTile() {
     maindiv.appendChild(button);
     button.style.left = pageWidth * ratio + "px";
     button.style.width = button.style.height = pageWidth * 25 / 375 + "px";
-    button.style.top = pageWidth * 80 / 375 + "px";
+    button.style.top = pageWidth * 72 / 375 + "px";
     button.style.fontSize = pageWidth * 15 / 375 + "px";
-    button.style.border = "0px";
-    button.style.border = "2px dotted red";
+    button.style.border = "0px"; //button.style.border = "2px dotted red"
 
     button.onclick = function () {
       funcReroll(_index14);
     };
 
-    ratio += 355 / 3750;
+    ratio += 359 / 3750;
     button.value = "";
   };
 
@@ -826,7 +866,7 @@ function drawTile() {
     _loop5(_index14);
   }
 
-  ratio = 115 / 375;
+  ratio = 113 / 375;
 
   var _loop6 = function _loop6(_index15) {
     button = document.createElement("input");
@@ -835,17 +875,16 @@ function drawTile() {
     button.className = "btnItem";
     maindiv.appendChild(button);
     button.style.left = pageWidth * ratio + "px";
-    button.style.width = button.style.height = pageWidth * 25 / 375 + "px";
-    button.style.top = pageWidth * 138 / 375 + "px";
+    button.style.width = button.style.height = pageWidth * 26 / 375 + "px";
+    button.style.top = pageWidth * 124 / 375 + "px";
     button.style.fontSize = pageWidth * 15 / 375 + "px";
-    button.style.border = "0px";
-    button.style.border = "2px dotted red";
+    button.style.border = "0px"; //button.style.border = "2px dotted red"
 
     button.onclick = function () {
       funcPlus(_index15);
     };
 
-    ratio += 355 / 3750;
+    ratio += 359 / 3750;
     button.value = "";
   };
 
@@ -870,8 +909,7 @@ function drawTile() {
       button.style.width = button.style.height = pageWidth * 25 / 360 + "px";
       button.style.top = pageWidth * topratio + "px";
       button.style.fontSize = pageWidth * 15 / 360 + "px";
-      button.style.border = "0px";
-      button.style.border = "2px dotted red";
+      button.style.border = "0px"; //button.style.border = "2px dotted red"
 
       button.onclick = function () {
         funcYellow(_x, _y);
@@ -885,7 +923,7 @@ function drawTile() {
       _loop9(_y);
     }
 
-    topratio += 295 / 3600;
+    topratio += 270 / 3600;
   };
 
   for (var _x = 0; _x <= 3; _x++) {
@@ -925,8 +963,7 @@ function drawTile() {
         funcBlue(_x2, _y);
       };
 
-      leftratio += 31 / 360;
-      button.style.border = "2px dotted red";
+      leftratio += 31 / 360; //button.style.border = "2px dotted red"
     };
 
     for (var _y = 0; _y <= 3; _y++) {
