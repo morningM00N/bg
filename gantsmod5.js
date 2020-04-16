@@ -765,6 +765,9 @@ function drawTile() {
     button.type = "button";
     button.id = "btnOrange_" + _index11;
     button.className = "btnRound";
+    button.style.margin = "0px";
+    button.style.border = "0px";
+    button.style.padding = "0px";
     maindiv.appendChild(button);
     button.style.left = pageWidth * ratio + "px";
     button.style.width = button.style.height = pageWidth * 25 / 360 + "px";
@@ -793,6 +796,9 @@ function drawTile() {
     button.type = "button";
     button.id = "btnGreen_" + _index12;
     button.className = "btnRound";
+    button.style.margin = "0px";
+    button.style.border = "0px";
+    button.style.padding = "0px";
     maindiv.appendChild(button);
     button.style.left = pageWidth * ratio + "px";
     button.style.width = button.style.height = pageWidth * 25 / 360 + "px";
@@ -821,6 +827,9 @@ function drawTile() {
     button.type = "button";
     button.id = "btnRound" + _index13;
     button.className = "btnRound";
+    button.style.margin = "0px";
+    button.style.border = "0px";
+    button.style.padding = "0px";
     maindiv.appendChild(button);
     button.style.left = pageWidth * ratio + "px";
     button.style.width = button.style.height = pageWidth * 25 / 360 + "px";
@@ -849,6 +858,9 @@ function drawTile() {
     button.type = "button";
     button.id = "btnReroll" + _index14;
     button.className = "btnItem";
+    button.style.margin = "0px";
+    button.style.border = "0px";
+    button.style.padding = "0px";
     maindiv.appendChild(button);
     button.style.left = pageWidth * ratio + "px";
     button.style.width = button.style.height = pageWidth * 25 / 375 + "px";
@@ -877,6 +889,9 @@ function drawTile() {
     button.type = "button";
     button.id = "btnPlus" + _index15;
     button.className = "btnItem";
+    button.style.margin = "0px";
+    button.style.border = "0px";
+    button.style.padding = "0px";
     maindiv.appendChild(button);
     button.style.left = pageWidth * ratio + "px";
     button.style.width = button.style.height = pageWidth * 26 / 375 + "px";
@@ -908,6 +923,9 @@ function drawTile() {
       button.type = "button";
       button.id = "btnYellow_" + _x + "_" + _y;
       button.className = "btnRound";
+      button.style.margin = "0px";
+      button.style.border = "0px";
+      button.style.padding = "0px";
       maindiv.appendChild(button);
       button.style.left = pageWidth * leftratio + "px";
       button.style.width = button.style.height = pageWidth * 25 / 360 + "px";
@@ -959,6 +977,9 @@ function drawTile() {
       button = funcInsertElement("btnBlue_" + _x2 + "_" + _y, "button", "btnRound", 0.538 + _y * ytic, 0.380 + _x2 * xtic, 0.606 + _y * ytic, 0.428 + _x2 * xtic); //button.style.border = "1px solid black"
 
       button.style.border = "0px";
+      button.style.margin = "0px";
+      button.style.border = "0px";
+      button.style.padding = "0px";
       button.value = "";
       button.innerHTML = "";
       button.style.fontSize = pageWidth * 15 / 360 + "px";

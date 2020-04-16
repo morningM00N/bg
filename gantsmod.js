@@ -736,6 +736,10 @@ function drawTile() {
         button.type = "button"
         button.id = "btnOrange_" + index
         button.className = "btnRound"
+        button.style.margin="0px"
+        button.style.border="0px"
+        button.style.padding="0px"
+        
 
         maindiv.appendChild(button)
 
@@ -760,6 +764,10 @@ function drawTile() {
         button.type = "button"
         button.id = "btnGreen_" + index
         button.className = "btnRound"
+        button.style.margin="0px"
+        button.style.border="0px"
+        button.style.padding="0px"
+        
 
         maindiv.appendChild(button)
 
@@ -784,6 +792,10 @@ function drawTile() {
         button.type = "button"
         button.id = "btnRound" + index
         button.className = "btnRound"
+        button.style.margin="0px"
+        button.style.border="0px"
+        button.style.padding="0px"
+        
 
         maindiv.appendChild(button)
 
@@ -809,6 +821,10 @@ function drawTile() {
         button.type = "button"
         button.id = "btnReroll" + index
         button.className = "btnItem"
+        button.style.margin="0px"
+        button.style.border="0px"
+        button.style.padding="0px"
+        
 
         maindiv.appendChild(button)
 
@@ -833,6 +849,10 @@ function drawTile() {
         button.type = "button"
         button.id = "btnPlus" + index
         button.className = "btnItem"
+        button.style.margin="0px"
+        button.style.border="0px"
+        button.style.padding="0px"
+        
 
         maindiv.appendChild(button)
 
@@ -862,6 +882,10 @@ function drawTile() {
             button.type = "button"
             button.id = "btnYellow_" + _x + "_" + _y
             button.className = "btnRound"
+            button.style.margin="0px"
+        button.style.border="0px"
+        button.style.padding="0px"
+        
 
             maindiv.appendChild(button)
 
@@ -913,6 +937,10 @@ function drawTile() {
                     0.428 + _x * xtic)
                 //button.style.border = "1px solid black"
             button.style.border = "0px"
+            button.style.margin="0px"
+        button.style.border="0px"
+        button.style.padding="0px"
+        
             button.value = ""
             button.innerHTML = ""
             button.style.fontSize = pageWidth * 15 / 360 + "px"
