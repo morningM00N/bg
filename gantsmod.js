@@ -650,7 +650,7 @@ function drawTile() {
 
     var btnCal = document.getElementById("btnCalculate")
     btnCal.style.left = pageWidth * 5 / 360 + "px"
-    btnCal.style.top = pageWidth * 520 / 360 + "px"
+    btnCal.style.top = pageWidth * 200 / 360 + "px"
     btnCal.style.fontSize = pageWidth * 20 / 360 + "px"
     btnCal.style.padding = pageWidth * 8 / 360 + "px"
 
