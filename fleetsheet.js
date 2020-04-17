@@ -24,7 +24,7 @@ function funcDrawPage() {
     }
 }
 
-funcChangePage()
+
 
 function funcChangePage() {
     if (page == 1) {
@@ -51,6 +51,10 @@ function funcMarkX() {
         event.srcElement.innerHTML = "X"
     }
 }
+
+let numOfCoins = 0
+
+let lastGainedCoin = 0
 
 function funcDrawFleetSheet() {
 
@@ -81,6 +85,16 @@ function funcDrawFleetSheet() {
         kingcrapIdx++
     }
 
+    { // market area
+
+        let btnMarket = funcInsertElement("twopage_market",
+            "button", "btnTrans",
+            0.6543,
+            0.0744,
+            0.8009,
+            0.2367)
+    }
+
 
     {
 
@@ -102,6 +116,231 @@ function funcDrawFleetSheet() {
             twopageFontSize = btnKingcrap.style.fontSize
 
             //btnKingcrap.style.border = "1px dotted red"
+
+        }
+    }
+
+    { // coin area
+        0.,
+        0.,
+        0.,
+        0.
+
+        let btnCoinInc = funcInsertElement("twopage_coin_gain",
+            "button", "btnTrans",
+            0.4136, 0.8179, 0.5558, 0.8452)
+
+        btnCoinInc.onclick = function() {
+            for (let idx = 0; idx < 3; idx++) {
+                document.getElementById("twopage_coins_" + lastGainedCoin).innerHTML = "X"
+                lastGainedCoin++
+            }
+        }
+        let topTic = 0.023
+        let leftTic = 0.048
+
+
+        for (let idx = 0; idx < 120; idx++) {
+            let modval = 0
+            if (idx % 20 == 1) {
+                modval = -0.004
+            } else if (idx % 20 >= 5) {
+                modval = 0.004
+            }
+            if (idx % 20 >= 9) {
+                modval += 0.004
+            }
+            if (idx % 20 >= 12) {
+                modval += 0.005
+            }
+
+            if (idx % 20 >= 14) {
+                modval += 0.004
+            }
+
+            if (idx % 20 >= 18) {
+                modval -= 0.005
+            }
+
+            if (idx % 20 == 19) {
+                modval -= 0.007
+            }
+
+            let btnCoins = funcInsertElement("twopage_coins_" + idx,
+                "button", "btnTrans",
+                0.0235 + idx % 20 * leftTic + modval,
+                0.8548 + Math.floor(idx / 20) * topTic,
+                0.0416 + idx % 20 * leftTic + modval,
+                0.8664 + Math.floor(idx / 20) * topTic)
+
+            btnCoins.style.fontSize = twopageFontSize
+                //btnCoins.innerHTML = "X"
+            btnCoins.onclick = function() {
+                if (idx == lastGainedCoin - 1) {
+                    event.srcElement.innerHTML = ""
+                    lastGainedCoin--
+                    return
+                }
+                if (idx == lastGainedCoin) {
+                    event.srcElement.innerHTML = "X"
+                    lastGainedCoin++
+                }
+            }
+
+
+
+            //btnKingcrap.style.border = "1px dotted red"
+
+        }
+
+    }
+
+    { // wharf area
+        { // casino
+            let topTic = 0.021
+            for (let idx = 0; idx < 2; idx++) {
+                let btnCasino = funcInsertElement("twopage_casino_" + idx,
+                    "button", "btnTrans",
+                    0.5602,
+                    0.3444 + idx * topTic,
+                    0.5821,
+                    0.3566 + idx * topTic)
+                btnCasino.onclick = funcMarkX
+                btnCasino.style.fontSize = twopageFontSize
+                    // btnCasino.innerHTML = "X"
+            }
+        }
+
+        { // bank
+
+            let topTic = 0.059
+            for (let idx = 0; idx < 3; idx++) {
+                let btnBank = funcInsertElement("twopage_bank_" + idx,
+                    "button", "btnTrans",
+                    0.7850 + idx * topTic,
+                    0.345,
+                    0.8053 + idx * topTic,
+                    0.3627)
+                btnBank.onclick = funcMarkX
+                btnBank.style.fontSize = twopageFontSize
+                    // btnBank.innerHTML = "X"
+            }
+        } { // seafood
+            let topTic = 0.0183
+            for (let idx = 0; idx < 5; idx++) {
+                let btnseafood = funcInsertElement("twopage_seafood_" + idx,
+                    "button", "btnTrans",
+                    0.7421,
+                    0.4628 + idx * topTic,
+                    0.7571,
+                    0.4795 + idx * topTic)
+                btnseafood.onclick = funcMarkX
+                btnseafood.style.fontSize = twopageFontSize
+                    //  btnseafood.innerHTML = "X"
+            }
+
+            let btnseafood = funcInsertElement("twopage_seafood",
+                "button", "btnTrans",
+                0.549,
+                0.467,
+                0.5821,
+                0.4856)
+            btnseafood.onclick = funcMarkX
+            btnseafood.style.fontSize = twopageFontSize
+                // btnseafood.innerHTML = "X"
+
+        }
+
+        { // salvage
+
+            let topTic = 0.0183
+            for (let idx = 0; idx < 2; idx++) {
+                let btnSalvage = funcInsertElement("twopage_salvage_" + idx,
+                    "button", "btnTrans",
+                    0.8096,
+                    0.4689 + idx * topTic,
+                    0.8271,
+                    0.4825 + idx * topTic)
+                btnSalvage.onclick = funcMarkX
+                btnSalvage.style.fontSize = twopageFontSize
+                    //btnSalvage.innerHTML = "X"
+            }
+
+            topTic = 0.0195
+            for (let idx = 0; idx < 3; idx++) {
+                let btnSalvage = funcInsertElement("twopage_salvage_star_" + idx,
+                    "button", "btnTrans",
+                    0.9352,
+                    0.4698 + idx * topTic,
+                    0.9519,
+                    0.4810 + idx * topTic)
+                btnSalvage.onclick = funcMarkX
+                btnSalvage.style.fontSize = twopageFontSize
+                    // btnSalvage.innerHTML = "X"
+            }
+        }
+
+        { // baitshop
+            let topTic = 0.0183
+            for (let idx = 0; idx < 2; idx++) {
+                let btnBaitshop = funcInsertElement("twopage_baitshop_" + idx,
+                    "button", "btnTrans",
+                    0.7764,
+                    0.5948 + idx * topTic,
+                    0.7899,
+                    0.6085 + idx * topTic)
+                btnBaitshop.onclick = funcMarkX
+                btnBaitshop.style.fontSize = twopageFontSize
+                    // btnBaitshop.innerHTML = "X"
+            }
+
+        }
+
+
+        { // ridback
+            let btnRidback = funcInsertElement("twopage_ridback",
+                "button", "btnTrans",
+                0.7812,
+                0.7228,
+                0.8031,
+                0.7405)
+            btnRidback.onclick = funcMarkX
+            btnRidback.style.fontSize = twopageFontSize
+                //btnRidback.innerHTML = "X"
+
+
+        }
+
+        { // fisherman
+            let topTic = 0.0183
+
+            for (let idx = 0; idx < 4; idx++) {
+                let btnFisherman = funcInsertElement("twopage_fisherman_" + idx,
+                    "button", "btnTrans",
+                    0.5711 + Math.floor(idx / 2) * 0.029,
+                    0.6024 + idx % 2 * topTic,
+                    0.5930 + Math.floor(idx / 2) * 0.029,
+                    0.6176 + idx % 2 * topTic)
+                btnFisherman.onclick = funcMarkX
+                btnFisherman.style.fontSize = twopageFontSize
+                    //btnFisherman.innerHTML = "X"
+            }
+
+        }
+
+        { // smokehouse
+            let topTic = 0.0183
+            for (let idx = 0; idx < 2; idx++) {
+                let btnSmokehouse = funcInsertElement("twopage_smokehouse_" + idx,
+                    "button", "btnTrans",
+                    0.5646,
+                    0.7223 + idx * topTic,
+                    0.5864,
+                    0.7359 + idx * topTic)
+                btnSmokehouse.onclick = funcMarkX
+                btnSmokehouse.style.fontSize = twopageFontSize
+                    //btnSmokehouse.innerHTML = "X"
+            }
 
         }
     }
@@ -162,20 +401,20 @@ function funcDrawFleetSheet() {
     { // twopage_area
         {
             let btnKingcrapLicense = funcInsertElement("twopage_kingcrap_license",
-                "button", "btnTrans",
-                0.0214, 0.3226, 0.0494, 0.3367)
-            btnKingcrapLicense.innerHTML = "X"
+                    "button", "btnTrans",
+                    0.0214, 0.3226, 0.0494, 0.3367)
+                //btnKingcrapLicense.innerHTML = "X"
             btnKingcrapLicense.style.fontSize = twopageFontSize
             btnKingcrapLicense.onclick = funcMarkX
 
             for (let idx = 0; idx < 4; idx++) {
                 let btnKingcrapLicenseOption = funcInsertElement("twopage_kingcrap_license_option_" + idx,
-                    "button", "btnTrans",
-                    0.1371,
-                    0.3998 + idx * 0.0365,
-                    0.1598,
-                    0.4158 + idx * 0.0365)
-                btnKingcrapLicenseOption.innerHTML = "X"
+                        "button", "btnTrans",
+                        0.1371,
+                        0.3998 + idx * 0.0365,
+                        0.1598,
+                        0.4158 + idx * 0.0365)
+                    //btnKingcrapLicenseOption.innerHTML = "X"
                 btnKingcrapLicenseOption.style.fontSize = twopageFontSize
                 btnKingcrapLicenseOption.onclick = funcMarkX
 
@@ -211,6 +450,10 @@ function funcDrawFleetSheet() {
                     0.1944,
                     0.6466 + idx * 0.078)
                 btnKingcrapfishInc.onclick = function() {
+                    if (document.getElementById("twopage_kingcrap_boat_" + idx).innerHTML == "") {
+                        document.getElementById("twopage_kingcrap_boat_" + idx).innerHTML = "X"
+                        return
+                    }
                     for (let idx2 = 0; idx2 < 4; idx2++) {
                         if (document.getElementById("twopage_kingcrap_boat_fish_" + idx + "_" + idx2).innerHTML == "") {
                             document.getElementById("twopage_kingcrap_boat_fish_" + idx + "_" + idx2).innerHTML = "X"
@@ -234,15 +477,16 @@ function funcDrawFleetSheet() {
                         }
 
                     }
+                    document.getElementById("twopage_kingcrap_boat_" + idx).innerHTML = ""
                 }
 
                 let btnKingcrapboat = funcInsertElement("twopage_kingcrap_boat_" + idx,
-                    "button", "btnTrans",
-                    0.036,
-                    0.5930 + idx * 0.078,
-                    0.0560,
-                    0.6021 + idx * 0.078)
-                btnKingcrapboat.innerHTML = "X"
+                        "button", "btnTrans",
+                        0.036,
+                        0.5930 + idx * 0.078,
+                        0.0560,
+                        0.6021 + idx * 0.078)
+                    //btnKingcrapboat.innerHTML = "X"
                 btnKingcrapboat.style.fontSize = twopageFontSize
                 btnKingcrapboat.onclick = funcMarkX
             }
@@ -260,7 +504,7 @@ function funcDrawFleetSheet() {
                 0.2438,
                 0.5724 + idx * topTic)
 
-            btnBarge.innerHTML = "X"
+            //btnBarge.innerHTML = "X"
             btnBarge.style.fontSize = twopageFontSize
 
             btnBarge.onclick = funcMarkX
@@ -271,12 +515,12 @@ function funcDrawFleetSheet() {
         let leftTic = 0.032
         for (let idx = 0; idx < 10; idx++) {
             let btnBargeFish = funcInsertElement("twopage_barge_fish" + idx,
-                "button", "btnTrans",
-                0.327 + (idx % 5) * leftTic,
-                0.5495 + Math.floor(idx / 5) * topTic,
-                0.3443 + (idx % 5) * leftTic,
-                0.5678 + Math.floor(idx / 5) * topTic)
-            btnBargeFish.innerHTML = "X"
+                    "button", "btnTrans",
+                    0.327 + (idx % 5) * leftTic,
+                    0.5495 + Math.floor(idx / 5) * topTic,
+                    0.3443 + (idx % 5) * leftTic,
+                    0.5678 + Math.floor(idx / 5) * topTic)
+                //btnBargeFish.innerHTML = "X"
             btnBargeFish.style.fontSize = twopageFontSize
 
         }
@@ -297,6 +541,7 @@ function funcDrawFleetSheet() {
                 }
 
             }
+            document.getElementById("twopage_barge_ship").innerHTML = ""
         }
 
         let btnBargeShipInc = funcInsertElement("twopage_barge_ship_inc",
@@ -306,6 +551,10 @@ function funcDrawFleetSheet() {
             (0.4893 + 0.4893) / 2,
             0.6055)
         btnBargeShipInc.onclick = function() {
+            if (document.getElementById("twopage_barge_ship").innerHTML == "") {
+                document.getElementById("twopage_barge_ship").innerHTML = "X"
+                return
+            }
             for (let idx2 = 0; idx2 <= 9; idx2++) {
                 if (document.getElementById("twopage_barge_fish" + idx2).innerHTML == "") {
                     document.getElementById("twopage_barge_fish" + idx2).innerHTML = "X"
@@ -316,12 +565,12 @@ function funcDrawFleetSheet() {
         }
 
         let btnBargeShip = funcInsertElement("twopage_barge_ship",
-            "button", "btnTrans",
-            (0.3278 + 0.3278) / 2,
-            0.52,
-            (0.3493 + 0.3493) / 2,
-            0.5289)
-        btnBargeShip.innerHTML = "X"
+                "button", "btnTrans",
+                (0.3278 + 0.3278) / 2,
+                0.52,
+                (0.3493 + 0.3493) / 2,
+                0.5289)
+            //btnBargeShip.innerHTML = "X"
         btnBargeShip.style.fontSize = twopageFontSize
         btnBargeShip.onclick = funcMarkX
 
@@ -389,12 +638,12 @@ function funcDrawFleetSheet() {
 
                     let leftTic = 0.028
                     let btnInuitShipFish = funcInsertElement("twopage_inuit_ship_fish" + idx + "_" + idx2,
-                        "button", "btnTrans",
-                        0.3575 + idx2 * leftTic,
-                        0.7106 + idx * topTic,
-                        0.3806 + idx2 * leftTic,
-                        0.7254 + idx * topTic)
-                    btnInuitShipFish.innerHTML = "X"
+                            "button", "btnTrans",
+                            0.3575 + idx2 * leftTic,
+                            0.7106 + idx * topTic,
+                            0.3806 + idx2 * leftTic,
+                            0.7254 + idx * topTic)
+                        //btnInuitShipFish.innerHTML = "X"
                     btnInuitShipFish.style.fontSize = twopageFontSize
 
 
@@ -414,6 +663,9 @@ function funcDrawFleetSheet() {
                         }
 
                     }
+
+                    document.getElementById("twopage_inuit_ship" + idx).innerHTML = ""
+
                 }
 
                 let btnInuitShipInc = funcInsertElement("twopage_inuit_ship_inc" + idx,
@@ -423,6 +675,10 @@ function funcDrawFleetSheet() {
                     0.4728,
                     0.7323 + idx * topTic)
                 btnInuitShipInc.onclick = function() {
+                    if (document.getElementById("twopage_inuit_ship" + idx).innerHTML == "") {
+                        document.getElementById("twopage_inuit_ship" + idx).innerHTML = "X"
+                        return
+                    }
                     for (let idx2 = 0; idx2 <= 3; idx2++) {
                         if (document.getElementById("twopage_inuit_ship_fish" + idx + "_" + idx2).innerHTML == "") {
                             document.getElementById("twopage_inuit_ship_fish" + idx + "_" + idx2).innerHTML = "X"
@@ -435,12 +691,12 @@ function funcDrawFleetSheet() {
 
 
                 let btnInuitShip = funcInsertElement("twopage_inuit_ship" + idx,
-                    "button", "btnTrans",
-                    0.3381,
-                    0.6883 + idx * topTic,
-                    0.3575,
-                    0.7014 + idx * topTic)
-                btnInuitShip.innerHTML = "X"
+                        "button", "btnTrans",
+                        0.3381,
+                        0.6883 + idx * topTic,
+                        0.3575,
+                        0.7014 + idx * topTic)
+                    //btnInuitShip.innerHTML = "X"
                 btnInuitShip.style.fontSize = twopageFontSize
                 btnInuitShip.onclick = funcMarkX
 
@@ -457,24 +713,24 @@ function funcDrawFleetSheet() {
         for (let idx = 0; idx < 2; idx++) {
             let topTic = 0.021
             let btnResearchVessel = funcInsertElement("twopage_research_" + idx,
-                "button", "btnTrans",
-                0.2310,
-                0.363 + idx * topTic,
-                0.2570,
-                0.3781 + idx * topTic)
-            btnResearchVessel.innerHTML = "X"
+                    "button", "btnTrans",
+                    0.2310,
+                    0.363 + idx * topTic,
+                    0.2570,
+                    0.3781 + idx * topTic)
+                //btnResearchVessel.innerHTML = "X"
             btnResearchVessel.style.fontSize = twopageFontSize
 
             btnResearchVessel.onclick = funcMarkX
 
             topTic = 0.068
             let btnResearchVesselShip = funcInsertElement("twopage_research_ship_" + idx,
-                "button", "btnTrans",
-                0.3450 - idx * 0.01,
-                0.3194 + idx * topTic,
-                0.3641,
-                0.3347 + idx * topTic)
-            btnResearchVesselShip.innerHTML = "X"
+                    "button", "btnTrans",
+                    0.3450 - idx * 0.01,
+                    0.3194 + idx * topTic,
+                    0.3641,
+                    0.3347 + idx * topTic)
+                //btnResearchVesselShip.innerHTML = "X"
             btnResearchVesselShip.style.fontSize = twopageFontSize
 
             btnResearchVesselShip.onclick = funcMarkX
@@ -533,9 +789,26 @@ function funcDrawFleetSheet() {
         0.6058, 0.9558, 0.7058, 0.9860)
     inputDate.style.fontFamily = "'Nanum Pen Script', cursive"
 
+
+
+    {
+        let topTic = 0.0245
+
+        for (let idx = 0; idx < 6; idx++) {
+            let btnScores = funcInsertElement("onepage_scores_" + idx,
+                    "button", "btnTrans",
+                    0.8687,
+                    0.8402 + idx * topTic,
+                    0.9606,
+                    0.8669 + idx * topTic)
+                //btnScores.innerHTML = idx * 10
+
+        }
+    }
     let btnFinalScore = funcInsertElement("onepage_score",
         "button", "btnTrans",
         0.7187, 0.8414, 0.9614, 0.9871)
+    btnFinalScore.onclick = funcCal
 
 
     let btnChange = funcInsertElement("onepage_change",
@@ -796,12 +1069,206 @@ function funcDrawFleetSheet() {
     funcDrawPage()
 }
 
-
-$(window).resize(function() {
-    funcUpdatePageSize(true)
-    funcDrawFleetSheet()
-});
-
-funcPrepareGetLocation()
-
 funcDrawFleetSheet()
+
+function funcCountFish() {
+
+    let scoreFish = 0
+
+    for (let _type = 0; _type < 5; _type++) {
+        for (let idx = 0; idx < 3; idx++) {
+            for (let idx2 = 0; idx2 < 10; idx2++) {
+                let curFish = document.getElementById("onepage_boat_fish_" + _type + "_" + idx + "_" + idx2)
+                if (curFish != null && curFish.innerHTML == "X") {
+                    scoreFish++
+                }
+            }
+
+        }
+
+    }
+
+    for (let idx = 0; idx < 3; idx++) {
+        for (let idx2 = 0; idx2 < 4; idx2++) {
+            if (document.getElementById("twopage_kingcrap_boat_fish_" + idx + "_" + idx2).innerHTML == "X") {
+                scoreFish++
+            }
+        }
+    }
+
+    for (let idx = 0; idx < 10; idx++) {
+        if (document.getElementById("twopage_barge_fish" + idx).innerHTML == "X") {
+            scoreFish++
+        }
+    }
+
+
+    for (let idx = 0; idx < 2; idx++) {
+        for (let idx2 = 0; idx2 < 4; idx2++) {
+            if (document.getElementById("twopage_inuit_ship_fish" + idx + "_" + idx2).innerHTML == "X") {
+                scoreFish++
+            }
+        }
+    }
+
+    return scoreFish
+}
+
+let numOfFish
+let numOfBoat
+let numOfBuilding
+let numOfLicense
+
+function funcCal() {
+
+    numOfFish = numOfBoat = numOfBuilding = numOfLicense = 0
+    let scoreFish = funcCountFish()
+    numOfFish = scoreFish
+    document.getElementById("onepage_scores_0").innerHTML = scoreFish
+
+    let scoreBoat = 0
+    for (let _type = 0; _type < 5; _type++) {
+        for (let idx = 0; idx < 3; idx++) {
+            let tempObj = document.getElementById("onepage_boat_act_" + _type + "_" + idx)
+            if (tempObj != null && tempObj.innerHTML == "X") {
+                if (_type == 0 || _type == 3) {
+                    scoreBoat += 2
+                } else {
+                    scoreBoat++
+                }
+                numOfBoat++
+            }
+        }
+    }
+    for (let idx = 0; idx < 3; idx++) {
+        if (document.getElementById("twopage_kingcrap_boat_" + idx).innerHTML == "X") {
+            scoreBoat += 3
+            numOfBoat++
+        }
+    }
+    for (let idx = 0; idx < 2; idx++) {
+        if (document.getElementById("twopage_research_ship_" + idx).innerHTML == "X") {
+            scoreBoat += 1
+            numOfBoat++
+        }
+
+    }
+    if (document.getElementById("twopage_barge_ship").innerHTML == "X") {
+        numOfBoat++
+    }
+    for (let idx = 0; idx < 2; idx++) {
+        if (document.getElementById("twopage_inuit_ship" + idx).innerHTML == "X") {
+            numOfBoat++
+        }
+    }
+    document.getElementById("onepage_scores_1").innerHTML = scoreBoat
+    let scoreLicense = 0
+    for (let _type = 0; _type < 5; _type++) {
+        for (let idx = 0; idx < 3; idx++) {
+            let tempObj = document.getElementById("onepage_licence_" + _type + "_" + idx)
+            if (tempObj != null && tempObj.innerHTML == "X") {
+                numOfLicense++
+            }
+        }
+    }
+    if (document.getElementById("onepage_licence_0_2").innerHTML == "X") {
+        scoreLicense += 5
+    }
+    if (document.getElementById("onepage_licence_1_2").innerHTML == "X") {
+        scoreLicense += 6
+    }
+    if (document.getElementById("onepage_licence_2_2").innerHTML == "X") {
+        scoreLicense += 7
+    }
+    if (document.getElementById("onepage_licence_3_2").innerHTML == "X") {
+        scoreLicense += 4
+    }
+    if (document.getElementById("onepage_licence_4_2").innerHTML == "X") {
+        scoreLicense += 3
+    }
+    if (document.getElementById("twopage_kingcrap_license").innerHTML == "X") {
+        scoreLicense += 5
+    }
+    document.getElementById("onepage_scores_2").innerHTML = scoreLicense
+    let scoreWharf = 0
+    if (document.getElementById("twopage_casino_0").innerHTML == "X" &&
+        document.getElementById("twopage_casino_1").innerHTML == "X") {
+        scoreWharf += 2
+        numOfBuilding++
+    }
+    if (document.getElementById("twopage_bank_0").innerHTML == "X" &&
+        document.getElementById("twopage_bank_1").innerHTML == "X" &&
+        document.getElementById("twopage_bank_2").innerHTML == "X") {
+        scoreWharf += 3
+        numOfBuilding++
+    }
+    if (document.getElementById("twopage_salvage_0").innerHTML == "X" &&
+        document.getElementById("twopage_salvage_1").innerHTML == "X") {
+        scoreWharf += 2
+        numOfBuilding++
+    }
+    if (document.getElementById("twopage_baitshop_0").innerHTML == "X" &&
+        document.getElementById("twopage_baitshop_1").innerHTML == "X") {
+        scoreWharf += 2
+        numOfBuilding++
+    }
+    if (document.getElementById("twopage_ridback").innerHTML == "X") {
+        scoreWharf += 1
+        numOfBuilding++
+    }
+    if (document.getElementById("twopage_smokehouse_0").innerHTML == "X" &&
+        document.getElementById("twopage_smokehouse_1").innerHTML == "X") {
+        scoreWharf += 3
+        numOfBuilding++
+    }
+    if (document.getElementById("twopage_fisherman_0").innerHTML == "X" &&
+        document.getElementById("twopage_fisherman_1").innerHTML == "X" &&
+        document.getElementById("twopage_fisherman_2").innerHTML == "X" &&
+        document.getElementById("twopage_fisherman_3").innerHTML == "X") {
+        scoreWharf += 10
+        numOfBuilding++
+    }
+    if (document.getElementById("twopage_seafood").innerHTML == "X") {
+        let count = 0
+        numOfBuilding++
+        for (let idx = 0; idx < 5; idx++) {
+            if (document.getElementById("twopage_seafood_" + idx).innerHTML == "X") {
+                count++
+            }
+        }
+        if (count == 1) {
+            scoreWharf += 1
+        } else if (count == 2) {
+            scoreWharf += 3
+        } else if (count == 3) {
+            scoreWharf += 6
+        } else if (count == 4) {
+            scoreWharf += 10
+        } else if (count == 5) {
+            scoreWharf += 15
+        }
+    }
+    document.getElementById("onepage_scores_3").innerHTML = scoreWharf
+    let scoreBonus = 0
+    numOfCoins = 0
+    for (let idx = 0; idx < 118; idx++) {
+        if (document.getElementById("twopage_coins_" + idx).innerHTML == "X") {
+            numOfCoins++
+        }
+
+    }
+    console.log(numOfFish, numOfBoat, numOfBuilding, numOfLicense, numOfCoins)
+    if (document.getElementById("twopage_kingcrap_license").innerHTML == "X") {
+        if (document.getElementById("twopage_kingcrap_license_option_0").innerHTML == "X") {
+            scoreBonus = 2 * numOfBuilding
+        } else if (document.getElementById("twopage_kingcrap_license_option_1").innerHTML == "X") {
+            scoreBonus = Math.floor(numOfFish / 6)
+        } else if (document.getElementById("twopage_kingcrap_license_option_2").innerHTML == "X") {
+            scoreBonus = numOfLicense + 1
+        } else if (document.getElementById("twopage_kingcrap_license_option_3").innerHTML == "X") {
+            scoreBonus = Math.floor(numOfCoins / 10)
+        }
+    }
+    document.getElementById("onepage_scores_4").innerHTML = scoreBonus
+    document.getElementById("onepage_scores_5").innerHTML = scoreFish + scoreBoat + scoreLicense + scoreWharf + scoreBonus
+}
