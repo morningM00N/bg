@@ -99,19 +99,47 @@ function funcChangeTeam() {
 
 }
 
+funcWidthPerHeight(0)
+
+funcUpdatePageSize(true)
+
+
+
+$(window).resize(function() {
+    funcUpdatePageSize(true)
+    drawTile()
+});
+
+//funcPrepareGetLocation()
+
+let sltGuessSelected = new Array()
+let sltAnswerSelected = new Array()
+for (let idx = 0; idx < 8; idx++) {
+    sltGuessSelected[idx] = new Array()
+    sltAnswerSelected[idx] = new Array()
+}
+
 function drawTile() {
+
 
     var pageWidth = document.documentElement.clientWidth
     var pageHeight = document.documentElement.clientHeight
     if (pageHeight > pageWidth) {
-        var resize = confirm("원본 비율로 표시하겠습니까?\n(취소하는 경우 비율이 변경되어 글씨 크기가 매우 작을 수 있습니다.)")
-        if (resize == true) {
-            pageHeight = pageWidth / 529 * 756
-        }
+        // var resize = confirm("원본 비율로 표시하겠습니까?\n(취소하는 경우 비율이 변경되어 글씨 크기가 매우 작을 수 있습니다.)")
+        // if (resize == true) {
+        //     pageHeight = pageWidth / 529 * 756
+        // }
 
     } else {
         pageHeight = pageWidth / 529 * 756
     }
+
+    let fullscreenbutton = funcInsertElement("buttonFull", "button", null,
+        0.8962, 0.0140, 0.9774, 0.0496)
+    fullscreenbutton.onclick = funcFullScreen
+    fullscreenbutton.style.backgroundColor = "transparent"
+    fullscreenbutton.style.border = "0px"
+
 
     var btnChange = document.getElementById("btnChange")
     btnChange.style.width = 0.4 * pageWidth + "px"
@@ -163,10 +191,15 @@ function drawTile() {
     for (let round = 0; round < 8; round++) {
 
         for (let numOfHints = 0; numOfHints < 3; numOfHints++) {
-            var textInput = document.createElement("input")
+
+            var textInput = document.getElementById("txtHints_" + round + "_" + numOfHints)
+            if (textInput == null) {
+                textInput = document.createElement("input")
+                maindiv.appendChild(textInput)
+            }
+
             textInput.id = "txtHints_" + round + "_" + numOfHints
-            textInput.value = ""
-            maindiv.appendChild(textInput)
+                //textInput.value = ""
             textInput.className = "txtHints"
             textInput.style.left = leftTxt * pageWidth + "px"
             textInput.style.top = topTxtIter * pageHeight + "px"
@@ -176,21 +209,35 @@ function drawTile() {
             textInput.style.padding = txtPadding * pageHeight + "px"
 
             {
-                var sltGuess = document.createElement("select")
+
+                var sltGuess = document.getElementById("sltGuess_" + round + "_" + numOfHints)
+                if (sltGuess == null) {
+                    sltGuess = document.createElement("select")
+                    maindiv.appendChild(sltGuess)
+                }
                 sltGuess.id = "sltGuess_" + round + "_" + numOfHints
-                maindiv.appendChild(sltGuess)
+
                 sltGuess.className = "sltGuess"
-                sltGuess.innerHTML = ""
+                    //sltGuess.innerHTML = ""
                 sltGuess.style.left = sltLeftGuess * pageWidth + "px"
                 sltGuess.style.top = topSltIter * pageHeight + "px"
                 sltGuess.style.width = sltWidth * pageWidth + "px"
                 sltGuess.style.height = txtHeight * pageHeight + "px"
                 sltGuess.style.fontSize = sltWidth * pageWidth + "px"
                 sltGuess.style.padding = "0px"
+                sltGuess.onchange = function() {
+                    sltGuessSelected[round][numOfHints] = event.srcElement.selectedIndex
+                }
 
 
                 for (let idx2 = 0; idx2 <= 4; idx2++) {
-                    var opt = document.createElement("option")
+                    var opt = document.getElementById("option_" + round + "_" + numOfHints + "_" + idx2)
+                    if (opt == null) {
+                        opt = document.createElement("option")
+                        sltGuess.appendChild(opt)
+                    }
+
+                    opt.id = "option_" + round + "_" + numOfHints + "_" + idx2
                     opt.style.fontsize = sltWidth * pageWidth + "px"
                     opt.innerHTML = (idx2)
                     if (idx2 == 0) {
@@ -199,15 +246,21 @@ function drawTile() {
                         opt.hidden = true
                         opt.innerHTML = ""
                     }
-                    sltGuess.appendChild(opt)
+
                 }
+                sltGuess.selectedIndex = sltGuessSelected[round][numOfHints]
 
             }
 
             {
-                var sltGuess = document.createElement("select")
+                var sltGuess = document.getElementById("sltAnswer_" + round + "_" + numOfHints)
+                if (sltGuess == null) {
+                    sltGuess = document.createElement("select")
+                    maindiv.appendChild(sltGuess)
+                }
                 sltGuess.id = "sltAnswer_" + round + "_" + numOfHints
-                maindiv.appendChild(sltGuess)
+
+
                 sltGuess.className = "sltGuess"
                 sltGuess.style.left = sltLeftAnswer * pageWidth + "px"
                 sltGuess.style.top = topSltIter * pageHeight + "px"
@@ -215,16 +268,23 @@ function drawTile() {
                 sltGuess.style.height = txtHeight * pageHeight + "px"
                 sltGuess.style.fontSize = sltWidth * pageWidth + "px"
                 sltGuess.style.padding = "0px"
+
                 sltGuess.onchange = function() {
-                    funcInputAnswer(round, numOfHints)
-                }
-                sltGuess.onclick = function() {
-                    funcClickCheck(round, numOfHints)
-                }
+                        sltAnswerSelected[round][numOfHints] = event.srcElement.selectedIndex
+                        funcInputAnswer(round, numOfHints)
+                    }
+                    // sltGuess.onclick = function() {
+                    //     funcClickCheck(round, numOfHints)
+                    // }
 
                 for (let idx2 = 0; idx2 <= 4; idx2++) {
-                    var opt = document.createElement("option")
+                    var opt = document.getElementById("optIDsltAnswer_" + round + "_" + numOfHints + "_" + idx2)
+                    if (opt == null) {
+                        opt = document.createElement("option")
+                        sltGuess.appendChild(opt)
+                    }
                     opt.style.fontsize = sltWidth * pageWidth + "px"
+                    opt.id = "optIDsltAnswer_" + round + "_" + numOfHints + "_" + idx2
                     opt.innerHTML = (idx2)
                     if (idx2 == 0) {
                         opt.selected = true
@@ -232,8 +292,12 @@ function drawTile() {
                         opt.hidden = true
                         opt.innerHTML = ""
                     }
-                    sltGuess.appendChild(opt)
                 }
+
+                sltGuess.selectedIndex = sltAnswerSelected[round][numOfHints]
+
+
+
             }
 
             topTxtIter += topTxtNextHintsTic
@@ -265,9 +329,12 @@ function drawTile() {
 
 
     for (let answer = 0; answer < 4; answer++) {
-        var pAnswer = document.createElement("p")
+        var pAnswer = document.getElementById("pHints_" + answer)
+        if (pAnswer == null) {
+            pAnswer = document.createElement("p")
+            maindiv.appendChild(pAnswer)
+        }
         pAnswer.id = "pHints_" + answer
-        maindiv.appendChild(pAnswer)
         pAnswer.className = "txtHints"
         pAnswer.style.left = leftTxt * pageWidth + "px"
         pAnswer.style.top = topTxt * pageHeight + "px"
@@ -283,7 +350,7 @@ function funcClickCheck(thisRound, thisNumOfHints) {
     for (let round = 0; round < thisRound; round++) {
         for (let numOfHints = 0; numOfHints < 3; numOfHints++) {
             var sltAnswer = document.getElementById("sltAnswer_" + round + "_" + numOfHints)
-            //console.log(sltAnswer.selectedIndex)
+                //console.log(sltAnswer.selectedIndex)
             if (sltAnswer.selectedIndex == 0) {
                 alert("앞의 라운드부터 진행해 주세요.")
                 return
