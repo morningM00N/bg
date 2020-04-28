@@ -1,5 +1,4 @@
 .bgdiv {
-    touch-action: none;
     background-repeat: no-repeat;
     background-size: 100%;
     border: 0px;
@@ -8,7 +7,7 @@
 }
 
 body {
-    touch-action: none;
+    overscroll-behavior: contain;
     border: 0px;
     margin: 0px;
     padding: 0px;
