@@ -6,6 +6,9 @@
     padding: 0px;
 }
 
+.wrapper { overscroll-behavior: none }
+
+
 body {
     border: 0px;
     margin: 0px;
