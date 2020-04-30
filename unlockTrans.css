@@ -1,18 +1,18 @@
 .bgdiv {
-    touch-action: none;
+  /*  touch-action: none;*/
     background-repeat: no-repeat;
     background-size: 100%;
     border: 0px;
     margin: 0px;
     padding: 0px;
 }
-
+/*
 .wrapper {
     overscroll-behavior: none
 }
-
+*/
 body {
-    touch-action: none;
+  /*  touch-action: none;*/
     border: 0px;
     margin: 0px;
     padding: 0px;
