@@ -19,8 +19,8 @@ body {
 }
 
 .btnTrans {
-    border: 0px;
     border: 1px dotted red;
+    border: 0px;
     margin: 0px;
     padding: 0px;
     background-color: transparent;
@@ -44,7 +44,7 @@ body {
 table {
     margin: 0px;
     border-collapse: separate;
-    border-spacing: 0px;
+    border-spacing: 5px;
 }
 
 th,

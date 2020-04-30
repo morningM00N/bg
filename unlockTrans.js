@@ -2,7 +2,13 @@ funcWidthPerHeight(0)
 
 funcUpdatePageSize(true)
 
+let bgImg = funcInsertElement("bgImg","img",null,0,0,1,1)
+bgImg.src = "img/unlock_insertcoin/bg.jpg"
+bgImg.style.opacity="0.3"
 
+
+let tableLoc = 0
+let pathbg = "img/unlock_insertcoin/bg"
 let wordList = new Array();
 let rawFile = new XMLHttpRequest();
 let cardIDList = new Array();
@@ -12,7 +18,6 @@ rawFile.onreadystatechange = function() {
     if (rawFile.readyState === 4) {
         if (rawFile.status === 200 || rawFile.status == 0) {
             let allText = rawFile.responseText;
-            let thisWord = ""
             wordList = allText.split('|')
             for (let idx = 0; idx < allText.length; idx++) {
                 //console.log(allText[idx], allText.charCodeAt(idx))
@@ -110,8 +115,11 @@ function funcPickCards(idx) {
                 0.025 + 0.23 + numOfCards % 4 * 0.24,
                 0.13 + heightRatio + Math.floor(numOfCards / 4) * 1.02 * heightRatio)
             numOfCards++
-            cardBack.innerHTML = cardIDList[idx2]
+            //cardBack.innerHTML = cardIDList[idx2]
+            cardBack.style.backgroundImage = "url('"+pathbg+cardIDList[idx2]+".png')"
+            cardBack.style.borderRadius="5%"
             cardBack.style.display = "inline"
+            cardBack.style.boxShadow = "5px 5px 5px gray"
             cardBack.style.fontSize = cardBack.style.fontSize.replace("px", "") / 2 + "px"
             cardBack.style.whiteSpace = "nowrap"
             cardBack.onclick = function() {
@@ -121,24 +129,41 @@ function funcPickCards(idx) {
 
         }
     }
+    if (numOfCards>4)
+    {
+        tableLoc=1
+    }
+    else{
+        tableLoc=0   
+    }
+    document.getElementById("tableTrans").style.top=pageHeight*(0.15 + heightRatio + tableLoc * 1.04 * heightRatio) +"px"
+    
 }
 
 
 function funcShowTrans(idx2) {
     let tableTrans = document.getElementById("tableTrans")
-    let newRow = document.createElement("tr")
-        //newRow.style.border = "1px solid black"
+    // let newRow = document.createElement("tr")
+    //     //newRow.style.border = "1px solid black"
+
+    // //    newRow.style.height = 0.01 * pageHeight + "px"
+    // tableTrans.appendChild(newRow)
+
+    let newRow = tableTrans.insertRow(0)
+    //newRow.style.border = "1px solid black"
 
     //    newRow.style.height = 0.01 * pageHeight + "px"
-    tableTrans.appendChild(newRow)
+    //tableTrans.appendChild(newRow)
 
     {
         let newCol = document.createElement("td")
         newCol.innerHTML = idx2
+        newCol.style.color = "black"
+        newCol.style.textShadow = "5px 5px 5px white"
         newCol.style.border = "1px solid black"
-        if (tableTrans.childElementCount > 1) {
-            newCol.style.borderTop = "0px"
-        }
+        // if (tableTrans.childElementCount > 1) {
+        //     newCol.style.borderTop = "0px"
+        // }
         newCol.style.borderRadius = "5px 0px 0px 5px"
         newCol.style.padding = "10px"
         newCol.style.textAlign = "center"
@@ -158,10 +183,13 @@ function funcShowTrans(idx2) {
         let newCol = document.createElement("td")
         newCol.innerHTML = contentInfor[idx2]
         newCol.style.border = "1px solid black"
-        if (tableTrans.childElementCount > 1) {
-            newCol.style.borderTop = "0px"
-        }
+        // if (tableTrans.childElementCount > 1) {
+        //     newCol.style.borderTop = "0px"
+        // }
         newCol.style.borderLeft = "0px"
+        newCol.style.color = "black"
+        newCol.style.textShadow = "5px 5px 5px white"
+        
         newCol.style.borderRadius = "0px 5px 5px 0px"
         newCol.style.padding = "10px"
         newCol.style.textAlign = "center"
@@ -175,7 +203,7 @@ function funcDrawUnlock() {
 
     let tableTrans = funcInsertElement("tableTrans", "table", null,
             0.05,
-            0.15 + heightRatio + 1 * 1.04 * heightRatio,
+            0.15 + heightRatio + tableLoc * 1.04 * heightRatio,
             0.95,
             0.95
         )
@@ -194,6 +222,8 @@ function funcDrawUnlock() {
             Math.floor(idx / 5) * 0.055 + 0.065
         )
         btnCards.innerHTML = (idx * 10) + "~ "
+        btnCards.style.color="black"
+        btnCards.style.textShadow = "5px 5px 5px gray"
         for (let idx2 = 0; idx2 < characterLoc[idx].length; idx2++) {
             btnCards.innerHTML = btnCards.innerHTML + "," + characterLoc[idx][idx2]
 
