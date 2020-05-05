@@ -535,17 +535,13 @@ function funcPink(idx) {
         slt.selectedIndex = 0
         return
     }
-    if (slt.selectedIndex > 0 && slt.selectedIndex < thresPink[idx]) {
-        alert("조건을 만족하지 않았습니다.")
-        slt.selectedIndex = 0
-        return
-    }
+    
     arrPink[idx] = slt.selectedIndex
 
     var btn = document.getElementById("btnRemovePink" + idx)
     btn.style.display = "inline"
 
-    if (arrPink[idx] > 0) {
+    if (arrPink[idx] > 0 && slt.selectedIndex >= thresPink[idx]) {
         if (idx == 4) {
             gainPlus()
         }

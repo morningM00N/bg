@@ -722,10 +722,11 @@
 
     {
         var btn = document.createElement("button")
-        btn.style.backgroundImage = "url('https://lh3.googleusercontent.com/proxy/rhNMdxcNb9uo5-Hawur1BcWVT5S4TqEjYQVsUzSNV3tusXSOc2ReV6aMqr5LpprDrqMuMdcfJAW4O4fxHBkJJLKPUutpIC3mUXWbclA48_Eaqyu23Fw')"
+        btn.style.backgroundImage = "url('https://lh3.googleusercontent.com/proxy/af-K2v7Em7ZAYlW-A9rNA2rElFZyj7wUW8z8EJzgDXV20zKTYtW3UEovvwFZeb4Uq0Vuy_8WHpz-bItaOYzt1qbluFED6NUJJxbWXeXekCFqidLuHgExOETQsK6otB6iH8mc_NoTCD5NqANfDg8PEF3nq06w-uby7DoP8x4_yJ5nP3TkGnU3EFMfkRBMny2cxhPEKAQnfu79_0e1nMl6r7GYuMF2x_IEFGOureqZC7bfuTQS1qb6DHoePoAKdzHVIogsY1OWZaqc58_2TKe4IV1U')"
         btn.style.opacity = "0.5"
-        btn.style.backgroundSize = "100%"
-        btn.style.backgroundPositionY = "30%"
+        btn.style.backgroundSize = "250%"
+        btn.style.backgroundPositionY = "27%"
+        btn.style.backgroundPositionX = "40%"
         btn.style.width = pageWidth + "px"
         btn.style.height = btnHeight * pageHeight + "px"
         btn.style.fontSize = 0.03 * pageHeight + "px"
@@ -753,6 +754,40 @@
         topLoc -= 1 / pageHeight
 
     }
+
+    {
+        var btn = document.createElement("button")
+        btn.style.backgroundImage = "url('img/unlock_insertcoin/bg.jpg')"
+        btn.style.opacity = "0.5"
+        btn.style.backgroundSize = "100%"
+        btn.style.backgroundPositionY = "93%"
+        btn.style.width = pageWidth + "px"
+        btn.style.height = btnHeight * pageHeight + "px"
+        btn.style.fontSize = 0.03 * pageHeight + "px"
+        btn.style.top = topLoc * pageHeight + "px"
+        btn.style.backgroundColor = "gray"
+        btn.className = "imgBtn"
+        mainDiv.appendChild(btn)
+
+        var pText = document.createElement("a")
+        pText.className = "pText"
+        pText.href = "unlock_insertcoin.html"
+        pText.style.textDecoration = "none"
+        pText.style.width = pageWidth + "px"
+        pText.style.height = btnHeight * pageHeight + "px"
+        pText.style.fontSize = 0.04 * pageHeight + "px"
+        pText.style.lineHeight = 0.2 * btnHeight * pageHeight + "px"
+        pText.style.top = topLoc * pageHeight + "px"
+        pText.style.padding = 0.02 * pageHeight + "px"
+        pText.style.boxSizing = "border-box"
+        pText.innerHTML = "언락(insert coin)"
+        pText.style.color = "white"
+        pText.style.textShadow = "3px 3px 1px black"
+        mainDiv.appendChild(pText)
+        topLoc += btnHeight
+        topLoc -= 1 / pageHeight
+    }
+
 
     {
         var btn = document.createElement("button")

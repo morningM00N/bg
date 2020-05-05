@@ -3,16 +3,17 @@ funcWidthPerHeight(0)
 funcUpdatePageSize(true)
 
 let bgImg = funcInsertElement("bgImg","img",null,0,0,1,1)
-bgImg.src = "img/unlock_insertcoin/bg.jpg"
+bgImg.src = bgImgPath
 bgImg.style.opacity="0.3"
 
 
 let tableLoc = 0
-let pathbg = "img/unlock_insertcoin/bg"
+//let pathbg = "img/unlock_insertcoin/bg"
+//let filepath = "unlockTest.txt"
 let wordList = new Array();
 let rawFile = new XMLHttpRequest();
 let cardIDList = new Array();
-rawFile.open("GET", "unlockTest.txt", false);
+rawFile.open("GET", filepath, false);
 rawFile.setRequestHeader('Content-Type', 'text/html;charset=utf-8')
 rawFile.onreadystatechange = function() {
     if (rawFile.readyState === 4) {
