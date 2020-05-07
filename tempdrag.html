@@ -16,12 +16,23 @@
             justify-content: center;
             overflow: hidden;
             border-radius: 7px;
+            touch-action: none;
         }
         
         #item {
             width: 100px;
             height: 100px;
-            background-color: rgb(245, 230, 99);
+            background-color: rgb(100, 50, 99);
+            border: 10px solid rgba(136, 136, 136, .5);
+            border-radius: 50%;
+            touch-action: none;
+            user-select: none;
+        }
+        
+        #item2 {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(100, 50, 99);
             border: 10px solid rgba(136, 136, 136, .5);
             border-radius: 50%;
             touch-action: none;
@@ -46,20 +57,29 @@
             <div id="item">
 
             </div>
+
+            <div id="item2">
+
+            </div>
         </div>
     </div>
 
     <script>
         var dragItem = document.querySelector("#item");
+        var dragItem2 = document.querySelector("#item2");
+
         var container = document.querySelector("#container");
 
         var active = false;
+        var active2 = false;
         var currentX;
         var currentY;
         var initialX;
         var initialY;
         var xOffset = 0;
         var yOffset = 0;
+        var xOffset2 = 0;
+        var yOffset2 = 0;
 
         container.addEventListener("touchstart", dragStart, false);
         container.addEventListener("touchend", dragEnd, false);
@@ -73,6 +93,14 @@
             if (e.type === "touchstart") {
                 initialX = e.touches[0].clientX - xOffset;
                 initialY = e.touches[0].clientY - yOffset;
+                if (e.target === dragItem) {
+                    initialX = e.touches[0].clientX - xOffset;
+                    initialY = e.touches[0].clientY - yOffset;
+                } else if (e.target === dragItem2) {
+                    initialX = e.touches[0].clientX - xOffset2;
+                    initialY = e.touches[0].clientY - yOffset2;
+                }
+
             } else {
                 initialX = e.clientX - xOffset;
                 initialY = e.clientY - yOffset;
@@ -80,14 +108,18 @@
 
             if (e.target === dragItem) {
                 active = true;
+            } else if (e.target === dragItem2) {
+                active2 = true;
             }
         }
 
         function dragEnd(e) {
+
             initialX = currentX;
             initialY = currentY;
 
             active = false;
+            active2 = false;
         }
 
         function drag(e) {
@@ -107,6 +139,22 @@
                 yOffset = currentY;
 
                 setTranslate(currentX, currentY, dragItem);
+            } else if (active2) {
+
+                e.preventDefault();
+
+                if (e.type === "touchmove") {
+                    currentX = e.touches[0].clientX - initialX;
+                    currentY = e.touches[0].clientY - initialY;
+                } else {
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                }
+
+                xOffset2 = currentX;
+                yOffset2 = currentY;
+
+                setTranslate(currentX, currentY, dragItem2);
             }
         }
 
