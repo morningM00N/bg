@@ -9,7 +9,7 @@
     <style>
         #container {
             width: 100%;
-            height: 400px;
+            height: 80%;
             background-color: #333;
             display: flex;
             align-items: center;
@@ -23,7 +23,7 @@
             height: 100px;
             background-color: rgb(100, 50, 99);
             border: 10px solid rgba(136, 136, 136, .5);
-            border-radius: 50%;
+            border-radius: 100%;
             touch-action: none;
             user-select: none;
         }
@@ -36,6 +36,17 @@
             border-radius: 50%;
             touch-action: none;
             user-select: none;
+        }
+        
+        #item3 {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(100, 50, 99);
+            border: 10px solid rgba(136, 136, 136, .5);
+            border-radius: 50%;
+            touch-action: none;
+            user-select: none;
+            background-image: url('https://webisfree.com/static/uploads/2019/8871_images739.jpg');
         }
         
         #item:active {
@@ -52,33 +63,48 @@
 <body>
 
     <div id="outerContainer">
+        <button id="btnInsert" style="height:100px; width:100px">hi</button>
         <div id="container">
-            <div id="item">
+            <!-- <div id="item">
 
             </div>
 
             <div id="item2">
 
             </div>
+
+            <div id="item3">
+
+            </div> -->
         </div>
     </div>
 
     <script>
+        var numOfObject = 0
+        document.getElementById("btnInsert").onclick = function() {
+            var newItem = document.createElement("button")
+            newItem.id = numOfObject
+            numOfObject++
+
+            container.appendChild(newItem)
+            newItem.style.width = "100px"
+            newItem.style.height = "100px"
+        }
+        var container = document.querySelector("#container");
+        container.style.height = 0.9 * document.documentElement.clientHeight + "px"
+
+
         var dragItem = document.querySelector("#item");
         var dragItem2 = document.querySelector("#item2");
 
-        var container = document.querySelector("#container");
 
-        var active = false;
-        var active2 = false;
+        var active = new Array();
         var currentX;
         var currentY;
         var initialX;
         var initialY;
-        var xOffset = 0;
-        var yOffset = 0;
-        var xOffset2 = 0;
-        var yOffset2 = 0;
+        var xOffset = new Array();
+        var yOffset = new Array();
 
         container.addEventListener("touchstart", dragStart, false);
         container.addEventListener("touchend", dragEnd, false);
@@ -89,27 +115,37 @@
         container.addEventListener("mousemove", drag, false);
 
         function dragStart(e) {
+            if (e.target.id == "container") {
+                return
+            }
             if (e.type === "touchstart") {
                 initialX = e.touches[0].clientX - xOffset;
                 initialY = e.touches[0].clientY - yOffset;
-                if (e.target === dragItem) {
-                    initialX = e.touches[0].clientX - xOffset;
-                    initialY = e.touches[0].clientY - yOffset;
-                } else if (e.target === dragItem2) {
-                    initialX = e.touches[0].clientX - xOffset2;
-                    initialY = e.touches[0].clientY - yOffset2;
+                if (xOffset[e.target.id] == null) {
+                    xOffset[e.target.id] = 0
+                    yOffset[e.target.id] = 0
                 }
+
+                initialX = e.touches[0].clientX - xOffset[e.target.id];
+                initialY = e.touches[0].clientY - yOffset[e.target.id];
+                // if (e.target === dragItem) {
+
+                // } else if (e.target === dragItem2) {
+                //     initialX = e.touches[0].clientX - xOffset2;
+                //     initialY = e.touches[0].clientY - yOffset2;
+                // }
 
             } else {
                 initialX = e.clientX - xOffset;
                 initialY = e.clientY - yOffset;
             }
 
-            if (e.target === dragItem) {
-                active = true;
-            } else if (e.target === dragItem2) {
-                active2 = true;
-            }
+            active[e.target.id] = true
+                // if (e.target === dragItem) {
+                //     active = true;
+                // } else if (e.target === dragItem2) {
+                //     active2 = true;
+                // }
         }
 
         function dragEnd(e) {
@@ -117,12 +153,14 @@
             initialX = currentX;
             initialY = currentY;
 
-            active = false;
-            active2 = false;
+            active[e.target.id] = false
+                // active = false;
+                // active2 = false;
         }
 
         function drag(e) {
-            if (active) {
+
+            if (active[e.target.id]) {
 
                 e.preventDefault();
 
@@ -134,27 +172,46 @@
                     currentY = e.clientY - initialY;
                 }
 
-                xOffset = currentX;
-                yOffset = currentY;
+                xOffset[e.target.id] = currentX;
+                yOffset[e.target.id] = currentY;
 
-                setTranslate(currentX, currentY, dragItem);
-            } else if (active2) {
-
-                e.preventDefault();
-
-                if (e.type === "touchmove") {
-                    currentX = e.touches[0].clientX - initialX;
-                    currentY = e.touches[0].clientY - initialY;
-                } else {
-                    currentX = e.clientX - initialX;
-                    currentY = e.clientY - initialY;
-                }
-
-                xOffset2 = currentX;
-                yOffset2 = currentY;
-
-                setTranslate(currentX, currentY, dragItem2);
+                setTranslate(currentX, currentY, e.target);
             }
+
+
+            // if (active) {
+
+            //     e.preventDefault();
+
+            //     if (e.type === "touchmove") {
+            //         currentX = e.touches[0].clientX - initialX;
+            //         currentY = e.touches[0].clientY - initialY;
+            //     } else {
+            //         currentX = e.clientX - initialX;
+            //         currentY = e.clientY - initialY;
+            //     }
+
+            //     xOffset = currentX;
+            //     yOffset = currentY;
+
+            //     setTranslate(currentX, currentY, dragItem);
+            // } else if (active2) {
+
+            //     e.preventDefault();
+
+            //     if (e.type === "touchmove") {
+            //         currentX = e.touches[0].clientX - initialX;
+            //         currentY = e.touches[0].clientY - initialY;
+            //     } else {
+            //         currentX = e.clientX - initialX;
+            //         currentY = e.clientY - initialY;
+            //     }
+
+            //     xOffset2 = currentX;
+            //     yOffset2 = currentY;
+
+            //     setTranslate(currentX, currentY, dragItem2);
+            // }
         }
 
         function setTranslate(xPos, yPos, el) {
