@@ -80,11 +80,31 @@
     </div>
 
     <script>
+        var clicktime = new Array()
         var numOfObject = 0
         document.getElementById("btnInsert").onclick = function() {
             var newItem = document.createElement("button")
             newItem.id = numOfObject
             numOfObject++
+
+            newItem.onclick = function() {
+                var curSec = (new Date()).getMilliseconds() + 1000 * (new Date()).getSeconds() + 60000 * (new Date()).getMinutes()
+                console.log(curSec)
+                if (clicktime[event.srcElement.id] == null) {
+                    clicktime[event.srcElement.id] = curSec
+
+                    return
+                }
+                if (Math.abs(curSec - clicktime[event.srcElement.id]) < 500) {
+                    console.log("dblclick")
+                    if (event.srcElement.style.backgroundColor == "red") {
+                        event.srcElement.style.backgroundColor = "white"
+                    } else {
+                        event.srcElement.style.backgroundColor = "red"
+                    }
+                }
+                clicktime[event.srcElement.id] = curSec
+            }
 
             container.appendChild(newItem)
             newItem.style.width = "100px"
