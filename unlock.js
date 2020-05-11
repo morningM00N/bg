@@ -20,7 +20,7 @@ function addDrag(target) {
 
     target.addEventListener('touchmove', function(e) {
         // grab the location of touch
-        e.preventDefault();
+        //e.preventDefault();
 
         var thisTouchLocation = e.targetTouches[0];
 
@@ -34,7 +34,7 @@ function funcDrawUnlock() {
     let card = funcInsertElement("card1", "img", null,
         0.1, 0.1, 0.3, 0.3)
 
-    card.style.backgroundColor = "black"
+    card.style.backgroundColor = "blue"
 
 
     let car2 = funcInsertElement("card2", "img", null,
