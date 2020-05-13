@@ -2,7 +2,7 @@ var JHCount = 0;
 function funcRecallJH()
 {
 	var JHDate = new Date();
-	console.log(JHCount++,JHDate.toDateString());
+	console.log(JHCount++,JHDate.toGMTString());
 	fun_zizum_select('14','1','');
 	var tempDay = document.getElementsByClassName("day_index calendar_day ");
 	if (tempDay[11].children[0].style.color=="")
