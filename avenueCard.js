@@ -37,8 +37,8 @@ function funcDrawAvenueCard() {
     btnFull.style.borderRadius = "10%"
 
     for (let idx = 0; idx < 100; idx++) {
-        let loc1 = getRandom(6)
-        let loc2 = getRandom(6)
+        let loc1 = MMath.getRandom(0, 5)
+        let loc2 = MMath.getRandom(0, 5)
         let temp = arrSanc[loc1]
         arrSanc[loc1] = arrSanc[loc2]
         arrSanc[loc2] = temp
@@ -62,7 +62,7 @@ function funcDrawAvenueCard() {
         0.60, 0.03, 0.85, 0.0640 + (0.2453 - 0.0652) / pageHeight * pageWidth * 90 / 65,
         2 / 3
     )
-    btnDecree.style.backgroundImage = "url('img/avenue/decree" + getRandom(16) + ".png')"
+    btnDecree.style.backgroundImage = "url('img/avenue/decree" + MMath.getRandom(1, 16) + ".png')"
     funcSetLocation("btnDecree", 0.45, 0.02, 0.60, 0.0640 + (0.2453 - 0.0652) / pageHeight * pageWidth * 90 / 65, true)
     btnDecree.onclick = funcClickDecree
 
@@ -114,9 +114,9 @@ function funcDrawPath() {
     btnPathCard.style.display = "inline"
     btnPathCard.style.backgroundImage = "url('img/avenue/backsanctuary.png')"
     funcSetLocation("drawedPathCard" + curPathCards, 0.03, 0.50, 0.18, 0.0640 + (0.2453 - 0.0652) / pageHeight * pageWidth * 90 / 65, true)
-    let getNumber = getRandom(arrPathCards.length)
+    let getNumber = MMath.getRandom(0, arrPathCards.length - 1)
     while (arrUsedCard[getNumber] == true) {
-        getNumber = getRandom(arrPathCards.length)
+        getNumber = MMath.getRandom(0, arrPathCards.length - 1)
     }
     arrUsedCard[getNumber] = true
     if (getNumber >= 20) {
@@ -148,7 +148,7 @@ function funcDrawPath() {
 
 function funcClickDecree() {
     if (confirm("카드를 바꾸겠습니까?") == true) {
-        btnDecree.style.backgroundImage = "url('img/avenue/decree" + (1 + getRandom(16)) + ".png')"
+        btnDecree.style.backgroundImage = "url('img/avenue/decree" + (MMath.getRandom(1, 16)) + ".png')"
     }
 
 }
