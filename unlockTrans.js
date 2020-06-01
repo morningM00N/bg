@@ -117,7 +117,7 @@ function funcPickCards(idx) {
                 0.13 + heightRatio + Math.floor(numOfCards / 4) * 1.02 * heightRatio)
             numOfCards++
             //cardBack.innerHTML = cardIDList[idx2]
-            cardBack.style.backgroundImage = "url('"+pathbg+cardIDList[idx2]+".png')"
+            cardBack.style.backgroundImage = "url('"+pathbg+cardIDList[idx2]+".jpg')"
             cardBack.style.borderRadius="5%"
             cardBack.style.display = "inline"
             cardBack.style.boxShadow = "5px 5px 5px gray"
