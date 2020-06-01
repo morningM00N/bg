@@ -76,8 +76,9 @@ function funcDrawSHPersonal() {
     let inputRoom = funcInsertElement("inputRoom", "input", "sltTrans",
         0.093, 0.0560, 0.65, 0.16
     )
-    inputRoom.onchange = function() {
-        roomNumber = event.srcElement.value
+    inputRoom.onclick = function() {
+        inputRoom.value = prompt("방번호를 입력하세요.")
+        roomNumber = inputRoom.value
     }
     inputRoom.value = roomNumber
     let btnNumOfP = funcInsertElement("btnNumOfP", "p", "sltTrans",
@@ -89,7 +90,7 @@ function funcDrawSHPersonal() {
             numOfPlayers = 5
         } else {
             numOfPlayers++
-            if (numOfPlayers == 11) {
+            if (numOfPlayers == 10) {
                 numOfPlayers = 5
             }
         }
@@ -258,14 +259,22 @@ function funcStartGame() {
         }
 
         //console.log(seed)
-        MMath.seedrandom(seed)
         let tempArr = new Array()
-        for (let idx = 0; idx < numOfPlayers; idx++) {
-            let loc = MMath.getRandom(0, 7)
-            while (tempArr[loc] >= 0) {
-                loc = MMath.getRandom(0, 7)
+        MMath.seedrandom(seed)
+        while (true) {
+
+            tempArr = new Array()
+            for (let idx = 0; idx < numOfPlayers; idx++) {
+                let loc = MMath.getRandom(0, 7)
+                while (tempArr[loc] >= 0) {
+                    loc = MMath.getRandom(0, 7)
+                }
+                tempArr[loc] = idx
             }
-            tempArr[loc] = idx
+            if (!(tempArr[0] == null || (tempArr[1] == null && tempArr[3] == null))) {
+                break
+
+            }
         }
         //console.log(playerRole)
         genRole = true
