@@ -1,1 +1,1 @@
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2c}"/>
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;a+b_i"/>
