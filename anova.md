@@ -3,7 +3,7 @@
 4. The sample data are organized as follows:
 
 
-|   | Worker | Third Header         |
+|   | Worker | University student         |  High-school student |
 | :------------ | :-----------: | -------------------: |
 | First row     | Data          | Very long data entry |
 | Second row    | **Cell**      | *Cell*               |
