@@ -20,6 +20,6 @@ The ANOVA Procedure
 
 | Source of Variation  | Sums of Squares (SS) | Degrees of Freedom (df)         |  Mean Squares (MS) |
 | :------------: | :-----------: | :-------------------: | :-------------------: |
-| Between Treatments     | <img src="https://latex.codecogs.com/svg.latex?SSTR=n_{w}(\bar{x}_w-\bar{x})^2+n_{u}(\bar{x}_u-\bar{x})^2+n_{h}(\bar{x}_h-\bar{x})^2"/>  =1600.29       | <img src="https://latex.codecogs.com/svg.latex?k-1=2"/> |  <img src="https://latex.codecogs.com/svg.latex?SSRT/(k-1)"/>=800.14 |
-| Error (or Residual)    | SSE     | <img src="https://latex.codecogs.com/svg.latex?nk-k"/> | 57.71 |
+| Between Treatments     | <img src="https://latex.codecogs.com/svg.latex?SSTR"/>=<img src="https://latex.codecogs.com/svg.latex?n_{w}(\bar{x}_w-\bar{x})^2+n_{u}(\bar{x}_u-\bar{x})^2+n_{h}(\bar{x}_h-\bar{x})^2"/>  =1600.29       | <img src="https://latex.codecogs.com/svg.latex?k-1=2"/> |  <img src="https://latex.codecogs.com/svg.latex?SSRT/(k-1)"/>=800.14 |
+| Error (or Residual)    | <img src="https://latex.codecogs.com/svg.latex?SSE"/>=<img src="https://latex.codecogs.com/svg.latex?\Sum_{j=1}^{n_w}(x_{wj}-\bar{x}_w)^2"/>     | <img src="https://latex.codecogs.com/svg.latex?nk-k"/> | 57.71 |
 | Total     | SST  | <img src="https://latex.codecogs.com/svg.latex?nk-1"/> | 19.51 |
