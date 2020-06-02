@@ -20,6 +20,6 @@ The ANOVA Procedure
 
 | Source of Variation  | Sums of Squares (SS) | Degrees of Freedom (df)         |  Mean Squares (MS) |
 | :------------: | :-----------: | :-------------------: | :-------------------: |
-| Between Treatments     | SSTR =  <img src="https://latex.codecogs.com/svg.latex?n_{worker}(\bar{a})^2"/>         | <img src="https://latex.codecogs.com/svg.latex?k-1"/> | 7  |
+| Between Treatments     | SSTR =  <img src="https://latex.codecogs.com/svg.latex?n_{worker}(\bar{X}_{worker}-\bar{X})^2"/>         | <img src="https://latex.codecogs.com/svg.latex?k-1"/> | 7  |
 | Error (or Residual)    | SSE     | <img src="https://latex.codecogs.com/svg.latex?nk-k"/> | 57.71 |
 | Total     | SST  | <img src="https://latex.codecogs.com/svg.latex?nk-1"/> | 19.51 |
