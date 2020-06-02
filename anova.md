@@ -20,6 +20,8 @@ The ANOVA Procedure
 
 | Source of Variation  | Sums of Squares (SS) | Degrees of Freedom (df)         |  Mean Squares (MS) | F |
 | :------------: | :-----------: | :-------------------: | :-------------------: | :-------------------: |
-| Between Treatments     | <img src="https://latex.codecogs.com/svg.latex?SSTR=n_{w}(\bar{x}_w-\bar{x})^2+n_{u}(\bar{x}_u-\bar{x})^2+n_{h}(\bar{x}_h-\bar{x})^2"/>  =1600.29       | <img src="https://latex.codecogs.com/svg.latex?k-1=2"/> |  <img src="https://latex.codecogs.com/svg.latex?MSTR=SSTR/(k-1)"/>=800.14 | <img src="https://latex.codecogs.com/svg.latex?F=MSTR/MSE"/>
+| Between Treatments     | <img src="https://latex.codecogs.com/svg.latex?SSTR=n_{w}(\bar{x}_w-\bar{x})^2+n_{u}(\bar{x}_u-\bar{x})^2+n_{h}(\bar{x}_h-\bar{x})^2"/>  =1600.29       | <img src="https://latex.codecogs.com/svg.latex?k-1=2"/> |  <img src="https://latex.codecogs.com/svg.latex?MSTR=SSTR/(k-1)"/>=800.14 | <img src="https://latex.codecogs.com/svg.latex?F=MSTR/MSE"=1.95/>
 | Error (or Residual)    | <img src="https://latex.codecogs.com/svg.latex?SSE=\sum_{j=1}^{n_w}(x_{wj}-\bar{x}_w)^2+\sum_{j=1}^{n_u}(x_{uj}-\bar{x}_u)^2+\sum_{j=1}^{n_h}(x_{hj}-\bar{x}_h)^2"/> = 7376.86   | <img src="https://latex.codecogs.com/svg.latex?nk-k"/> | <img src="https://latex.codecogs.com/svg.latex?MSE=SSE/(nk-k)"/>=409.83 |
 | Total     | <img src="https://latex.codecogs.com/svg.latex?SST=SSRT+SSE"/>=8977.14  | <img src="https://latex.codecogs.com/svg.latex?nk-1"/>=20 |  |
+
+where <img src="https://latex.codecogs.com/svg.latex?x_{wj}"/>, <img src="https://latex.codecogs.com/svg.latex?x_{uj}"/> and <img src="https://latex.codecogs.com/svg.latex?x_{hj}"/> are the <img src="https://latex.codecogs.com/svg.latex?{j}"/>-th sample for the workers, university students and high-school students, respectively.
