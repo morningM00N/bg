@@ -5,8 +5,8 @@
 
 |   | Worker | University student         |  High-school student |
 | :------------: | :-----------: | :-------------------: | :-------------------: |
-| Sample Size     | 7          | 7 | 7  |
-| Sample Mean    | 37.57     | 41.43 | 57.71 |
+| Sample Size     | <img src="https://latex.codecogs.com/svg.latex?n_w=7"/>          | <img src="https://latex.codecogs.com/svg.latex?n_u=7"/>  | <img src="https://latex.codecogs.com/svg.latex?n_h=7"/>  |
+| Sample Mean    | <img src="https://latex.codecogs.com/svg.latex?x_w=37.57"/>     | <img src="https://latex.codecogs.com/svg.latex?x_u=41.43"/> | <img src="https://latex.codecogs.com/svg.latex?x_h=57.71"/> |
 | Sample Standard Deviation     | 13.59  | 25.77 | 19.51 |
 
 
