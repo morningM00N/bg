@@ -6,8 +6,8 @@
 |   | Worker | University student         |  High-school student |
 | :------------: | :-----------: | :-------------------: | :-------------------: |
 | Sample Size     | <img src="https://latex.codecogs.com/svg.latex?n_w=7"/>          | <img src="https://latex.codecogs.com/svg.latex?n_u=7"/>  | <img src="https://latex.codecogs.com/svg.latex?n_h=7"/>  |
-| Sample Mean    | <img src="https://latex.codecogs.com/svg.latex?x_w=37.57"/>     | <img src="https://latex.codecogs.com/svg.latex?x_u=41.43"/> | <img src="https://latex.codecogs.com/svg.latex?x_h=57.71"/> |
-| Sample Standard Deviation     | 13.59  | 25.77 | 19.51 |
+| Sample Mean    | <img src="https://latex.codecogs.com/svg.latex?\bar{x_w}=37.57"/>     | <img src="https://latex.codecogs.com/svg.latex?\bar{x_u}=41.43"/> | <img src="https://latex.codecogs.com/svg.latex?\bar{x_h}=57.71"/> |
+| Sample Standard Deviation    | <img src="https://latex.codecogs.com/svg.latex?\bar{s_w}=13.59"/>     | <img src="https://latex.codecogs.com/svg.latex?\bar{s_u}=25.77"/> | <img src="https://latex.codecogs.com/svg.latex?\bar{s_h}=19.51"/> |
 
 
 The hypotheses of interest are as follows:
