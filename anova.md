@@ -5,10 +5,7 @@
 
 |   | Worker | University student         |  High-school student |
 | :------------ | :-----------: | -------------------: | -------------------: |
-| First row     | Data          | Very long data entry | |
-| Second row    | **Cell**      | *Cell*               | |
-| Third row     | Cell that spans across two columns  ||
+| Sample Size     | 7          | 7 | 7  |
+| Sample Mean    | 37.57     | 41.43 | 57.71 |
+| Sample Standard Deviation     | 13.59  | 25.77 | 19.51 |
 
-
-|  e | Worker | University student | High-school student |
-| Sample Size | 7 | 7 | 7 |
