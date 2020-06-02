@@ -11,6 +11,6 @@
 [Table caption, works as a reference][section-mmd-tables-table1] 
 
 
-|  |Worker|University student|High-school student|
-|Sample Size|7|7|7|
+|  e | Worker | University student | High-school student |
+| Sample Size | 7 | 7 | 7 |
 [Table caption, works as a reference][section-mmd-tables-table1] 
