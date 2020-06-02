@@ -9,3 +9,6 @@
 | Sample Mean    | 37.57     | 41.43 | 57.71 |
 | Sample Standard Deviation     | 13.59  | 25.77 | 19.51 |
 
+
+The hypotheses of interest are as follows:
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;H_0"/> is
