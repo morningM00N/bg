@@ -3,7 +3,7 @@
 4. The sample data are organized as follows:
 
 
-| First Header  | Worker | Third Header         |
+|   | Worker | Third Header         |
 | :------------ | :-----------: | -------------------: |
 | First row     | Data          | Very long data entry |
 | Second row    | **Cell**      | *Cell*               |
