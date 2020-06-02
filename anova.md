@@ -6,8 +6,8 @@
 |   | Worker | University student         |  High-school student |
 | :------------: | :-----------: | :-------------------: | :-------------------: |
 | Sample Size     | <img src="https://latex.codecogs.com/svg.latex?n_w=7"/>          | <img src="https://latex.codecogs.com/svg.latex?n_u=7"/>  | <img src="https://latex.codecogs.com/svg.latex?n_h=7"/>  |
-| Sample Mean    | <img src="https://latex.codecogs.com/svg.latex?\bar{x_w}=37.57"/>     | <img src="https://latex.codecogs.com/svg.latex?\bar{x_u}=41.43"/> | <img src="https://latex.codecogs.com/svg.latex?\bar{x_h}=57.71"/> |
-| Sample Standard Deviation    | <img src="https://latex.codecogs.com/svg.latex?\bar{s_w}=13.59"/>     | <img src="https://latex.codecogs.com/svg.latex?\bar{s_u}=25.77"/> | <img src="https://latex.codecogs.com/svg.latex?\bar{s_h}=19.51"/> |
+| Sample Mean    | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_w=37.57"/>     | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_u=41.43"/> | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_h=57.71"/> |
+| Sample Standard Deviation    | <img src="https://latex.codecogs.com/svg.latex?{s_w}=13.59"/>     | <img src="https://latex.codecogs.com/svg.latex?{s_u}=25.77"/> | <img src="https://latex.codecogs.com/svg.latex?{s_h}=19.51"/> |
 
 
 The hypotheses of interest are as follows:
@@ -20,6 +20,6 @@ The ANOVA Procedure
 
 | Source of Variation  | Sums of Squares (SS) | Degrees of Freedom (df)         |  Mean Squares (MS) |
 | :------------: | :-----------: | :-------------------: | :-------------------: |
-| Between Treatments     | SSTR =  <img src="https://latex.codecogs.com/svg.latex?n_{w}(\bar{X_w}-\bar{X})^2+n_{u}(\bar{X_u}-\bar{X})^2+n_{h}(\bar{X_h}-\bar{X})^2"/>         | <img src="https://latex.codecogs.com/svg.latex?k-1"/> | 7  |
+| Between Treatments     | SSTR =  <img src="https://latex.codecogs.com/svg.latex?n_{w}(\bar{x}_w-\bar{x})^2+n_{u}(\bar{x}_u-\bar{x})^2+n_{h}(\bar{x}_h-\bar{x})^2"/>         | <img src="https://latex.codecogs.com/svg.latex?k-1"/> | 7  |
 | Error (or Residual)    | SSE     | <img src="https://latex.codecogs.com/svg.latex?nk-k"/> | 57.71 |
 | Total     | SST  | <img src="https://latex.codecogs.com/svg.latex?nk-1"/> | 19.51 |
