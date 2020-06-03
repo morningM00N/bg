@@ -67,6 +67,6 @@ Assume that a singificance level <img src="https://latex.codecogs.com/svg.latex?
 where <img src="https://latex.codecogs.com/svg.latex?\bar{x}"/> is the average of all samples and
 <img src="https://latex.codecogs.com/svg.latex?x_{f,b}"/> is the amount of order for the food <img src="https://latex.codecogs.com/svg.latex?f"/>  and the beverage <img src="https://latex.codecogs.com/svg.latex?b"/>.
 
-When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MSTR/MSE{\sim}F[k-1,nk-k]=F[2,18]"/>. Since the P-value is 0.17 for <img src="https://latex.codecogs.com/svg.latex?F=1.95"/> and it is not smaller than <img src="https://latex.codecogs.com/svg.latex?\alpha"/>=0.05, we cannot reject the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> and thus at 95% level of confidence we conclude that there is no significant difference in the exercise time for the three groups.
+When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_{0F}"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MS_f/MS_e{\sim}F[n_w-1,n-1]=F[2,6]"/>. Since the P-value is 0.17 for <img src="https://latex.codecogs.com/svg.latex?F=2.43"/> and it is not smaller than <img src="https://latex.codecogs.com/svg.latex?\alpha"/>=0.05, we cannot reject the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> and thus at 95% level of confidence we conclude that there is no significant difference in the amount of order for the three foods studied.
 
 
