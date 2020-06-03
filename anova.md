@@ -27,7 +27,7 @@ Suppose that a singificance level <img src="https://latex.codecogs.com/svg.latex
 where <img src="https://latex.codecogs.com/svg.latex?\bar{x}"/> is the average of all samples and
 <img src="https://latex.codecogs.com/svg.latex?x_{wj}"/>, <img src="https://latex.codecogs.com/svg.latex?x_{uj}"/> and <img src="https://latex.codecogs.com/svg.latex?x_{hj}"/> are the <img src="https://latex.codecogs.com/svg.latex?{j}"/>-th sample for the workers, university students and high-school students, respectively.
 
-When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MSTR/MSE{\sim}F[k-1,nk-k]=F[2,18]"/>. Since the P-value is 0.17 for <img src="https://latex.codecogs.com/svg.latex?F=1.95"/> and it is not smaller than <img src="https://latex.codecogs.com/svg.latex?\alpha"/>=0.05, we cannot reject the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/>.
+When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MSTR/MSE{\sim}F[k-1,nk-k]=F[2,18]"/>. Since the P-value is 0.17 for <img src="https://latex.codecogs.com/svg.latex?F=1.95"/> and it is not smaller than <img src="https://latex.codecogs.com/svg.latex?\alpha"/>=0.05, we cannot reject the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> and thus at 95% level of confidence we conclude that there is no significant difference in the exercise time for the three groups.
 
 
 
@@ -63,3 +63,10 @@ Assume that a singificance level <img src="https://latex.codecogs.com/svg.latex?
 | Beverage | <img src="https://latex.codecogs.com/svg.latex?SS_{b}=n_w(\bar{x}_w-\bar{x})^2+n_{c}(\bar{x}_{c}-\bar{x})^2+n_{s}(\bar{x}_{s}-\bar{x})^2+n_{m}(\bar{x}_{m}-\bar{x})^2"/>=1472.25 | <img src="https://latex.codecogs.com/svg.latex?n_h-1=3"/> | <img src="https://latex.codecogs.com/svg.latex?MS_b=SS_{b}/(n_h-1)"/>=490.75 | <img src="https://latex.codecogs.com/svg.latex?MS_b/MS_e"/>=21.97 |
 | Error | <img src="https://latex.codecogs.com/svg.latex?SS_{e}=\sum_{f\in\{h,pi,pa\}}\sum_{b\in\{w,c,s,m\}}(x_{f,b}-\bar{x}_f-\bar{x}_b+\bar{x})^2"/>=134 | <img src="https://latex.codecogs.com/svg.latex?(n_w-1)(n_h-1)=6"/> | <img src="https://latex.codecogs.com/svg.latex?MS_e=SS_{e}/(n_w-1)(n_h-1)"/>=22.33 |  |
 | Total     | <img src="https://latex.codecogs.com/svg.latex?SS_T=SS_f+SS_b+SS_e"/>=1714.917  | <img src="https://latex.codecogs.com/svg.latex?n-1"/>=11 |  |
+
+where <img src="https://latex.codecogs.com/svg.latex?\bar{x}"/> is the average of all samples and
+<img src="https://latex.codecogs.com/svg.latex?x_{f,b}"/> is the amount of order for the food <img src="https://latex.codecogs.com/svg.latex?f"/>  and the beverage <img src="https://latex.codecogs.com/svg.latex?b"/>.
+
+When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MSTR/MSE{\sim}F[k-1,nk-k]=F[2,18]"/>. Since the P-value is 0.17 for <img src="https://latex.codecogs.com/svg.latex?F=1.95"/> and it is not smaller than <img src="https://latex.codecogs.com/svg.latex?\alpha"/>=0.05, we cannot reject the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> and thus at 95% level of confidence we conclude that there is no significant difference in the exercise time for the three groups.
+
+
