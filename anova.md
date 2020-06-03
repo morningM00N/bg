@@ -61,4 +61,4 @@ Assume that a singificance level <img src="https://latex.codecogs.com/svg.latex?
 
 | Source of Variation  | Sums of Squares (SS) | Degrees of Freedom (df)         |  Mean Squares (MS) | F |
 | :------------: | :-----------: | :-------------------: | :-------------------: | :-------------------: |
-| Food | <img src="https://latex.codecogs.com/svg.latex?SS_{f}=n_h(\bar{x}_h-\bar{x})^2+n_{pi}(\bar{x}_{pi}-\bar{x})^2+n_{pa}(\bar{x}_{pa}-\bar{x})^2"/>=108.67 | <img src="https://latex.codecogs.com/svg.latex?n_w-1"/>=2 | <img src="https://latex.codecogs.com/svg.latex?SS_{f}/(n_w-1)"/>=54.33
+| Food | <img src="https://latex.codecogs.com/svg.latex?SS_{f}=n_h(\bar{x}_h-\bar{x})^2+n_{pi}(\bar{x}_{pi}-\bar{x})^2+n_{pa}(\bar{x}_{pa}-\bar{x})^2"/>=108.67 | <img src="https://latex.codecogs.com/svg.latex?n_w-1=2"/> | <img src="https://latex.codecogs.com/svg.latex?MS_f=SS_{f}/(n_w-1)"/>=54.33 | <img src="https://latex.codecogs.com/svg.latex?MS_f/MSE=2.43"/> |
