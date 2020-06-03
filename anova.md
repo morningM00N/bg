@@ -34,3 +34,19 @@ When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> i
 
 
 
+5. The sample data are organized as follows:
+
+
+| Summary  | Count | Average | Standard Deviation |
+| :------------: | :-----------: | :-------------------: | :-------------------: | 
+| Hamberger     | 4          | 30.75  | 178.92 |
+| Pizza | 4 | 32.25 | 247.58 |
+| Pasta | 4 | 25.25 | 108.92 |
+| | | |
+| Water | 3 | 27.33 | 46.33|
+| Coke  | 3 | 41.33 | 66.33|
+| Sprite | 3 | 36.67 | 2.33|
+| Milk | 3 | 12.33 | 6.33|
+
+
+
