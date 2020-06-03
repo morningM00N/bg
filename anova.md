@@ -39,14 +39,14 @@ When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> i
 
 | Summary  | Count | Average | Standard Deviation |
 | :------------: | :-----------: | :-------------------: | :-------------------: | 
-| Hamberger     | <img src="https://latex.codecogs.com/svg.latex?n_{h}"/>=4          | 30.75  | 178.92 |
-| Pizza | <img src="https://latex.codecogs.com/svg.latex?n_{pi}"/>=4 | 32.25 | 247.58 |
-| Pasta | <img src="https://latex.codecogs.com/svg.latex?n_{pa}"/>=4 | 25.25 | 108.92 |
+| Hamberger     | <img src="https://latex.codecogs.com/svg.latex?n_{h}"/>=4 | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_h"/>=30.75  | 178.92 |
+| Pizza | <img src="https://latex.codecogs.com/svg.latex?n_{pi}"/>=4 | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_{pi}"/>=32.25 | 247.58 |
+| Pasta | <img src="https://latex.codecogs.com/svg.latex?n_{pa}"/>=4 | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_{pa}"/>=25.25 | 108.92 |
 | | | |
-| Water | <img src="https://latex.codecogs.com/svg.latex?n_w"/>=3 | 27.33 | 46.33|
-| Coke  | <img src="https://latex.codecogs.com/svg.latex?n_c"/>=3 | 41.33 | 66.33|
-| Sprite | <img src="https://latex.codecogs.com/svg.latex?n_s"/>=3 | 36.67 | 2.33|
-| Milk | <img src="https://latex.codecogs.com/svg.latex?n_m"/>=3 | 12.33 | 6.33|
+| Water | <img src="https://latex.codecogs.com/svg.latex?n_w"/>=3 | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_w"/>=27.33 | 46.33|
+| Coke  | <img src="https://latex.codecogs.com/svg.latex?n_c"/>=3 | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_c"/>=41.33 | 66.33|
+| Sprite | <img src="https://latex.codecogs.com/svg.latex?n_s"/>=3 | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_s"/>=36.67 | 2.33|
+| Milk | <img src="https://latex.codecogs.com/svg.latex?n_m"/>=3 | <img src="https://latex.codecogs.com/svg.latex?\bar{x}_m"/>=12.33 | 6.33|
 
 
 We are interest in testing Null hypotheses
