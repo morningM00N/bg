@@ -29,7 +29,7 @@ A singificance level <img src="https://latex.codecogs.com/svg.latex?\alpha"/>  i
 where <img src="https://latex.codecogs.com/svg.latex?\bar{x}"/> is the average of all samples and
 <img src="https://latex.codecogs.com/svg.latex?x_{wj}"/>, <img src="https://latex.codecogs.com/svg.latex?x_{uj}"/> and <img src="https://latex.codecogs.com/svg.latex?x_{hj}"/> are the <img src="https://latex.codecogs.com/svg.latex?{j}"/>-th sample for the workers, university students and high-school students, respectively.
 
-When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MSTR/MSE{\sim}F[k-1,nk-k]=F[2,18]"/>. Since the P-value is 0.17 and it is not smaller than <img src="https://latex.codecogs.com/svg.latex?\alpha"/>=0.05, we cannot reject the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/>.
+When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MSTR/MSE{\sim}F[k-1,nk-k]=F[2,18]"/>. Since the P-value is 0.17 for <img src="https://latex.codecogs.com/svg.latex?F=1.95"/> and it is not smaller than <img src="https://latex.codecogs.com/svg.latex?\alpha"/>=0.05, we cannot reject the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/>.
 
 
 
