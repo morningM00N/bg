@@ -16,7 +16,7 @@ The hypotheses of interest are as follows:
 
 <img src="https://latex.codecogs.com/svg.latex?H_1"/>: Mean times of exercise in a week are different among the three groups.
 
-A singificance level <img src="https://latex.codecogs.com/svg.latex?\alpha"/>  is 0.05.
+Suppose that a singificance level <img src="https://latex.codecogs.com/svg.latex?\alpha"/>  is 0.05.
 
 **The ANOVA Procedure**
 
@@ -39,14 +39,26 @@ When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> i
 
 | Summary  | Count | Average | Standard Deviation |
 | :------------: | :-----------: | :-------------------: | :-------------------: | 
-| Hamberger     | 4          | 30.75  | 178.92 |
-| Pizza | 4 | 32.25 | 247.58 |
-| Pasta | 4 | 25.25 | 108.92 |
+| Hamberger     | <img src="https://latex.codecogs.com/svg.latex?n_{h}"/>=4          | 30.75  | 178.92 |
+| Pizza | <img src="https://latex.codecogs.com/svg.latex?n_{pi}"/>=4 | 32.25 | 247.58 |
+| Pasta | <img src="https://latex.codecogs.com/svg.latex?n_{pa}"/>=4 | 25.25 | 108.92 |
 | | | |
-| Water | 3 | 27.33 | 46.33|
-| Coke  | 3 | 41.33 | 66.33|
-| Sprite | 3 | 36.67 | 2.33|
-| Milk | 3 | 12.33 | 6.33|
+| Water | <img src="https://latex.codecogs.com/svg.latex?n_w"/>=3 | 27.33 | 46.33|
+| Coke  | <img src="https://latex.codecogs.com/svg.latex?n_c"/>=3 | 41.33 | 66.33|
+| Sprite | <img src="https://latex.codecogs.com/svg.latex?n_s"/>=3 | 36.67 | 2.33|
+| Milk | <img src="https://latex.codecogs.com/svg.latex?n_m"/>=3 | 12.33 | 6.33|
 
 
+We are interest in testing Null hypotheses
 
+<img src="https://latex.codecogs.com/svg.latex?H_{0F}"/>: The amount of order in a day does not depend on the type of food.
+
+<img src="https://latex.codecogs.com/svg.latex?H_{0B}"/>: The amount of order in a day does not depend on the type of beverage.
+
+Assume that a singificance level <img src="https://latex.codecogs.com/svg.latex?\alpha"/>  is 0.05.
+
+**The ANOVA Procedure**
+
+| Source of Variation  | Sums of Squares (SS) | Degrees of Freedom (df)         |  Mean Squares (MS) | F |
+| :------------: | :-----------: | :-------------------: | :-------------------: | :-------------------: |
+| Food | <img src="https://latex.codecogs.com/svg.latex?SS_{f}="/>
