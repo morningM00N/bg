@@ -1,5 +1,3 @@
-<img src="https://latex.codecogs.com/svg.latex?a+b_i"/>
-
 4. The sample data are organized as follows:
 
 
@@ -61,6 +59,7 @@ Assume that a singificance level <img src="https://latex.codecogs.com/svg.latex?
 
 | Source of Variation  | Sums of Squares (SS) | Degrees of Freedom (df)         |  Mean Squares (MS) | F |
 | :------------: | :-----------: | :-------------------: | :-------------------: | :-------------------: |
-| Food | <img src="https://latex.codecogs.com/svg.latex?SS_{f}=n_h(\bar{x}_h-\bar{x})^2+n_{pi}(\bar{x}_{pi}-\bar{x})^2+n_{pa}(\bar{x}_{pa}-\bar{x})^2"/>=108.67 | <img src="https://latex.codecogs.com/svg.latex?n_w-1=2"/> | <img src="https://latex.codecogs.com/svg.latex?MS_f=SS_{f}/(n_w-1)"/>=54.33 | <img src="https://latex.codecogs.com/svg.latex?MS_f/MSE"/>=2.43 |
-| Beverage | <img src="https://latex.codecogs.com/svg.latex?SS_{b}=n_w(\bar{x}_w-\bar{x})^2+n_{c}(\bar{x}_{c}-\bar{x})^2+n_{s}(\bar{x}_{s}-\bar{x})^2+n_{m}(\bar{x}_{m}-\bar{x})^2"/>=1472.25 | <img src="https://latex.codecogs.com/svg.latex?n_h-1=3"/> | <img src="https://latex.codecogs.com/svg.latex?MS_b=SS_{b}/(n_h-1)"/>=490.75 | <img src="https://latex.codecogs.com/svg.latex?MS_b/MSE"/>=21.97 |
-| Error | <img src="https://latex.codecogs.com/svg.latex?SS_{e}=\sum_{f\in\{h,pi,pa\}}\sum_{b\in\{w,c,s,m\}}(x_{f,b}-\bar{x}_f-\bar{x}_b+\bar{x})^2"/>=134 | <img src="https://latex.codecogs.com/svg.latex?n_h-1=3"/> | <img src="https://latex.codecogs.com/svg.latex?MS_b=SS_{b}/(n_h-1)"/>=490.75 | <img src="https://latex.codecogs.com/svg.latex?MS_b/MSE"/>=21.97 |
+| Food | <img src="https://latex.codecogs.com/svg.latex?SS_{f}=n_h(\bar{x}_h-\bar{x})^2+n_{pi}(\bar{x}_{pi}-\bar{x})^2+n_{pa}(\bar{x}_{pa}-\bar{x})^2"/>=108.67 | <img src="https://latex.codecogs.com/svg.latex?n_w-1=2"/> | <img src="https://latex.codecogs.com/svg.latex?MS_f=SS_{f}/(n_w-1)"/>=54.33 | <img src="https://latex.codecogs.com/svg.latex?MS_f/MS_e"/>=2.43 |
+| Beverage | <img src="https://latex.codecogs.com/svg.latex?SS_{b}=n_w(\bar{x}_w-\bar{x})^2+n_{c}(\bar{x}_{c}-\bar{x})^2+n_{s}(\bar{x}_{s}-\bar{x})^2+n_{m}(\bar{x}_{m}-\bar{x})^2"/>=1472.25 | <img src="https://latex.codecogs.com/svg.latex?n_h-1=3"/> | <img src="https://latex.codecogs.com/svg.latex?MS_b=SS_{b}/(n_h-1)"/>=490.75 | <img src="https://latex.codecogs.com/svg.latex?MS_b/MS_e"/>=21.97 |
+| Error | <img src="https://latex.codecogs.com/svg.latex?SS_{e}=\sum_{f\in\{h,pi,pa\}}\sum_{b\in\{w,c,s,m\}}(x_{f,b}-\bar{x}_f-\bar{x}_b+\bar{x})^2"/>=134 | <img src="https://latex.codecogs.com/svg.latex?(n_w-1)(n_h-1)=6"/> | <img src="https://latex.codecogs.com/svg.latex?MS_e=SS_{e}/(n_w-1)(n_h-1)"/>=22.33 |  |
+| Total     | <img src="https://latex.codecogs.com/svg.latex?SS_T=SS_f+SS_b+SS_e"/>=1714.917  | <img src="https://latex.codecogs.com/svg.latex?n-1"/>=11 |  |
