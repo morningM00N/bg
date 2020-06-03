@@ -16,7 +16,9 @@ The hypotheses of interest are as follows:
 
 <img src="https://latex.codecogs.com/svg.latex?H_1"/>: Mean times of exercise in a week are different among the three groups.
 
-The ANOVA Procedure
+A singificance level <img src="https://latex.codecogs.com/svg.latex?\alpha"/>  is 0.05.
+
+**The ANOVA Procedure**
 
 | Source of Variation  | Sums of Squares (SS) | Degrees of Freedom (df)         |  Mean Squares (MS) | F |
 | :------------: | :-----------: | :-------------------: | :-------------------: | :-------------------: |
@@ -27,7 +29,7 @@ The ANOVA Procedure
 where <img src="https://latex.codecogs.com/svg.latex?\bar{x}"/> is the average of all samples and
 <img src="https://latex.codecogs.com/svg.latex?x_{wj}"/>, <img src="https://latex.codecogs.com/svg.latex?x_{uj}"/> and <img src="https://latex.codecogs.com/svg.latex?x_{hj}"/> are the <img src="https://latex.codecogs.com/svg.latex?{j}"/>-th sample for the workers, university students and high-school students, respectively.
 
-When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MSTR/MSE{\sim}F[k-1,nk-k]=F[2,18]"/>.
+When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MSTR/MSE{\sim}F[k-1,nk-k]=F[2,18]"/>. Since the P-value is 0.17 and it is not smaller than <img src="https://latex.codecogs.com/svg.latex?\alpha"/>=0.05, we cannot reject the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/>.
 
 
 
