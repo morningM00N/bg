@@ -26,3 +26,9 @@ The ANOVA Procedure
 
 where <img src="https://latex.codecogs.com/svg.latex?\bar{x}"/> is the average of all samples and
 <img src="https://latex.codecogs.com/svg.latex?x_{wj}"/>, <img src="https://latex.codecogs.com/svg.latex?x_{uj}"/> and <img src="https://latex.codecogs.com/svg.latex?x_{hj}"/> are the <img src="https://latex.codecogs.com/svg.latex?{j}"/>-th sample for the workers, university students and high-school students, respectively.
+
+When the null hypothesis <img src="https://latex.codecogs.com/svg.latex?H_0"/> is true, <img src="https://latex.codecogs.com/svg.latex?X=MSTR/MSE\sim F[k-1,nk-k]"/>.
+
+
+
+
