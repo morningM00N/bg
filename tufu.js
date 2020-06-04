@@ -121,7 +121,6 @@ function funcDrawSHPersonal() {
     btnTofuBg.style.color = "white"
         //btnTofuBg.style.height = Number(btnPolicyStart.style.height.replace("px", "")) * 1.5 + "px"
     btnPolicyStart.innerHTML = "정책"
-    btnPolicyStart.onclick = funcDrawPolicy
     btnPolicyStart.style.display = "none"
 
     let voteHeight = btnPolicyStart.style.height.replace("px", "")
@@ -131,24 +130,12 @@ function funcDrawSHPersonal() {
     let btnVoteYes = funcInsertElement("btnVoteYes", "button", "btnTrans",
         0.5,
         0.0560 + (0.18 - 0.0560) * 2,
-        0.5 + voteWidth / pageWidth,
-        0.0560 + (0.18 - 0.0560) * 2 + voteHeight / pageHeight
-    )
-    btnVoteYes.style.backgroundImage = "url('img/secrethitler/voteyes.png')"
-    btnVoteYes.style.boxShadow = shadowDepth + "px " + shadowDepth + "px gray"
-    btnVoteYes.onclick = function() { funcVote(true) }
-    btnVoteYes.style.display = "none"
-
-    let btnVoteNo = funcInsertElement("btnVoteNo", "button", "btnTrans",
-        0.5 + voteWidth / pageWidth + 0.05,
-        0.0560 + (0.18 - 0.0560) * 2,
         0.5 + voteWidth / pageWidth * 2 + 0.05,
         0.0560 + (0.18 - 0.0560) * 2 + voteHeight / pageHeight
     )
-    btnVoteNo.style.backgroundImage = "url('img/secrethitler/voteno.png')"
-    btnVoteNo.style.boxShadow = shadowDepth + "px " + shadowDepth + "px gray"
-    btnVoteNo.onclick = function() { funcVote(false) }
-    btnVoteNo.style.display = "none"
+    btnVoteYes.style.display = "none"
+
+
 
     btnPlayerName.innerHTML = playerNameList[idxOfPlayer]
     btnPlayerName.onclick = function() {
@@ -265,9 +252,9 @@ function funcStartGame() {
 
             tempArr = new Array()
             for (let idx = 0; idx < numOfPlayers; idx++) {
-                let loc = MMath.getRandom(0, 7)
+                let loc = MMath.getRandom(0, numOfPlayers)
                 while (tempArr[loc] >= 0) {
-                    loc = MMath.getRandom(0, 7)
+                    loc = MMath.getRandom(0, numOfPlayers)
                 }
                 tempArr[loc] = idx
             }
@@ -299,32 +286,102 @@ function funcStartGame() {
     btnVote.style.borderRadius = "5%"
 
 
+
+
+    let princessIdx = null
+    let queenIdx = null
+    let usedRole = new Array()
+
+    for (let idx = 0; idx < playerRole.length; idx++) {
+        if (playerRole[idx] != null) {
+            if (playerRole[idx] == 1) {
+                princessIdx = idx
+            } else if (playerRole[idx] == 2) {
+                queenIdx = idx
+            }
+            usedRole[playerRole[idx]] = true
+        }
+    }
+    let contents = ""
+    if (princessIdx != null) {
+        console.log("공주:" + playerNameList[princessIdx + 1])
+        contents += "공주:" + playerNameList[princessIdx + 1] + "<br>"
+    }
+    if (queenIdx != null) {
+        console.log("여왕:" + playerNameList[queenIdx + 1])
+        contents += "여왕:" + playerNameList[queenIdx + 1] + "<br>"
+    }
+    for (let idx = 0; idx <= numOfPlayers; idx++) {
+        if (usedRole[idx] != true) {
+            console.log("role:" + idx)
+            contents += "남는역할:"
+            switch (idx) {
+                case 1:
+                    contents += "공주"
+                    break;
+
+                case 2:
+                    contents += "여왕"
+                    break;
+                case 3:
+                    contents += "시녀"
+                    break;
+                case 4:
+                    contents += "경호원"
+                    break;
+                case 5:
+                    contents += "요리사"
+                    break;
+                case 6:
+                    contents += "대신"
+                    break;
+                case 7:
+                    contents += "스파이"
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    btnVote.innerHTML = contents
+    btnVote.style.whiteSpace = "nowrap"
+    btnVote.style.lineHeight = btnVote.style.height.replace("px", "") / 10 + "px"
+    btnVote.style.fontSize = btnVote.style.height.replace("px", "") / 10 + "px"
+    btnVote.style.color = "orange"
+    btnVote.style.fontWeight = "bold"
+
     if (playerRole[idxOfPlayer - 1] == 0) {
         btnVote.style.backgroundImage = "url('img/tofu/prince.png')"
         btnVote.innerHTML = ""
     } else if (playerRole[idxOfPlayer - 1] == 1) {
         btnVote.style.backgroundImage = "url('img/tofu/princess.png')"
-        btnVote.innerHTML = ""
+            //btnVote.innerHTML = ""
+        btnVote.style.color = "red"
     } else if (playerRole[idxOfPlayer - 1] == 2) {
-        btnVote.style.backgroundImage = "url('img/tofu/cooker.png')"
-        btnVote.innerHTML = ""
-    } else if (playerRole[idxOfPlayer - 1] == 3) {
         btnVote.style.backgroundImage = "url('img/tofu/queen.png')"
-        btnVote.innerHTML = ""
-    } else if (playerRole[idxOfPlayer - 1] == 4) {
-        btnVote.style.backgroundImage = "url('img/tofu/major.png')"
-        btnVote.innerHTML = ""
-    } else if (playerRole[idxOfPlayer - 1] == 5) {
-        btnVote.style.backgroundImage = "url('img/tofu/guard.png')"
-        btnVote.innerHTML = ""
-    } else if (playerRole[idxOfPlayer - 1] == 6) {
-        btnVote.style.backgroundImage = "url('img/tofu/spy.png')"
-        btnVote.innerHTML = ""
-    } else if (playerRole[idxOfPlayer - 1] == 7) {
+            //btnVote.innerHTML = ""
+        btnVote.style.color = "blue"
+    } else if (playerRole[idxOfPlayer - 1] == 3) {
         btnVote.style.backgroundImage = "url('img/tofu/waitress.png')"
-        btnVote.innerHTML = ""
-    }
+            //btnVote.innerHTML = ""
+    } else if (playerRole[idxOfPlayer - 1] == 4) {
+        btnVote.style.backgroundImage = "url('img/tofu/guard.png')"
+            //btnVote.innerHTML = ""
+        btnVote.style.color = "blue"
 
+    } else if (playerRole[idxOfPlayer - 1] == 5) {
+        btnVote.style.backgroundImage = "url('img/tofu/cooker.png')"
+            //btnVote.innerHTML = ""
+        btnVote.style.color = "red"
+    } else if (playerRole[idxOfPlayer - 1] == 6) {
+        btnVote.style.backgroundImage = "url('img/tofu/major.png')"
+            //btnVote.innerHTML = ""
+        btnVote.style.color = "blue"
+
+    } else if (playerRole[idxOfPlayer - 1] == 7) {
+        btnVote.style.backgroundImage = "url('img/tofu/spy.png')"
+            //btnVote.innerHTML = ""
+    }
 
 
 }
@@ -337,107 +394,5 @@ let curPickedPolicyCards = new Array()
 
 let lastCard = false
 
-function funcDrawPolicy() {
-    if (policyStage == true) {
-        alert("현재 정책 단계를 끝내주세요!")
-        return
-    }
-    if (numOfEnactedFascistPolicies == 5) {
-        document.getElementById("btnWithdraw").style.display = "inline"
-    }
-    lastCard = false
-    policyStage = true
-    document.getElementById("btnHidden").innerHTML = "공개"
-    isHidden = true
-    document.getElementById("btnHidden").style.display = "inline"
-    if (numOfDrawDeck < 3) {
-        alert("드로우 덱을 새로 만듭니다.")
-            //console.log("reshuffle...")
-        numOfDrawDeck = 0
-        for (let idx = 0; idx < policyDeck.length; idx++) {
-            if (policyDeck[idx] != ENACTED) {
-                policyDeck[idx] = UNUSED
-                numOfDrawDeck++
-            }
-        }
-    }
-    numOfDrawDeck -= 3
-        //console.log("remain " + numOfDrawDeck + " cards")
-    for (let idx = 0; idx < 3; idx++) {
-        let btnPolicy = document.getElementById("btnPolicy" + idx)
-        btnPolicy.style.display = "inline"
-        btnPolicy.style.backgroundImage = "url('img/secrethitler/policybg.png')"
-        let thisCard = MMath.getRandom(0, policyDeck.length - 1)
-        while (policyDeck[thisCard] != UNUSED) {
-            thisCard = MMath.getRandom(0, policyDeck.length - 1)
-        }
-        curPickedPolicyCards[idx] = thisCard
-        policyDeck[thisCard] = DISCARDED
 
-    }
-}
 funcDrawSHPersonal()
-
-//funcStartGame()
-
-//funcDrawPolicy()
-
-function funcSelectPolicy(idx) {
-    if (policyStage == false) {
-        funcDrawPolicy()
-        return
-    }
-    if (event.srcElement.innerHTML == "X") {
-        let answer = confirm("이 카드를 버리겠습니까?")
-        if (answer != true) {
-            return
-        }
-        event.srcElement.innerHTML = ""
-        event.srcElement.style.display = "none"
-        if (lastCard == true) {
-            policyStage = false
-            for (let idx = 0; idx < 3; idx++) {
-                if (document.getElementById("btnPolicy" + idx).style.display != "none") {
-                    if (curPickedPolicyCards[idx] < 6) {
-                        numOfEnactedLiberalPolicies++
-                    } else {
-                        numOfEnactedFascistPolicies++
-                    }
-                    policyDeck[curPickedPolicyCards[idx]] = ENACTED
-                    break;
-                }
-            }
-            document.getElementById("btnHidden").style.display = "none"
-            document.getElementById("btnWithdraw").style.display = "none"
-        } else {
-            lastCard = true
-        }
-    } else if (event.srcElement.innerHTML == "") {
-        for (let idx = 0; idx < 3; idx++) {
-            document.getElementById("btnPolicy" + idx).innerHTML = ""
-
-        }
-        event.srcElement.innerHTML = "X"
-    }
-
-}
-
-function funcVote(voteYes) {
-    let btnVote = funcInsertElement("btnVoteBig", "button", "sltTrans",
-        0.1,
-        0.05,
-        0.9,
-        1.0,
-        6 / 9
-    )
-    btnVote.style.display = "inline"
-    btnVote.onclick = function() {
-        event.srcElement.style.display = "none"
-    }
-    btnVote.style.borderRadius = "10%"
-    if (voteYes == true) {
-        btnVote.style.backgroundImage = "url('img/secrethitler/voteyes.png')"
-    } else {
-        btnVote.style.backgroundImage = "url('img/secrethitler/voteno.png')"
-    }
-}
