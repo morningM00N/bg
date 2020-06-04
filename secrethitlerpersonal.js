@@ -76,8 +76,9 @@ function funcDrawSHPersonal() {
     let inputRoom = funcInsertElement("inputRoom", "input", "sltTrans",
         0.093, 0.0560, 0.65, 0.16
     )
-    inputRoom.onchange = function() {
-        roomNumber = event.srcElement.value
+    inputRoom.onclick = function() {
+        inputRoom.value = prompt("방번호를 입력하세요.")
+        roomNumber = inputRoom.value
     }
     inputRoom.value = roomNumber
     let btnNumOfP = funcInsertElement("btnNumOfP", "p", "sltTrans",
