@@ -15,15 +15,26 @@
 
 <body id="body">
     <div id="main" class="bgdiv">
-        예약일 <input id="dateTarget" type="date" onchange="funcGetTime()"> 공휴일<input type="checkbox" id="chkboxHolyday"> <br><br> 테마 <select id="sltTheme" onchange="funcGetTime()" selectedIndex=0><option>네드</option><option>엔젤리오</option></select> &nbsp;&nbsp;
+        예약일 <input id="dateTarget" type="date" onchange="funcGetTime()"> 공휴일<input type="checkbox" id="chkboxHolyday">
+        <br><br> 테마 <select id="sltTheme" onchange="funcGetTime()" selectedIndex=0>
+            <option>네드</option>
+            <option>엔젤리오</option>
+        </select> &nbsp;&nbsp;
         시간 <select id="sltTime"></select>
-        <br><br> 이름 <input id="inputName" value="홍길동" style="width:48px;"> &nbsp;&nbsp; 폰번호 <input id="inputPhone1" style="width:24px;" value="010">-<input value="1234" id="inputPhone2" style="width:32px;">-<input value="1234" id="inputPhone3" style="width:32px;">
-        <br><br> 대기시간 (ms) <input id="inputTry" style="width:24px;" value=10> &nbsp; <button onclick="funcFirst()">첫번째</button> &nbsp; <button>두번째</button>
+        <br><br> 이름 <input id="inputName" value="홍길동" style="width:48px;"> &nbsp;&nbsp; 폰번호 <input id="inputPhone1"
+            style="width:24px;" value="010">-<input value="1234" id="inputPhone2" style="width:32px;">-<input
+            value="1234" id="inputPhone3" style="width:32px;">
+        <br><br> 대기시간 (ms) <input id="inputTry" style="width:24px;" value=10> &nbsp; <button
+            onclick="funcFirst()">첫번째</button> &nbsp; <button>두번째</button>
         <br><br><br> <input id="inputFirst">
 
     </div>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
+
+        
+
+
         var dateTarget = document.getElementById("dateTarget")
         dateTarget.valueAsDate = new Date()
         var selectedThemeIdx = 0
@@ -47,14 +58,14 @@
             new Array(1494, 1495, 1496, 1497, 1498, 1499, 1500, 1501))
 
         timeTableCode[ANGERLIO] = new Array(
-            new Array(1523, 1524, 1525, 1526, 1527, 1528, 1529, 1530, 1531, ),
+            new Array(1523, 1524, 1525, 1526, 1527, 1528, 1529, 1530, 1531),
             new Array(1532, 1533, 1534, 1535, 1536, 1537, 1538, 1539, 1540),
             new Array(1541, 1542, 1543, 1544, 1545, 1546, 1547, 1548, 1549))
 
 
         var timeTable = new Array()
         timeTable[NERD] = new Array(
-            new Array("10:30", "12:00", "13:35", "15:15", "16:50", "18:25", "20:05", "21:45"),
+            new Array("10:20", "12:00", "13:35", "15:15", "16:50", "18:25", "20:05", "21:45"),
             new Array("10:50", "12:30", "14:05", "15:45", "17:20", "18:55", "20:35", "22:15"),
             new Array("10:50", "12:30", "14:05", "15:45", "17:20", "18:55", "20:35", "22:15"))
 
@@ -78,11 +89,11 @@
             console.log(month, day)
 
             inputFirst.value = "javascript:fun_zizum_select('14','1','');"
-            inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');"
-            inputFirst.value += "var tempDay = document.getElementsByTagName('td');"
-            inputFirst.value += "var dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}"
+            inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');var tempDay;var dateLoc;"
+            inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
+            inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
             inputFirst.value += "var JHCount = 0;"
-            inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toGMTString());"
+            inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
             inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');"
             inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
             inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='14';f.rev_days.value='"
@@ -91,7 +102,11 @@
             inputFirst.value += "';f.theme_time_num.value='"
             inputFirst.value += timeTableCode[selectedThemeIdx][dateFlag][sltTime.selectedIndex]
             inputFirst.value += "';f.submit();}"
-            inputFirst.value += "}"
+            inputFirst.value += "};"
+            inputFirst.value += "var JHInterval; setTimeout(function(){JHInterval= setInterval(funcRecallJH," + 100 + ")},1000)"
+
+            
+
         }
         funcGetTime()
         funcFirst()
