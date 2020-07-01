@@ -19,6 +19,7 @@
         <br><br> 테마 <select id="sltTheme" onchange="funcGetTime()" selectedIndex=0>
             <option>네드</option>
             <option>엔젤리오</option>
+            <option>삐릿뽀</option>
         </select> &nbsp;&nbsp; 시간 <select id="sltTime"></select>
         <br><br> 이름 <input id="inputName" placeholder="이름" style="width:48px;"> &nbsp;&nbsp; 폰번호 <input id="inputPhone1" style="width:24px;" value="010">-<input placeholder="1234" id="inputPhone2" style="width:32px;">-<input placeholder="1234" id="inputPhone3"
             style="width:32px;">
@@ -121,6 +122,11 @@
             new Array(1532, 1533, 1534, 1535, 1536, 1537, 1538, 1539, 1540),
             new Array(1541, 1542, 1543, 1544, 1545, 1546, 1547, 1548, 1549))
 
+        timeTableCode[BBIRITBBO] = new Array(
+            new Array(1303, 1304, 1305, 1306, 1307, 1308, 1309, 1310),
+            new Array(1314, 1315, 1316, 1317, 1318, 1319, 1320, 1321),
+            new Array(1322, 1323, 1324, 1325, 1326, 1327, 1328, 1329))
+
 
         var timeTable = new Array()
         timeTable[NERD] = new Array(
@@ -133,28 +139,54 @@
             new Array("10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30", "21:00", "22:30"),
             new Array("10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30", "21:00", "22:30"))
 
+        timeTable[BBIRITBBO] = new Array(
+            new Array("10:30", "12:10", "13:50", "15:30", "17:10", "18:50", "20:30", "22:10"),
+            new Array("10:30", "12:10", "13:50", "15:30", "17:10", "18:50", "20:30", "22:10"),
+            new Array("10:30", "12:10", "13:50", "15:30", "17:10", "18:50", "20:30", "22:10"))
+
         function funcFirst() {
             var inputFirst = document.getElementById("inputFirst")
             var month = dateTarget.valueAsDate.getMonth() + 1
             var day = dateTarget.valueAsDate.getDate()
             console.log(month, day)
 
-            inputFirst.value = "javascript:fun_zizum_select('14','1','');"
-            inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');var tempDay;var dateLoc;"
-            inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
-            inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
-            inputFirst.value += "var JHCount = 0;"
-            inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
-            inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');"
-            inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
-            inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='14';f.rev_days.value='"
-            inputFirst.value += dateTarget.value + "';f.theme_num.value='"
-            inputFirst.value += selectedThemeIdx == 0 ? 48 : 51
-            inputFirst.value += "';f.theme_time_num.value='"
-            inputFirst.value += timeTableCode[selectedThemeIdx][dateFlag][sltTime.selectedIndex]
-            inputFirst.value += "';f.submit();}"
-            inputFirst.value += "};"
-            inputFirst.value += "var JHInterval; setTimeout(function(){JHInterval= setInterval(funcRecallJH," + document.getElementById("inputTry").value + ")},1000);"
+            if (selectedThemeIdx == 0 || selectedThemeIdx == 1) {
+
+                inputFirst.value = "javascript:fun_zizum_select('14','1','');"
+                inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');var tempDay;var dateLoc;"
+                inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
+                inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
+                inputFirst.value += "var JHCount = 0;"
+                inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
+                inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');"
+                inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
+                inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='14';f.rev_days.value='"
+                inputFirst.value += dateTarget.value + "';f.theme_num.value='"
+                inputFirst.value += selectedThemeIdx == 0 ? 48 : 51
+                inputFirst.value += "';f.theme_time_num.value='"
+                inputFirst.value += timeTableCode[selectedThemeIdx][dateFlag][sltTime.selectedIndex]
+                inputFirst.value += "';f.submit();}"
+                inputFirst.value += "};"
+                inputFirst.value += "var JHInterval; setTimeout(function(){JHInterval= setInterval(funcRecallJH," + document.getElementById("inputTry").value + ")},1000);"
+            } else if (selectedThemeIdx == 2) {
+
+                inputFirst.value = "javascript:fun_zizum_select('10','5','');"
+                inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');var tempDay;var dateLoc;"
+                inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
+                inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
+                inputFirst.value += "var JHCount = 0;"
+                inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
+                inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');"
+                inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
+                inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='10';f.rev_days.value='"
+                inputFirst.value += dateTarget.value + "';f.theme_num.value='"
+                inputFirst.value += 41
+                inputFirst.value += "';f.theme_time_num.value='"
+                inputFirst.value += timeTableCode[selectedThemeIdx][dateFlag][sltTime.selectedIndex]
+                inputFirst.value += "';f.submit();}"
+                inputFirst.value += "};"
+                inputFirst.value += "var JHInterval; setTimeout(function(){JHInterval= setInterval(funcRecallJH," + document.getElementById("inputTry").value + ")},1000);"
+            }
 
             inputFirst.select();
             inputFirst.setSelectionRange(0, 9999999)
