@@ -20,6 +20,7 @@
             <option>네드</option>
             <option>엔젤리오</option>
             <option>삐릿뽀</option>
+            <option>원더랜드(일욜만가능)</option>
         </select> &nbsp;&nbsp; 시간 <select id="sltTime"></select>
         <br><br> 이름 <input id="inputName" placeholder="이름" style="width:48px;"> &nbsp;&nbsp; 폰번호 <input id="inputPhone1" style="width:24px;" value="010">-<input placeholder="1234" id="inputPhone2" style="width:32px;">-<input placeholder="1234" id="inputPhone3"
             style="width:32px;">
@@ -96,7 +97,8 @@
         var NERD = 0
         var ANGERLIO = 1
         var BBIRITBBO = 2
-        var HOLYDAY = 3
+            //var HOLYDAY = 3
+        var WONDERLAND = 3
 
         var SUNDAY = 2
         var SATURDAY = 1
@@ -127,6 +129,11 @@
             new Array(1314, 1315, 1316, 1317, 1318, 1319, 1320, 1321),
             new Array(1322, 1323, 1324, 1325, 1326, 1327, 1328, 1329))
 
+        timeTableCode[WONDERLAND] = new Array(
+            new Array(1619, 1620, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630),
+            new Array(1619, 1620, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630),
+            new Array(1619, 1620, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630))
+
 
         var timeTable = new Array()
         timeTable[NERD] = new Array(
@@ -144,6 +151,11 @@
             new Array("10:30", "12:10", "13:50", "15:30", "17:10", "18:50", "20:30", "22:10"),
             new Array("10:30", "12:10", "13:50", "15:30", "17:10", "18:50", "20:30", "22:10"))
 
+        timeTable[WONDERLAND] = new Array(
+            new Array("X"),
+            new Array("X"),
+            new Array("09:50", "10:55", "12:00", "14:10", "15:15", "16:20", "17:25", "18:30", "19:35", "20:40", "21:45"))
+
         function funcFirst() {
             var inputFirst = document.getElementById("inputFirst")
             var month = dateTarget.valueAsDate.getMonth() + 1
@@ -153,12 +165,12 @@
             if (selectedThemeIdx == 0 || selectedThemeIdx == 1) {
 
                 inputFirst.value = "javascript:fun_zizum_select('14','1','');"
-                inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');var tempDay;var dateLoc;"
+                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');var tempDay;var dateLoc;"
                 inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
                 inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
                 inputFirst.value += "var JHCount = 0;"
                 inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
-                inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');"
+                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');"
                 inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
                 inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='14';f.rev_days.value='"
                 inputFirst.value += dateTarget.value + "';f.theme_num.value='"
@@ -171,16 +183,33 @@
             } else if (selectedThemeIdx == 2) {
 
                 inputFirst.value = "javascript:fun_zizum_select('10','5','');"
-                inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');var tempDay;var dateLoc;"
+                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');var tempDay;var dateLoc;"
                 inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
                 inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
                 inputFirst.value += "var JHCount = 0;"
                 inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
-                inputFirst.value += "javascript:fun_calendar_move('2020','" + month + "');"
+                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');"
                 inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
                 inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='10';f.rev_days.value='"
                 inputFirst.value += dateTarget.value + "';f.theme_num.value='"
                 inputFirst.value += 41
+                inputFirst.value += "';f.theme_time_num.value='"
+                inputFirst.value += timeTableCode[selectedThemeIdx][dateFlag][sltTime.selectedIndex]
+                inputFirst.value += "';f.submit();}"
+                inputFirst.value += "};"
+                inputFirst.value += "var JHInterval; setTimeout(function(){JHInterval= setInterval(funcRecallJH," + document.getElementById("inputTry").value + ")},1000);"
+            } else if (selectedThemeIdx == 3) {
+                inputFirst.value = "javascript:fun_zizum_select('15','2','');"
+                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');var tempDay;var dateLoc;"
+                inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
+                inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
+                inputFirst.value += "var JHCount = 0;"
+                inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
+                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');"
+                inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
+                inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='10';f.rev_days.value='"
+                inputFirst.value += dateTarget.value + "';f.theme_num.value='"
+                inputFirst.value += 53
                 inputFirst.value += "';f.theme_time_num.value='"
                 inputFirst.value += timeTableCode[selectedThemeIdx][dateFlag][sltTime.selectedIndex]
                 inputFirst.value += "';f.submit();}"
