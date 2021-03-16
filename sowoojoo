@@ -1,0 +1,18 @@
+http://sowoojoo-escape.com/layout/res/home.php?go=rev.make.input&rev_days=2021-03-18&theme_time_num=789
+
+
+f = eval('document.register');
+f.children[2].value="2021-03-21";
+f.children[3].value='737';
+var temp = f.getElementsByClassName('input');
+temp[0].value="김진현";
+temp[1].value="8998";
+temp[2].value="9272";
+f.submit();
+
+
+
+f = eval('document.register'); 
+f.payment.value = 'A';
+f.action = "../../core/res/rev.make.mutong.php";
+f.submit();
