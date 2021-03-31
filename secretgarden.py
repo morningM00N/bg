@@ -78,8 +78,15 @@ class Worker(QObject):
         elif date.dayOfWeek() == 7:
             curDayOfWeek = 2
 
+        curDate = QDate(datetime.datetime.now().year,datetime.datetime.now().month,datetime.datetime.now().day)
+
+        if (curDate.daysTo(date)>7):
+            self.sig_log.emit("예약 오픈 5분전부터 가능합니다!")
+            print("QMessageBox.about(self, '경고', '5분전부터 가능합니다!')")
+            return;
+
         if datetime.datetime.now().hour != 23 or datetime.datetime.now().minute < 54:
-            self.sig_log.emit("5분전부터 가능합니다!")
+            self.sig_log.emit("예약 오픈 5분전부터 가능합니다!")
             print("QMessageBox.about(self, '경고', '5분전부터 가능합니다!')")
             #return;
 
@@ -93,7 +100,7 @@ class Worker(QObject):
         driver = None
         if driver == None:
             chromeOptions = webdriver.ChromeOptions()
-            chromeOptions.add_argument("headless")
+            #chromeOptions.add_argument("headless")
             driver = webdriver.Chrome(options=chromeOptions)
             wait = WebDriverWait(driver, 10)
 
