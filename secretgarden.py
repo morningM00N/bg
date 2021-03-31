@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QDate
 from PyQt5.QtCore import QObject
@@ -27,6 +27,7 @@ SUNDAY = 2
 timeList = {}
 timeCode = {}
 
+versionUpdate = False
 
 
 themaName = supportThemaList[0]
@@ -158,7 +159,8 @@ class MyApp(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.cal = QCalendarWidget(self)
+        if versionUpdate == False:
+            self.cal = QCalendarWidget(self)
         self.personalInfoGroup = QGroupBox('')
         self.personalName = QLineEdit('김길동')
         self.personalPhone = QLineEdit('010-1234-5678')
@@ -177,7 +179,8 @@ class MyApp(QWidget):
 
 
         self.initUI()
-        self.updateTimeTable()
+        if versionUpdate == False:
+            self.updateTimeTable()
 
         self.worker.sig_log.connect(self.updateLog)
 
@@ -229,58 +232,63 @@ class MyApp(QWidget):
         self.setLayout(gridbox)
 
         # 위젯 배치
-        gridbox.addWidget(self.cal, 1, 0)
-        gridbox.addWidget(self.showLog, 2, 0)
-        gridbox.addWidget(self.personalInfoGroup, 0, 0)
-        gridbox.addWidget(self.themaName, 0, 1)
-        gridbox.addWidget(self.timeGroup, 1, 1)
-        gridbox.addWidget(self.startBtn, 2, 1)
+        if versionUpdate == False:
+            gridbox.addWidget(self.cal, 1, 0)
+            gridbox.addWidget(self.showLog, 2, 0)
+            gridbox.addWidget(self.personalInfoGroup, 0, 0)
+            gridbox.addWidget(self.themaName, 0, 1)
+            gridbox.addWidget(self.timeGroup, 1, 1)
+            gridbox.addWidget(self.startBtn, 2, 1)
 
-        personalInfoGroupLayout = QHBoxLayout()
-        personalInfoGroupLayout.addWidget(self.personalName)
-        personalInfoGroupLayout.addWidget(self.personalPhone)
-        personalInfoGroupLayout.addWidget(self.personalPassWord)
+            personalInfoGroupLayout = QHBoxLayout()
+            personalInfoGroupLayout.addWidget(self.personalName)
+            personalInfoGroupLayout.addWidget(self.personalPhone)
+            personalInfoGroupLayout.addWidget(self.personalPassWord)
 
-        self.personalInfoGroup.setLayout(personalInfoGroupLayout)
+            self.personalInfoGroup.setLayout(personalInfoGroupLayout)
 
-        # 달력 표시 및 날짜 변경시 함수 호출 연결
-        self.cal.setGridVisible(True)
-        self.cal.clicked[QDate].connect(self.updateTimeTable)
+            # 달력 표시 및 날짜 변경시 함수 호출 연결
+            self.cal.setGridVisible(True)
+            self.cal.clicked[QDate].connect(self.updateTimeTable)
 
-        # 테마 선택이 바뀌었을 때 함수 호출 연결
-        self.themaName.currentIndexChanged.connect(self.updateTimeTable)
+            # 테마 선택이 바뀌었을 때 함수 호출 연결
+            self.themaName.currentIndexChanged.connect(self.updateTimeTable)
 
-        # 매크로 시작 함수 호출 연결
-        self.startBtn.clicked.connect(self.worker.startMacro)
+            # 매크로 시작 함수 호출 연결
+            self.startBtn.clicked.connect(self.worker.startMacro)
 
-        # self.lbl = QLabel(self)
-        # date = self.cal.selectedDate()
-        # self.lbl.setText(date.toString())
+            # self.lbl = QLabel(self)
+            # date = self.cal.selectedDate()
+            # self.lbl.setText(date.toString())
 
-        # 테마 추가
-        for th in supportThemaList:
-            self.themaName.addItem(th)
+            # 테마 추가
+            for th in supportThemaList:
+                self.themaName.addItem(th)
+
+        else:
+            gridbox.addWidget(self.showLog, 0, 0)
+            self.updateLog("최신 버전을 사용해 주세요.")
+
 
         self.setWindowTitle('소우주 예약 도우미')
         self.setGeometry(300, 300, 400, 300)
         self.show()
 
 
-versionCheckRoutine = False
+versionCheckRoutine = True
 
 if __name__ == '__main__':
 
     if versionCheckRoutine == True:
         chromeOptions = webdriver.ChromeOptions()
-        #chromeOptions.add_argument("headless")
+        chromeOptions.add_argument("headless")
         versionCheckDriver = webdriver.Chrome(options=chromeOptions)
         wait = WebDriverWait(versionCheckDriver, 10)
         versionCheckDriver.get('https://morningm00n.github.io/bg/versioncheck.html')
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'p')))
 
         if versionCheckDriver.find_element_by_id('version').text != '1.00':
-            print("최신 버전을 사용해 주세요.")
-            sys.exit()
+            versionUpdate = True
 
         versionCheckDriver.quit()
 
