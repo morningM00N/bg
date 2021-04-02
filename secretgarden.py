@@ -12,13 +12,16 @@ import time
 import datetime
 from PyQt5.QtCore import QThread
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
+import chromedriver_autoinstaller
+
 
 supportThemaList = (
     'H.E.L.L.P',
-    '달: 마지막 유산'
+    '달: 마지막 유산',
+    "후레쉬망고 호스텔"
 )
 
-themaIdxList = (66,68)
+themaIdxList = (66,68,65)
 
 WEEKDAY = 0
 SATURDAY = 1
@@ -53,6 +56,20 @@ timeCode[themaName].append((0,0,0,0,0,0,0,0))
 timeCode[themaName].append((0,0,0,0,0,0,0,0))
 timeCode[themaName].append((0,0,0,0,0,0,0,0))
 
+themaName = supportThemaList[2]
+timeList[themaName] = []
+timeList[themaName].append(('10:20','11:50','13:20','14:50','16:20','17:50','19:20','20:50','22:20'))
+timeList[themaName].append(('10:20','11:50','13:20','14:50','16:20','17:50','19:20','20:50','22:20'))
+timeList[themaName].append(('10:20','11:50','13:20','14:50','16:20','17:50','19:20','20:50','22:20'))
+
+timeCode[themaName] = []
+timeCode[themaName].append((0,0,0,0,0,0,0,0))
+timeCode[themaName].append((0,0,0,0,0,0,0,0))
+timeCode[themaName].append((0,0,0,0,0,0,0,0))
+
+
+path = chromedriver_autoinstaller.install(cwd=True)
+
 
 date = None
 themaName = None
@@ -71,6 +88,7 @@ class Worker(QObject):
         super(self.__class__, self).__init__(parent)
 
 
+
     def startMacro(self):
         curDayOfWeek = 0
         if date.dayOfWeek() == 6:
@@ -85,10 +103,10 @@ class Worker(QObject):
             print("QMessageBox.about(self, '경고', '5분전부터 가능합니다!')")
             return;
 
-        if datetime.datetime.now().hour != 23 or datetime.datetime.now().minute < 54:
+        if curDate.daysTo(date)==7 and (datetime.datetime.now().hour != 23 or datetime.datetime.now().minute < 54):
             self.sig_log.emit("예약 오픈 5분전부터 가능합니다!")
             print("QMessageBox.about(self, '경고', '5분전부터 가능합니다!')")
-            #return;
+            return;
 
         webPageAddress = 'http://www.secretgardenescape.com/reservation.html?k_shopno=11&rdate=2021-03-27&prdno='
 
@@ -100,8 +118,8 @@ class Worker(QObject):
         driver = None
         if driver == None:
             chromeOptions = webdriver.ChromeOptions()
-            #chromeOptions.add_argument("headless")
-            driver = webdriver.Chrome(options=chromeOptions)
+            chromeOptions.add_argument("headless")
+            driver = webdriver.Chrome(executable_path=path, options=chromeOptions)
             wait = WebDriverWait(driver, 10)
 
         driver.get(webPageAddress)
@@ -272,6 +290,8 @@ class MyApp(QWidget):
             for th in supportThemaList:
                 self.themaName.addItem(th)
 
+            self.updateLog('\n이름 / 전화번호 / 예약비밀번호를 입력하고 원하는 테마와 시간을\n\n선택 후 시작버튼을 눌러주세요. (크롬이 설치되어 있어야 합니다.)\n')
+
         else:
             gridbox.addWidget(self.showLog, 0, 0)
             self.updateLog("최신 버전을 사용해 주세요.")
@@ -289,7 +309,7 @@ if __name__ == '__main__':
     if versionCheckRoutine == True:
         chromeOptions = webdriver.ChromeOptions()
         chromeOptions.add_argument("headless")
-        versionCheckDriver = webdriver.Chrome(options=chromeOptions)
+        versionCheckDriver = webdriver.Chrome(executable_path=path, options=chromeOptions)
         wait = WebDriverWait(versionCheckDriver, 10)
         versionCheckDriver.get('https://morningm00n.github.io/bg/versioncheck.html')
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'p')))
