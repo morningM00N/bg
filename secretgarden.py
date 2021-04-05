@@ -79,6 +79,8 @@ inputName = None
 inputPhone = None
 inputPassWord = None
 
+driver = None
+
 
 
 class Worker(QObject):
@@ -115,7 +117,7 @@ class Worker(QObject):
 
         self.sig_log.emit('예약을 시작합니다.')
 
-        driver = None
+        global driver
         if driver == None:
             chromeOptions = webdriver.ChromeOptions()
             #chromeOptions.add_argument("headless")
@@ -185,8 +187,8 @@ class Worker(QObject):
 
         self.sig_log.emit('예약이 성공하면 문자가 발송됩니다. (실패시 문자 미발송)')
 
-        driver.quit()
-        driver=None
+        #driver.quit()
+        #driver=None
 
 class MyApp(QWidget):
 
@@ -217,6 +219,14 @@ class MyApp(QWidget):
 
         self.worker.sig_log.connect(self.updateLog)
 
+    def updatePersonalInfo(self):
+        global inputName
+        global inputPhone
+        global inputPassWord
+
+        inputName = self.personalName.text()
+        inputPhone = self.personalPhone.text()
+        inputPassWord = self.personalPassWord.text()
 
     def updateTimeTable(self):
         global date
@@ -290,7 +300,7 @@ class MyApp(QWidget):
 
 
             # 매크로 시작 함수 호출 연결
-            self.startBtn.clicked.connect(self.updateTimeTable)
+            self.startBtn.clicked.connect(self.updatePersonalInfo)
             self.startBtn.clicked.connect(self.worker.startMacro)
 
             # self.lbl = QLabel(self)
@@ -311,6 +321,13 @@ class MyApp(QWidget):
         self.setWindowTitle('소우주 예약 도우미')
         self.setGeometry(300, 300, 400, 300)
         self.show()
+
+    def closeEvent(self,QCloseEvent):
+        print("close")
+        global driver
+        if driver != None:
+            driver.quit()
+            driver=None
 
 
 versionCheckRoutine = True
