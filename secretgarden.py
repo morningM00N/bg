@@ -68,7 +68,7 @@ timeCode[themaName].append((0,0,0,0,0,0,0,0))
 timeCode[themaName].append((0,0,0,0,0,0,0,0))
 
 
-path = chromedriver_autoinstaller.install(cwd=True)
+#path = chromedriver_autoinstaller.install(cwd=True)
 
 
 date = None
@@ -118,8 +118,9 @@ class Worker(QObject):
         driver = None
         if driver == None:
             chromeOptions = webdriver.ChromeOptions()
-            chromeOptions.add_argument("headless")
-            driver = webdriver.Chrome(executable_path=path, options=chromeOptions)
+            #chromeOptions.add_argument("headless")
+            driver = webdriver.Chrome(#executable_path=path,
+                options=chromeOptions)
             wait = WebDriverWait(driver, 10)
 
         driver.get(webPageAddress)
@@ -150,12 +151,19 @@ class Worker(QObject):
         wait.until(EC.visibility_of_element_located((By.ID, 'container')))
         print("web page loaded")
 
+        macroCode = driver.find_element_by_id('myspam')
+        spamCodes = macroCode.find_elements_by_css_selector('span')
+        spamCodeExtracted = ""
+        for spamCodes in spamCodes:
+            spamCodeExtracted = spamCodeExtracted+ spamCodes.text
+
         reservedData = str(date.year()) + '-' + '{:02d}'.format(date.month()) + '-' + '{:02d}'.format(date.day())
 
         jsCommand="document.getElementById('o_name').value='"+inputName+"'; document.getElementsByName('o_hand_ph01')[0].value='"+firstPhoneNumber+"';"\
                   +" document.getElementsByName('o_hand_ph02')[0].value='"+secondPhoneNumber+"';"\
                   +"document.getElementsByName('o_hand_ph03')[0].value='"+thirdPhoneNumber+"';"\
-                  +"document.getElementById('passwd').value='"+inputPassWord+"'; document.check_buy.privacy[0].checked=true;"\
+                  +"document.getElementById('passwd').value='"+inputPassWord+"'; document.check_buy.privacy[0].checked=true;" \
+                  +"document.getElementById('As_wkey').value='" + spamCodeExtracted+"';"\
                   +"document.getElementsByName('productno')[0].value='" + str(themaIdxList[themaIdx]) +"';" \
                   +"document.getElementsByName('derv_date')[0].value='" + reservedData + "';" \
                   +"document.getElementsByName('derv_time')[0].value='" + selectedTime + "'; Order_Check(document.check_buy);"
@@ -276,10 +284,13 @@ class MyApp(QWidget):
             self.cal.setGridVisible(True)
             self.cal.clicked[QDate].connect(self.updateTimeTable)
 
+
             # 테마 선택이 바뀌었을 때 함수 호출 연결
             self.themaName.currentIndexChanged.connect(self.updateTimeTable)
 
+
             # 매크로 시작 함수 호출 연결
+            self.startBtn.clicked.connect(self.updateTimeTable)
             self.startBtn.clicked.connect(self.worker.startMacro)
 
             # self.lbl = QLabel(self)
@@ -309,12 +320,13 @@ if __name__ == '__main__':
     if versionCheckRoutine == True:
         chromeOptions = webdriver.ChromeOptions()
         chromeOptions.add_argument("headless")
-        versionCheckDriver = webdriver.Chrome(executable_path=path, options=chromeOptions)
+        versionCheckDriver = webdriver.Chrome(#executable_path=path,
+                                              options=chromeOptions)
         wait = WebDriverWait(versionCheckDriver, 10)
         versionCheckDriver.get('https://morningm00n.github.io/bg/versioncheck.html')
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'p')))
 
-        if versionCheckDriver.find_element_by_id('version').text != '1.00':
+        if versionCheckDriver.find_element_by_id('version').text != '1.01':
             versionUpdate = True
 
         versionCheckDriver.quit()
