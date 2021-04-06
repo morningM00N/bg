@@ -168,8 +168,14 @@ class Worker(QObject):
                   +"document.getElementById('As_wkey').value='" + spamCodeExtracted+"';"\
                   +"document.getElementsByName('productno')[0].value='" + str(themaIdxList[themaIdx]) +"';" \
                   +"document.getElementsByName('derv_date')[0].value='" + reservedData + "';" \
-                  +"document.getElementsByName('derv_time')[0].value='" + selectedTime + "'; Order_Check(document.check_buy);"
+                  +"document.getElementsByName('derv_time')[0].value='" + selectedTime + "';" \
+                  +"var tempVal = document.getElementsByTagName('tbody')[0];" \
+                  +"tempVal.children[1].children[1].innerText='" + themaName + "';" \
+                  +"tempVal.children[2].children[1].innerText='" + reservedData + "';" \
+                  +"tempVal.children[3].children[1].innerText='" + selectedTime + "';"
 
+
+        driver.execute_script(jsCommand)
         # jsCommand = "document.getElementById('o_name').value='이정석'; document.getElementsByName('o_hand_ph01')[0].value='010';" \
         #             + " document.getElementsByName('o_hand_ph02')[0].value='2068';" \
         #             + "document.getElementsByName('o_hand_ph03')[0].value='7565';" \
@@ -177,6 +183,9 @@ class Worker(QObject):
         #             + "document.getElementsByName('productno')[0].value='66';" \
         #             + "document.getElementsByName('derv_date')[0].value='2021-04-03';" \
         #             + "document.getElementsByName('derv_time')[0].value='10:15'; Order_Check(document.check_buy);"
+
+
+        jsCommand = "Order_Check(document.check_buy);"
 
         try:
             driver.execute_script(jsCommand)
