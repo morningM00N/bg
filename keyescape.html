@@ -20,7 +20,10 @@
             <option>네드</option>
             <option>엔젤리오</option>
             <option>삐릿뽀</option>
+            <option>홀리데이</option>
+            <option>고백</option>
             <option>원더리아</option>
+            <option>백투더씬</option>
         </select> &nbsp;&nbsp; 시간 <select id="sltTime"></select>
         <br><br> 이름 <input id="inputName" placeholder="이름" style="width:48px;"> &nbsp;&nbsp; 폰번호 <input id="inputPhone1" style="width:24px;" value="010">-<input placeholder="1234" id="inputPhone2" style="width:32px;">-<input placeholder="1234" id="inputPhone3"
             style="width:32px;">
@@ -91,17 +94,21 @@
     </div>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
+        function getSeq(startNum, endNum) {
+            var ret = new Array()
+            for (let index = startNum; index <= endNum; index++) {
+                ret.push(index)
+            }
+            return ret
+        }
+
         var dateTarget = document.getElementById("dateTarget")
         dateTarget.valueAsDate = new Date()
         var selectedThemeIdx = 0
-        var NERD = 0
-        var ANGERLIO = 1
-        var BBIRITBBO = 2
-            //var HOLYDAY = 3
-        var WONDERLAND = 3
 
-        var SUNDAY = 2
-        var SATURDAY = 1
+        var SUNDAY = 3
+        var SATURDAY = 2
+        var FRIDAY = 1
         var WEEKDAY = 0
 
         var dateFlag = 0
@@ -113,117 +120,130 @@
         document.getElementById("inputPhone3").value = "1234"
 
 
-        var timeTableCode = new Array()
-        timeTableCode[NERD] = new Array(
-            new Array(1470, 1471, 1472, 1473, 1474, 1475, 1476, 1477),
-            new Array(1486, 1487, 1488, 1489, 1490, 1491, 1492, 1493),
-            new Array(1494, 1495, 1496, 1497, 1498, 1499, 1500, 1501))
+        var timeTableCode = []
 
-        timeTableCode[ANGERLIO] = new Array(
-            new Array(1514, 1515, 1516, 1517, 1518, 1519, 1520, 1521, 1522),
-            new Array(1532, 1533, 1534, 1535, 1536, 1537, 1538, 1539, 1540),
-            new Array(1541, 1542, 1543, 1544, 1545, 1546, 1547, 1548, 1549))
-
-        timeTableCode[BBIRITBBO] = new Array(
-            new Array(1303, 1304, 1305, 1306, 1307, 1308, 1309, 1310),
-            new Array(1314, 1315, 1316, 1317, 1318, 1319, 1320, 1321),
-            new Array(1322, 1323, 1324, 1325, 1326, 1327, 1328, 1329))
-
-        timeTableCode[WONDERLAND] = new Array(
-            new Array(1583, 1584, 1585, 1586, 1587, 1588, 1589, 1590, 1591, 1592, 1593, 1594),
-            new Array(1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1615, 1616, 1617, 1618),
-            new Array(1619, 1620, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630))
-
-
-        var timeTable = new Array()
-        timeTable[NERD] = new Array(
+        timeTableCode["네드"] = new Array(
+            14, // zizum code
+            48, // theme code
+            getSeq(1470, 1477),
+            getSeq(1478, 1485),
+            getSeq(1486, 1493),
+            getSeq(1494, 1501),
+            new Array("10:20", "12:00", "13:35", "15:15", "16:50", "18:25", "20:05", "21:45"),
             new Array("10:20", "12:00", "13:35", "15:15", "16:50", "18:25", "20:05", "21:45"),
             new Array("10:50", "12:30", "14:05", "15:45", "17:20", "18:55", "20:35", "22:15"),
-            new Array("10:50", "12:30", "14:05", "15:45", "17:20", "18:55", "20:35", "22:15"))
+            new Array("10:50", "12:30", "14:05", "15:45", "17:20", "18:55", "20:35", "22:15")
+        )
 
-        timeTable[ANGERLIO] = new Array(
+        timeTableCode["엔젤리오"] = new Array(
+            14,
+            51,
+            getSeq(1514, 1522),
+            getSeq(1523, 1531),
+            getSeq(1532, 1540),
+            getSeq(1541, 1549),
+            new Array("10:00", "11:30", "13:00", "14:30", "16:00", "17:30", "19:00", "20:30", "22:00"),
             new Array("10:00", "11:30", "13:00", "14:30", "16:00", "17:30", "19:00", "20:30", "22:00"),
             new Array("10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30", "21:00", "22:30"),
             new Array("10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30", "21:00", "22:30"))
 
-        timeTable[BBIRITBBO] = new Array(
+        timeTableCode["삐릿뽀"] = new Array(
+            10,
+            41,
+            getSeq(1303, 1310), //new Array(1303, 1304, 1305, 1306, 1307, 1308, 1309, 1310),
+            new Array(1330, 1331, 1333, 1332, 1334, 1335, 1336, 1337),
+            getSeq(1314, 1321), //new Array(1314, 1315, 1316, 1317, 1318, 1319, 1320, 1321),
+            getSeq(1322, 1329), //new Array(1322, 1323, 1324, 1325, 1326, 1327, 1328, 1329),
+            new Array("10:30", "12:10", "13:50", "15:30", "17:10", "18:50", "20:30", "22:10"),
             new Array("10:30", "12:10", "13:50", "15:30", "17:10", "18:50", "20:30", "22:10"),
             new Array("10:30", "12:10", "13:50", "15:30", "17:10", "18:50", "20:30", "22:10"),
             new Array("10:30", "12:10", "13:50", "15:30", "17:10", "18:50", "20:30", "22:10"))
 
-        timeTable[WONDERLAND] = new Array(
-            new Array("09:50", "10:55", "12:00", "13:05", "14:10", "15:15", "16:20", "17:25", "18:30", "19:35", "20:40", "21:45"),
-            new Array("09:50", "10:55", "12:00", "13:05", "14:10", "15:15", "16:20", "17:25", "18:30", "19:35", "20:40", "21:45"),
-            new Array("09:50", "10:55", "12:00", "13:05", "14:10", "15:15", "16:20", "17:25", "18:30", "19:35", "20:40", "21:45"))
+        timeTableCode["홀리데이"] = new Array(
+            10,
+            45,
+            getSeq(1341, 1350), // new Array(1341, 1342, 1343, 1344, 1345, 1346, 1347, 1348, 1349, 1350),
+            new Array(1351, 1356, 1357, 1358, 1359, 1360, 1352, 1353, 1354, 1355),
+            getSeq(1379, 1388), //new Array(1379, 1380, 1381, 1382, 1383, 1384, 1385, 1386, 1387, 1388),
+            getSeq(1389, 1398), //new Array(1389, 1390, 1391, 1392, 1393, 1394, 1395, 1396, 1397, 1398),
+            new Array("10:20", "11:40", "13:00", "14:20", "15:40", "17:00", "18:20", "19:40", "21:00", "22:20"),
+            new Array("10:20", "11:40", "13:00", "14:20", "15:40", "17:00", "18:20", "19:40", "21:00", "22:20"),
+            new Array("10:20", "11:40", "13:00", "14:20", "15:40", "17:00", "18:20", "19:40", "21:00", "22:20"),
+            new Array("10:20", "11:40", "13:00", "14:20", "15:40", "17:00", "18:20", "19:40", "21:00", "22:20"))
+
+
+        timeTableCode["고백"] = new Array(
+            10, // zizum code
+            43, // theme code
+            getSeq(1417, 1423),
+            getSeq(1432, 1438),
+            new Array(1405, 1406, 1407, 1400, 1401, 1402, 1403),
+            getSeq(1408, 1414),
+            new Array("10:00", "11:55", "13:50", "15:45", "17:40", "19:35", "21:30"),
+            new Array("10:00", "11:55", "13:50", "15:45", "17:40", "19:35", "21:30"),
+            new Array("10:00", "11:55", "13:50", "15:45", "17:40", "19:35", "21:30"),
+            new Array("10:00", "11:55", "13:50", "15:45", "17:40", "19:35", "21:30"))
+
+        timeTableCode["원더리아"] = new Array(
+            15, // zizum code
+            53, // theme code
+            getSeq(1583, 1594),
+            getSeq(1595, 1606),
+            getSeq(1607, 1618),
+            getSeq(1608, 1630),
+            new Array("9:50", "10:55", "12:00", "13:05", "14:10", "15:15", "16:20", "17:25", "18:30", "19:35", "20:40", "21:45"),
+            new Array("9:50", "10:55", "12:00", "13:05", "14:10", "15:15", "16:20", "17:25", "18:30", "19:35", "20:40", "21:45"),
+            new Array("9:50", "10:55", "12:00", "13:05", "14:10", "15:15", "16:20", "17:25", "18:30", "19:35", "20:40", "21:45"),
+            new Array("9:50", "10:55", "12:00", "13:05", "14:10", "15:15", "16:20", "17:25", "18:30", "19:35", "20:40", "21:45"))
+
+        timeTableCode["백투더씬"] = new Array(
+            15, // zizum code
+            54, // theme code
+            getSeq(1651, 1660),
+            getSeq(1661, 1670),
+            getSeq(1631, 1640),
+            getSeq(1641, 1650),
+            new Array("10:05", "11:25", "12:45", "14:05", "15:25", "16:45", "18:05", "19:25", "20:45", "22:05"),
+            new Array("10:05", "11:25", "12:45", "14:05", "15:25", "16:45", "18:05", "19:25", "20:45", "22:05"),
+            new Array("10:05", "11:25", "12:45", "14:05", "15:25", "16:45", "18:05", "19:25", "20:45", "22:05"),
+            new Array("10:05", "11:25", "12:45", "14:05", "15:25", "16:45", "18:05", "19:25", "20:45", "22:05"))
+
+
 
         function funcFirst() {
+
             var inputFirst = document.getElementById("inputFirst")
+            var themeName = document.getElementById("sltTheme").value
             var month = dateTarget.valueAsDate.getMonth() + 1
             var day = dateTarget.valueAsDate.getDate()
-            console.log(month, day)
+            console.log(month, day, themeName)
 
-            if (selectedThemeIdx == 0 || selectedThemeIdx == 1) {
+            inputFirst.value = "javascript:fun_zizum_select('" + timeTableCode[themeName][0] + "','0','');"
+            inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');var tempDay;var dateLoc;"
+            inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
+            inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
+            inputFirst.value += "var JHCount = 0;"
+            inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
+            inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');"
+            inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
+            inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='" + timeTableCode[themeName][0] + "';f.rev_days.value='"
+            inputFirst.value += dateTarget.value + "';f.theme_num.value='"
+            inputFirst.value += timeTableCode[themeName][1]
+            inputFirst.value += "';f.theme_time_num.value='"
+            inputFirst.value += timeTableCode[themeName][2 + dateFlag][sltTime.selectedIndex]
+            inputFirst.value += "';f.submit();}"
+            inputFirst.value += "};"
+            inputFirst.value += "var JHInterval; setTimeout(function(){JHInterval= setInterval(funcRecallJH," + document.getElementById("inputTry").value + ")},1000);"
 
-                inputFirst.value = "javascript:fun_zizum_select('14','1','');"
-                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');var tempDay;var dateLoc;"
-                inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
-                inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
-                inputFirst.value += "var JHCount = 0;"
-                inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
-                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');"
-                inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
-                inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='14';f.rev_days.value='"
-                inputFirst.value += dateTarget.value + "';f.theme_num.value='"
-                inputFirst.value += selectedThemeIdx == 0 ? 48 : 51
-                inputFirst.value += "';f.theme_time_num.value='"
-                inputFirst.value += timeTableCode[selectedThemeIdx][dateFlag][sltTime.selectedIndex]
-                inputFirst.value += "';f.submit();}"
-                inputFirst.value += "};"
-                inputFirst.value += "var JHInterval; setTimeout(function(){JHInterval= setInterval(funcRecallJH," + document.getElementById("inputTry").value + ")},1000);"
-            } else if (selectedThemeIdx == 2) {
-
-                inputFirst.value = "javascript:fun_zizum_select('10','5','');"
-                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');var tempDay;var dateLoc;"
-                inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
-                inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
-                inputFirst.value += "var JHCount = 0;"
-                inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
-                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');"
-                inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
-                inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='10';f.rev_days.value='"
-                inputFirst.value += dateTarget.value + "';f.theme_num.value='"
-                inputFirst.value += 41
-                inputFirst.value += "';f.theme_time_num.value='"
-                inputFirst.value += timeTableCode[selectedThemeIdx][dateFlag][sltTime.selectedIndex]
-                inputFirst.value += "';f.submit();}"
-                inputFirst.value += "};"
-                inputFirst.value += "var JHInterval; setTimeout(function(){JHInterval= setInterval(funcRecallJH," + document.getElementById("inputTry").value + ")},1000);"
-            } else if (selectedThemeIdx == 3) {
-                inputFirst.value = "javascript:fun_zizum_select('15','2','');"
-                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');var tempDay;var dateLoc;"
-                inputFirst.value += "setTimeout(function(){tempDay = document.getElementsByTagName('td');"
-                inputFirst.value += " dateLoc = 0; while(dateLoc<50 && tempDay[dateLoc].innerText!=" + day + "){dateLoc++;}},500);"
-                inputFirst.value += "var JHCount = 0;"
-                inputFirst.value += "function funcRecallJH(){var JHDate=new Date();console.log(JHCount++,JHDate.toString());"
-                inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');"
-                inputFirst.value += "if (tempDay[dateLoc].children[0].style.color==''){"
-                inputFirst.value += "clearInterval(JHInterval);f = eval('document.register');f.zizum_num.value='10';f.rev_days.value='"
-                inputFirst.value += dateTarget.value + "';f.theme_num.value='"
-                inputFirst.value += 53
-                inputFirst.value += "';f.theme_time_num.value='"
-                inputFirst.value += timeTableCode[selectedThemeIdx][dateFlag][sltTime.selectedIndex]
-                inputFirst.value += "';f.submit();}"
-                inputFirst.value += "};"
-                inputFirst.value += "var JHInterval; setTimeout(function(){JHInterval= setInterval(funcRecallJH," + document.getElementById("inputTry").value + ")},1000);"
-            }
 
             inputFirst.select();
             inputFirst.setSelectionRange(0, 9999999)
             document.execCommand("copy")
 
         }
-        funcGetTime()
-        funcFirst()
+        funcGetTime();
+
+        funcFirst();
 
         function funcSecond() {
             var inputFirst = document.getElementById("inputFirst")
@@ -263,11 +283,14 @@
                 dateFlag = SUNDAY
             } else if (targetDate.getDay() == 6) {
                 dateFlag = SATURDAY
+            } else if (targetDate.getDay() == 5) {
+                dateFlag = FRIDAY
             }
 
-            for (let idx = 0; idx < timeTable[selectedThemeIdx][dateFlag].length; idx++) {
+
+            for (let idx = 0; idx < timeTableCode[sltTheme.value][dateFlag + 6].length; idx++) {
                 var option = document.createElement("option")
-                option.innerHTML = timeTable[selectedThemeIdx][dateFlag][idx]
+                option.innerHTML = timeTableCode[sltTheme.value][dateFlag + 6][idx]
                 sltTime.appendChild(option)
 
             }
