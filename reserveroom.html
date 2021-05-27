@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="themaInforArea">
+        <button type="button" onclick="funcMoveAll(5)">+5분</button>
+        <button type="button" onclick="funcMoveAll(-5)">-5분</button>
+        <button type="button" onclick="funcUpdateTheme()">그리기</button>
+        <button type="button" onclick="funcSave()">저장</button>
+
+
+        <br/><br/>
+        <textarea id="themeInforArea" onkeydown="resizeTextArea(this)" onkeyup="resizeTextArea(this)" style="width:100%">
+            title-a,duration-70,times-10/20 90 9|
+            title-b, duration-60, times-11/20 75 2, times-13/50 75 2, time-16/20</textarea><br/><br/>
+
+    </div>
+    <div id="tableArea">
+
+    </div>
+</body>
+
+<script>
+    var tableDivStartLoc = 150
+    var maxTime = new Date("2021-01-02 00:00") - new Date("2021-01-01 09:00")
+    var tableHeight = 800
+
+    var themeInfor = [
+        ['A', 70, ['10:20', '11:50', '13:20', '14:50', '16:20', '17:50', '19:20', '20:50', '22:20']],
+        ['B', 60, ['11:20', '12:35', '13:50', '15:05', '16:20', '17:35', '18:50', '20:05', '21:20']],
+        ['C', 60, ['11:00', '20:00', '21:30']],
+        ['D', 85, ['11:00', '13:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']],
+        ['E', 75, ['10:20', '12:00', '13:40', '15:20', '17:00', '18:40', '20:20', '22:00']]
+    ]
+
+    resizeTextArea(document.getElementById("themeInforArea"))
+
+    function funcParsingData() {
+        themeInfor = new Array()
+        var textData = document.getElementById("themeInforArea").value
+        var themeEntries = textData.split("|");
+        for (let idx = 0; idx < themeEntries.length; idx++) {
+            if (themeEntries[idx].indexOf("title-") == -1) {
+                continue
+            }
+            var thisInfor = new Array(3);
+            thisInfor[2] = new Array();
+            var aEntry = themeEntries[idx].trim().split(",");
+            aEntry.forEach(element => {
+                var aPair = element.trim().split("-")
+                if (aPair[0] == "title") {
+                    thisInfor[0] = aPair[1]
+                } else if (aPair[0] == "duration") {
+                    thisInfor[1] = Number(aPair[1])
+                } else if (aPair[0] == "time") {
+                    thisInfor[2].push(aPair[1].replace("/", ":"))
+                } else if (aPair[0] == "times") {
+                    var timeEntries = aPair[1].trim().split(" ")
+                    var startTime = new Date("2021-01-01 " + timeEntries[0].replace("/", ":"))
+                    var interval = Number(timeEntries[1])
+                    var numOfTimes = Number(timeEntries[2])
+                    for (let idx2 = 1; idx2 <= numOfTimes; idx2++) {
+                        thisInfor[2].push(funcGetTimeFromDate(startTime))
+                        startTime = new Date(startTime.getTime() + interval * 60 * 1000)
+                    }
+
+                } else {
+
+                }
+            });
+            themeInfor.push(thisInfor)
+        }
+    }
+
+
+    function funcGetTimeFromDate(dateObj) {
+        return (dateObj.getHours() >= 10 ? dateObj.getHours() : "0" + dateObj.getHours()) + ":" + (dateObj.getMinutes() >= 10 ? dateObj.getMinutes() : "0" + dateObj.getMinutes())
+    }
+
+    function resizeTextArea(obj) {
+        obj.style.height = "1px";
+        obj.style.height = (12 + obj.scrollHeight) + "px";
+        tableDivStartLoc = 100 + obj.scrollHeight
+    }
+
+    var numOfThemas = themeInfor.length
+    var zIndexTemp = 100
+    var moveList = []
+
+    function funcMoveAll(mod) {
+        console.log(moveList)
+        moveList.forEach(element => {
+            funcModifyTime(element, mod)
+        });
+    }
+
+    function funcSave() {
+        var retVal = ""
+        for (let idx = 0; idx < themeInfor.length; idx++) {
+            el = themeInfor[idx]
+            retVal += ("title-" + el[0] + ", duration-" + el[1] + ", ")
+            btnEntries[idx].forEach(el => {
+                var flag = ""
+                if (el.style.backgroundColor == "red") {
+                    flag = "r"
+                } else if (el.style.backgroundColor == "gray") {
+                    flag = "g"
+                }
+                retVal += ("time-" + flag + el.innerHTML.split("~")[0].trim() + ", ")
+                console.log(el.innerHTML)
+            })
+            retVal += "|\n"
+        }
+
+        console.log(retVal)
+        document.getElementById("themeInforArea").value = retVal
+    }
+
+    function funcChangeColor(elem) {
+        if (elem.style.backgroundColor == "red") {
+            for (let idx = 0; idx < moveList.length; idx++) {
+                if (elem.innerHTML == moveList[idx].innerHTML) {
+                    moveList[idx] = moveList[moveList.length - 1]
+                    moveList.pop()
+                    break;
+                }
+            }
+            elem.style.backgroundColor = "gray"
+        } else if (elem.style.backgroundColor == "gray") {
+            elem.style.backgroundColor = ""
+        } else {
+            moveList.push(elem)
+            elem.style.backgroundColor = "red"
+            elem.style.zIndex = zIndexTemp++
+        }
+    }
+
+
+    function funcChangeVal(elem) {
+        //console.log(elem.value)
+        document.getElementById("spanTime").innerHTML = elem.value + "분"
+    }
+
+    var btnEntries
+
+    function funcUpdateTheme() {
+
+        funcParsingData()
+        btnEntries = new Array(themeInfor.length)
+
+        var tableDiv = document.getElementById("tableArea")
+        while (tableDiv.hasChildNodes()) {
+            tableDiv.removeChild(tableDiv.firstChild)
+        }
+
+        tableDiv.style.height = tableHeight + "px"
+
+        for (let idx = 9; idx <= 24; idx++) {
+            var loc = new Date(new Date("2021-01-01 09:00").getTime() + (idx - 9) * 60 * 60 * 1000)
+                //console.log(loc)
+            var btn = document.createElement("button")
+            btn.innerHTML = idx
+            btn.style.border = "1px dotted"
+            btn.style.backgroundColor = "white"
+            btn.style.textAlign = "left"
+            btn.style.borderBottom = "0px"
+            btn.style.verticalAlign = "top"
+            btn.style.flex = 1
+            btn.style.flexDirection = "column"
+            btn.style.position = "absolute"
+            btn.style.height = (60 * 60 * 1000) / maxTime * tableHeight + "px"
+            btn.style.width = "100%"
+            btn.style.top = tableDivStartLoc + ((loc - new Date("2021-01-01 09:00")) / maxTime) * tableHeight + "px"
+            tableDiv.appendChild(btn)
+        }
+
+
+        for (let idx = 0; idx < themeInfor.length; idx++) {
+            btnEntries[idx] = new Array()
+            var titleText = document.createElement("p")
+            titleText.style.left = (10 + (idx) * 90 / themeInfor.length) + "%"
+            titleText.style.width = (81 / themeInfor.length) + "%"
+            titleText.style.textAlign = "center"
+            titleText.style.top = (tableDivStartLoc - 50) + "px"
+            titleText.style.position = "absolute"
+            titleText.innerHTML = themeInfor[idx][0]
+            tableDiv.appendChild(titleText)
+
+            var boxHeight = (themeInfor[idx][1] * 60 * 1000) / maxTime * tableHeight + "px"
+            themeInfor[idx][2].forEach(element => {
+                var flag
+                if (element[0] == "r") {
+                    flag = "red"
+                    element = element.substr(1)
+                } else if (element[0] == "g") {
+                    flag = "gray"
+                    element = element.substr(1)
+                }
+                var topLoc = new Date("2021-01-01 " + element)
+                var endLoc = new Date(topLoc.getTime() + themeInfor[idx][1] * 60 * 1000)
+                    //console.log((topLoc - new Date("2021-01-01 09:00")) / maxTime)
+                var btn = document.createElement("button")
+                btn.innerHTML = element + " ~ " + funcGetTimeFromDate(endLoc)
+                btn.style.position = "absolute"
+                    //console.log(boxHeight)
+                btn.style.height = boxHeight
+                btn.style.top = tableDivStartLoc + ((topLoc - new Date("2021-01-01 09:00")) / maxTime) * tableHeight + "px"
+                    //btn.style.left = 150 * (idx + 1) + "px"
+                btn.style.left = (10 + (idx) * 90 / themeInfor.length) + "%"
+                btn.style.width = (81 / themeInfor.length) + "%"
+                btn.onclick = function() {
+                    funcChangeColor(btn)
+                }
+                if (flag == "red") {
+                    funcChangeColor(btn)
+                } else if (flag == "gray") {
+                    funcChangeColor(btn)
+                    funcChangeColor(btn)
+                }
+                tableDiv.appendChild(btn)
+                btnEntries[idx].push(btn)
+            });
+
+        }
+    }
+
+
+    function funcModifyTime(btn, mod) {
+        var times = btn.innerHTML.split("~")
+        var topLoc = new Date(new Date("2021-01-01 " + times[0]).getTime() + mod * 60 * 1000)
+        var endLoc = new Date(new Date("2021-01-01 " + times[1]).getTime() + mod * 60 * 1000)
+
+        btn.innerHTML = funcGetTimeFromDate(topLoc) + " ~ " + funcGetTimeFromDate(endLoc)
+        btn.style.top = tableDivStartLoc + ((topLoc - new Date("2021-01-01 09:00")) / maxTime) * tableHeight + "px"
+
+        console.log(topLoc)
+    }
+</script>
+
+</html>
