@@ -208,7 +208,7 @@
             new Array("10:05", "11:25", "12:45", "14:05", "15:25", "16:45", "18:05", "19:25", "20:45", "22:05"),
             new Array("10:05", "11:25", "12:45", "14:05", "15:25", "16:45", "18:05", "19:25", "20:45", "22:05"))
 
-
+        var themenum2second
 
         function funcFirst() {
 
@@ -217,6 +217,7 @@
             var month = dateTarget.valueAsDate.getMonth() + 1
             var day = dateTarget.valueAsDate.getDate()
             console.log(month, day, themeName)
+            themenum2second = timeTableCode[themeName][2 + dateFlag][sltTime.selectedIndex]
 
             inputFirst.value = "javascript:fun_zizum_select('" + timeTableCode[themeName][0] + "','0','');"
             inputFirst.value += "javascript:fun_calendar_move('2021','" + month + "');var tempDay;var dateLoc;"
@@ -259,7 +260,9 @@
             var day = dateTarget.valueAsDate.getDate()
             console.log(month, day)
 
-            inputFirst.value = 'f = eval("document.register"); f.name.value="홍길동"; f.mobile1.value="010"; f.mobile2.value="1234"; f.mobile3.value="4567"; $("#but_exe").hide(); param = "prm1=" + f.name.value + "&prm2=" + f.mobile1.value + "-" + f.mobile2.value + "-" + f.mobile3.value; $.ajax({type: "POST",url: "rev.make2.ajax.php",data: param,dataType:"html",error: function(){alert("Ajax fail");},success: function(d){if( String( d ) == "0000" ){alert( "" );}else {f.submit();}}});'
+            inputFirst.value = 'f = eval("document.register"); f.rev_days.value="revdaysjh";f.theme_time_num.value="themenumjh";f.name.value="홍길동"; f.mobile1.value="010"; f.mobile2.value="1234"; f.mobile3.value="4567"; $("#but_exe").hide(); param = "prm1=" + f.name.value + "&prm2=" + f.mobile1.value + "-" + f.mobile2.value + "-" + f.mobile3.value; $.ajax({type: "POST",url: "rev.make2.ajax.php",data: param,dataType:"html",error: function(){alert("Ajax fail");},success: function(d){if( String( d ) == "0000" ){alert( "" );}else {f.submit();}}});'
+            inputFirst.value = inputFirst.value.replace("themenumjh", themenum2second)
+            inputFirst.value = inputFirst.value.replace("revdaysjh", dateTarget.value)
             inputFirst.value = inputFirst.value.replace("홍길동", inputName.value)
             inputFirst.value = inputFirst.value.replace("1234", inputPhone2.value)
             inputFirst.value = inputFirst.value.replace("4567", inputPhone3.value)
