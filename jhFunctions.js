@@ -575,3 +575,13 @@ function funcRoll(diceNumber, idx, arrImgs, intFirstTry, func) {
 
 }
 //funcPrepareGetLocation()
+
+function funcSortArr(arr){
+    for (let index = 0; index < arr.length*1000; index++) {
+        let idx1 = MMath.getRandom(0,arr.length-1)
+        let idx2 = MMath.getRandom(0,arr.length-1)
+        let temp = arr[idx1]
+        arr[idx1]=arr[idx2]
+        arr[idx2]=temp
+    }
+}
