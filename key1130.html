@@ -1,0 +1,83 @@
+import sys
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.expected_conditions import presence_of_element_located
+import time
+import selenium.common.exceptions
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from datetime import datetime, timedelta, date
+from selenium import webdriver
+
+
+if len(sys.argv)!=5:
+    print("2021-07-06 1813 이성훈 010-2069-8564")
+    target = "2021-07-18"
+    themaNum = "1636"
+    reservName = "이성훈"
+    reservPhone = "010-2069-8564"
+    #sys.exit()
+else:
+    target = sys.argv[1]
+    themaNum = sys.argv[2]
+    reservName = sys.argv[3]
+    reservPhone = sys.argv[4]
+
+print(target,themaNum,reservName,reservPhone)
+
+options = webdriver.ChromeOptions()
+options.add_argument("--auto-open-devtools-for-tabs")
+
+driver = webdriver.Chrome(options=options)
+wait = WebDriverWait(driver, 10)
+
+targetdate = date.fromisoformat(target)
+
+driver.get("https://keyescape.co.kr/web/home.php?go=rev.make")
+wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'day_index')))
+
+jsCommand = "javascript:fun_days_select('" + targetdate.__str__() + "','" + str(targetdate.day - 1) + "')"
+driver.execute_script(jsCommand)
+wait.until(EC.visibility_of_element_located((By.ID,'theme_data')))
+
+jsCommand = "javascript:fun_theme_select('54','0')"
+driver.execute_script(jsCommand)
+
+wait.until(EC.visibility_of_element_located((By.ID, 'theme_time_data')))
+
+timeTable = driver.find_element_by_id('theme_time_data')
+
+count = 0
+while timeTable.text.__contains__("예약")==True:
+    print(count,'\t', datetime.now().__str__())
+    driver.execute_script(jsCommand)
+    time.sleep(0.1)
+    wait.until(EC.visibility_of_element_located((By.ID, 'theme_time_data')))
+    timeTable = driver.find_element_by_id('theme_time_data')
+    count += 1
+    if count == 10:
+        driver.execute_script("javascript:fun_days_select('2021-07-16')")
+        wait.until(EC.visibility_of_element_located((By.ID, 'theme_data')))
+
+wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@id='theme_time_data']/li")))
+jsCommand = "javascript:fun_theme_time_select('"+themaNum+"','5')"
+driver.execute_script(jsCommand)
+#driver.execute_script("javascript:fun_theme_time_select('41','5')")
+driver.execute_script("javascript:fun_submit()")
+
+wait.until(EC.visibility_of_element_located((By.NAME, "name")))
+jsCommand = ""
+
+jsCommand += "document.getElementsByName('name')[0].value='" + reservName +"';"
+splittedPhone = reservPhone.split('-')
+jsCommand += "document.getElementsByName('mobile2')[0].value='" + splittedPhone[1] +"';"
+jsCommand += "document.getElementsByName('mobile3')[0].value='" + splittedPhone[2] +"';"
+jsCommand += "document.getElementsByName('str_spam')[0].value=document.getElementsByClassName('spam_code')[0].innerText;"
+jsCommand += "document.getElementsByName('ck_agree')[0].checked=true;"
+jsCommand += "javascript:fun_submit();"
+driver.execute_script(jsCommand)
+
+wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@class='btn_C_Area']/a")))
+#driver.execute_script("javascript:fun_payment_mutong()")
