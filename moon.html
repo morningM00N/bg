@@ -14,52 +14,43 @@
 </head>
 <style>
     td {
-        text-align: left;
+        text-align: center;
+    }
+    
+    input {
+        text-align: center;
+    }
+    
+    table {
+        border: 1px solid #444444;
+        border-collapse: collapse;
+    }
+    
+    th,
+    td {
+        border: 1px solid #444444;
     }
 </style>
 
 <body id="body">
     <div id="main" class="bgdiv">
         <textarea id="themeInforArea" onkeydown="resizeTextArea(this)" onkeyup="resizeTextArea(this)" style="width:100%">title-a,duration-70,times-10/20 90 9|
-title-b, duration-60, times-11/20 75 2, times-13/50 75 2, time-16/20</textarea><br/><br/>
-        <table>
+title-b, duration-60, times-11/20 75 2, times-13/50 75 2, time-16/20</textarea>
+        <br><br> # of users <input id="inputNumOfUsers" size=1 value=18> &nbsp # of themas <input id="inputNumOfThemas" size=1 value=6> &nbsp &nbsp <button onclick="funcDrawThemaInforTable()">그리기</button>
+
+        <table id="tblThemaInfor">
             <tr>
-                <th>테마명</th>
-                <th>시간(분)</th>
-                <th>시작시간(xx/xx xx/xx xx/xx ...)</th>
-            </tr>
-            <tr>
-                <td>귀향(80분)</td>
-                <td><input size=3 id="themalength0" value=80 style="text-align:center;"></td>
-                <td><input id="thematime0" value="9/00 10/20 11/30 12/40 13/50 15/00"></td>
-            </tr>
-            <tr>
-                <td>U can do it</td>
-                <td><input size=3 id="themalength1" value=60 style="text-align:center;"></td>
-                <td><input id="thematime1" value="10/00 11/10 12/20 13/30 14/40 15/50"></td>
-            </tr>
-            <tr>
-                <td>시라노 연애조작단</td>
-                <td><input size=3 id="themalength2" value=60 style="text-align:center;"></td>
-                <td><input id="thematime2" value="10/00 11/10 12/20 13/30 14/40 15/50"></td>
-            </tr>
-            <tr>
-                <td>심곡사진관</td>
-                <td><input size=3 id="themalength3" value=60 style="text-align:center;"></td>
-                <td><input id="thematime3" value="10/10 11/20 12/30 13/40 14/50 16/00"></td>
-            </tr>
-            <tr>
-                <td>그녀는 책 속에</td>
-                <td><input size=3 id="themalength4" value=60 style="text-align:center;"></td>
-                <td><input id="thematime4" value="10/10 11/20 12/30 13/40 14/50 16/00"></td>
-            </tr>
-            <tr>
-                <td>리셋</td>
-                <td><input size=3 id="themalength5" value=60 style="text-align:center;"></td>
-                <td><input id="thematime5" value="10/20 11/30 12/40 13/50 15/00 16/10"></td>
+                <th>thema</th>
+                <th>duration(m)</th>
+                <th colspan=10>start times(xx/xx xx/xx xx/xx ...)</th>
             </tr>
 
+
         </table>
+        <br>
+        <button onclick="funcDrawUserInputTable()">그리기</button>
+        <br>
+        <br>
         <table id="tblUserInput">
         </table>
         <br>
@@ -73,6 +64,151 @@ title-b, duration-60, times-11/20 75 2, times-13/50 75 2, time-16/20</textarea><
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="jhFunctions.js"></script>
     <script>
+        let numOfThemas
+        let numOfUsers
+
+        let arrStartTimes = []
+        let arrMinutes = ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']
+        for (let idx = 9; idx < 23; idx++) {
+            arrMinutes.forEach(element => {
+                arrStartTimes.push("" + idx + ":" + element)
+            });
+        }
+
+
+        function funcDrawThemaInforTable() {
+            numOfThemas = Number(document.getElementById('inputNumOfThemas').value)
+            numOfUsers = Number(document.getElementById('inputNumOfUsers').value)
+            console.log(numOfThemas, numOfUsers)
+
+            let tblThemaInfor = document.getElementById('tblThemaInfor')
+            while (tblThemaInfor.childElementCount > 0) {
+                tblThemaInfor.removeChild(tblThemaInfor.childNodes[0])
+            }
+            for (let idx = 0; idx < numOfThemas; idx++) {
+                let tr = document.createElement('tr')
+                tr.id = 'tr-' + idx
+                let td = document.createElement('td')
+                let inputBox = document.createElement('input')
+                inputBox.value = idx
+                inputBox.size = 5
+                inputBox.id = "themaName" + idx
+                inputBox.onchange = funcUpdateThemaName
+                td.appendChild(inputBox)
+                tr.appendChild(td)
+
+                let td2 = document.createElement('td')
+                let inputBox2 = document.createElement('input')
+                inputBox2.value = 60
+                inputBox2.size = 1
+                inputBox2.id = "themaDuration" + idx
+                inputBox2.onchange = funcUpdateThemaDuration
+                td2.appendChild(inputBox2)
+                tr.appendChild(td2)
+
+                let td25 = document.createElement('td')
+                let insertedSlt = document.createElement('select')
+                insertedSlt.id = "startTime-" + idx + "-0"
+                insertedSlt.size = 1
+                arrStartTimes.forEach(element => {
+                    let insertedOpt = document.createElement('option')
+                    insertedOpt.innerHTML = element
+                    insertedSlt.appendChild(insertedOpt)
+                });
+                td25.appendChild(insertedSlt)
+                tr.appendChild(td25)
+
+                let td3 = document.createElement('td')
+                let insertedBtn = document.createElement('button')
+                insertedBtn.id = 'btn' + idx
+                insertedBtn.innerHTML = '추가'
+                insertedBtn.onclick = funcAddTime
+                td3.appendChild(insertedBtn)
+                tr.appendChild(td3)
+
+
+                tblThemaInfor.appendChild(tr)
+            }
+
+            funcDrawUserInputTable()
+        }
+
+        function funcDrawUserInputTable() {
+
+            let tempStr = 'abcdefghijklmnopqrstuvwxyz'
+            let tblUserInput = document.getElementById('tblUserInput')
+
+            while (tblUserInput.childElementCount > 0) {
+                tblUserInput.removeChild(tblUserInput.childNodes[0])
+            }
+            let headRow = document.createElement('tr')
+            headRow.appendChild(document.createElement('th'))
+            for (let idx = 0; idx < numOfUsers; idx++) {
+                let th = document.createElement('th')
+                let userName = document.createElement('input')
+                userName.id = "userName" + idx
+                userName.value = tempStr[idx]
+                userName.size = 1
+                userName.style.backgroundColor = 'transparent'
+                userName.style.border = "0px"
+                th.appendChild(userName)
+                headRow.appendChild(th)
+            }
+            tblUserInput.appendChild(headRow)
+            for (let idx = 0; idx < numOfThemas; idx++) {
+                let tr = document.createElement('tr')
+                let td = document.createElement('td')
+                td.innerHTML = document.getElementById('themaName' + idx).value
+                tr.appendChild(td)
+                for (let idx2 = 0; idx2 < numOfUsers; idx2++) {
+                    let td = document.createElement('td')
+                    let input = document.createElement('input')
+                    input.size = 1
+                    input.id = "thema-" + idx + "-user-" + idx2
+                    td.appendChild(input)
+                    tr.appendChild(td)
+                }
+                tblUserInput.appendChild(tr)
+            }
+        }
+
+        function funcAddTime() {
+            let curTd = event.target.parentElement
+            let tr = curTd.parentElement
+
+            let insertedSlt = document.createElement('select')
+            console.log(tr.id)
+            console.log("hit")
+            insertedSlt.id = "startTime-" + tr.id.split('-')[1] + "-" + (tr.childElementCount - 3)
+            insertedSlt.size = 1
+            arrStartTimes.forEach(element => {
+                let insertedOpt = document.createElement('option')
+                insertedOpt.innerHTML = element
+                insertedSlt.appendChild(insertedOpt)
+            });
+            curTd.appendChild(insertedSlt)
+            let insertedTd = document.createElement('td')
+            insertedTd.appendChild(event.target)
+            tr.appendChild(insertedTd)
+            console.log(tr.childElementCount)
+        }
+
+        function funcUpdateThemaName() {
+            console.log('funcUpdateThemaName called')
+
+        }
+
+        function funcUpdateThemaDuration() {
+            console.log('funcUpdateThemaDuration called')
+
+        }
+
+        function funcUpdateThemaTimes() {
+
+        }
+
+        funcDrawThemaInforTable()
+
         function resizeTextArea(obj) {
             obj.style.height = "1px";
             obj.style.height = (12 + obj.scrollHeight) + "px";
@@ -82,7 +218,7 @@ title-b, duration-60, times-11/20 75 2, times-13/50 75 2, time-16/20</textarea><
         resizeTextArea(document.getElementById("themeInforArea"))
 
         function funcSave() {
-            var savedStr = ""
+            let savedStr = ""
             for (let idx = 0; idx < 6; idx++) {
                 savedStr += document.getElementById('themalength' + idx).value + " |||"
                 savedStr += document.getElementById('thematime' + idx).value + " ||| \n"
@@ -99,39 +235,6 @@ title-b, duration-60, times-11/20 75 2, times-13/50 75 2, time-16/20</textarea><
         }
 
 
-        var themaNames = ['귀향', 'U can do it', '시라노 연애조작단', '심곡사진관', '그녀는 책 속에', '리셋']
-        var tempStr = 'abcdefghijklmnopqrstuvwxyz'
-        var tblUserInput = document.getElementById('tblUserInput')
-        var headRow = document.createElement('tr')
-        headRow.appendChild(document.createElement('th'))
-        for (let idx = 0; idx < 18; idx++) {
-            var th = document.createElement('th')
-            var userName = document.createElement('input')
-            userName.id = "userName" + idx
-            userName.value = tempStr[idx]
-            userName.size = 1
-            userName.style.textAlign = "center"
-            userName.style.backgroundColor = 'transparent'
-            userName.style.border = "0px"
-            th.appendChild(userName)
-            headRow.appendChild(th)
-        }
-        tblUserInput.appendChild(headRow)
-        for (let idx = 0; idx < themaNames.length; idx++) {
-            var tr = document.createElement('tr')
-            var td = document.createElement('td')
-            td.innerHTML = themaNames[idx]
-            tr.appendChild(td)
-            for (let idx2 = 0; idx2 < 18; idx2++) {
-                var td = document.createElement('td')
-                var input = document.createElement('input')
-                input.size = 1
-                input.id = "thema-" + idx + "-user-" + idx2
-                td.appendChild(input)
-                tr.appendChild(td)
-            }
-            tblUserInput.appendChild(tr)
-        }
 
         function funcDraw() {
             console.log("funcDraw")
