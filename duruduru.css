@@ -1,0 +1,38 @@
+html,
+body {
+    margin: 5px;
+    padding: 5px;
+}
+
+td,
+th {
+    padding: 5px;
+    text-align: center;
+}
+
+th {
+    background-color: orange;
+}
+
+input {
+    text-align: center;
+}
+
+table {
+    border: 1px solid #444444;
+    border-collapse: collapse;
+}
+
+button {
+    border: 0px;
+    border-radius: 5%;
+}
+
+th,
+td {
+    border: 1px solid #444444;
+}
+
+.colorRed {
+    color: red;
+}
