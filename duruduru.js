@@ -8,7 +8,6 @@ rawFile.onreadystatechange = function() {
     if (rawFile.readyState === 4) {
         if (rawFile.status === 200 || rawFile.status == 0) {
             let allText = rawFile.responseText;
-            console.log(allText)
             schedules = allText.split("|||")[0]
             firstContact = allText.split("|||")[1]
         }
@@ -28,10 +27,10 @@ let dataBonus = {}
 let dataScores = []
 
 schedules.split('|').forEach(elem => {
-    if (elem.length == 0) {
+    let tmpToken = elem.split('\t')
+    if (tmpToken.length < 4) {
         return
     }
-    let tmpToken = elem.split('\t')
     let tmpArr = []
     tmpArr[DATE] = tmpToken[0]
     if (tmpToken[1] == 'Y') {
