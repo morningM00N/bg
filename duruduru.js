@@ -18,6 +18,7 @@ let schedules = '\
 let firstContact = '\
 구름위로	빵꾸똥꾸	|\
 영혼을담은트롤링	Jul	|\
+재흥	니쿠	|\
 '
 let DATE = 0
 let PUBLIC = 1
