@@ -19,6 +19,7 @@ rawFile.send(null);
 let DATE = 0
 let PUBLIC = 1
 let PARTICIPANTS = 2
+let FIRSTCONTACT = 3
 
 let dataSchedules = []
 let dataCoOccuranceList = {}
@@ -26,7 +27,9 @@ let dataFirstContact = {}
 let dataBonus = {}
 let dataScores = []
 
-schedules.split('|').forEach(elem => {
+schedules.split('|').forEach(elemOri => {
+    let splitElemOri = elemOri.split(',')
+    let elem = splitElemOri[0]
     let tmpToken = elem.split('\t')
     if (tmpToken.length < 4) {
         return
@@ -45,8 +48,16 @@ schedules.split('|').forEach(elem => {
         }
 
     }
+    if (splitElemOri.length>1){
+        tmpArr[FIRSTCONTACT] = []
+        splitElemOri[1].split(' ').forEach(elem2 =>{
+            tmpArr[FIRSTCONTACT].push(elem2)
+        })
+    }
     dataSchedules.push(tmpArr)
 })
+
+console.log("dataSchedules",dataSchedules)
 
 dataSchedules.forEach(elem => {
     for (let idx = 0; idx < elem[PARTICIPANTS].length - 1; idx++) {
@@ -70,6 +81,16 @@ dataSchedules.forEach(elem => {
 
     }
 
+    if (elem[FIRSTCONTACT]!=undefined){
+        elem[FIRSTCONTACT].forEach(elem2 =>{
+            let firstUserIdx = Math.floor(elem2/10)
+            let secondUserIdx = elem2%10
+            let user1 = elem[PARTICIPANTS][firstUserIdx-1].trim()
+            let user2 = elem[PARTICIPANTS][secondUserIdx-1].trim()
+            dataFirstContact[user1].add(user2)
+            dataFirstContact[user2].add(user1)        
+        })
+    }
     if (elem[PUBLIC] == true) {
         dataBonus[elem[PARTICIPANTS][0].trim()] += 2
         for (let idx = 1; idx < elem[PARTICIPANTS].length; idx++) {
@@ -79,6 +100,7 @@ dataSchedules.forEach(elem => {
 
 });
 
+/*
 firstContact.split('|').forEach(elem => {
     if (elem.length == 0) {
         return
@@ -95,6 +117,7 @@ firstContact.split('|').forEach(elem => {
     dataFirstContact[user1].add(user2)
     dataFirstContact[user2].add(user1)
 })
+*/
 
 for (const key in dataBonus) {
     dataScores.push({ score: dataBonus[key] + dataCoOccuranceList[key].size + dataFirstContact[key].size, name: key })
@@ -202,4 +225,23 @@ dataSchedules.forEach(elem => {
         }
         td.innerHTML = tmpVal
     }
+
+    {
+        let td = document.createElement('td')
+        tr.appendChild(td)
+        td.setAttribute("class","colorRed")
+        let tmpVal = ""
+        if (elem[FIRSTCONTACT]!=undefined){
+            elem[FIRSTCONTACT].forEach(elem2 =>{
+                let firstUserIdx = Math.floor(elem2/10)
+                let secondUserIdx = elem2%10
+                let user1 = elem[PARTICIPANTS][firstUserIdx-1].trim()
+                let user2 = elem[PARTICIPANTS][secondUserIdx-1].trim()
+                tmpVal += " (" + user1 +", "+user2+") "
+            })
+        }
+            td.innerHTML = tmpVal
+    }
+
+
 })
