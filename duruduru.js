@@ -50,7 +50,7 @@ schedules.split('|').forEach(elemOri => {
     }
     if (splitElemOri.length>1){
         tmpArr[FIRSTCONTACT] = []
-        splitElemOri[1].split(' ').forEach(elem2 =>{
+        splitElemOri[1].split(/ |\t/).forEach(elem2 =>{
             tmpArr[FIRSTCONTACT].push(elem2)
         })
     }
@@ -232,7 +232,9 @@ dataSchedules.forEach(elem => {
         td.setAttribute("class","colorRed")
         let tmpVal = ""
         if (elem[FIRSTCONTACT]!=undefined){
+            console.log(elem[FIRSTCONTACT])
             elem[FIRSTCONTACT].forEach(elem2 =>{
+                
                 let firstUserIdx = Math.floor(elem2/10)
                 let secondUserIdx = elem2%10
                 let user1 = elem[PARTICIPANTS][firstUserIdx-1].trim()
