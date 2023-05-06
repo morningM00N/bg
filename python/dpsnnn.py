@@ -88,7 +88,7 @@ while True:
         except:
             pass
 
-        #driver.find_element(By.NAME, "tel").send_keys("28761575")
+        #driver.find_element(By.NAME, "tel").send_keys("11112222")
         #sleep(0.3)
         #driver.find_element(By.XPATH,"//div[2]/div/button/span[2]/span").click()
         #sleep(0.3)

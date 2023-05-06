@@ -71,11 +71,11 @@ def buyKurly(JHM:JHSelenium) -> None:
     JHM.browser.get("https://www.kurly.com/shop/member/login.php")
     JHM.wait.until(EC.presence_of_element_located((By.NAME,'m_id')))
     JHM.browser.find_element(By.NAME,'m_id').clear()
-    JHM.browser.find_element(By.NAME,'m_id').send_keys('eternitier')
+    JHM.browser.find_element(By.NAME,'m_id').send_keys('id')
 
     JHM.wait.until(EC.presence_of_element_located((By.NAME,'password')))
     JHM.browser.find_element(By.NAME,'password').clear()
-    JHM.browser.find_element(By.NAME,'password').send_keys('15751abcjin')
+    JHM.browser.find_element(By.NAME,'password').send_keys('password')
     
     JHM.waitAndClick(By.CLASS_NAME,'btn_type1')
     sleep(5)

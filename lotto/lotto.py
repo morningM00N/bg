@@ -13,11 +13,11 @@ def run(playwright: Playwright) -> None:
 
     page.locator("[placeholder=\"아이디\"]").click()
     # Fill [placeholder="아이디"]
-    page.locator("[placeholder=\"아이디\"]").fill("etrlove8")
+    page.locator("[placeholder=\"아이디\"]").fill("idhere")
     # Click [placeholder="비밀번호"]
     page.locator("[placeholder=\"비밀번호\"]").click()
     # Fill [placeholder="비밀번호"]
-    page.locator("[placeholder=\"비밀번호\"]").fill("15751!ace")
+    page.locator("[placeholder=\"비밀번호\"]").fill("password")
     # Click form[name="jform"] >> text=로그인
     # with page.expect_navigation(url="https://dhlottery.co.kr/common.do?method=popupOne&txtNo=14287"):
     with page.expect_navigation():
