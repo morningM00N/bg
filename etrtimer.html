@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <link href="secrethitlerpersonal.css" rel="stylesheet">
+
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <!--모바일페이지크기조절메타태그-->
+    <title>제목</title>
+</head>
+
+<body id="body">
+    <div id="main" class="bgdiv">
+    </div>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="jhFunctions.js"></script>
+    <script>
+        let usedTime = 0
+
+        function getTimeFormat(usedTime) {
+            let mil = usedTime % 100
+            usedTime = Math.floor(usedTime / 100)
+            let sec = usedTime % 60
+            usedTime = Math.floor(usedTime / 60)
+            let min = usedTime % 60
+            usedTime = Math.floor(usedTime / 60)
+            return min + ":" + sec + ":" + mil
+        }
+        funcWidthPerHeight(0)
+
+        funcUpdatePageSize(true)
+        let pTimer = funcInsertElement("pTime", "p", "btnTrans",
+            0.05, 0.05, 0.95, 0.1)
+        pTimer.align = "left"
+        pTimer.innerHTML = "발언 시간"
+
+        let btnStart = funcInsertElement("btnStart", "button", "btnTrans",
+            0.05, 0.15, 0.90, 0.85)
+        btnStart.style.backgroundColor = "black"
+        btnStart.style.fontSize = pTimer.style.fontSize
+        let shadowSize = 0.03 * pageWidth
+        btnStart.style.boxShadow = shadowSize + "px " + shadowSize + "px " + shadowSize / 2 + "px gray"
+        btnStart.innerHTML = "발언 시작"
+        btnStart.style.color = "white"
+        let intTimer
+        btnStart.addEventListener('touchstart', function() {
+            intTimer = setInterval(function() {
+                let pTimer = document.getElementById("pTime")
+                usedTime++
+                pTimer.innerHTML = "발언 시간 " + getTimeFormat(usedTime)
+            }, 10)
+            document.getElementById("btnStart").innerHTML = "발언 중"
+        });
+
+        btnStart.addEventListener('touchend', function() {
+            clearInterval(intTimer)
+            document.getElementById("btnStart").innerHTML = "발언 시작"
+        });
+    </script>
+
+</body>

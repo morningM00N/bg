@@ -1,0 +1,53 @@
+body {
+    font-size: 22px;
+    font-family: 'Bangers', cursive;
+    margin: 0px;
+}
+
+input {
+    font-family: 'Bangers', cursive;
+}
+
+.bgdiv {
+    background-image: url('img/doppelt.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin: 0px;
+}
+
+.btnRound {
+    position: absolute;
+    background-color: transparent;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 25%;
+    color: black;
+    font-family: 'Bangers', cursive;
+}
+
+.sltRound {
+    position: absolute;
+    background-color: transparent;
+    border: 0px;
+    border-radius: 25%;
+    color: black;
+    -webkit-appearance: none;
+    font-family: 'Bangers', cursive;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    text-align: center;
+    text-align-last: center;
+}
+
+.btnItem {
+    position: absolute;
+    background-color: transparent;
+    border: 0px;
+    border-radius: 100%;
+    margin: 0px;
+    padding: 0px;
+    color: black;
+    font-family: 'Bangers', cursive;
+}

@@ -1,0 +1,36 @@
+.bgdiv {
+    background-image: url("img/cartographers/subMapA.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.mapTiles{
+    border: 0px;
+    background-color: transparent;
+    margin: 0px;
+    padding:0px;
+    position: absolute;
+    font-weight: bolder;
+}
+
+.textScore{
+    border: 0px;
+    background-color: transparent;
+    margin: 0px;
+    padding:0px;
+    position: absolute;
+    font-weight: bolder;
+    text-align: center;
+    text-align-last: center;
+    font-family: 'Sriracha', cursive;
+}

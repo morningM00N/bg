@@ -1,0 +1,7 @@
+document.getElementsByName('rev_days')[0].value='2022-12-24';
+document.getElementsByName('theme_time_num')[0].value=35;
+document.getElementsByName('name')[0].value='김이름';
+document.getElementsByName('mobile2')[0].value='5555';
+document.getElementsByName('mobile3')[0].value='6666';
+document.getElementsByName('ck_agree')[0].checked=true;
+fun_submit();

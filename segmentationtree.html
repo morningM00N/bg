@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+    <style>
+        table {
+            margin: 0px;
+            border-collapse: collapse;
+        }
+        
+        .buttonBar {
+            position: absolute;
+            background-color: black;
+            border: 0px;
+            margin: 0px;
+            padding: 0px
+        }
+        
+        div {
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <!--모바일페이지크기조절메타태그-->
+    <title>segmentation tree</title>
+</head>
+
+<body id="body">
+    <div id="main" class="bgdiv">
+        seed: <input id="inputSeed" style="text-align: center;" value="1" ; onchange="drawBars()">
+        <br><br> Sum: <input id="fromBox" style="text-align: center;" value="1" ;> to
+        <input id="toBox" style="text-align: center;" value="1" ;>
+        <br><br> Update: <input id="valueBox" style="text-align: center;" value="1" ;> at
+        <input id="atBox" style="text-align: center;" value="1" ;>
+        <p id="abc"></p>
+        <button onclick="funcBtnSquare()">O(N<sup>2</sup>) algorithm</button>
+        <button onclick="funcBtnNlonN()">O(N &middot logN) algorithm</button>
+        <button onclick="funcBtnLinear()">O(N) algorithm</button>
+        <p id="log"></p>
+    </div>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="jhFunctions.js"></script>
+
+    <script>
+        function funcClickBar(idx) {
+            console.log(idx)
+        }
+
+        function drawBars() {
+            MMath.seedrandom(document.getElementById("inputSeed").value)
+
+            for (let idx = 0; idx < inputSize; idx++) {
+                inputArr[idx] = MMath.getRandom(5, inputSize)
+                var newBut = document.getElementById("row" + idx)
+                if (newBut == null) {
+                    newBut = document.createElement("button")
+                    mainDiv.appendChild(newBut)
+                }
+                newBut.className = "buttonBar"
+                newBut.style.top = 200 + "px"
+                newBut.style.left = 10 + 3 * idx + "px"
+                newBut.id = "row" + idx
+                newBut.style.width = "3px"
+                newBut.style.height = Math.abs(inputArr[idx] / inputSize * 200) + "px"
+                newBut.onclick = function() {
+                    funcClickBar(idx)
+                }
+
+                newBut.style.backgroundColor = "black"
+            }
+        }
+        var thisInterval
+        var timeCount
+        var idxTrace
+
+        function funcBtnSquare() {
+            drawBars()
+
+            traceArrSquare = new Array()
+
+            console.log(funcSquareAlg(inputArr), new Date().getTime() - startTime)
+
+
+            idxTrace = 0
+            curMaxIdx = 0
+            timeCount = new Date().getTime()
+                //var thisInterval = setInterval(funcDrawNlonN, 1)
+            if (thisInterval != null) {
+                clearInterval(thisInterval)
+            }
+            thisInterval = setInterval(funcDrawSquare, 1)
+
+            //var thisInterval = setInterval(funcDrawLinear, 1)
+
+        }
+
+        function funcBtnNlonN() {
+            drawBars()
+
+            traceArrLogN = new Array()
+            solArrLogN = new Array()
+
+            console.log(funcLogNAlg(inputArr, 0, inputArr.length - 1), new Date().getTime() - startTime)
+
+
+            idxTrace = 0
+            curMaxIdx = 0
+            timeCount = new Date().getTime()
+
+            drawSolution = false
+
+            if (thisInterval != null) {
+                clearInterval(thisInterval)
+            }
+            thisInterval = setInterval(funcDrawNlonN, 10)
+
+            //var thisInterval = setInterval(funcDrawLinear, 1)
+
+        }
+
+        function funcBtnLinear() {
+            drawBars()
+            solArrLinear = new Array()
+            traceArrLinear = new Array()
+
+            console.log(funcLinearAlg(inputArr), new Date().getTime() - startTime)
+
+
+            idxTrace = 0
+            curMaxIdx = 0
+            timeCount = new Date().getTime()
+
+            drawSolution = false
+
+            if (thisInterval != null) {
+                clearInterval(thisInterval)
+            }
+
+
+            thisInterval = setInterval(funcDrawLinear, 10)
+
+        }
+        var mainDiv = document.getElementById("main")
+        var inputSize = 200
+        mainDiv.style.margin = "10px"
+        mainDiv.style.padding = "10px"
+        MMath.seedrandom(document.getElementById("inputSeed").value)
+
+
+
+        var inputArr = new Array()
+        drawBars()
+
+        var traceArrSquare = new Array()
+        var traceArrLogN = new Array()
+        var traceArrLinear = new Array()
+
+
+        var solArrLinear = new Array()
+
+        function funcLinearAlg(inputArr) {
+            var curMax = 0
+            var iterMax = 0
+            var startIdx = 0
+
+            for (let idx = 0; idx < inputArr.length; idx++) {
+                iterMax += inputArr[idx]
+                if (iterMax < 0) {
+                    iterMax = 0
+                    startIdx = idx + 1
+                    traceArrLinear[idx + 1] = idx + 1
+                }
+                if (curMax < iterMax) {
+                    curMax = iterMax
+                    solArrLinear[idx] = 1000 * startIdx + idx
+                } else if (idx > 0) {
+                    solArrLinear[idx] = solArrLinear[idx - 1]
+                }
+            }
+            return curMax
+        }
+
+        var curMaxIdx = 0
+        var iterIdx = 0
+
+        function funcDrawLinear() {
+            document.getElementById("abc").innerHTML = "elapsed time: " + (new Date().getTime() - timeCount) / 1000 + " sec"
+            if (curMaxIdx == inputSize) {
+                document.getElementById("log").innerHTML = ""
+                if (thisInterval != null) {
+                    clearInterval(thisInterval)
+                }
+                for (let idx = 0; idx < inputSize; idx++) {
+                    if (document.getElementById("row" + idx).style.backgroundColor == "blue") {
+                        document.getElementById("row" + idx).style.backgroundColor = "black"
+                    } else if (document.getElementById("row" + idx).style.backgroundColor == "purple") {
+                        document.getElementById("row" + idx).style.backgroundColor = "red"
+                    }
+                }
+                return
+
+            }
+
+            for (let idx = 0; idx < inputSize; idx++) {
+                document.getElementById("row" + idx).style.backgroundColor = "black"
+            }
+
+            if (solArrLinear[curMaxIdx] != null) {
+                var idx11 = Math.floor(solArrLinear[curMaxIdx] / 1000)
+                var idx22 = solArrLinear[curMaxIdx] % 1000
+                for (let idx = idx11; idx <= idx22; idx++) {
+                    document.getElementById("row" + idx).style.backgroundColor = "red"
+                }
+            }
+
+
+            if (traceArrLinear[curMaxIdx] == curMaxIdx) {
+                iterIdx = curMaxIdx
+            }
+            var sumTemp = "" + inputArr[iterIdx]
+            for (let idx = iterIdx; idx <= curMaxIdx; idx++) {
+                if (document.getElementById("row" + idx).style.backgroundColor == "black") {
+                    document.getElementById("row" + idx).style.backgroundColor = "blue"
+                } else {
+                    document.getElementById("row" + idx).style.backgroundColor = "purple"
+                }
+                if (inputArr[idx] < 0) {
+                    sumTemp += inputArr[idx]
+                } else {
+                    sumTemp += ("+" + inputArr[idx])
+                }
+            }
+            document.getElementById("log").innerHTML = sumTemp
+
+            curMaxIdx++
+        }
+
+
+        var curMaxIdxSquare = 0
+
+        function funcSquareAlg(inputArr) {
+            var curMax = 0
+            for (let idx1 = 0; idx1 < inputArr.length; idx1++) {
+                for (let idx2 = idx1; idx2 < inputArr.length; idx2++) {
+                    let parSum = 0
+                    traceArrSquare.push(1000 * idx1 + idx2)
+                    for (let idx3 = idx1; idx3 <= idx2; idx3++) {
+                        parSum += inputArr[idx3]
+                    }
+                    if (parSum > curMax) {
+                        curMax = parSum
+                        curMaxIdxSquare = 1000 * idx1 + idx2
+                    }
+                    traceArrSquare.push(curMaxIdxSquare)
+                }
+
+            }
+            return curMax
+        }
+
+
+
+        var solArrLogN = new Array()
+
+        function funcLogNAlg(inputArr, startIdx, lastIdx) {
+            if (startIdx == lastIdx) {
+                traceArrLogN.push(startIdx * 1000 + lastIdx)
+                if (inputArr[startIdx] < 0) {
+                    return 0
+                } else {
+                    solArrLogN[startIdx * 1000 + lastIdx] = startIdx * 1000 + startIdx
+                    return inputArr[startIdx]
+                }
+            }
+            var midIdx = Math.floor((startIdx + lastIdx) / 2)
+            var former = funcLogNAlg(inputArr, startIdx, midIdx)
+            var latter = funcLogNAlg(inputArr, midIdx + 1, lastIdx)
+
+            var formerMaxSum = 0
+            var formerIter = 0
+            var formerIdx = midIdx + 1
+            traceArrLogN.push(startIdx * 1000 + lastIdx)
+
+            for (let idx = midIdx; idx >= startIdx; idx--) {
+                formerIter += inputArr[idx]
+                if (formerIter > formerMaxSum) {
+                    formerMaxSum = formerIter
+                    formerIdx = idx
+                }
+            }
+
+            var latterMaxSum = 0
+            var latterIter = 0
+            var latterIdx = midIdx
+
+            for (let idx = midIdx + 1; idx <= lastIdx; idx++) {
+                latterIter += inputArr[idx]
+                if (latterIter > latterMaxSum) {
+                    latterMaxSum = latterIter
+                    latterIdx = idx
+                }
+            }
+
+            var mergeSol = formerMaxSum + latterMaxSum
+            if (former > latter) {
+                if (former > mergeSol) {
+                    solArrLogN[startIdx * 1000 + lastIdx] = solArrLogN[startIdx * 1000 + midIdx]
+                    return former
+                } else {
+                    solArrLogN[startIdx * 1000 + lastIdx] = 1000 * formerIdx + latterIdx
+                    return mergeSol
+                }
+            } else {
+                if (latter > mergeSol) {
+                    solArrLogN[startIdx * 1000 + lastIdx] = solArrLogN[(midIdx + 1) * 1000 + lastIdx]
+                    return latter
+                } else {
+                    solArrLogN[startIdx * 1000 + lastIdx] = 1000 * formerIdx + latterIdx
+                    return mergeSol
+                }
+            }
+
+        }
+
+
+        function funcDrawSquare() {
+            document.getElementById("abc").innerHTML = "elapsed time: " + (new Date().getTime() - timeCount) / 1000 + " sec"
+
+            if (idxTrace == traceArrSquare.length) {
+                if (thisInterval != null) {
+                    clearInterval(thisInterval)
+                }
+                for (let idx = 0; idx < inputSize; idx++) {
+                    if (document.getElementById("row" + idx).style.backgroundColor == "blue") {
+                        document.getElementById("row" + idx).style.backgroundColor = "black"
+                    }
+                }
+                document.getElementById("log").innerHTML = ""
+
+                return
+            }
+            for (let idx = 0; idx < inputSize; idx++) {
+                //if (document.getElementById("row" + idx).style.backgroundColor == "green") 
+                {
+                    document.getElementById("row" + idx).style.backgroundColor = "black"
+                }
+
+            }
+
+            var idx11 = Math.floor(traceArrSquare[idxTrace] / 1000)
+            var idx22 = traceArrSquare[idxTrace] % 1000
+
+            var computeStr = "" + inputArr[idx11]
+            for (let idx = idx11; idx <= idx22; idx++) {
+                document.getElementById("row" + idx).style.backgroundColor = "blue"
+                if (idx > idx11) {
+                    if (inputArr[idx] < 0) {
+                        computeStr += inputArr[idx]
+                    } else {
+                        computeStr = computeStr + "+" + inputArr[idx]
+                    }
+                }
+            }
+
+            document.getElementById("log").innerHTML = computeStr
+
+            idxTrace++
+            idx11 = Math.floor(traceArrSquare[idxTrace] / 1000)
+            idx22 = traceArrSquare[idxTrace] % 1000
+            for (let idx = idx11; idx <= idx22; idx++) {
+                if (document.getElementById("row" + idx).style.backgroundColor == "blue") {
+                    document.getElementById("row" + idx).style.backgroundColor = "purple"
+                } else {
+                    document.getElementById("row" + idx).style.backgroundColor = "red"
+                }
+            }
+            idxTrace++
+        }
+
+        var targetIdx = 0
+        var iterIdx = 0
+        var drawSolution = false
+        var idx1
+        var idx2
+
+        function funcDrawNlonN() {
+
+            document.getElementById("abc").innerHTML = "elapsed time: " + (new Date().getTime() - timeCount) / 1000 + " sec"
+
+
+            if (idxTrace >= traceArrLogN.length) {
+                document.getElementById("log").innerHTML = ""
+                if (thisInterval != null) {
+                    clearInterval(thisInterval)
+                }
+                for (let idx = 0; idx < inputSize; idx++) {
+                    if (document.getElementById("row" + idx).style.backgroundColor == "blue") {
+                        document.getElementById("row" + idx).style.backgroundColor = "black"
+                    }
+                }
+                return
+            }
+
+            if (drawSolution == false) {
+                // for (let idx = 0; idx < inputSize; idx++) {
+                //     document.getElementById("row" + idx).style.backgroundColor = "black"
+                // }
+                idx1 = Math.floor(traceArrLogN[idxTrace] / 1000)
+                idx2 = traceArrLogN[idxTrace] % 1000
+                var subSum = "" + inputArr[idx1]
+
+                for (let idx = idx1; idx <= idx2; idx++) {
+                    document.getElementById("row" + idx).style.backgroundColor = "blue"
+                    if (inputArr[idx] < 0) {
+                        subSum += inputArr[idx]
+                    } else {
+                        subSum += ("+" + inputArr[idx])
+                    }
+
+                }
+                document.getElementById("log").innerHTML = subSum
+                drawSolution = true
+            } else {
+
+                for (let idx = idx1; idx <= idx2; idx++) {
+                    document.getElementById("row" + idx).style.backgroundColor = "black"
+                }
+
+                var solution = solArrLogN[1000 * idx1 + idx2]
+                idx1 = Math.floor(solution / 1000)
+                idx2 = solution % 1000
+
+                for (let idx = idx1; idx <= idx2; idx++) {
+                    document.getElementById("row" + idx).style.backgroundColor = "red"
+                }
+                drawSolution = false
+                idxTrace++
+            }
+
+        }
+
+
+        var idxTrace = 0
+
+
+        curMaxIdx = 0
+        var timeCount = new Date().getTime()
+
+
+
+
+
+        console.log("draw done")
+        var startTime = new Date().getTime()
+
+        console.log(funcSquareAlg(inputArr), new Date().getTime() - startTime)
+        startTime = new Date().getTime()
+        console.log(funcLogNAlg(inputArr, 0, inputArr.length - 1), new Date().getTime() - startTime)
+
+        startTime = new Date().getTime()
+        console.log(funcLinearAlg(inputArr), new Date().getTime() - startTime)
+    </script>
+
+</body>

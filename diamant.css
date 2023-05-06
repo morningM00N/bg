@@ -1,0 +1,45 @@
+.bgdiv {
+    background-image: url("img/diamant/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0px;
+    margin: 0px;
+}
+
+body{
+    margin:0px;
+    border:0px;
+    padding:0px;
+}
+
+.empty{
+    background-color: transparent;
+    opacity: 0.0;
+    margin:0px;
+    border:0px;
+    padding:0px;
+    position: absolute;
+}
+.cards{
+    background-color: transparent;
+    /*opacity: 30%;*/
+    margin:0px;
+    border:0px;
+    padding:0px;
+    position: absolute;
+    color:red;
+    text-align: center;
+    vertical-align: center;
+    font-weight: bolder;
+}
+
+.dmg{
+   /*opacity: 30%;*/
+    background-color: transparent;
+    margin:0px;
+    border-style: dashed;
+    padding:0px;
+    position: absolute;
+    border-radius: 5%;
+    color:black;
+}

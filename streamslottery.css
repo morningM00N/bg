@@ -1,0 +1,53 @@
+.bgdiv {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-image: url('img/bg2.jpg');
+}
+
+body {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.cards {
+    background-color: transparent;
+    border: 0px;
+
+    border: 3px dashed black;
+    border: 0px;
+
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    border-radius: 5%;
+    background-size: 100%;
+}
+
+.btnDice {
+    border: 1px dotted red;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+    text-align-last: center;
+    position: absolute;
+    font-family: 'Sriracha', cursive;
+    border-radius: 20%;
+    box-shadow: 10px 10px;
+}
+
+.txtRound {
+    border: 1px dotted red;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+    text-align-last: center;
+    position: absolute;
+    font-family: 'Bangers', cursive;
+   
+}

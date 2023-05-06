@@ -1,0 +1,42 @@
+.bgdiv {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-image: url('');
+    background-image: url('img/harvestdice.jpg');
+}
+
+body {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.btnTrans {
+    border: 1px dotted red;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+    text-align-last: center;
+    position: absolute;
+    font-family: 'Sriracha', cursive;
+    background-repeat: no-repeat;
+}
+
+.btnCircle {
+    border: 1px dotted red;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 100%;
+    background-color: transparent;
+    text-align-last: center;
+    color:black;
+    position: absolute;
+    font-family: 'Sriracha', cursive;
+}
+
+

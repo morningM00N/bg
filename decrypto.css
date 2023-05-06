@@ -1,0 +1,39 @@
+body {
+    font-size: 22px;
+    font-family: 'Stylish', sans-serif;
+    border: 0px;
+    margin: 0px;
+}
+
+input {
+    font-family: 'Stylish', sans-serif;
+}
+
+.bgdiv {
+    background-image: url("img/decrypto_white.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0px;
+    margin: 0px;
+}
+
+.txtHints {
+    position: absolute;
+    background-color: transparent;
+    border-style: hidden;
+    text-align-last: center;
+}
+
+.sltGuess {
+    position: absolute;
+    background-color: transparent;
+    text-align-last: center;
+    border-style: hidden;
+    -webkit-appearance: none;
+}
+
+.btnChange {
+    position: absolute;
+    background-color: transparent;
+    border-style: hidden;
+}

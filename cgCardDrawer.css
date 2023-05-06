@@ -1,0 +1,27 @@
+.bgdiv {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-image: url('img/bg.jpg');
+}
+
+body {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.cards {
+    background-color: transparent;
+
+    border: 3px dashed black;
+    border: 0px;
+
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    border-radius: 5%;
+    background-size: 100%;
+}

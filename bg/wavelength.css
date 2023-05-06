@@ -1,0 +1,63 @@
+.bgdiv {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-image: url('img/bg4.jpg');
+}
+
+  
+.rangeClass::-webkit-slider-thumb { 
+    -webkit-appearance: none;
+    background: black;
+    cursor: pointer;
+    border: 1px solid #000000; 
+    height: 100%;
+    width: 2%;   
+    margin-top: 0px; 
+    border-radius: 3px;
+    border:0px;
+  }
+
+.rangeClass{
+	width:100%;
+	-webkit-appearance: none;
+}  
+
+input[type=range] {
+	width:100%;
+	-webkit-appearance: none;
+	background: white;
+}
+
+ 
+
+body {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.btnTrans {
+    border: 1px dotted red;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+    text-align-last: center;
+    position: absolute;
+    font-family: 'Nanum Pen Script', cursive;
+}
+
+.sltTrans {
+    border: 1px dotted red;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+    position: absolute;
+    text-align-last: center;
+    -webkit-appearance: none;
+    font-family: 'Sriracha', cursive;
+}

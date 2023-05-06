@@ -1,0 +1,44 @@
+@startuml ex
+actor master
+actor participants
+master->server:create(name:String)
+activate server
+server->roomManagement:isExists(name:String)
+activate roomManagement
+alt room exists
+server<--roomManagement:true
+master<--server:createFail
+else room does not exist
+return false
+server->roomManagement:createRoom(name:String)
+activate roomManagement
+roomManagement->room:construct(name:String)
+activate room
+return doneConstuct
+return doneOpen
+server->roomManagement:joinRoom(name:String,id:Session)
+activate roomManagement
+roomManagement->room:joinRoom(name:String,id:Session)
+activate room
+return doneJoin
+return doneJoin
+return createSuccess
+end
+
+participants->server:joinRoom(name:String)
+activate server
+server->roomManagement:isExists(name:String)
+activate roomManagement
+alt room exists
+server<--roomManagement:true
+server->roomManagement:joinRoom(name:String,id:Session)
+roomManagement->room:joinRoom(name:String,id:Session)
+activate room
+return doneJoin
+server<--roomManagement:doneJoin
+participants<--server:joinSuccess
+else room does not exist
+return false
+return joinFail
+end
+@enduml
