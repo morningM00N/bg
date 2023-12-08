@@ -1,1 +1,14 @@
-{"FREQ":144,"IN":7,"INSTS":[{"CELL":"AOI22","CON":{"A0":"0"}},{"CELL":"AOI22","CON":{"A0":"0"}}],"NETS":1,"OUT":2,"STAGE":1,"TIN":8,"TOUT":2}
+{
+    "CELLS": { "ADDF": 27, "ADDH": 3, "AND2": 1, "AO21": 3, "AO21B": 1, "AOI21": 8, "AOI21P": 1, "AOI22": 36, "AOI22BB": 1, "BUFH": 1, "CGEN": 5, "CGENCON": 2, "INV": 27, "NAND2": 14, "NAND2B": 1, "NAND2XB": 1, "NOR2": 6, "NOR2B": 1, "NOR3": 1, "OA21A1OI2": 3, "OAI21": 11, "OAI211": 3, "OAI22": 26, "OAI31": 7, "OR2": 1, "XNOR2": 15, "XNOR3": 1, "XOR2": 5, "XOR3": 3 },
+    "PATTERNS": [{ "FREQ": 780, "IN": 10, "INSTS": [{ "CELL": "AOI22", "CON": { "A0": "0" } }, { "CELL": "AOI22", "CON": { "A0": "0" } }, { "CELL": "AOI22", "CON": { "A0": "0" } }], "NETS": 1, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 },
+        { "FREQ": 627, "IN": 10, "INSTS": [{ "CELL": "AOI22", "CON": { "B0": "0" } }, { "CELL": "AOI22", "CON": { "B0": "0" } }, { "CELL": "AOI22", "CON": { "B0": "0" } }], "NETS": 1, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 },
+        { "FREQ": 588, "IN": 9, "INSTS": [{ "CELL": "AOI22", "CON": { "A0": "0", "B0": "1" } }, { "CELL": "AOI22", "CON": { "A0": "0", "B0": "1" } }, { "CELL": "AOI22", "CON": { "A0": "0" } }], "NETS": 2, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 },
+        { "FREQ": 537, "IN": 9, "INSTS": [{ "CELL": "AOI22", "CON": { "A0": "0", "B0": "1" } }, { "CELL": "AOI22", "CON": { "A0": "0", "B0": "1" } }, { "CELL": "AOI22", "CON": { "B0": "1" } }], "NETS": 2, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 },
+        { "FREQ": 504, "IN": 8, "INSTS": [{ "CELL": "OAI22", "CON": { "A0": "1", "B0": "0" } }, { "CELL": "OAI22", "CON": { "A0": "1", "B0": "0" } }, { "CELL": "OAI22", "CON": { "A0": "1", "B0": "0" } }], "NETS": 2, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 },
+        { "FREQ": 504, "IN": 10, "INSTS": [{ "CELL": "OAI22", "CON": { "A0": "0" } }, { "CELL": "OAI22", "CON": { "A0": "0" } }, { "CELL": "OAI22", "CON": { "A0": "0" } }], "NETS": 1, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 },
+        { "FREQ": 504, "IN": 9, "INSTS": [{ "CELL": "OAI22", "CON": { "A0": "1", "B0": "0" } }, { "CELL": "OAI22", "CON": { "A0": "1", "B0": "0" } }, { "CELL": "OAI22", "CON": { "A0": "1" } }], "NETS": 2, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 },
+        { "FREQ": 504, "IN": 10, "INSTS": [{ "CELL": "OAI22", "CON": { "B0": "0" } }, { "CELL": "OAI22", "CON": { "B0": "0" } }, { "CELL": "OAI22", "CON": { "B0": "0" } }], "NETS": 1, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 },
+        { "FREQ": 504, "IN": 9, "INSTS": [{ "CELL": "OAI22", "CON": { "A0": "1", "B0": "0" } }, { "CELL": "OAI22", "CON": { "A0": "1", "B0": "0" } }, { "CELL": "OAI22", "CON": { "B0": "0" } }], "NETS": 2, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 },
+        { "FREQ": 492, "IN": 8, "INSTS": [{ "CELL": "AOI22", "CON": { "A0": "0", "B0": "1" } }, { "CELL": "AOI22", "CON": { "A0": "0", "B0": "1" } }, { "CELL": "AOI22", "CON": { "A0": "0", "B0": "1" } }], "NETS": 2, "OUT": 3, "STAGE": 1, "TIN": 12, "TOUT": 3 }
+    ]
+}
