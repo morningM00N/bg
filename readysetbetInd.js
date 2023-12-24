@@ -1,5 +1,5 @@
 
-var webSocket = new WebSocket("ws://192.168.1.139:9998");
+var webSocket = new WebSocket("ws://localhost:9998");
 
 webSocket.onopen = function(message){      
     console.log("Server connect...")    
