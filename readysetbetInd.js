@@ -1,13 +1,16 @@
 
-var webSocket = new WebSocket("ws://localhost:9998");
+var webSocket
 
-webSocket.onopen = function(message){      
-    console.log("Server connect...")    
-};
+function funcConnect(){
+    webSocket = new WebSocket("ws://192.168.1.139:9998");
+    webSocket.onopen = function(message){      
+        console.log("Server connect...")    
+    };
+    webSocket.onmessage = function(message){      
+        console.log("Recieve From Server => "+message.data)    
+    };
+}
 
-webSocket.onmessage = function(message){      // 출력 area에 메시지를 표시한다.      
-    console.log("Recieve From Server => "+message.data)    
-};
 
 pageHeight = document.documentElement.clientHeight
 pageWidth = document.documentElement.clientWidth
@@ -41,6 +44,7 @@ for (let i = 0; i < 9; i++) {
 function funcBet(color,selectCoidID,i,j){
     console.log(color,selectCoidID,i,j)
     webSocket.send(color+"_"+selectCoidID+"_"+i+"_"+j);
+    alert("clicked")
 }
 
 
@@ -98,6 +102,7 @@ function funcDraw(){
         img.style.width = pageWidth/6+"px"
         img.style.borderRadius="100%"
         img.style.boxShadow="10px 10px gray"
+        img.onclick=function(){funcConnect()}
 
     }
 
