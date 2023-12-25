@@ -1,13 +1,17 @@
 
 var webSocket
 
+function funcShowLog(log){
+    console.log(log)
+}
 function funcConnect(){
+    funcShowLog("connecting")
     webSocket = new WebSocket("ws://192.168.1.139:9998");
     webSocket.onopen = function(message){      
-        console.log("Server connect...")    
+        funcShowLog("Server connect...")
     };
     webSocket.onmessage = function(message){      
-        console.log("Recieve From Server => "+message.data)    
+        funcShowLog("Recieve From Server => "+message.data)
     };
 }
 
@@ -42,9 +46,8 @@ for (let i = 0; i < 9; i++) {
 }
 
 function funcBet(color,selectCoidID,i,j){
-    console.log(color,selectCoidID,i,j)
+    funcShowLog(""+color+","+selectCoidID+","+i+","+j)
     webSocket.send(color+"_"+selectCoidID+"_"+i+"_"+j);
-    alert("clicked")
 }
 
 
@@ -95,9 +98,9 @@ function funcDraw(){
         tdChip.style.width="10%"
         
         let img = funcAddChild("img",tdChip)
-        img.src = "img/readysetbet/chips/green ("+(i+1)+").png"
+        img.src = "http://morningm00n.github.io/bg/img/readysetbet/chips/green ("+(i+1)+").png"
         if (i==4){
-            img.src = "img/readysetbet/chips/black ("+(i)+").png"
+            img.src = "http://morningm00n.github.io/bg/img/readysetbet/chips/black ("+(i)+").png"
         }
         img.style.width = pageWidth/6+"px"
         img.style.borderRadius="100%"
@@ -106,7 +109,10 @@ function funcDraw(){
 
     }
 
+
     let tblMain = document.getElementById('tblInd')
+
+
     tblMain.style.width = "100%"
     let tr = funcAddChild("tr",tblMain)
     let td = funcAddChild("td",tr)
@@ -116,7 +122,7 @@ function funcDraw(){
         td = funcAddChild("td",tr)
         td.style.width="10%"
         let img = funcAddChild("img",td)
-        img.src = "img/readysetbet/propbets/pro ("+i+").png"
+        img.src = "http://morningm00n.github.io/bg/img/readysetbet/propbets/pro ("+i+").png"
         img.style.width = pageWidth/3.2+"px"
     }
     tr = funcAddChild("tr",tblMain)
@@ -132,7 +138,7 @@ function funcDraw(){
             td.style.textAlign="left"
         }
         let img = funcAddChild("img",td)
-        img.src = "img/readysetbet/propbets/pro ("+(i+5)+").png"
+        img.src = "http://morningm00n.github.io/bg/img/readysetbet/propbets/pro ("+(i+5)+").png"
         img.style.width = pageWidth/3.2+"px"
     }
 
@@ -143,22 +149,22 @@ function funcDraw(){
     td = funcAddChild("td",tr)
     td.style.width="10%"
     let img = funcAddChild("img",td)
-    img.src = "img/readysetbet/horse/blue.png"
+    img.src = "http://morningm00n.github.io/bg/img/readysetbet/horse/blue.png"
     img.style.width = pageWidth/4.4+"px"
     td = funcAddChild("td",tr)
     td.style.width="10%"
     img = funcAddChild("img",td)
-    img.src = "img/readysetbet/horse/orange.png"
+    img.src = "http://morningm00n.github.io/bg/img/readysetbet/horse/orange.png"
     img.style.width = pageWidth/4.4+"px"
     td = funcAddChild("td",tr)
     td.style.width="10%"
     img = funcAddChild("img",td)
-    img.src = "img/readysetbet/horse/red.png"
+    img.src = "http://morningm00n.github.io/bg/img/readysetbet/horse/red.png"
     img.style.width = pageWidth/4.4+"px"
     td = funcAddChild("td",tr)
     td.style.width="10%"
     img = funcAddChild("img",td)
-    img.src = "img/readysetbet/horse/black.png"
+    img.src = "http://morningm00n.github.io/bg/img/readysetbet/horse/black.png"
     img.style.width = pageWidth/4.4+"px"
 
     tr = funcAddChild("tr",tblInd)
@@ -229,10 +235,11 @@ function funcDraw(){
         td = funcAddChild("td",tr)
         td.style.width="10%"
         let img = funcAddChild("img",td)
-        img.src = "img/readysetbet/horse/horse"+i+".png"
+        img.src = "http://morningm00n.github.io/bg/img/readysetbet/horse/horse"+i+".png"
         img.style.width = pageWidth/4.2+"px"
     
     }
+
 
 
 

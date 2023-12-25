@@ -1,9 +1,9 @@
 .bgdiv {
-    background-image: url('img/readysetbet/bg.png');
+    background-image: url('https://morningm00n.github.io/bg/img/readysetbet/bg.png');
     }
 
 header {
-    background-image: url('img/readysetbet/bg.png');
+    background-image: url('https://morningm00n.github.io/bg/img/readysetbet/bg.png');
     position: fixed;
     top: 0;
     left: 0;
@@ -23,7 +23,7 @@ header {
       
 table {
     border-collapse: collapse;
-    background-image: url('img/readysetbet/bg.png');
+    background-image: url('https://morningm00n.github.io/bg/img/readysetbet/bg.png');
 
   }
 

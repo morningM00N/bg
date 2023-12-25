@@ -1,16 +1,22 @@
 import asyncio;# 웹 소켓 모듈을 선언한다.
 import websockets; # 클라이언트 접속이 되면 호출된다.
 
+print("server run")
 clients = {}
 async def accept(websocket, path):  
     while True:    # 클라이언트로부터 메시지를 대기한다.    
-        if (websocket in clients)==False:
-            clients[websocket]=0
-        data = await websocket.recv()    
-        print("receive : " + data)    # 클라인언트로 echo를 붙여서 재 전송한다.    
-        for key in clients:
-            if key==websocket: continue
-            await key.send("echo : " + data) # 웹 소켓 서버 생성.호스트는 localhost에 port는 9998로 생성한다. 
+        try:
+            if (websocket in clients)==False:
+                clients[websocket]=0
+                
+            data = await websocket.recv()    
+            print("receive : " + data)    # 클라인언트로 echo를 붙여서 재 전송한다.    
+            for key in clients:
+                if key==websocket: continue
+                await key.send("echo : " + data) # 웹 소켓 서버 생성.호스트는 localhost에 port는 9998로 생성한다. 
+        except Exception as e:
+            print(e)
+            pass
 
 start_server = websockets.serve(accept, "192.168.1.139", 9998)# 비동기로 서버를 대기한다.
         
