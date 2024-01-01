@@ -1,0 +1,47 @@
+@startuml boardgame
+
+enum COLOR {
+    BLUE,
+    RED,
+    ORANGE,
+}
+
+enum ORDER{
+    WIN,PLACE,SHOW
+}
+class GameController{
+    +addUser(name:str,m:Messenger):bool
+    +removeUser(name:str):bool
+    +updateConnect(name:str,m:Messenger):bool
+    +startGame():bool
+    +setGame():bool
+}
+
+class PythonReadySetBet{
+    -players:dict[str,Messenger]
+    -curRound:int
+    -propCards:list[int]
+    -exoticCards:list[int]
+    -vipCards:list[bool]
+    -betLocColor:list[bool]
+    -betLocProp:list[bool]
+    -betLocExotic:list[int]
+    +addPlayer(name:str,m:Messenger):COLOR
+    +betColor(name:str,loc:int,chip:int):bool
+    +betProp(name:str,loc:int,chip:int):bool
+    +betExotic(name:str,loc:int,chip:int):bool
+    +betHorse(name:str,order:ORDER,chip:int):bool
+    +startRound():bool
+    +clearBet():void
+}
+
+class JSReadySetBetMainBoard{
+    
+}
+
+class Messenger{
+    +sendMessage(m:json):bool
+    +receiveMessage(m:json):bool
+}
+
+@enduml

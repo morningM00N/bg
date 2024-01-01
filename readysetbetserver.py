@@ -5,6 +5,18 @@ import random
 true = True
 false = False
 
+def SWAP(arr,idx1,idx2):
+    tmp = arr[idx1]
+    arr[idx1]=arr[idx2]
+    arr[idx2]=tmp
+    return
+
+def shuffle(arr):
+    for _ in range(len(arr)*1000):
+        idx1 = random.randint(0,len(arr)-1)
+        idx2 = random.randint(0,len(arr)-1)
+        SWAP(arr,idx1,idx2)
+
 COLORS=["blue","brown","dark","green","pink","purple","silver","yellow"]
 class ReadySetBet:
     def __init__(self) -> None:
@@ -25,26 +37,11 @@ class ReadySetBet:
             self.vips.append(i)
         for i in range(self.numOfProps):
             self.prosBets.append(i)
-            
-        for _ in range(100000):
-            idx1 = random.randint(0,self.numOfExotic-1)
-            idx2 = random.randint(0,self.numOfExotic-1)
-            tmp = self.exoticOrder[idx1]
-            self.exoticOrder[idx1]=self.exoticOrder[idx2]
-            self.exoticOrder[idx2]=tmp
-            
-            idx1 = random.randint(0,self.numOfVips-1)
-            idx2 = random.randint(0,self.numOfVips-1)
-            tmp = self.vips[idx1]
-            self.vips[idx1]=self.vips[idx2]
-            self.vips[idx2]=tmp
 
-            idx1 = random.randint(0,self.numOfProps-1)
-            idx2 = random.randint(0,self.numOfProps-1)
-            tmp = self.prosBets[idx1]
-            self.prosBets[idx1]=self.prosBets[idx2]
-            self.prosBets[idx2]=tmp
-            
+        shuffle(self.exoticOrder)            
+        shuffle(self.vips)            
+        shuffle(self.prosBets)            
+       
         self.bet["prop"]=[None]*5
         self.bet["color"]=[None]*4
         self.bet["exotic"]=[]
