@@ -48,7 +48,7 @@ async function funcConnect() {
 
                 }
                 else if (event.value == "true") {
-                    alert("" + roomNumber + " 방에 들어갔습니다." + event.color)
+                    alert("" + roomNumber + " 방에 들어갔습니다.")
 
                     for (let i = 0; i < 5; i++) {
                         let img = document.getElementById("idChips_" + i)
@@ -151,12 +151,12 @@ async function funcConnect() {
 funcConnect()
 let roomNumber = undefined
 let nameID = undefined
-function funcDebug(namein)
+//function funcDebug(namein)
 {
     roomNumber = 1 
-    //roomNumber = prompt("방번호를 입력하세요.")
-    nameID = namein
-    // nameID = prompt("이름을 입력하세요.")
+    roomNumber = prompt("방번호를 입력하세요.")
+    //nameID = namein
+    nameID = prompt("이름을 입력하세요.")
     const event = {
         type: "join",
         room: roomNumber,

@@ -4,7 +4,7 @@
 var webSocket = undefined
 
 async function funcConnect() {
-    webSocket = new WebSocket("ws://m0rningm00n.ddns.net:9998")
+    varwebSocket = new WebSocket("ws://m0rningm00n.ddns.net:9998")
     webSocket.onopen = function (message) {
         funcShowLog("Server connect...")
     };
@@ -85,7 +85,7 @@ async function funcConnect() {
 funcConnect()
 
 let roomNumber = 1
-//roomNumber = prompt("방번호를 입력하세요.")
+roomNumber = prompt("방번호를 입력하세요.")
 
 const event = {
     type: "newgame",

@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from enum import Enum
+
 import asyncio
 import random
 import websockets
@@ -9,108 +13,81 @@ def DP(b):
         print("err")
         input()
 
+def getWWOF(name:str,word:str):
+    if '가'<=name[-1]<='힣' and (ord(name[-1])-ord("가")) % 28 > 0:
+        return name+word[0]
+    else:
+        return name+word[1]
+
 false = False
 true = True
-class ReadySetBet:
-    def __init__(self) -> None:
-        try:
-            self.ratios = [None]*9
-            self.ratios[0] = [[[9, 2], [8, 2], [7, 2],[0,0]], [[5, 3], [5, 4],[0,0]], [[4, 3], [4, 4],[0,0]]]
-            self.ratios[1] = [[[7, 0], [6, 0], [5, 1],[0,0]], [[4, 0], [4, 1],[0,0]], [[3, 0], [3, 1],[0,0]]]
-            self.ratios[2] = [[[5, 0], [4, 0], [4, 2],[0,0]], [[3, 2], [2, 2],[0,0]], [[2, 0], [2, 3],[0,0]]]
-            self.ratios[3] = [[[3, 0], [3, 1], [3, 2],[0,0]], [[2, 1], [2, 5],[0,0]], [[1, 0], [1, 2],[0,0]]]
-            self.ratios[4] = [[[3, 2], [3, 3], [3, 4],[0,0]], [[2, 5], [2, 6],[0,0]], [[1, 1], [1, 3],[0,0]]]
-            self.ratios[5] = self.ratios[3]
-            self.ratios[6] = self.ratios[2]
-            self.ratios[7] = self.ratios[1]
-            self.ratios[8] = self.ratios[0]
 
-            self.colors=["blue", "brown", "dark", "green", "pink", "purple", "silver", "yellow"]
-            self.host=None
-            self.curRound = 0
-            self.exoticOrder=[]
-            for _ in range(4):
-                idx = random.randint(0,4)
-                while idx in self.exoticOrder:
-                    idx = random.randint(0,4)
-                self.exoticOrder.append(idx)
-            self.propOrder=[]
-            for _ in range(20):
-                idx = random.randint(0,27)
-                while idx in self.propOrder:
-                    idx = random.randint(0,27)
-                self.propOrder.append(idx)
-            self.vip=[]
-            for _ in range(32):
-                self.vip.append(False)
-            self.players={}
-            self.betColors=None
-            self.betProp=None
-            self.betExotic=None
-            self.betHorse=None
-            self.usedCoins={}
-            self.sendVIPs={}
-            self.initBet()
-                
-        except Exception as e:
-            print(e)
-        pass
-    
-    async def toHost(self,message):
-        await self.host.send(message)  
+class RoomState(Enum):
+    END = 0
+    PLAYING = 1
+    READY = 2
+    NEW = 3
 
-    async def broadcast(self,message):
-        for key in self.players:
-            await self.players[key][0].send(message)
-          
-    def joinPlayer(self,name,wc):
-        if len(self.players)>=8:
-            return "FULL"
-        if name in self.players:
-            return False
-        color = self.colors[len(self.players)]
-        self.players[name] = (wc,color)
-        print(f"player {color} join")
-        self.usedCoins[color] = [0,0,0,0,0]
-        self.sendVIPs[color] = [None,None]
-        return color
+class ErrorType(Enum):
+    NO_ERROR = 0    
+    DUPLICATED_NAME = 1
+    NOT_NEW_STATE = 2
+    FULL_PLAYERS = 3
+    NOT_PLAYING_STATE = 4 
+    NO_PLAYER = 5
+    PLAYING_PLAYER = 6
     
-    def leavePlayer(self,wc):
-        removedKey = None
-        for key in self.players:
-            if self.players[key][0]==wc:
-                removedKey = key
-                break
-        if removedKey!=None:
-            print(f"player {self.players[key][1]} leave")
-            self.players.pop(removedKey)
-    def getColor(self,wc):
-        for key in self.players:
-            if self.players[key][0]==wc:
-                return self.players[key][1]
-        DP(False)
+class Room:
+    def __init__(self,name:str,capacity:int,host:Player) -> None:
+        self.name:str = name
+        self.capacity:int = capacity
+        self.host = host
+        self.players:dict[str,Player] = {}
+        self.state:RoomState = RoomState.NEW
+    
+    def join(self,player:Player) -> ErrorType:
+        if self.state!=RoomState.NEW:
+            return ErrorType.NOT_NEW_STATE
+        elif self.capacity>=len(self.players):
+            return ErrorType.FULL_PLAYERS
+        elif player.name in self.players:
+            return ErrorType.DUPLICATED_NAME
+        player.room = self
+        self.players[player.name] = player
+        return ErrorType.NO_ERROR
+    
+    def reJoin(self,player:Player) -> ErrorType:
+        if self.state!=RoomState.PLAYING:
+            return ErrorType.NOT_PLAYING_STATE
+        elif player.name not in self.players:
+            return ErrorType.NO_PLAYER
+        elif self.players[player.name] != None:
+            return ErrorType.PLAYING_PLAYER
+        player.room = self
+        self.players[player.name] = player
+        return ErrorType.NO_ERROR
         
-    def initBet(self):
-        self.betColors=[False,False,False,False]
-        self.betProp=[False,False,False,False,False]
-        self.betExotic=[0,0,0,0]
-        self.betHorse=[
-            [0,0,0],
-            [0,0,0],
-            [0,0,0],
-            [0,0,0],
-            [0,0,0],
-            [0,0,0],
-            [0,0,0],
-            [0,0,0],
-            [0,0,0]]
-        for key in self.usedCoins:
-            self.usedCoins[key] = [0,0,0,0,0]
-        for key in self.sendVIPs:
-            self.sendVIPs[key] = [None,None]
+
+class Player:
+    def __init__(self,name:str=None,websocket:websockets=None,room:Room=None) -> None:
+        self.name:str = name
+        self.websocket:websockets = websocket
+        self.room:Room = room
+        self.ready:bool = False
         
+    def join(self,room:Room) -> ErrorType:
+        assert self.room==None, 'already join a room'
+        errType = room.join(self)
+        return errType
+
+    def createRoom(self,roomName:str,capacity:int) ->ErrorType:
+        room=Room(roomName,capacity,self)
+        return room
             
-                
+            
+            
+        
+    
         
         
 
@@ -467,15 +444,30 @@ async def handler(websocket):
             return
 
 
+mapWebsocketToPlayer={}
+async def MyHandler(websocket):
+    while True:
+        try:
+            message = await websocket.recv()
+            event = json.loads(message)
+            
+        except websockets.exceptions.ConnectionClosedOK as e:
+            if websocket in mapWebsocketToPlayer:
+                player:Player = mapWebsocketToPlayer[websocket]
+                room:Room = player.room
+            
+        
+    
+
 
 async def main():
-    async with websockets.serve(handler, "192.168.1.139", 9998):
+    async with websockets.serve(MyHandler, "192.168.1.139", 9998):
         await asyncio.Future()  # run forever
 
 
 if __name__ == "__main__":
     print("run server")
     asyncio.run(main())
-    print("run server")
+    print("end server")
     
     #python -m http.server 80
