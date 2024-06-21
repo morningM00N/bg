@@ -151,11 +151,18 @@ function funcCardDraw(){
             return
         }
     }
+    let usedBG = [false,false,false,false,false,false,false]
     for (let idx = 0; idx < 3; idx++) {
         
         curCards[idx].style.backgroundImage = "url('img/welcometo/"+cardArr[idx+curIdx]+".png')"
 //        curCards[idx].innerHTML = idx+curIdx
-        let bgpath = cardArr[idx+curIdx-3][0]+"B";
+        let thisBgIdx = MMath.getRandom(0,6)
+        while (usedBG[thisBgIdx]==true)
+            {
+                thisBgIdx = MMath.getRandom(0,6)
+            }
+            usedBG[thisBgIdx]=true
+        let bgpath = cardArr[idx+curIdx-3][0]+"B"+thisBgIdx;
 //        nextCards[idx].innerHTML = idx+curIdx-3
         nextCards[idx].style.backgroundImage = "url('img/welcometo/"+bgpath+".png')"
 
