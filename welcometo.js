@@ -45,7 +45,7 @@ funcUpdatePageSize(true)
 let curCards = []
 let nextCards = []
 
-let goal=[MMath.getRandom(1,11),MMath.getRandom(1,11),MMath.getRandom(1,6)]
+let goal=[MMath.getRandom(1,11),MMath.getRandom(1,10),MMath.getRandom(1,6)]
 
 let leftMargin = 0.01
 let topMargin = 0.01
