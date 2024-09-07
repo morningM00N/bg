@@ -29,7 +29,7 @@ function funcDrawWi(){
     console.log(inputSol.style.fontSize)
     inputSol.onclick = function() {
         let ans = prompt("정답입력")
-        if (ans=null){
+        if (ans==null){
             return
         }
         inputSol.value = ans
