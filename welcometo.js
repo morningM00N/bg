@@ -81,6 +81,7 @@ function insertElement(){
         rleftMargin+rcardWidth,
         rtopMargin+rcardHeight
     )
+    rollbackBtn.id = "btnRollBack"
     rollbackBtn.innerHTML = "취소"
     rollbackBtn.onclick=function(){
         let res = confirm("취소하시겠습니까?")
@@ -146,6 +147,7 @@ function funcCardDraw(){
         let res = confirm("덱을 소진했습니다. (이 행동은 취소할 수 없습니다)")
         if (res==true){
             curIdx = 3
+            document.getElementById("btnRollBack").innerHTML="취소/"+((curIdx/3)-1)
             funcSortArr(cardArr)
         }else{
             return
@@ -170,6 +172,7 @@ function funcCardDraw(){
 //        nextCards[idx].style.backgroundImage = "url('img/welcometo/"+cardArr[idx+curIdx-3]+".png')"
     }   
     curIdx+=3
+    document.getElementById("btnRollBack").innerHTML="취소/"+((curIdx/3)-1)
 }
 
 funcCardDraw()
