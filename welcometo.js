@@ -82,13 +82,13 @@ function insertElement(){
         rtopMargin+rcardHeight
     )
     rollbackBtn.id = "btnRollBack"
-    rollbackBtn.innerHTML = "취소"
+    rollbackBtn.innerHTML = "취소/1"
     rollbackBtn.onclick=function(){
         let res = confirm("취소하시겠습니까?")
         if (res==true){
             if (curIdx>6){
                 curIdx -= 6
-                funcCardDraw()
+                funcCardDraw(false)
             }
         }
     }
@@ -126,13 +126,13 @@ function insertElement(){
             gtopMargin + ggapHeight*idx+gcardHeight
         )
         goalCards[idx].onclick = function(){
-            if (accomplish[idx]==false){
-                accomplish[idx]=true
-                goalCards[idx].style.backgroundImage="url('img/welcometo/goal"+(idx+1)+" ("+goal[idx]+").png')"
+            if (accomplish[idx]!=true){
+                accomplish[idx]=false
+                goalCards[idx].style.backgroundImage="url('https://raw.githubusercontent.com/morningM00N/bg/refs/heads/master/img/welcometo/goal"+(idx+1)+" ("+goal[idx]+").png')"
             }
             else{
                 accomplish[idx]=false
-                goalCards[idx].style.backgroundImage="url('img/welcometo/goal"+(idx+1)+"b ("+goal[idx]+").png')"
+                goalCards[idx].style.backgroundImage="url('https://raw.githubusercontent.com/morningM00N/bg/refs/heads/master/img/welcometo/goal"+(idx+1)+"b ("+goal[idx]+").png')"
             }
         }
         goalCards[idx].click()
@@ -142,38 +142,85 @@ function insertElement(){
 
 insertElement()
 curIdx=3
-function funcCardDraw(){
-    if (curIdx+2 >= cardArr.length){
+
+function funcCardDraw(animation) {
+    if (curIdx+2 >= cardArr.length) {
         let res = confirm("덱을 소진했습니다. (이 행동은 취소할 수 없습니다)")
-        if (res==true){
+        if (res==true) {
             curIdx = 3
-            document.getElementById("btnRollBack").innerHTML="취소/"+((curIdx/3)-1)
+            document.getElementById("btnRollBack").innerHTML="취소/1"
             funcSortArr(cardArr)
-        }else{
+        } else {
             return
         }
     }
-    let usedBG = [false,false,false,false,false,false,false]
+
+    // 현재 카드들을 이전 카드 위치로 이동하는 애니메이션
     for (let idx = 0; idx < 3; idx++) {
+        // 이동할 카드 엘리먼트 생성
+        if (animation!=false){
+        let moveCard = funcInsertElement(
+            "moveCard"+idx,
+            "div",
+            "btnTrans",
+            leftMargin + gapVertical*idx,
+            topMargin,
+            leftMargin + gapVertical*idx + cardWidth,
+            topMargin + cardHeight
+        )
+        moveCard.id = "movedCard"+idx
         
-        curCards[idx].style.backgroundImage = "url('img/welcometo/"+cardArr[idx+curIdx]+".png')"
-//        curCards[idx].innerHTML = idx+curIdx
-        let thisBgIdx = MMath.getRandom(0,6)
-        while (usedBG[thisBgIdx]==true)
-            {
+        // 현재 카드의 이미지로 설정
+        moveCard.style.backgroundImage = curCards[idx].style.backgroundImage
+        moveCard.style.transition = "all 0.5s ease"
+        moveCard.style.zIndex = "1000"
+
+        curCards[idx].style.backgroundImage = "url('https://raw.githubusercontent.com/morningM00N/bg/refs/heads/master/img/welcometo/"+cardArr[idx+curIdx]+".png')"
+
+
+        
+        // 약간의 지연 후 이동 시작
+        setTimeout(() => {
+            // 다음 카드 위치로 이동
+            moveCard.style.transform = `translate(${modVertical*pageWidth}px, ${gapHeight*pageHeight}px)`
+        }, 50 * idx) // 각 카드마다 약간의 시차를 두고 이동
+        }
+    }
+
+    setTimeout(() => {
+        // 실제 카드 업데이트
+        let usedBG = [false,false,false,false,false,false,false]
+        for (let i = 0; i < 3; i++) {
+            if (animation!=false){
+            document.getElementById("movedCard"+i).remove()
+            }
+            curCards[i].style.backgroundImage = "url('https://raw.githubusercontent.com/morningM00N/bg/refs/heads/master/img/welcometo/"+cardArr[i+curIdx]+".png')"
+            
+            let thisBgIdx = MMath.getRandom(0,6)
+            while (usedBG[thisBgIdx]==true) {
                 thisBgIdx = MMath.getRandom(0,6)
             }
             usedBG[thisBgIdx]=true
-        let bgpath = cardArr[idx+curIdx-3][0]+"B"+thisBgIdx;
-//        nextCards[idx].innerHTML = idx+curIdx-3
-        nextCards[idx].style.backgroundImage = "url('img/welcometo/"+bgpath+".png')"
-
+            let bgpath = cardArr[i+curIdx-3][0]+"B"+thisBgIdx
+            nextCards[i].style.backgroundImage = "url('https://raw.githubusercontent.com/morningM00N/bg/refs/heads/master/img/welcometo/"+bgpath+".png')"
+        }
         
-//        nextCards[idx].style.backgroundImage = "url('img/welcometo/"+cardArr[idx+curIdx-3]+".png')"
-    }   
-    curIdx+=3
-    document.getElementById("btnRollBack").innerHTML="취소/"+((curIdx/3)-1)
+        curIdx+=3
+        document.getElementById("btnRollBack").innerHTML="취소/"+((curIdx/3)-1)
+        // 상태 저장
+    }, 500) // 애니메이션 시간과 동일하게 설정
+
+
 }
+
+// CSS 스타일 추가를 위한 스타일 엘리먼트 생성
+let style = document.createElement('style')
+style.textContent = `
+    .btnTrans {
+        transition: transform 0.5s ease;
+    }
+`
+document.head.appendChild(style)
 
 funcCardDraw()
 
