@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guess Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Number Guess Game</h1>
+    <table id="tblMain">
+        <tr>
+            <td style="text-align:left" colspan="5">Query : <input id="inQuery">
+                <button onclick="funcQuery()">query</button>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left" colspan="5"><span id="spanQ">Answer :</span>
+                <span id="spQuery"></span>
+                S : <select id="sltS">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+                B : <select id="sltB">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+                <button onclick="funcAns()">answer</button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2">The player</td>
+            <td colspan="2">AI</td>
+        </tr>
+    </table>
+
+</body>
+<script>
+    function funcCheck(e,t){let n=0,l=0,r=[!1,!1,!1,!1],a=[!1,!1,!1,!1];for(let s=0;s<4;s++)e[s]==t[s]&&(n++,e[s]=null,t[s]=null,a[s]=!0,r[s]=!0);for(let o=0;o<4;o++)if(!a[o]){for(let d=0;d<4;d++)if(!r[d]&&t[o]==e[d]){l++,a[o]=!0,r[d]=!0;break}}return{s:n,b:l}}function get_query(e,t){for(;;){if(5040==t.size)return null;let n="";for(let l=0;l<4;l++){let r=Math.floor(10*Math.random());for(;-1!=n.search(r.toString());)r=Math.floor(10*Math.random());n+=r.toString()}if(t.has(n))continue;t.add(n);let a=!1;for(let s=0;s<e.length;s++){let o=e[s][0],d=e[s][1].s,u=e[s][1].b,f=funcCheck(o,n);if(f.s!=d||f.b!=u){a=!0;break}}if(!1==a)return n}}function permutation(e,t){let n=[];return!function l(r,a){if(r.length===t){n.push([...r]);return}for(let s=0;s<e.length;s++)a[s]||(a[s]=!0,r.push(e[s]),l(r,a),r.pop(),a[s]=!1)}([],Array(e.length).fill(!1)),n}rc=permutation([0,1,2,3,4,5,6,7,8,9],4),resultCandidates=[];for(let i=0;i<rc.length;i++){let e="";for(let t=0;t<4;t++)e+=rc[i][t].toString();resultCandidates.push(e)}let turnOrder=!0,numOfTry=1,history=[],queried=new Set,lastTr,lastQuery=null,gameFinished=!1,userInputHistory=[];function funcShowSB(){for(;null==finalAns;)finalAns=resultCandidates[Math.floor(Math.random()*resultCandidates.length)];let e=document.getElementById("tblMain");for(;e.childNodes.length>2;)e.removeChild(e.lastChild);for(let t=0;t<history.length;t++){let n=userInputHistory[t][0],l=userInputHistory[t][1].s,r=userInputHistory[t][1].b,a=document.createElement("tr");e.appendChild(a);{let s=document.createElement("td");s.innerHTML="Try "+(t+1).toString(),a.appendChild(s)}{let o=document.createElement("td"),d=["black","black","black","black"],u=[!1,!1,!1,!1];for(let f=0;f<4;f++)n[f]==finalAns[f]&&(d[f]="red",u[f]=!0);for(let h=0;h<4;h++)if("black"==d[h]){for(let $=0;$<4;$++)if(!0!=u[$]&&n[h]==finalAns[$]){d[h]="blue",u[$]=!0;break}}let p="";for(let c=0;c<4;c++)p+="<span style='color:"+d[c]+";'>"+n[c]+"</span>";o.innerHTML=p,a.appendChild(o)}{let m=document.createElement("td");m.innerHTML="<span style='color:red;'>S"+l+"</span> <span style='color:blue;'>B"+r+"</span>",a.appendChild(m)}{let _=history[t][0],y=history[t][1].s,g=history[t][1].b;if(null!=lastQuery){{let b=document.createElement("td"),C=["black","black","black","black"],E=[!1,!1,!1,!1];for(let T=0;T<4;T++)_[T]==lastQuery[T]&&(C[T]="red",E[T]=!0);for(let H=0;H<4;H++)if("black"==C[H]){for(let k=0;k<4;k++)if(!0!=E[k]&&_[H]==lastQuery[k]){C[H]="blue",E[k]=!0;break}}let M="";for(let S=0;S<4;S++)M+="<span style='color:"+C[S]+";'>"+_[S]+"</span>";b.innerHTML=M,a.appendChild(b)}{let B=document.createElement("td");B.innerHTML="<span style='color:red;'>S"+y+"</span> <span style='color:blue;'>B"+g+"</span>",a.appendChild(B)}}else{{let I=document.createElement("td");I.innerHTML=_,a.appendChild(I)}{let L=document.createElement("td");L.innerHTML="S"+y+" B"+g,a.appendChild(L)}}}}let Q=document.createElement("tr");e.appendChild(Q);{let A=document.createElement("td");A.innerHTML="Answer : ",Q.appendChild(A)}{let O=document.createElement("td");O.innerHTML=finalAns,Q.appendChild(O)}}function funcAns(){if(gameFinished)return;if(!0==turnOrder){alert("Not AI turn");return}turnOrder=!0;let e=document.getElementById("sltS").selectedIndex,t=document.getElementById("sltB").selectedIndex;if(history.push([lastQuery,{s:e,b:t}]),4==e){alert("AI Win!"),gameFinished=!0,funcShowSB();return}{let n=document.createElement("td");n.innerHTML=lastQuery,lastTr.appendChild(n)}{let l=document.createElement("td");l.innerHTML="S"+e+" B"+t,lastTr.appendChild(l)}null==(lastQuery=get_query(history,queried))&&(alert("Error in Ur responses"),funcShowSB(),gameFinished=!0)}let finalAns=null;function funcQuery(){if(gameFinished)return;if(!1==turnOrder){alert("Please enter the response first");return}turnOrder=!1;let e=document.getElementById("inQuery").value;if(4!=e.length){alert("Please enter a 4-digit number");return}for(let t=0;t<e.length;t++)if(e[t]<"0"||e[t]>"9"){alert("Please enter a 4-digit number");return}let n=[];for(let l=0;l<resultCandidates.length;l++){let r=funcCheck(e,resultCandidates[l]),a=r.s,s=r.b;a in n==!1&&(n[a]=[]),s in n[a]==!1&&(n[a][s]=[]),n[a][s].push(resultCandidates[l])}let o,d=0,u=0;if(5040==resultCandidates.length).6>Math.random()?(d=0,u=1):.5>Math.random()?(d=0,u=2):.3>Math.random()?(d=1,u=1):.15>Math.random()?(d=1,u=2):.07>Math.random()?(d=2,u=1):(d=0,u=1);else{let f=0;for(let h=0;h<n.length;h++)if(void 0!=n[h])for(let $=0;$<n[h].length;$++)void 0!=n[h][$]&&n[h][$].length>f&&(f=n[h][$].length,d=h,u=$)}for(;void 0==o;)o=n[d][u][Math.floor(Math.random()*n[d][u].length)];resultCandidates=[];for(let p=0;p<n[d][u].length;p++)resultCandidates.push(n[d][u][p]);let c=document.getElementById("tblMain"),m=!1,_=funcCheck(o,e);4==_.s&&(m=!0,finalAns=o);let y=document.createElement("tr");{let g=document.createElement("td");g.innerHTML="Try "+numOfTry.toString(),y.appendChild(g)}{let b=document.createElement("td");b.innerHTML=e,y.appendChild(b)}{let C=document.createElement("td");C.innerHTML="S"+_.s+" B"+_.b,y.appendChild(C)}if(userInputHistory.push([e,_]),c.appendChild(y),numOfTry+=1,m){alert("Correct! U win!"),gameFinished=!0;return}null==lastQuery&&(lastQuery=get_query(history,queried)),document.getElementById("spanQ").innerHTML=lastQuery+"'s Answer : ",lastTr=y}
+</script>
+
+</html>
