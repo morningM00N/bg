@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이사 전략 자산 변화 시뮬레이터 (천원 단위)</title>
+    <style>
+        body { font-family: 'Pretendard', -apple-system, sans-serif; background-color: #f0f2f5; color: #333; padding: 20px; line-height: 1.5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #1a73e8; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: #5f6368; margin-bottom: 40px; font-weight: bold; }
+        .section { background: #fff; border: 1px solid #e0e0e0; padding: 25px; border-radius: 12px; margin-bottom: 25px; }
+        .section-title { font-weight: bold; font-size: 1.2em; margin-bottom: 20px; color: #1a73e8; display: flex; align-items: center; }
+        .section-title::before { content: ''; display: inline-block; width: 4px; height: 18px; background: #1a73e8; margin-right: 10px; border-radius: 2px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .input-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-size: 0.9em; margin-bottom: 6px; color: #5f6368; font-weight: 600; }
+        input[type="text"], input[type="number"] { padding: 12px; border: 1px solid #dadce0; border-radius: 8px; font-size: 1em; transition: border 0.2s; }
+        input:focus { border-color: #1a73e8; outline: none; }
+        .radio-group { display: flex; gap: 15px; margin-top: 5px; }
+        .radio-group label { font-weight: normal; color: #333; display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .result-table { width: 100%; border-collapse: collapse; margin-top: 30px; background: white; border-radius: 10px; overflow: hidden; table-layout: fixed; }
+        th, td { padding: 18px; border-bottom: 1px solid #f1f3f4; vertical-align: top; }
+        th { background-color: #f8f9fa; text-align: center; color: #5f6368; font-weight: 600; }
+        .row-label { font-weight: bold; background: #fdfdfd; text-align: center; vertical-align: middle; }
+        .highlight { font-weight: bold; color: #d93025; font-size: 1.1em; display: block; margin-bottom: 8px; }
+        .plus { color: #188038; font-weight: bold; font-size: 1.1em; display: block; margin-bottom: 8px; }
+        .calc-details { display: block; font-size: 0.85em; color: #444; background: #f8f9fa; padding: 15px; border-radius: 6px; line-height: 1.7; white-space: pre-wrap; }
+        .best-card { background-color: #e6f4ea !important; border: 2px solid #34a853 !important; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏠 이사 전략별 4년 자산 변화 시뮬레이터</h1>
+    <div class="subtitle">※ 모든 금액의 단위는 '천 원'입니다.</div>
+
+    <div class="section">
+        <div class="section-title">자산 및 투자 배분 설정</div>
+        <div class="grid">
+            <div class="input-group">
+                <label>보유 현금 총액 (천 원)</label>
+                <input type="text" id="initCash" value="340,000" oninput="formatAndCalc(this)">
+            </div>
+            <div class="input-group">
+                <label>보유 주식 총액 (천 원)</label>
+                <input type="text" id="initStock" value="160,000" oninput="formatAndCalc(this)">
+            </div>
+        </div>
+        <div class="grid" style="margin-top: 10px;">
+            <div class="input-group">
+                <label>목표 국내 주식 투자액 (천 원)</label>
+                <input type="text" id="targetDomStock" value="100,000" oninput="formatAndCalc(this)">
+            </div>
+            <div class="input-group">
+                <label>국내 주식 연 수익률 (%)</label>
+                <input type="number" id="domStockRate" value="5.0" step="0.1" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>목표 해외 주식 투자액 (천 원)</label>
+                <input type="text" id="targetForStock" value="200,000" oninput="formatAndCalc(this)">
+            </div>
+            <div class="input-group">
+                <label>해외 주식 연 수익률 (%)</label>
+                <input type="number" id="forStockRate" value="8.0" step="0.1" oninput="calculate()">
+            </div>
+        </div>
+        <div class="grid">
+            <div class="input-group" style="grid-column: 1 / 3;">
+                <label>연 예금 금리 (%) / 세금 15.4% 자동차감</label>
+                <input type="number" id="savRate" value="3.5" step="0.1" oninput="calculate()">
+            </div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="section">
+            <div class="section-title">전세 시나리오</div>
+            <div class="input-group">
+                <label>전세 보증금 (천 원)</label>
+                <input type="text" id="jDep" value="500,000" oninput="formatAndCalc(this)">
+            </div>
+            <div class="input-group">
+                <label>대출 금액 (천 원)</label>
+                <input type="text" id="jLoan" value="150,000" oninput="formatAndCalc(this)">
+            </div>
+            <div class="input-group">
+                <label>대출 이자율 (%)</label>
+                <input type="number" id="jLoanRate" value="4.0" step="0.1" oninput="calculate()">
+            </div>
+            <div class="input-group" style="margin-top: 10px; background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                <label style="color: #1a73e8;">💡 2년 후 보증금 5% 인상분 납부 방식</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="jIncMethod" value="loan" checked onchange="calculate()"> 대출 추가</label>
+                    <label><input type="radio" name="jIncMethod" value="sell" onchange="calculate()"> 자산 매도</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">월세 시나리오</div>
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="input-group">
+                    <label>월세 보증금 (천 원)</label>
+                    <input type="text" id="wDep" value="200,000" oninput="formatAndCalc(this)">
+                </div>
+                <div class="input-group">
+                    <label>월세 (천 원)</label>
+                    <input type="text" id="wRent" value="1,000" oninput="formatAndCalc(this)">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>추가 대출 금액 (천 원) - 투자용</label>
+                <input type="text" id="wLoan" value="0" oninput="formatAndCalc(this)">
+            </div>
+            <div class="input-group">
+                <label>대출 이자율 (%)</label>
+                <input type="number" id="wLoanRate" value="4.0" step="0.1" oninput="calculate()">
+            </div>
+        </div>
+    </div>
+
+    <div class="result-container">
+        <table class="result-table">
+            <thead>
+                <tr>
+                    <th width="12%">구분</th>
+                    <th width="33%">4년 총 지출 (주거비+이자)</th>
+                    <th width="40%">4년 총 투자 수익 (세후)</th>
+                    <th width="15%">순자산 변화액</th>
+                </tr>
+            </thead>
+            <tbody id="resultBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function parseNum(str) { return parseFloat(str.replace(/,/g, '')) || 0; }
+    function formatNum(num) { return Math.round(num).toLocaleString(); }
+    function formatAndCalc(el) {
+        let val = el.value.replace(/[^0-9]/g, '');
+        el.value = val ? parseInt(val).toLocaleString() : '';
+        calculate();
+    }
+
+    function simulateInvestment(remainAsset, withdrawAtYear2) {
+        const targetDom = parseNum(document.getElementById('targetDomStock').value);
+        const targetFor = parseNum(document.getElementById('targetForStock').value);
+        
+        let initDom = Math.min(remainAsset, targetDom);
+        let initFor = Math.min(remainAsset - initDom, targetFor);
+        let initSav = remainAsset - initDom - initFor;
+
+        const domRate = parseFloat(document.getElementById('domStockRate').value) / 100;
+        const forRate = parseFloat(document.getElementById('forStockRate').value) / 100;
+        const savRate = parseFloat(document.getElementById('savRate').value) / 100;
+        const effSavRate = savRate * (1 - 0.154); 
+
+        // 2년차 자산
+        let dom2 = initDom * Math.pow(1 + domRate, 2);
+        let for2 = initFor * Math.pow(1 + forRate, 2);
+        let sav2 = initSav * Math.pow(1 + effSavRate, 2);
+
+        let withdrawLog = "";
+        let w = withdrawAtYear2;
+        let drawnSav = 0, drawnDom = 0, drawnFor = 0;
+        
+        if (w > 0) {
+            drawnSav = Math.min(w, sav2); w -= drawnSav;
+            drawnDom = Math.min(w, dom2); w -= drawnDom;
+            drawnFor = Math.min(w, for2); w -= drawnFor;
+            withdrawLog = `\n[!] 2년차 전세인상분(${formatNum(withdrawAtYear2)}천원) 확보를 위한 매도 발생\n - 예금인출: ${formatNum(drawnSav)}천원\n - 국내인출: ${formatNum(drawnDom)}천원\n - 해외인출: ${formatNum(drawnFor)}천원\n`;
+        }
+
+        let savAfter = sav2 - drawnSav;
+        let domAfter = dom2 - drawnDom;
+        let forAfter = for2 - drawnFor;
+
+        // 4년차 최종 자산
+        let dom4 = domAfter * Math.pow(1 + domRate, 2);
+        let for4 = forAfter * Math.pow(1 + forRate, 2);
+        let sav4 = savAfter * Math.pow(1 + effSavRate, 2);
+
+        let domProfit = dom4 + drawnDom - initDom;
+        let savProfit = sav4 + drawnSav - initSav;
+        let forProfitRaw = for4 + drawnFor - initFor;
+        let forTax = Math.max(0, forProfitRaw - 10000) * 0.22; 
+        let forProfit = forProfitRaw - forTax;
+
+        function buildDetailedFormula(name, init, valAt2, drawn, valAfter, finalObj, rate, tax, profit, isForeign) {
+            if (init <= 0) return `• [${name}] 투자금 없음\n\n`;
+            
+            let rStr = (1 + rate).toFixed(5).replace(/0+$/, '').replace(/\.$/, '');
+            let text = `• [${name}] 상세 계산:\n`;
+
+            if (drawn === 0) {
+                text += `  - 4년운용: ${formatNum(init)} x ${rStr}^4 = ${formatNum(finalObj)}\n`;
+                let grossProfit = finalObj - init;
+                text += `  - 세전수익: ${formatNum(finalObj)} - 원금 ${formatNum(init)} = ${formatNum(grossProfit)}\n`;
+                
+                if (isForeign) {
+                    text += (grossProfit > 10000) ? `  - 양도세 차감: (총수익 ${formatNum(grossProfit)} - 10,000) x 22% = ${formatNum(tax)}\n` : `  - 양도세: 0 (비과세)\n`;
+                }
+            } else {
+                let profit1 = valAt2 - init;
+                let profit2 = finalObj - valAfter;
+                let grossProfit = profit1 + profit2;
+
+                text += `  - 1~2년차: ${formatNum(init)} x ${rStr}^2 = ${formatNum(valAt2)} (수익: ${formatNum(profit1)})\n`;
+                text += `  - 2년차 인출: ${formatNum(valAt2)} - ${formatNum(drawn)} = ${formatNum(valAfter)} 남음\n`;
+                text += `  - 3~4년차: ${formatNum(valAfter)} x ${rStr}^2 = ${formatNum(finalObj)} (수익: ${formatNum(profit2)})\n`;
+                text += `  - 세전수익 합계: ${formatNum(profit1)} + ${formatNum(profit2)} = ${formatNum(grossProfit)}\n`;
+
+                if (isForeign) {
+                    text += (grossProfit > 10000) ? `  - 양도세 차감: (총수익 ${formatNum(grossProfit)} - 10,000) x 22% = ${formatNum(tax)}\n` : `  - 양도세: 0 (비과세)\n`;
+                }
+            }
+            text += `  ▶ 최종 세후수익: ${formatNum(profit)}천원\n\n`;
+            return text;
+        }
+
+        let detailText = `[초기배분] 예금 ${formatNum(initSav)} / 국내 ${formatNum(initDom)} / 해외 ${formatNum(initFor)}\n` + withdrawLog + `\n`;
+        detailText += buildDetailedFormula("예금(세후금리적용)", initSav, sav2, drawnSav, savAfter, sav4, effSavRate, 0, savProfit, false);
+        detailText += buildDetailedFormula("국내", initDom, dom2, drawnDom, domAfter, dom4, domRate, 0, domProfit, false);
+        detailText += buildDetailedFormula("해외", initFor, for2, drawnFor, forAfter, for4, forRate, forTax, forProfit, true);
+
+        return { totalProfit: domProfit + forProfit + savProfit, detailText: detailText.trim() };
+    }
+
+    function calculate() {
+        const totalInit = parseNum(document.getElementById('initCash').value) + parseNum(document.getElementById('initStock').value);
+
+        // --- 전세 시나리오 ---
+        const jDep = parseNum(document.getElementById('jDep').value);
+        const jLoan = parseNum(document.getElementById('jLoan').value);
+        const jLoanRate = parseFloat(document.getElementById('jLoanRate').value) / 100;
+        const jIncMethod = document.querySelector('input[name="jIncMethod"]:checked').value;
+        const jInc = jDep * 0.05; 
+        
+        let jCost1 = jLoan * jLoanRate * 2;
+        let jCost2 = (jIncMethod === 'loan') ? (jLoan + jInc) * jLoanRate * 2 : jLoan * jLoanRate * 2;
+        let jTotalCost = jCost1 + jCost2;
+        let jCostDetail = `• 1~2년차: ${formatNum(jLoan)} x ${jLoanRate*100}% x 2년 = ${formatNum(jCost1)}천원\n` + 
+                          `• 3~4년차: ${jIncMethod === 'loan' ? '대출추가(' + formatNum(jLoan + jInc) + ')' : '기존대출(' + formatNum(jLoan) + ')'} x ${jLoanRate*100}% x 2년 = ${formatNum(jCost2)}천원`;
+        
+        const jInv = simulateInvestment(Math.max(0, totalInit + jLoan - jDep), (jIncMethod === 'sell' ? jInc : 0));
+        const jNetChange = jInv.totalProfit - jTotalCost;
+
+        // --- 월세 시나리오 ---
+        const wDep = parseNum(document.getElementById('wDep').value);
+        const wRent = parseNum(document.getElementById('wRent').value);
+        const wLoan = parseNum(document.getElementById('wLoan').value);
+        const wLoanRate = parseFloat(document.getElementById('wLoanRate').value) / 100;
+
+        let wRentCost = (wRent * 24) + (wRent * 1.05 * 24);
+        let wLoanCost = wLoan * wLoanRate * 4;
+        let wTotalCost = wRentCost + wLoanCost;
+        let wCostDetail = `• 4년 총 월세: ${formatNum(wRentCost)}천원 (2년후 5%↑ 반영)\n` +
+                          `• 4년 대출이자: ${formatNum(wLoan)} x ${wLoanRate*100}% x 4년 = ${formatNum(wLoanCost)}천원`;
+
+        const wInv = simulateInvestment(Math.max(0, totalInit + wLoan - wDep), 0);
+        const wNetChange = wInv.totalProfit - wTotalCost;
+
+        const resultBody = document.getElementById('resultBody');
+        const bestIsWolse = wNetChange > jNetChange;
+
+        resultBody.innerHTML = `
+            <tr class="${!bestIsWolse ? 'best-card' : ''}">
+                <td class="row-label">1. 전세</td>
+                <td><span class="highlight">총 -${formatNum(jTotalCost)}천원</span><span class="calc-details">${jCostDetail}</span></td>
+                <td><span class="plus">총 +${formatNum(jInv.totalProfit)}천원</span><span class="calc-details">${jInv.detailText}</span></td>
+                <td style="text-align: right; vertical-align: middle;"><span class="${jNetChange >= 0 ? 'plus' : 'highlight'}" style="font-size: 1.3em;">${jNetChange >= 0 ? '+' : ''}${formatNum(jNetChange)}천원</span></td>
+            </tr>
+            <tr class="${bestIsWolse ? 'best-card' : ''}">
+                <td class="row-label">2. 월세</td>
+                <td><span class="highlight">총 -${formatNum(wTotalCost)}천원</span><span class="calc-details">${wCostDetail}</span></td>
+                <td><span class="plus">총 +${formatNum(wInv.totalProfit)}천원</span><span class="calc-details">${wInv.detailText}</span></td>
+                <td style="text-align: right; vertical-align: middle;"><span class="${wNetChange >= 0 ? 'plus' : 'highlight'}" style="font-size: 1.3em;">${wNetChange >= 0 ? '+' : ''}${formatNum(wNetChange)}천원</span></td>
+            </tr>`;
+    }
+    calculate();
+</script>
+</body>
+</html>
